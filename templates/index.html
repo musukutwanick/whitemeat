@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The White Meat Company</title>
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/scroll-animations.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="{% url 'index' %}" class="active">Home</a></li>
+       <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+      <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+      <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+      <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="hero" data-aos="fade-in" data-aos-duration="1000">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1 id="typewriter-title" class="shine-text glow-text" data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">The White Meat Company</h1>
+      <p class="subheading" id="typewriter-subheading" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">Pioneering Zimbabwe's white meat revolution through leading the commercialization of rabbit farming through premium breeding stock, high-quality equipment, expert training and a guaranteed market for your produce nationwide. From farm to fork, our value chain includes The Rabbit Hole Bar & Grill, bringing white meat cuisine to life.</p>
+     
+    </div>
+    <div class="bouncing-cylinder"></div>
+  </section>
+
+  <section class="about scroll-animate fade-in" id="about">
+  <h2 class="section-heading text-reveal">About The White Meat Company</h2>
+  
+
+  <div class="about-content">
+  <div class="about-image scroll-animate slide-left">
+    <img src="{% static 'images/about.png' %}" alt="Rabbit" />
+  </div>
+
+  <div class="about-text scroll-animate slide-right delay-2">
+    <h3>Our Story</h3>
+    <p>
+      Founded in Harare, The White Meat Company was born from a bold vision to commercialize rabbit farming and position Zimbabwe as a regional powerhouse in the white meat value chain. By combining local expertise with modern techniques, we provide premium breeding stock, international standard cages and accessories, expert-led Masterclass training and guaranteed markets for our farmers. Our value chain extends to the The Rabbit Hole Bar & Grill, where we showcase the best of white meat cuisine and other food menu's.
+    </p>
+
+    <div class="stats">
+      <div class="stat-box blue card-animate delay-3">500+ satisfied customers</div>
+      <div class="stat-box pink card-animate delay-4">50+ masterclass graduates</div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="mission-vision">
+    <h2 class="section-heading">Our Mission and Vision</h2>
+   <div class="mv-boxes">
+  <div class="mv-box">
+    <div class="icon-circle green">
+      <!-- Mission: Checkmark Circle SVG -->
+      <svg width="48" height="48" fill="none" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#2e7d32" />
+        <path d="M16 24l6 6 10-10" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h3>Our Mission</h3>
+    <p>
+      To build a nationwide rabbit farm network and aggregate rabbit meat produce, and related by-products, into one huge supply quota for mainstream market distribution.
+    </p>
+  </div>
+  <div class="mv-box">
+    <div class="icon-circle brown">
+      <!-- Vision: Eye SVG -->
+      <svg width="48" height="48" fill="none" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#8d6e63" />
+        <ellipse cx="24" cy="24" rx="8" ry="5" fill="#fff" />
+        <circle cx="24" cy="24" r="2.5" fill="#8d6e63" />
+      </svg>
+    </div>
+    <h3>Our Vision</h3>
+    <p>
+      To build a huge rabbit farming industry which will see Zimbabwe become a regional powerhouse and a global player in the rabbit farming value chain. 
+
+    </p>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<section class="services-section">
+  <h2 class="services-heading">Our Services</h2>
+  <p class="services-subheading">
+    Everything you need for successful rabbit farming – from live rabbits to equipment and expert guidance.
+  </p>
+
+  <div class="service-cards">
+    <!-- Card 1 -->
+    <div class="service-card">
+      <img src="{% static 'images/rabbit.jpg' %}" alt="Live Rabbits">
+      <h3>Suppliers of Pure Breeding Stock and Rabbit Stockfeed</h3>
+      <p>
+        Premium breeding stock from top-quality bloodline and health certified rabbit stock. We offer quality breeds suitable for meat production and breeding programs.
+      </p>
+      <ul>
+        <li>✓ New Zealand White</li>
+        <li>✓ Californian</li>
+        <li>✓ Health certified stock</li>
+      </ul>
+      <a href="breeding.html" class="service-btn">Check Details</a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="service-card">
+      <img src="{% static 'images/equip.webp' %}" alt="Farming Equipment">
+      <h3> Manufacturers & distributors of international standard rabbit cages & accessories 
+</h3>
+      <p>Professional grade cages complete farming setups designed for optimal rabbit health and productivity. They come with the following features
+             </p>
+      <ul>
+        <li>✓ Galvanized wire cages</li>
+        <li>✓ Feeding troughs</li>
+        <li>✓ Water drinkers</li>
+        <li>✓ Advanced manure & urine collection system</li>
+      </ul>
+      <a href="cages.html" class="service-btn">View Equipment</a>
+    </div>
+
+    <!-- Card 3 -->
+    <!-- Card 3 -->
+    <div class="service-card">
+      <img src="{% static 'images/bunnies.jpg' %}" alt="Expert Consultation">
+      <h3>Regular training through our Rabbitry Masterclasses</h3>
+      <p>
+        Personalized guidance from experienced rabbit farmers to help you establish and optimize your rabbit farming operation.
+      </p>
+      <ul>
+        <li>✓ Setup planning</li>
+        <li>✓ Breeding programs</li>
+        <li>✓ Health management</li>
+        <li>✓ Business planning</li>
+      </ul>
+      <a href="masterclass.html" class="service-btn">Book Masterclass</a>
+    </div>
+  </div>
+</section>
+
+
+
+
+<div class="farming-tips fade-in">
+  <h2>Essential Rabbit Farming Tips</h2>
+  <div class="tips-grid">
+    <div class="tip-box">
+      <div class="tip-icon">
+        <!-- Housing: Folder SVG -->
+        <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="20" fill="#dfece5" />
+          <rect x="12" y="18" width="16" height="8" rx="2" fill="#42594a" fill-opacity="0.15"/>
+          <rect x="12" y="14" width="7" height="4" rx="1" fill="#42594a" fill-opacity="0.15"/>
+          <rect x="12" y="18" width="16" height="8" rx="2" stroke="#42594a" stroke-width="2"/>
+          <rect x="12" y="14" width="7" height="4" rx="1" stroke="#42594a" stroke-width="2"/>
+        </svg>
+      </div>
+      <h4>Housing</h4>
+      <p>Provide adequate space, ventilation, and protection from weather conditions.</p>
+    </div>
+    <div class="tip-box">
+      <div class="tip-icon">
+        <!-- Nutrition: Basket/Bucket SVG -->
+        <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="20" fill="#dfece5" />
+          <rect x="15" y="18" width="10" height="8" rx="2" fill="#42594a" fill-opacity="0.15"/>
+          <rect x="15" y="18" width="10" height="8" rx="2" stroke="#42594a" stroke-width="2"/>
+          <rect x="18" y="14" width="4" height="4" rx="1" stroke="#42594a" stroke-width="2"/>
+        </svg>
+      </div>
+      <h4>Nutrition</h4>
+      <p>Balanced diet with quality pellets, fresh vegetables, and unlimited clean water.</p>
+    </div>
+    <div class="tip-box">
+      <div class="tip-icon">
+        <!-- Health Care: Heart SVG -->
+        <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="20" fill="#dfece5" />
+          <path d="M20 28s-7-4.5-7-9.5a4 4 0 0 1 7-2.5A4 4 0 0 1 27 18.5c0 5-7 9.5-7 9.5z" stroke="#42594a" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
+      <h4>Health Care</h4>
+      <p>Regular health checks, vaccinations, and immediate treatment of any issues.</p>
+    </div>
+    <div class="tip-box">
+      <div class="tip-icon">
+        <!-- Records: Dollar Sign SVG -->
+        <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="20" fill="#dfece5" />
+          <text x="20" y="26" text-anchor="middle" font-size="20" fill="#42594a" font-family="Arial, sans-serif">$</text>
+        </svg>
+      </div>
+      <h4>Records</h4>
+      <p>Keep detailed records of breeding, health, and production for better management.</p>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery Section -->
+<section class="gallery-section animate-on-scroll fade-in" id="gallery">
+  <h2 class="gallery-title">Gallery</h2>
+  <p class="gallery-subtitle">
+    Explore our farming operations and restaurant atmosphere through these carefully curated images.
+  </p>
+  <div class="gallery-filters">
+    <button class="gallery-filter active" data-filter="all">All</button>
+    <button class="gallery-filter" data-filter="farming">Farming</button>
+    <button class="gallery-filter" data-filter="restaurant">Restaurant</button>
+  </div>
+  <div class="gallery-grid">
+    <img src="{% static 'images/equip.webp' %}" alt="Farming 1" data-category="farming" />
+    <img src="{% static 'images/rabb.jpeg' %}" alt="Farming 2" data-category="farming" />
+    <img src="{% static 'images/cons.jpeg' %}" alt="Farming 3" data-category="farming" />
+    <img src="{% static 'images/about.png' %}" alt="Farming 4" data-category="farming" />
+    <img src="{% static 'images/menu1.jpeg' %}" alt="Restaurant 1" data-category="restaurant" />
+    <img src="{% static 'images/menu2.jpeg' %}" alt="Rabbit Dish" data-category="restaurant" />
+    <img src="{% static 'images/dining.jpeg' %}" alt="Fish Dish" data-category="restaurant" />
+    <img src="{% static 'images/menu2.jpeg' %}" alt="Restaurant 2" data-category="restaurant" />
+  </div>
+</section>
+
+<!-- Contact Us Section -->
+<section class="contact-section animate-on-scroll fade-in" id="contact">
+  <h2 class="contact-title">Contact Us</h2>
+  <p class="contact-subtitle">
+    Get in touch with us for inquiries about rabbit farming, equipment, masterclass bookings, or restaurant reservations.
+  </p>
+  <div class="contact-content">
+    <div class="contact-info">
+      <h3>Get In Touch</h3>
+      <div class="contact-info-item">
+        <span class="contact-icon">
+          <!-- Address: Location Pin SVG -->
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
+            <rect width="22" height="22" rx="6" fill="#2d6a4f"/>
+            <path d="M11 6.5a4 4 0 0 0-4 4c0 2.5 4 7 4 7s4-4.5 4-7a4 4 0 0 0-4-4zm0 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" fill="#fff"/>
+          </svg>
+        </span>
+        <div>
+          <strong>Address</strong><br />
+          Belvedere, Harare, Zimbabwe<br />
+          The White Meat Company & The Rabbit Hole Bar & Grill
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-icon">
+          <!-- Phone: Phone SVG -->
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
+            <rect width="22" height="22" rx="6" fill="#2d6a4f"/>
+            <path d="M16 14.5v2a1 1 0 0 1-1.09 1A13.05 13.05 0 0 1 5.5 7.09 1 1 0 0 1 6.5 6h2a1 1 0 0 1 1 0.76l0.5 2a1 1 0 0 1-0.23 1L9 11a10.5 10.5 0 0 0 4 4l1.24-1.24a1 1 0 0 1 1-0.23l2 0.5a1 1 0 0 1 0.76 1z" fill="#fff"/>
+          </svg>
+        </span>
+        <div>
+          <strong>Phone & WhatsApp</strong><br />
+          +263 772 333 369<br />
+          +263 779 521 665<br />
+          Available 8:00 AM - 10:00 PM
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-icon">
+          <!-- Email: Envelope SVG -->
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
+            <rect width="22" height="22" rx="6" fill="#2d6a4f"/>
+            <path d="M6 8.5l5 4 5-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="6" y="7.5" width="10" height="7" rx="2" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+        </span>
+        <div>
+          <strong>Email</strong><br />
+          info@whitemeatcompany.com<br />
+          restaurant@rabbitholeharare.zw
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-icon">
+          <!-- Business Hours: Clock SVG -->
+          <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
+            <rect width="22" height="22" rx="6" fill="#2d6a4f"/>
+            <circle cx="11" cy="11" r="5" stroke="#fff" stroke-width="1.5"/>
+            <path d="M11 8.5v3l2 2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <div>
+          <strong>Business Hours</strong><br />
+          Farming: Tuesday - Saturday, 8:00 AM - 5:00 PM<br />
+          Restaurant: Tuesday - Sunday, 09:30 AM - 10:00 PM<br/>
+          Closed on Mondays
+        </div>
+      </div>
+      <div class="contact-social">
+        <span>Follow Us</span><br />
+        <a href="https://www.facebook.com/thewhitemeatco" class="social-icon" aria-label="Facebook" target="_blank">
+          <!-- Facebook SVG -->
+          <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
+            <rect width="36" height="36" rx="8" fill="#1877f2"/>
+            <path d="M22.5 12h-3a2 2 0 0 0-2 2v3h4l-0.5 3h-3.5v9h-3v-9h-3v-3h3v-3a5 5 0 0 1 5-5h3.5v3z" fill="#fff"/>
+          </svg>
+        </a>
+        <a href="https://x.com/WhiteMeatCompa1" class="social-icon" aria-label="X (Twitter)" target="_blank">
+          <!-- X (Twitter) SVG -->
+          <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
+            <rect width="36" height="36" rx="8" fill="#000"/>
+            <path d="M12.5 12.5l11 11m0-11l-11 11" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@brightt.makuchete2875" class="social-icon" aria-label="YouTube" target="_blank">
+          <!-- YouTube SVG -->
+          <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
+            <rect width="36" height="36" rx="8" fill="#ff0000"/>
+            <path d="M24 18l-8-5v10l8-5z" fill="#fff"/>
+            <path d="M28 14.5a2.5 2.5 0 0 0-2.5-2.5h-15A2.5 2.5 0 0 0 8 14.5v7a2.5 2.5 0 0 0 2.5 2.5h15a2.5 2.5 0 0 0 2.5-2.5v-7z" stroke="#fff" stroke-width="1.5" fill="none"/>
+          </svg>
+        </a>
+        <a href="https://whatsapp.com/channel/0029VaMwhvvEKyZDkNNk5H21" class="social-icon whatsapp-channel" aria-label="Join our WhatsApp channel" target="_blank">
+          <!-- WhatsApp SVG -->
+          <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
+            <rect width="36" height="36" rx="8" fill="#25d366"/>
+            <path d="M25.8 10.2A11.9 11.9 0 0 0 18 6c-6.6 0-12 5.4-12 12 0 2.1 0.5 4.1 1.6 5.9L6 30l6.3-1.6c1.7 0.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.2-8.6zM18 27.2c-1.8 0-3.6-0.5-5.1-1.3l-0.4-0.2-3.6 0.9 1-3.4-0.3-0.4c-0.9-1.5-1.4-3.3-1.4-5.1 0-5.3 4.3-9.6 9.6-9.6 2.6 0 5 1 6.8 2.8s2.8 4.2 2.8 6.8c0 5.3-4.3 9.6-9.6 9.6z" fill="#fff"/>
+            <path d="M22.5 19.5c-0.3 0-0.6-0.1-0.9-0.2-0.8-0.4-1.4-0.9-1.9-1.5-0.5-0.6-0.8-1.3-0.8-2.1 0-0.5 0.2-1 0.5-1.4 0.3-0.4 0.7-0.6 1.1-0.6s0.8 0.2 1.1 0.6c0.3 0.4 0.5 0.9 0.5 1.4 0 0.8-0.3 1.5-0.8 2.1-0.5 0.6-1.1 1.1-1.9 1.5-0.3 0.1-0.6 0.2-0.9 0.2z" fill="#fff"/>
+          </svg>
+        </a>
+      
+      </div>
+    </div>
+    <form class="contact-form" id="contactForm">
+      <h3>Send Us a Message</h3>
+      <div class="form-row">
+        <input type="text" name="name" id="contactName" placeholder="Name" required />
+        <input type="email" name="email" id="contactEmail" placeholder="Email" required />
+      </div>
+      <div class="form-row">
+        <select name="subject" id="contactSubject" required>
+          <option value="">Select a topic</option>
+          <option value="farming">Rabbit Farming</option>
+          <option value="equipment">Equipment</option>
+          <option value="masterclass">Masterclass</option>
+          <option value="restaurant">Restaurant Reservation</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <textarea name="message" id="contactMessage" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+      </div>
+      <button type="submit" class="btn contact-btn">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- Map/Location Section -->
+<section class="map-section animate-on-scroll fade-in">
+  <div class="map-card">
+    <h2 class="map-title">Find Us in Belvedere, Harare</h2>
+    <div class="map-placeholder" style="padding:0;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3798.1300762967035!2d31.002710299999997!3d-17.8325362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a5625e2989af%3A0x5e54f2f976050108!2sThe%20Rabbit%20Hole%20Bar%20%26%20Grill!5e0!3m2!1sen!2szw!4v1751555295219!5m2!1sen!2szw" width="100%" height="350" style="border:0; border-radius: 9px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer Section -->
+<footer class="footer-section animate-on-scroll fade-in">
+  <div class="footer-content">
+    <div class="footer-col company">
+      <h3>The White Meat Company</h3>
+      <p>Leading Zimbabwe's sustainable rabbit farming revolution while providing exceptional white meat dining experiences in Belvedere, Harare.</p>
+      
+    </div>
+    <div class="footer-col links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="masterclass.html">Masterclass Training</a></li>
+        <li><a href="cages.html">Cages+Accessories</a></li>
+        <li><a href="breeding.html">Breeding Stock</a></li>
+        <li><a href="rabbithole.html">Rabbit Hole</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </div>
+    <div class="footer-col contact">
+      <h4>Contact Info</h4>
+      <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br />info@whitemeatcompany.zw</p>
+      <div style="margin-top: 20px;">
+        <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
+      </div>
+    </div>
+  </div>
+  <hr class="footer-divider" />
+  <div class="footer-bottom">
+    &copy; 2025 The White Meat Company. All rights reserved.
+  </div>
+</footer>
+
+  <!-- Custom Scroll Animations -->
+  <script src="{% static 'js/scroll-animations.js' %}"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50,
+      delay: 100
+    });
+  </script>
+  <script>
+    // Intersection Observer for fade-in scroll animations
+    const fadeObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => {
+      fadeObserver.observe(el);
+    });
+  </script>
+  <script>
+    // Typewriter effect for hero section
+    function typeWriter(element, text, speed = 50, callback) {
+      let i = 0;
+      element.textContent = '';
+      const cursor = document.createElement('span');
+      cursor.className = 'typewriter-cursor';
+      cursor.textContent = '|';
+      element.appendChild(cursor);
+      function type() {
+        if (i < text.length) {
+          element.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          cursor.remove();
+          if (callback) callback();
+        }
+      }
+      type();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const title = document.getElementById('typewriter-title');
+      const subheading = document.getElementById('typewriter-subheading');
+      
+      subheading.style.visibility = 'hidden';
+      
+      typeWriter(title, title.textContent, 60, () => {
+        subheading.style.visibility = 'visible';
+        typeWriter(subheading, subheading.textContent, 15);
+      });
+    });
+  </script>
+  <script>
+    // Gallery filter functionality
+    document.querySelectorAll('.gallery-filter').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Remove active from all
+        document.querySelectorAll('.gallery-filter').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.getAttribute('data-filter');
+        document.querySelectorAll('.gallery-grid img').forEach(img => {
+          if (filter === 'all' || img.getAttribute('data-category') === filter) {
+            img.style.display = '';
+          } else {
+            img.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+  <script>
+    // Contact form WhatsApp integration
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const subject = document.getElementById('contactSubject').value;
+      const message = document.getElementById('contactMessage').value;
+      
+      // Create WhatsApp message
+      let whatsappMessage = `Hello, I'm ${name}.\n\n`;
+      whatsappMessage += `Email: ${email}\n`;
+      whatsappMessage += `Subject: ${subject}\n\n`;
+      whatsappMessage += `Message: ${message}`;
+      
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      
+      // WhatsApp URL with phone number
+      const whatsappURL = `https://wa.me/263772333369?text=${encodedMessage}`;
+      
+      // Open WhatsApp
+      window.open(whatsappURL, '_blank');
+    });
+  </script>
+</body>
+</html>

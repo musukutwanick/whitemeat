@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The White Meat Company</title>
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="{% url 'index' %}">Home</a></li>
+       <li><a href="{% url 'masterclass' %}" class="active">Masterclass Training</a></li>
+      <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+      <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+      <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
+    </ul>
+  </nav>
+
+<section class="hero-masterclass" data-aos="fade-in" data-aos-duration="1000">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1 data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">Rabbit Farming Masterclass</h1>
+    <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+      Transform your future with Zimbabwe's most comprehensive rabbit farming training program.
+      Learn from 7 years of proven success and guaranteed market access.
+    </p>
+    <a href="#book" class="btn green" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="800">Book Your Spot - $140</a>
+  </div>
+</section>
+
+<section class="about-masterclass">
+  <h2>What is the Rabbit Farming Masterclass?</h2>
+  <div class="about-content">
+    <div class="text">
+      <h3>Comprehensive Professional Training</h3>
+      <p>
+        Our Rabbit Farming Masterclass is a comprehensive 2-day intensive program designed to equip you with all the knowledge, skills, and practical experience needed to establish and operate a successful rabbit farming business.
+      </p>
+      <p>
+        Developed by The White Meat Company with over 7 years of commercial rabbit farming experience, this masterclass combines theoretical knowledge with hands-on practical training, business planning, and guaranteed market access.
+      </p>
+      <p>
+        Whether you're a complete beginner or looking to scale your existing operation, our masterclass provides the roadmap to profitable rabbit farming in Zimbabwe.
+      </p>
+    </div>
+    <div class="image">
+      <img src="{% static 'images/master.jpg' %}" alt="Rabbitry" />
+    </div>
+  </div>
+</section>
+
+
+<section class="key-features">
+  <h2>Key Areas Covered in the Masterclass</h2>
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9,22 9,12 15,12 15,22"/>
+        </svg>
+      </div>
+      <h3>Setup & Infrastructure</h3>
+      <p>Learn optimal housing design, ventilation systems, and equipment selection for maximum productivity and animal welfare.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          <circle cx="12" cy="8" r="2"/>
+          <path d="M12 10v4"/>
+        </svg>
+      </div>
+      <h3>Nutrition & Feeding</h3>
+      <p>Master feed formulation, nutritional requirements, and cost-effective feeding strategies for all life stages.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          <circle cx="12" cy="6" r="3"/>
+        </svg>
+      </div>
+      <h3>Health Management</h3>
+      <p>Comprehensive health protocols, disease prevention, vaccination schedules, and treatment procedures.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          <circle cx="8" cy="12" r="2"/>
+          <circle cx="16" cy="12" r="2"/>
+        </svg>
+      </div>
+      <h3>Breeding Programs</h3>
+      <p>Selective breeding techniques, genetic improvement, breeding schedules, and record keeping systems.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v6"/>
+          <path d="M12 17v6"/>
+        </svg>
+      </div>
+      <h3>Business Management</h3>
+      <p>Financial planning, cost analysis, market strategies, and scaling your operation for maximum profitability.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          <path d="M12 2v10"/>
+          <path d="M8 6l8 8"/>
+          <path d="M16 6l-8 8"/>
+        </svg>
+      </div>
+      <h3>Market Access</h3>
+      <p>Direct access to our established supply chain and guaranteed market for your premium rabbit meat production.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="benefits">
+    <h1>Upcoming Masterclass - August 2025</h1>
+
+    <div class="date-box">
+      August 2nd & 3rd, 2025
+    </div>
+
+    <div class="fact-box">
+      <h2>FACT: Rabbit farming is 5x more profitable than chicken farming!</h2>
+      <p>Through our business, the White Meat Company, we guarantee you a market for your produce! We are pioneering the commercialization of rabbit farming in Zimbabwe.</p>
+    </div>
+
+    <p class="description">
+      During this training, we will share with you our experiences over the last 7 years so that you can become a successful and profitable rabbit farmer!
+    </p>
+  </section>
+ <section class="schedule-section">
+    <h1>2-Day Training Schedule</h1>
+
+    <!-- Day 1 -->
+    <div class="schedule-card">
+      <div class="schedule-header">Day 1 - August 2nd, 2025</div>
+      <table class="schedule-table">
+        <tr>
+          <td class="time-col">8:00 AM</td>
+          <td>
+            <div class="session-title">Registration & Welcome</div>
+            <div class="session-desc">Coffee, networking, and course materials distribution</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">9:00 AM</td>
+          <td>
+            <div class="session-title">Rabbit Farming Fundamentals</div>
+            <div class="session-desc">Industry overview, profitability analysis, and market opportunities</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">11:00 AM</td>
+          <td>
+            <div class="session-title">Housing & Infrastructure Setup</div>
+            <div class="session-desc">Cage systems, ventilation, water systems, and facility design</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">1:00 PM</td>
+          <td>
+            <div class="session-title">Lunch Break</div>
+            <div class="session-desc">Networking lunch with rabbit meat tasting</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">2:00 PM</td>
+          <td>
+            <div class="session-title">Nutrition & Feeding Strategies</div>
+            <div class="session-desc">Feed formulation, feeding schedules, and cost optimization</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">4:00 PM</td>
+          <td>
+            <div class="session-title">Hands-On Practice Session 1</div>
+            <div class="session-desc">Animal handling, health assessment, and feeding procedures</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="schedule-card">
+      <div class="schedule-header">Day 2 - August 3rd, 2025</div>
+      <table class="schedule-table">
+        <tr>
+          <td class="time-col">8:00 AM</td>
+          <td>
+            <div class="session-title">Health Management & Disease Prevention</div>
+            <div class="session-desc">Vaccination protocols, common diseases, and treatment procedures</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">10:00 AM</td>
+          <td>
+            <div class="session-title">Breeding & Reproduction</div>
+            <div class="session-desc">Breeding programs, genetic selection, and production cycles</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">12:00 PM</td>
+          <td>
+            <div class="session-title">Business Planning & Financial Management</div>
+            <div class="session-desc">Cost analysis, pricing strategies, and scaling your operation</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">1:00 PM</td>
+          <td>
+            <div class="session-title">Lunch Break</div>
+            <div class="session-desc">Business networking and Q&A session</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">2:00 PM</td>
+          <td>
+            <div class="session-title">Market Access & Sales Strategies</div>
+            <div class="session-desc">Supply chain integration and guaranteed purchase agreements</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">3:30 PM</td>
+          <td>
+            <div class="session-title">Hands-On Practice Session 2</div>
+            <div class="session-desc">Breeding procedures, record keeping, and facility management</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="time-col">5:00 PM</td>
+          <td>
+            <div class="session-title">Graduation & Certificate Presentation</div>
+            <div class="session-desc">Course completion, resources distribution, and network building</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+<section id="book" class="booking-section">
+  <div class="booking-container">
+    <h2>Secure Your Spot Today</h2>
+    <p class="subtitle">Limited seats available – Join Zimbabwe’s most successful rabbit farming program</p>
+
+    <div class="pricing-box">
+      <h3>Complete 2-Day Masterclass</h3>
+      <div class="price">$140</div>
+      <p class="note">Includes training materials, meals, hands-on practice, business plan template, and ongoing support access</p>
+    </div>
+
+    <form class="registration-form">
+      <h4>Registration Form</h4>
+
+      <label for="name">Full Name *</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email Address *</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <label for="location">Location/City *</label>
+      <input type="text" id="location" name="location" required>
+
+      <label for="experience">Farming Experience</label>
+      <select id="experience" name="experience">
+        <option value="">Select your experience level</option>
+        <option value="none">No experience</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+
+      <label for="interest">Why are you interested in rabbit farming?</label>
+      <textarea id="interest" name="interest" rows="4" placeholder="Tell us about your goals and expectations..."></textarea>
+
+      <button type="button" class="book-button" onclick="submitToWhatsApp()">Book Now – $140</button>
+      <p class="small-note">Click to send your details via WhatsApp. Secure payment options available. Full refund if cancelled 48 hours before the event.</p>
+    </form>
+  </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer-section animate-on-scroll fade-in">
+  <div class="footer-content">
+    <div class="footer-col company">
+      <h3>The White Meat Company</h3>
+      <p>Leading Zimbabwe's sustainable rabbit farming revolution while providing exceptional white meat dining experiences in Belvedere, Harare.</p>
+      
+    </div>
+    <div class="footer-col links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+        <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+        <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+        <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </div>
+    <div class="footer-col contact">
+      <h4>Contact Info</h4>
+      <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br />info@whitemeatcompany.zw</p>
+      <div style="margin-top: 20px;">
+        <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
+      </div>
+    </div>
+  </div>
+  <hr class="footer-divider" />
+  <div class="footer-bottom">
+    &copy; 2025 The White Meat Company. All rights reserved.
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script>
+    // Intersection Observer for fade-in scroll animations
+    const fadeObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => {
+      fadeObserver.observe(el);
+    });
+  </script>
+  <script>
+    // Typewriter effect for hero section
+    function typeWriter(element, text, speed = 50, callback) {
+      let i = 0;
+      element.textContent = '';
+      const cursor = document.createElement('span');
+      cursor.className = 'typewriter-cursor';
+      cursor.textContent = '|';
+      element.appendChild(cursor);
+      function type() {
+        if (i < text.length) {
+          element.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          cursor.remove();
+          if (callback) callback();
+        }
+      }
+      type();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const title = document.getElementById('typewriter-title');
+      const subheading = document.getElementById('typewriter-subheading');
+      const desc = document.getElementById('typewriter-desc');
+      subheading.style.visibility = 'hidden';
+      desc.style.visibility = 'hidden';
+      typeWriter(title, title.textContent, 60, () => {
+        subheading.style.visibility = 'visible';
+        typeWriter(subheading, subheading.textContent, 30, () => {
+          desc.style.visibility = 'visible';
+          typeWriter(desc, desc.textContent, 15);
+        });
+      });
+    });
+  </script>
+  <script>
+    // Gallery filter functionality
+    document.querySelectorAll('.gallery-filter').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Remove active from all
+        document.querySelectorAll('.gallery-filter').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.getAttribute('data-filter');
+        document.querySelectorAll('.gallery-grid img').forEach(img => {
+          if (filter === 'all' || img.getAttribute('data-category') === filter) {
+            img.style.display = '';
+          } else {
+            img.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <script>
+    // WhatsApp form submission function
+    function submitToWhatsApp() {
+      // Get form data
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const location = document.getElementById('location').value;
+      const experience = document.getElementById('experience').value;
+      const interest = document.getElementById('interest').value;
+
+      // Validate required fields
+      if (!name || !email || !phone || !location) {
+        alert('Please fill in all required fields (marked with *)');
+        return;
+      }
+
+      // Create WhatsApp message
+      let message = `Hi! I'm interested in booking the Rabbit Farming Masterclass for August 2025.\n\n`;
+      message += `📋 MY DETAILS:\n`;
+      message += `• Name: ${name}\n`;
+      message += `• Email: ${email}\n`;
+      message += `• Phone: ${phone}\n`;
+      message += `• Location: ${location}\n`;
+      
+      if (experience) {
+        message += `• Farming Experience: ${experience}\n`;
+      }
+      
+      if (interest) {
+        message += `• Why I'm interested: ${interest}\n`;
+      }
+      
+      message += `\n💰 Course Fee: $140\n`;
+      message += `📅 Dates: August 2nd & 3rd, 2025\n\n`;
+      message += `Please confirm my booking and send payment details. Thank you!`;
+
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Create WhatsApp URL
+      const whatsappURL = `https://wa.me/263772333369?text=${encodedMessage}`;
+      
+      // Open WhatsApp
+      window.open(whatsappURL, '_blank');
+    }
+  </script>
+
+
+</body>
+</html>
+
+
+
+
+</body>

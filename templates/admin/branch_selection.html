@@ -1,0 +1,61 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Select Branch{% endblock %}
+{% block page_title %}Select Restaurant Branch{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Choose a Branch to Manage Menu</h2>
+        <p style="color: #666; margin-top: 10px;">Select the restaurant branch you want to add or manage menu items for.</p>
+    </div>
+    
+    <div class="branches-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+        {% for branch in branches %}
+        <div class="branch-card" style="border: 2px solid #e3e6f0; border-radius: 10px; padding: 25px; text-align: center; transition: all 0.3s ease; cursor: pointer;">
+            <div class="branch-icon" style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                <i class="fas fa-store" style="font-size: 2rem; color: white;"></i>
+            </div>
+            
+            <h3 style="color: #2c3e50; margin-bottom: 10px; font-size: 1.4rem;">{{ branch.name }}</h3>
+            <p style="color: #666; margin-bottom: 15px; line-height: 1.5;">{{ branch.address }}</p>
+            
+            <div style="margin-bottom: 20px;">
+                <span style="display: inline-block; background: #e8f5e8; color: #2d5a2d; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+                    <i class="fas fa-phone" style="margin-right: 5px;"></i>
+                    {{ branch.phone }}
+                </span>
+            </div>
+            
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <a href="{% url 'branch_menu_items' branch.id %}" class="btn btn-primary" style="flex: 1;">
+                    <i class="fas fa-utensils" style="margin-right: 8px;"></i>
+                    Manage Menu
+                </a>
+                <a href="{% url 'add_menu_item' branch.id %}" class="btn btn-success">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <i class="fas fa-store" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
+            <h3 style="color: #666;">No restaurant branches found</h3>
+            <p style="color: #999;">Contact the system administrator to add restaurant branches.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.branch-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-color: #667eea;
+}
+
+.branch-card:hover .branch-icon {
+    transform: scale(1.1);
+}
+</style>
+{% endblock %}

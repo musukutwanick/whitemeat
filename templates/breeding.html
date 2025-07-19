@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The White Meat Company</title>
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="{% url 'index' %}">Home</a></li>
+       <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+      <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+      <li><a href="{% url 'breeding' %}" class="active">Breeding Stock</a></li>
+      <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
+    </ul>
+  </nav>
+
+  <section class="breeding-stock-section" data-aos="fade-in" data-aos-duration="1000">
+    <div class="overlay"></div>
+    <div class="content">
+        <h1 data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">Premium Breeding Stock</h1>
+        <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+            Pure New Zealand White & Californian rabbits from certified bloodlines. Join our
+            exclusive outgrower program with guaranteed buy-back terms.
+        </p>
+        <a href="#breeds" class="button" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="800">View Our Breeds</a>
+    </div>
+</section>
+
+
+<section id="breeds" class="rabbit-breeds">
+    <div class="container">
+        <h2>Our Premium Rabbit Breeds</h2>
+        <p class="subtitle">
+            We specialize in two superior meat rabbit breeds, carefully selected <br>
+            for optimal growth, meat quality, and commercial viability.
+        </p>
+
+        <div class="breed-cards">
+            <!-- Card 1 -->
+            <div class="breed-card">
+                <div class="image-wrapper">
+                    <img src="{% static 'images/new.jpg' %}" alt="New Zealand White">
+                    
+                </div>
+                <div class="card-content">
+                    <h3>New Zealand White</h3>
+                    <p>
+                        The gold standard of commercial rabbit farming. Known for rapid growth,
+                        excellent feed conversion, and superior meat quality with distinctive white fur and red eyes.
+                    </p>
+                    <ul>
+                        <li>✓ Mature weight: 4–5.5 kg</li>
+                        <li>✓ Excellent mothering ability</li>
+                        <li>✓ Fast growth rate to market weight</li>
+                        <li>✓ Superior feed conversion ratio</li>
+                        <li>✓ Hardy and disease resistant</li>
+                        <li>✓ Large litter sizes (8–12 kits)</li>
+                        <li>✓ Premium meat quality</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="breed-card">
+                <div class="image-wrapper">
+                    <img src="{% static 'images/carli.jpg' %}" alt="Californian Rabbit">
+                   
+                </div>
+                <div class="card-content">
+                    <h3>Californian</h3>
+                    <p>
+                        Distinctive white rabbits with black points on ears, nose, feet, and tail.
+                        Excellent for meat production with superior muscle-to-bone ratio and calm temperament.
+                    </p>
+                    <ul>
+                        <li>✓ Mature weight: 4–5 kg</li>
+                        <li>✓ Excellent meat-to-bone ratio</li>
+                        <li>✓ Calm and easy to handle</li>
+                        <li>✓ Good feed efficiency</li>
+                        <li>✓ Distinctive color pattern</li>
+                        <li>✓ Reliable breeding performance</li>
+                        <li>✓ Market-preferred carcass quality</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="outgrower-program">
+    <div class="container">
+        <h2>Exclusive Outgrower Program</h2>
+        <p class="subtitle">
+            Join Zimbabwe’s premier rabbit farming network with guaranteed market access and <br>
+            premium pricing for your produce.
+        </p>
+
+        <div class="program-grid">
+            <div class="program-card highlight">
+                <h3>Guaranteed Market Access</h3>
+                <p>We guarantee a market for all your produce, ensuring stable income and business growth through our established supply chain network.</p>
+            </div>
+
+            <div class="program-card">
+                <h3>Certified Training</h3>
+                <p>Hold a certificate in rabbit farming from The World Meat Company masterclass program.</p>
+            </div>
+
+            <div class="program-card">
+                <h3>Commercial Scale</h3>
+                <p>Operate with minimum 51x36 breeders cages and 63x64 weaner cages for commercial viability.</p>
+            </div>
+
+            <div class="program-card">
+                <h3>Regular Deliveries</h3>
+                <p>Maintain consistent supply through regular deliveries. Cages exceeding daily capacity must fit program specifications.</p>
+            </div>
+
+            <div class="program-card">
+                <h3>Pure Bloodlines</h3>
+                <p>Maintain New Zealand white pure breeds from WWCO parent stock without crossbreeding from unapproved sources.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Section 2: Buy-Back Terms & Pricing -->
+<section class="buy-back">
+    <h2>Buy-Back Terms & Pricing</h2>
+    <p>Transparent pricing and clear terms for all outgrower program participants.</p>
+
+    <div class="buy-back-content">
+        <div class="conditions">
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/><path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/><path d="M12 3v18"/></svg> Buy-Back Conditions</h3>
+            <ul>
+                <li>We buy ‘PURE’ New Zealand White & Californian rabbits ONLY</li>
+                <li>Rabbits must be 3 months old & weigh 2.1–2.4 kg live weight</li>
+                <li>All rabbits will be thoroughly inspected for quality</li>
+                <li>We do NOT buy produce from non-outgrowers</li>
+                <li>Deliveries must be pre-arranged 48 hours in advance</li>
+                <li>Receiving bay open: 8:30am–11:30am (Sunday–Wednesday)</li>
+                <li>Dispatch bay open: All day (Thursday–Friday)</li>
+                <li>Delivery quantities must match expected cage output</li>
+            </ul>
+        </div>
+
+        <div class="pricing-box">
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Current Pricing</h3>
+            <p>Bucks (Meat): <strong>$7 each</strong></p>
+            <p>Does (Breeders): <strong>$10 each</strong></p>
+
+            <div class="delivery-requirements">
+                <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Delivery Requirements</h4>
+                <p>Meat rabbit deliveries must be accompanied by an equal or greater number of breeders to maintain program balance.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="notice">
+        <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Program Requirements</h4>
+        <p><strong>Training:</strong> Complete our masterclass certification program</p>
+        <p><strong>Scale:</strong> Minimum commercial cage setup required</p>
+        <p><strong>Payment:</strong> 21 days from invoice date</p>
+    </div>
+</section>
+
+<section class="outgrower-contact">
+    <h2>Join Our Outgrower Program</h2>
+    <p>Ready to start your commercial rabbit farming journey?</p>
+
+    <div class="contact-options">
+        <div class="contact-card">
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Us</h3>
+            <p>+263 772 333 369<br>+263 779 521 665</p>
+        </div>
+
+        <div class="contact-card">
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp Us</h3>
+            <p>+263 772 333 369<br>+263 779 521 665</p>
+        </div>
+
+        <div class="contact-card">
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Visit Our Facility</h3>
+            <p>Number 17793 Tredgold Drive<br>Belvedere, Harare</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer-section animate-on-scroll fade-in">
+  <div class="footer-content">
+    <div class="footer-col company">
+      <h3>The White Meat Company</h3>
+      <p>Leading Zimbabwe's sustainable rabbit farming revolution while providing exceptional white meat dining experiences in Belvedere, Harare.</p>
+      
+    </div>
+    <div class="footer-col links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+        <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+        <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+        <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </div>
+    <div class="footer-col contact">
+      <h4>Contact Info</h4>
+      <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br />info@whitemeatcompany.zw</p>
+      <div style="margin-top: 20px;">
+        <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
+      </div>
+    </div>
+  </div>
+  <hr class="footer-divider" />
+  <div class="footer-bottom">
+    &copy; 2025 The White Meat Company. All rights reserved.
+  </div>
+</footer>
+
+  <!-- Custom Scroll Animations -->
+  <script src="{% static 'js/scroll-animations.js' %}"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script>
+    // Intersection Observer for fade-in scroll animations
+    const fadeObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => {
+      fadeObserver.observe(el);
+    });
+  </script>
+  <script>
+    // Typewriter effect for hero section
+    function typeWriter(element, text, speed = 50, callback) {
+      let i = 0;
+      element.textContent = '';
+      const cursor = document.createElement('span');
+      cursor.className = 'typewriter-cursor';
+      cursor.textContent = '|';
+      element.appendChild(cursor);
+      function type() {
+        if (i < text.length) {
+          element.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          cursor.remove();
+          if (callback) callback();
+        }
+      }
+      type();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const title = document.getElementById('typewriter-title');
+      const subheading = document.getElementById('typewriter-subheading');
+      const desc = document.getElementById('typewriter-desc');
+      subheading.style.visibility = 'hidden';
+      desc.style.visibility = 'hidden';
+      typeWriter(title, title.textContent, 60, () => {
+        subheading.style.visibility = 'visible';
+        typeWriter(subheading, subheading.textContent, 30, () => {
+          desc.style.visibility = 'visible';
+          typeWriter(desc, desc.textContent, 15);
+        });
+      });
+    });
+  </script>
+  <script>
+    // Gallery filter functionality
+    document.querySelectorAll('.gallery-filter').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Remove active from all
+        document.querySelectorAll('.gallery-filter').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.getAttribute('data-filter');
+        document.querySelectorAll('.gallery-grid img').forEach(img => {
+          if (filter === 'all' || img.getAttribute('data-category') === filter) {
+            img.style.display = '';
+          } else {
+            img.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+
+</body>
+</html>
+
+</body>
+

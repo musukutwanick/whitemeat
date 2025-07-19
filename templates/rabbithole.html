@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The White Meat Company</title>
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/scroll-animations.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="{% url 'index' %}">Home</a></li>
+       <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+      <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+      <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+      <li><a href="{% url 'rabbithole' %}" class="active">Rabbit Hole</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section" data-aos="fade-in" data-aos-duration="1000" style="background: url('{% static "images/restraurant.jpg" %}') center/cover no-repeat; min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative;">
+    <div class="hero-overlay" style="background: rgba(83, 71, 45, 0.65); backdrop-filter: blur(4px); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
+    <div class="hero-content" style="position: relative; z-index: 2; text-align: center; color: white; max-width: 800px; padding: 0 20px;">
+      <h1 data-aos="fade-down" data-aos-delay="300" data-aos-duration="800" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: 1px;">Welcome to Rabbit Hole Restaurant</h1>
+      <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="800" style="font-size: 1.3rem; margin-bottom: 2.5rem; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto;">Get all your favorite rabbit dishes cooked with quality ingredients. Experience the finest white meat cuisine with a commitment to quality, sustainability, and exceptional flavors that define healthy dining.</p>
+      <div class="hero-tagline" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="800" style="margin-top: 2rem;">
+        <span style="color: white; font-size: 2rem; font-weight: 700; letter-spacing: 2px;">EAT</span>
+        <span style="color: #e50914; font-size: 2rem; font-weight: 700; margin: 0 1rem;">|</span>
+        <span style="color: white; font-size: 2rem; font-weight: 700; letter-spacing: 2px;">LIVE</span>
+        <span style="color: #e50914; font-size: 2rem; font-weight: 700; margin: 0 1rem;">|</span>
+        <span style="color: white; font-size: 2rem; font-weight: 700; letter-spacing: 2px;">HEALTHY</span>
+      </div>
+    </div>
+  </section>
+
+<section class="menu-section" style="padding: 80px 20px; background: #fff;">
+  <div class="menu-container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <h2 class="menu-title" style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: #2c3e50;">Our Menu</h2>
+    <div style="width: 60px; height: 4px; background: #5cb3a8; margin: 0 auto 3rem auto; border-radius: 2px;"></div>
+
+    <!-- Filter Buttons -->
+    <div class="menu-tabs" style="margin-bottom: 4rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <button class="menu-tab active" data-filter="all" style="background: #5cb3a8; color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;">All</button>
+      {% for category in categories %}
+      <button class="menu-tab" data-filter="{{ category.slug }}" style="background: transparent; color: #666; border: 2px solid #ddd; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;">{{ category.name }}</button>
+      {% endfor %}
+    </div>
+
+    <!-- Menu Cards -->
+    <div class="menu-items" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; justify-items: center;">
+      {% for item in menu_items %}
+      <div class="menu-card {{ item.category.slug }} all" style="position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s; cursor: pointer;">
+        <img src="{{ item.image_url }}" alt="{{ item.name }}" style="width: 100%; height: 250px; object-fit: cover;">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 2rem 1.5rem 1.5rem; text-align: left;">
+          <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; color: white;">{{ item.name }}</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.9; line-height: 1.4;">{{ item.description }}</p>
+          <div style="display: flex; justify-content: flex-end; align-items: center;">
+            <span class="badge" style="background: #e50914; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">{{ item.category.name|upper }}</span>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #666;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">No Menu Items Available</h3>
+        <p>Our menu is being updated. Please check back later or contact us for more information.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Menu Filter Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuTabs = document.querySelectorAll(".menu-tab");
+    const menuCards = document.querySelectorAll(".menu-card");
+
+    function filterMenuCards(filter) {
+      menuCards.forEach((card) => {
+        if (filter === "all" || card.classList.contains(filter)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    menuTabs.forEach((tab) => {
+      tab.addEventListener("click", function () {
+        // Remove active class from all tabs
+        menuTabs.forEach(t => {
+          t.style.background = "transparent";
+          t.style.color = "#666";
+          t.style.border = "2px solid #ddd";
+        });
+        
+        // Add active class to clicked tab
+        this.style.background = "#5cb3a8";
+        this.style.color = "white";
+        this.style.border = "2px solid #5cb3a8";
+
+        const filter = this.dataset.filter;
+        filterMenuCards(filter);
+      });
+      
+      // Add hover effects
+      tab.addEventListener("mouseenter", function() {
+        if (this.style.background !== "rgb(92, 179, 168)") {
+          this.style.background = "#f0f0f0";
+          this.style.color = "#333";
+        }
+      });
+      
+      tab.addEventListener("mouseleave", function() {
+        if (this.style.background !== "rgb(92, 179, 168)") {
+          this.style.background = "transparent";
+          this.style.color = "#666";
+        }
+      });
+    });
+
+    // Add hover effects to menu cards
+    menuCards.forEach(card => {
+      card.addEventListener("mouseenter", function() {
+        this.style.transform = "translateY(-5px)";
+      });
+      
+      card.addEventListener("mouseleave", function() {
+        this.style.transform = "translateY(0)";
+      });
+    });
+
+    // Default: Show all cards
+    filterMenuCards("all");
+  });
+</script>
+
+<!-- Select Where to Dine Heading -->
+<section style="padding: 60px 20px 40px; background: #fff; text-align: center;">
+  <h2 style="font-size: 3.5rem; font-weight: 700; color: #2c3e50; margin: 0;">Select Where to Dine</h2>
+</section>
+
+<!-- Rabbit hole Pagomo Section -->
+<section class="pagomo-section" style="padding: 40px 20px 80px; background: #fff;">
+  <div class="pagomo-container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <h2 class="pagomo-title" style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: #2c3e50;">Rabbit hole Pagomo</h2>
+    <div style="width: 60px; height: 4px; background: #5cb3a8; margin: 0 auto 2rem auto; border-radius: 2px;"></div>
+    <p class="pagomo-subtitle" style="font-size: 1.2rem; color: #666; margin-bottom: 3rem; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Our flagship location offering the complete Rabbit Hole experience with a vibrant atmosphere and extensive menu. 
+      Join us for exceptional dining in the heart of Pagomo.
+    </p>
+
+    <div class="pagomo-map" style="max-width: 800px; margin: 0 auto;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30387.108017334933!2d30.952801010839856!3d-17.8204137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a5005ab9857b%3A0x64e4ebc8d391f6a4!2sRabbit%20Hole%20PaGomo!5e0!3m2!1sen!2szw!4v1752682566421!5m2!1sen!2szw" width="100%" height="400" style="border:0; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="pagomo-button" style="margin-top: 2rem;">
+      <a href="{% url 'pagomo' %}" style="text-decoration: none;">
+        <button style="background: linear-gradient(135deg, #4285f4 0%, #1976d2 100%); color: white; border: none; padding: 16px 48px; border-radius: 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3); letter-spacing: 1px; min-width: 200px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(66, 133, 244, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(66, 133, 244, 0.3)'">Visit Us</button>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Rabbit hole Premium Section -->
+<section class="premium-section" style="padding: 80px 20px; background: #f8f9fa;">
+  <div class="premium-container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <h2 class="premium-title" style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: #2c3e50;">Rabbit hole Premium</h2>
+    <div style="width: 60px; height: 4px; background: #5cb3a8; margin: 0 auto 2rem auto; border-radius: 2px;"></div>
+    <p class="premium-subtitle" style="font-size: 1.2rem; color: #666; margin-bottom: 3rem; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Experience our premium dining location with an elevated atmosphere and exclusive menu offerings. 
+      Visit us for an unforgettable culinary journey.
+    </p>
+
+    <div class="premium-map" style="max-width: 800px; margin: 0 auto;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30387.108017334933!2d30.952801010839856!3d-17.8204137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a5625e2989af%3A0x5e54f2f976050108!2sThe%20Rabbit%20Hole%20Bar%20%26%20Grill!5e0!3m2!1sen!2szw!4v1752683185081!5m2!1sen!2szw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="premium-button" style="margin-top: 2rem;">
+      <button style="background: linear-gradient(135deg, #4285f4 0%, #1976d2 100%); color: white; border: none; padding: 16px 48px; border-radius: 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3); letter-spacing: 1px; min-width: 200px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(66, 133, 244, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(66, 133, 244, 0.3)'">Visit Us</button>
+    </div>
+  </div>
+</section>
+
+<!-- Other Branches Coming Soon Heading -->
+<section style="padding: 60px 20px 40px; background: #fff; text-align: center;">
+  <h2 style="font-size: 3.5rem; font-weight: 700; color: #2c3e50; margin: 0;">Other Branches Coming Soon</h2>
+</section>
+
+
+<!-- Footer Section -->
+<footer class="footer-section animate-on-scroll fade-in">
+  <div class="footer-content">
+    <div class="footer-col company">
+      <h3>The White Meat Company</h3>
+      <p>Leading Zimbabwe's sustainable rabbit farming revolution while providing exceptional white meat dining experiences in Belvedere, Harare.</p>
+      
+    </div>
+    <div class="footer-col links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+        <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+        <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+        <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
+        <li><a href="{% url 'pagomo' %}">PaGomo Branch</a></li>
+      </ul>
+    </div>
+    <div class="footer-col contact">
+      <h4>Contact Info</h4>
+      <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br />info@whitemeatcompany.zw</p>
+      <div style="margin-top: 20px;">
+        <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
+      </div>
+    </div>
+  </div>
+  <hr class="footer-divider" />
+  <div class="footer-bottom">
+    &copy; 2025 The White Meat Company. All rights reserved.
+  </div>
+</footer>
+
+  <!-- AOS Animation Library -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
+    });
+  </script>
+
+</body>

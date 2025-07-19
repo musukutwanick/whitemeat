@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Static Files Debug</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Static Files Debug</h1>
+    <div class="debug">
+        <h3>Static URL Debug:</h3>
+        <p>CSS URL: <code>{% static 'css/style.css' %}</code></p>
+        <p>Logo URL: <code>{% static 'images/logo.svg' %}</code></p>
+    </div>
+    <div class="debug">
+        <h3>If CSS is loading, this text should be Arial:</h3>
+        <p>This is a test paragraph.</p>
+    </div>
+</body>
+</html>

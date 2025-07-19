@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rabbit Hole PaGomo</title>
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/scroll-animations.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    /* Pagomo Page Responsive Styles */
+    @media (max-width: 1024px) {
+      .pagomo-order-grid {
+        grid-template-columns: 1fr 320px !important;
+        gap: 25px !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .menu-section {
+        padding: 40px 0 !important;
+      }
+      
+      .menu-section h2 {
+        font-size: 2rem !important;
+      }
+      
+      .pagomo-order-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+      }
+      
+      .pagomo-menu-item {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 15px !important;
+      }
+      
+      .pagomo-menu-item img {
+        width: 100% !important;
+        max-width: 200px !important;
+        height: 150px !important;
+      }
+      
+      .pagomo-menu-item .add-to-cart-btn {
+        width: 100% !important;
+        max-width: 200px !important;
+        padding: 12px 16px !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .menu-section {
+        padding: 30px 0 !important;
+      }
+      
+      .menu-section > div {
+        padding: 0 15px !important;
+      }
+      
+      .menu-section h2 {
+        font-size: 1.8rem !important;
+      }
+      
+      .menu-section > div > div > div {
+        padding: 20px 15px !important;
+      }
+      
+      .pagomo-menu-item {
+        padding: 15px 0 !important;
+      }
+      
+      .menu-section input,
+      .menu-section textarea {
+        font-size: 16px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+      <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+      <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+      <li><a href="{% url 'rabbithole' %}" class="active">Rabbit Hole</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero/Intro Section -->
+  <section class="pagomo-hero" data-aos="fade-in" data-aos-duration="1000" style="background: url('images/restraurant1.jpg') center/cover no-repeat; min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
+    <div class="pagomo-hero-overlay" style="background: linear-gradient(135deg, rgba(34, 139, 34, 0.7), rgba(72, 61, 139, 0.6)); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
+    <div style="position: relative; z-index: 2; text-align: center; padding: 60px 20px;">
+      <h1 data-aos="fade-down" data-aos-delay="300" data-aos-duration="800" style="color: #fff; font-size: 3.2rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Rabbit Hole Pagomo</h1>
+      <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="800" style="color: #fff; font-size: 1.4rem; max-width: 650px; margin: 0 auto; line-height: 1.6; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Welcome to our PaGomo branch! Enjoy the finest rabbit cuisine, a cozy atmosphere, and healthy, delicious meals for the whole family. Experience the best of The White Meat Company in the heart of PaGomo.</p>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="menu-section" style="background: #f8f9fa; padding: 60px 0;">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+      <!-- Header -->
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; margin-bottom: 10px;">Place Order</h2>
+        <div style="width: 60px; height: 4px; background: #5cb3a8; margin: 0 auto; border-radius: 2px;"></div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="pagomo-order-grid" style="display: grid; grid-template-columns: 1fr 350px; gap: 30px; align-items: start;">
+        <!-- Left Column - Menu Items -->
+        <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <h3 style="color: #5cb3a8; font-size: 1.3rem; font-weight: 600; margin-bottom: 25px; border-bottom: 2px solid #5cb3a8; padding-bottom: 10px;">Our Menu</h3>
+          
+          <!-- Category Filter Buttons -->
+          <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;">
+            <button class="category-filter active" data-category="all" style="background: #5cb3a8; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">All</button>
+            {% for category in categories %}
+            <button class="category-filter" data-category="{{ category.slug }}" style="background: #f8f9fa; color: #666; border: 1px solid #ddd; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">{{ category.name }}</button>
+            {% endfor %}
+          </div>
+          
+          <div id="pagomo-menu-items">
+            
+            {% for item in menu_items %}
+            <!-- {{ item.name }} -->
+            <div class="menu-item pagomo-menu-item" data-category="{{ item.category.slug }}" style="display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid #eee;">
+              <img src="{{ item.image_url }}" alt="{{ item.name }}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">
+              <div style="flex: 1; min-width: 0;">
+                <h4 style="font-size: 1.1rem; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">{{ item.name }}</h4>
+                <p style="color: #666; font-size: 0.9rem; margin: 0 0 10px 0;">{{ item.description }}</p>
+                <span style="color: #5cb3a8; font-weight: 700; font-size: 1.1rem;">${{ item.price }}</span>
+              </div>
+              <button class="add-to-cart-btn" data-name="{{ item.name }}" data-price="{{ item.price }}" style="background: #5cb3a8; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 600; flex-shrink: 0;">Add to Cart</button>
+            </div>
+            {% empty %}
+            <div style="text-align: center; padding: 40px; color: #666;">
+              <p>No menu items available at the moment.</p>
+              <p>Please check back later or contact us for more information.</p>
+              <!-- Debug: Branch slug is '{{ branch.slug|default:"No slug" }}', Active: {{ branch.is_active|default:"N/A" }} -->
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        
+        <!-- Right Column - Order Summary -->
+        <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 20px;">
+          <h3 style="color: #2c3e50; font-size: 1.3rem; font-weight: 600; margin-bottom: 25px; text-align: center;">Your Order</h3>
+          
+          <div id="cart-items" style="min-height: 100px; margin-bottom: 20px;">
+            <p style="color: #999; text-align: center; font-style: italic;">Your cart is empty</p>
+          </div>
+          
+          <div style="border-top: 2px solid #eee; padding-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+              <span style="font-size: 1.2rem; font-weight: 700; color: #2c3e50;">Total:</span>
+              <span id="cart-total" style="font-size: 1.3rem; font-weight: 700; color: #5cb3a8;">$0.00</span>
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+              <h4 style="color: #2c3e50; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Reservation Information</h4>
+              <input type="text" placeholder="Full Name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
+              <input type="text" placeholder="Phone Number" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
+              <input type="date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
+              <input type="time" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
+              <input type="number" placeholder="Number of People" min="1" max="20" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
+              <textarea placeholder="Special Requests (Optional)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; font-size: 0.9rem; min-height: 60px; resize: vertical;"></textarea>
+            </div>
+            
+            <button id="place-order-btn" style="width: 100%; background: #5cb3a8; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s;">Make Reservation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit Us Section -->
+  <section style="background: #f8f9fa; padding: 80px 20px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h2 style="text-align: center; font-size: 2.5rem; font-weight: 700; color: #2c3e50; margin-bottom: 50px;">Visit Us</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+        <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+          <h3 style="color: #5cb3a8; font-size: 1.8rem; font-weight: 600; margin-bottom: 25px;">Rabbit Hole PaGomo</h3>
+          <div style="space-y: 15px;">
+            <p style="margin-bottom: 15px; font-size: 1rem; line-height: 1.6; display: flex; align-items: center; gap: 10px;">
+              <svg width="18" height="18" fill="none" viewBox="0 0 18 18" style="flex-shrink: 0;">
+                <rect width="18" height="18" rx="4" fill="#2d6a4f"/>
+                <path d="M9 4.5a3 3 0 0 0-3 3c0 1.875 3 5.25 3 5.25s3-3.375 3-5.25a3 3 0 0 0-3-3zm0 4.125a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25z" fill="#fff"/>
+              </svg>
+              <strong style="color: #2c3e50;">Address:</strong> PaGomo, Harare, Zimbabwe
+            </p>
+            <p style="margin-bottom: 15px; font-size: 1rem; line-height: 1.6; display: flex; align-items: center; gap: 10px;">
+              <svg width="18" height="18" fill="none" viewBox="0 0 18 18" style="flex-shrink: 0;">
+                <rect width="18" height="18" rx="4" fill="#2d6a4f"/>
+                <path d="M13 11.375v1.5a.75.75 0 0 1-.82.75A9.79 9.79 0 0 1 4.125 5.57a.75.75 0 0 1 .75-.82h1.5a.75.75 0 0 1 .75.57l.375 1.5a.75.75 0 0 1-.173.75L6.75 8.25a7.875 7.875 0 0 0 3 3l.68-.577a.75.75 0 0 1 .75-.173l1.5.375a.75.75 0 0 1 .57.75z" fill="#fff"/>
+              </svg>
+              <strong style="color: #2c3e50;">Contact Number:</strong> +263 773 333 369
+            </p>
+            <p style="margin-bottom: 15px; font-size: 1rem; line-height: 1.6; display: flex; align-items: center; gap: 10px;">
+              <svg width="18" height="18" fill="none" viewBox="0 0 18 18" style="flex-shrink: 0;">
+                <rect width="18" height="18" rx="4" fill="#2d6a4f"/>
+                <path d="M4.5 5.625l3.75 3 3.75-3" stroke="#fff" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="4.5" y="5.625" width="7.5" height="5.25" rx="1.5" stroke="#fff" stroke-width="1.125"/>
+              </svg>
+              <strong style="color: #2c3e50;">Email:</strong> pagomo@rabbitholerestaurant.com
+            </p>
+            <div style="margin-top: 20px;">
+              <p style="margin-bottom: 10px; font-size: 1rem; line-height: 1.6; display: flex; align-items: center; gap: 10px;">
+                <svg width="18" height="18" fill="none" viewBox="0 0 18 18" style="flex-shrink: 0;">
+                  <rect width="18" height="18" rx="4" fill="#2d6a4f"/>
+                  <circle cx="9" cy="9" r="3.75" stroke="#fff" stroke-width="1.125"/>
+                  <path d="M9 6.375v2.25l1.5 1.5" stroke="#fff" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <strong style="color: #2c3e50;">Opening Hours:</strong>
+              </p>
+              <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-left: 20px;">
+                <p style="margin-bottom: 5px;"><strong>Tuesday - Sunday:</strong> 9:30 AM – 10:00 PM</p>
+                <p style="margin: 0;"><strong>Monday</strong> Closed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); height: 400px;">
+          <iframe
+            src="https://www.google.com/maps?q=123+Main+Street,+PaGomo+District,+Harare,+Zimbabwe&output=embed"
+            style="width: 100%; height: 100%; border: none;"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="footer-content">
+      <div class="footer-col company">
+        <h3>The White Meat Company</h3>
+        <p>Leading Zimbabwe's sustainable rabbit farming revolution while providing exceptional white meat dining experiences in Belvedere, Harare.</p>
+      </div>
+      <div class="footer-col links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+          <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+          <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+          <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
+        </ul>
+      </div>
+      <div class="footer-col contact">
+        <h4>Contact Info</h4>
+        <p>PaGomo Branch<br />123 Main Street, PaGomo District<br />Harare, Zimbabwe<br />+263 77 123 4567<br />pagomo@rabbitholerestaurant.com</p>
+        <div style="margin-top: 20px;">
+          <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      &copy; 2025 The White Meat Company. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Cart & Order Logic -->
+  <script>
+    // Category filtering functionality
+    document.querySelectorAll('.category-filter').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Remove active class from all buttons
+        document.querySelectorAll('.category-filter').forEach(b => {
+          b.classList.remove('active');
+          b.style.background = '#f8f9fa';
+          b.style.color = '#666';
+          b.style.border = '1px solid #ddd';
+        });
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        this.style.background = '#5cb3a8';
+        this.style.color = 'white';
+        this.style.border = 'none';
+        
+        const category = this.getAttribute('data-category');
+        const menuItems = document.querySelectorAll('.menu-item');
+        
+        menuItems.forEach(item => {
+          if (category === 'all' || item.getAttribute('data-category') === category) {
+            item.style.display = 'flex';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Cart functionality
+    let cart = [];
+    let cartTotal = 0;
+    
+    function updateCartDisplay() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalElement = document.getElementById('cart-total');
+      
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p style="color: #999; text-align: center; font-style: italic;">Your cart is empty</p>';
+        cartTotal = 0;
+      } else {
+        cartItemsContainer.innerHTML = '';
+        cartTotal = 0;
+        
+        // Group items by name
+        const groupedItems = {};
+        cart.forEach(item => {
+          if (groupedItems[item.name]) {
+            groupedItems[item.name].quantity += 1;
+            groupedItems[item.name].totalPrice += item.price;
+          } else {
+            groupedItems[item.name] = {
+              name: item.name,
+              price: item.price,
+              quantity: 1,
+              totalPrice: item.price
+            };
+          }
+        });
+        
+        // Display grouped items
+        Object.values(groupedItems).forEach(item => {
+          const itemElement = document.createElement('div');
+          itemElement.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;';
+          itemElement.innerHTML = `
+            <div>
+              <h4 style="margin: 0; font-size: 0.9rem; color: #2c3e50;">${item.name}</h4>
+              <p style="margin: 0; font-size: 0.8rem; color: #666;">$${item.price.toFixed(2)} × ${item.quantity}</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-weight: 600; color: #5cb3a8;">$${item.totalPrice.toFixed(2)}</span>
+              <button onclick="removeFromCart('${item.name}')" style="background: #e74c3c; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center;">×</button>
+            </div>
+          `;
+          cartItemsContainer.appendChild(itemElement);
+          cartTotal += item.totalPrice;
+        });
+      }
+      
+      cartTotalElement.textContent = `$${cartTotal.toFixed(2)}`;
+    }
+    
+    function addToCart(name, price) {
+      cart.push({ name, price: parseFloat(price) });
+      updateCartDisplay();
+    }
+    
+    function removeFromCart(itemName) {
+      const index = cart.findIndex(item => item.name === itemName);
+      if (index !== -1) {
+        cart.splice(index, 1);
+        updateCartDisplay();
+      }
+    }
+    
+    // Add event listeners to all "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const name = this.getAttribute('data-name');
+        const price = this.getAttribute('data-price');
+        addToCart(name, price);
+        
+        // Visual feedback
+        const originalText = this.textContent;
+        this.textContent = 'Added!';
+        this.style.background = '#27ae60';
+        setTimeout(() => {
+          this.textContent = originalText;
+          this.style.background = '#5cb3a8';
+        }, 1000);
+      });
+    });
+    
+    // Place reservation functionality
+    document.getElementById('place-order-btn').addEventListener('click', function() {
+      if (cart.length === 0) {
+        alert('Please select items for your reservation.');
+        return;
+      }
+      
+      const fullName = document.querySelector('input[placeholder="Full Name"]').value;
+      const phoneNumber = document.querySelector('input[placeholder="Phone Number"]').value;
+      const reservationDate = document.querySelector('input[type="date"]').value;
+      const reservationTime = document.querySelector('input[type="time"]').value;
+      const numberOfPeople = document.querySelector('input[placeholder="Number of People"]').value;
+      const specialRequests = document.querySelector('textarea[placeholder="Special Requests (Optional)"]').value;
+      
+      if (!fullName || !phoneNumber || !reservationDate || !reservationTime || !numberOfPeople) {
+        alert('Please fill in all required fields (Name, Phone, Date, Time, Number of People).');
+        return;
+      }
+      
+      // Validate date is not in the past
+      const selectedDate = new Date(reservationDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      if (selectedDate < today) {
+        alert('Please select a future date for your reservation.');
+        return;
+      }
+      
+      // Create reservation message for WhatsApp
+      let whatsappMessage = `🍽️ *Rabbit Hole Pagomo Reservation*\n\n`;
+      
+      // Add pre-ordered items
+      const groupedItems = {};
+      cart.forEach(item => {
+        if (groupedItems[item.name]) {
+          groupedItems[item.name].quantity += 1;
+          groupedItems[item.name].totalPrice += item.price;
+        } else {
+          groupedItems[item.name] = {
+            name: item.name,
+            price: item.price,
+            quantity: 1,
+            totalPrice: item.price
+          };
+        }
+      });
+      
+      whatsappMessage += `📋 *Pre-ordered Items:*\n`;
+      Object.values(groupedItems).forEach(item => {
+        whatsappMessage += `• ${item.name} × ${item.quantity} = $${item.totalPrice.toFixed(2)}\n`;
+      });
+      
+      whatsappMessage += `\n💰 *Estimated Total:* $${cartTotal.toFixed(2)}\n\n`;
+      whatsappMessage += `👤 *Customer:* ${fullName}\n`;
+      whatsappMessage += `📱 *Phone:* ${phoneNumber}\n`;
+      whatsappMessage += `📅 *Date:* ${reservationDate}\n`;
+      whatsappMessage += `🕐 *Time:* ${reservationTime}\n`;
+      whatsappMessage += `👥 *Party Size:* ${numberOfPeople} people\n`;
+      if (specialRequests) whatsappMessage += `📝 *Special Requests:* ${specialRequests}\n`;
+      
+      whatsappMessage += `\nPlease confirm this reservation. Thank you! 🙏`;
+      
+      // Encode the message for URL
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      
+      // Create WhatsApp URL
+      const whatsappUrl = `https://wa.me/263772333369?text=${encodedMessage}`;
+      
+      // Open WhatsApp in a new window/tab
+      window.open(whatsappUrl, '_blank');
+      
+      // Reset cart and form after sending
+      cart = [];
+      updateCartDisplay();
+      document.querySelector('input[placeholder="Full Name"]').value = '';
+      document.querySelector('input[placeholder="Phone Number"]').value = '';
+      document.querySelector('input[type="date"]').value = '';
+      document.querySelector('input[type="time"]').value = '';
+      document.querySelector('input[placeholder="Number of People"]').value = '';
+      document.querySelector('textarea[placeholder="Special Requests (Optional)"]').value = '';
+    });
+    
+    // Initialize cart display
+    updateCartDisplay();
+  </script>
+  
+  <!-- AOS Animation Library -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50
+    });
+  </script>
+</body>
+</html>

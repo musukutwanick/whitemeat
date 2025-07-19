@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Add Menu Item{% endblock %}
+
+{% block content_title %}Add New Menu Item{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Description *</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="price">Price *</label>
+        <input type="number" id="price" name="price" step="0.01" min="0" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="category">Category *</label>
+        <select id="category" name="category" required>
+            <option value="">Select a category</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image" accept="image/*">
+        <small style="color: #666; display: block; margin-top: 5px;">
+            Upload a high-quality image of the menu item. Recommended size: 800x600px or larger.
+        </small>
+    </div>
+    
+    <div class="form-group">
+        <div class="checkbox-group">
+            <input type="checkbox" id="is_available" name="is_available" checked>
+            <label for="is_available">Available for order</label>
+        </div>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+        <button type="submit" class="btn">Add Menu Item</button>
+        <a href="{% url 'branch_menu_items' branch.id %}" class="btn btn-secondary" style="margin-left: 10px;">Cancel</a>
+    </div>
+</form>
+{% endblock %}
