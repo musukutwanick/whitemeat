@@ -177,7 +177,7 @@ body, html {
 
 /* About Section */
 .about {
-  padding: 60px 20px 80px 20px;
+  padding: 160px 10px 180px 10px;
   background-color: #fff;
   text-align: center;
   margin-top: 0;
@@ -285,20 +285,17 @@ body, html {
 
 /* Mission & Vision Section */
 .mission-vision {
-  padding: 80px 20px 100px 20px;
-  margin-top: 60px;
+  width: 100%;
+  min-height: 600px;
+  padding: 80px 0 80px 0;
+  margin-top: 0;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   position: relative;
+  box-sizing: border-box;
 }
 
 .mission-vision::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #2d6a4f, #24513d, #2d6a4f);
+  content: none;
 }
 
 .mission-vision .section-heading {
@@ -594,10 +591,215 @@ body, html {
   }
 }
 
+@media (max-width: 1024px) {
+  .services-tabs {
+    flex-direction: column !important;
+    display: flex;
+    width: 100%;
+  }
+  .services-tab {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
 .farming-tips {
   background-color: #f8f8f5;
   padding: 60px 20px;
   text-align: center;
+}
+/* --- Services Section --- */
+.services-section {
+  background: #f8f9fa;
+  padding: 80px 20px 100px 20px;
+  text-align: center;
+  color: #222;
+}
+
+.services-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  max-width: 1200px;
+  margin: 0 auto 15px auto;
+}
+
+.services-subheading {
+  font-size: 1.2rem;
+  color: #5d6c7b;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  line-height: 1.6;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 25px 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  min-height: 220px;
+  text-align: left;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2d6a4f, #24513d);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.service-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.service-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: #5d6c7b;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  min-height: 70px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.service-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 25px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.service-card ul li {
+  font-size: 1rem;
+  color: #5d6c7b;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.service-btn {
+  background: linear-gradient(135deg, #2d6a4f, #24513d);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
+  margin-top: auto;
+  align-self: stretch;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.service-btn:hover {
+  background: linear-gradient(135deg, #24513d, #1e3e2f);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(45, 106, 79, 0.3);
+}
+
+/* Services Section Mobile Responsive */
+@media (max-width: 768px) {
+  .services-section {
+    padding: 60px 20px;
+  }
+  
+  .services-heading {
+    font-size: 1.8rem;
+  }
+  
+  .services-subheading {
+    font-size: 1rem;
+    margin-bottom: 40px;
+  }
+  
+  .service-cards {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+  }
+  
+  .service-card {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .service-card img {
+    height: 160px;
+  }
+  
+  .service-card h3 {
+    font-size: 1.1rem;
+    min-height: auto;
+  }
+  
+  .service-card p {
+    min-height: auto;
+  }
+  
+  .service-card ul {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-section {
+    padding: 40px 15px;
+  }
+  
+  .services-heading {
+    font-size: 1.6rem;
+  }
+  
+  .service-card {
+    padding: 20px;
+  }
+  
+  .service-card img {
+    height: 140px;
+  }
 }
 
 .farming-tips h2 {
@@ -1154,7 +1356,6 @@ textarea {
 
 .footer-divider {
   border: none;
-  border-top: 1px solid #3d3936;
   margin: 0 auto 18px auto;
   max-width: 1100px;
 }
@@ -1164,6 +1365,24 @@ textarea {
   color: #bdbdbd;
   font-size: 0.97rem;
   padding-bottom: 18px;
+}
+
+@media (max-width: 1024px) {
+  .footer-section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .footer-content {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .footer-col.company {
+    text-align: center;
+    margin-bottom: 18px;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* --- Booking Form Section --- */
@@ -2704,6 +2923,20 @@ h1 {
     margin-bottom: 0;
 }
 
+/* Responsive fix for contact/info box on mobile */
+@media (max-width: 600px) {
+  .contact-info-box, .get-in-touch, .contact-section, .contact-box {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    width: 95% !important;
+    max-width: 400px !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+}
+
 /* --- Footer Responsive Styles --- */
 @media (max-width: 768px) {
   .footer-section {
@@ -2723,19 +2956,8 @@ h1 {
     width: 100%;
   }
   
-  .footer-col.company,
-  .footer-col.links,
-  .footer-col.contact {
-    text-align: left;
-    padding: 0;
-  }
-  
-  .footer-divider {
-    margin: 0 20px 18px 20px;
-  }
-  
-  .footer-bottom {
-    padding: 0 20px 18px 20px;
+  .footer-col.links ul {
+    padding-left: 0 !important;
   }
 }
 
@@ -3011,7 +3233,7 @@ h1 {
   }
 }
 
-/* === PAGOMO PAGE RESPONSIVE STYLES === */
+/* === PAGOMO PAGE RESPONSONSIVE STYLES === */
 @media (max-width: 1024px) {
   .pagomo-order-grid {
     grid-template-columns: 1fr 320px !important;
