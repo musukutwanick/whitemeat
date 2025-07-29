@@ -247,3 +247,20 @@
   </script>
 
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var hamburger = document.getElementById('navbar-hamburger');
+    var navLinks = document.getElementById('nav-links');
+    if (hamburger && navLinks) {
+      hamburger.style.display = '';
+      hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
+      });
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          navLinks.classList.remove('open');
+        }
+      });
+    }
+  });
+</script>
