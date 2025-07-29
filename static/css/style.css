@@ -634,6 +634,24 @@ body, html {
 }
 
 @media (max-width: 480px) {
+  .hero {
+    height: 60vh;
+    min-height: 340px;
+    padding-top: 24px;
+  }
+  .hero-content h1 {
+    font-size: 2.1rem;
+    margin-bottom: 12px;
+  }
+  .hero-content .subheading {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  .hero-content {
+    max-width: 95vw;
+    padding: 0 8px;
+  }
+}
   .services-section {
     padding: 40px 15px;
   }
