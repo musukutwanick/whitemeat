@@ -14,6 +14,13 @@
     <div class="logo">
       <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
     </div>
+
+     <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu" style="display:none; background:none; border:none; cursor:pointer; padding:8px; margin-left:auto;">
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+    </button>
+
     <ul class="nav-links" id="nav-links">
       <li><a href="{% url 'index' %}">Home</a></li>
        <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
@@ -149,7 +156,7 @@
                 <li>All rabbits will be thoroughly inspected for quality</li>
                 <li>We do NOT buy produce from non-outgrowers</li>
                 <li>Deliveries must be pre-arranged 48 hours in advance</li>
-                <li>Receiving bay open: 8:30am–11:30am (Sunday–Wednesday)</li>
+                <li>Receiving bay open: 8:30am–11:30am (Monday–Friday)</li>
                 <li>Dispatch bay open: All day (Thursday–Friday)</li>
                 <li>Delivery quantities must match expected cage output</li>
             </ul>
@@ -305,6 +312,30 @@
 
 
 </body>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <script>
+    // Navbar hamburger toggle for mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      var hamburger = document.getElementById('navbar-hamburger');
+      var navLinks = document.getElementById('nav-links');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+          navLinks.classList.toggle('open');
+        });
+        // Hide nav links when resizing to tablet/desktop
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 600) {
+            navLinks.classList.remove('open');
+          }
+        });
+      }
+    });
+  </script>
+
 </html>
 
 </body>

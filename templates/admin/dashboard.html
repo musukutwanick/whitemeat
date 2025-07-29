@@ -4,31 +4,7 @@
 {% block page_title %}Welcome to Your Admin Dashboard{% endblock %}
 
 {% block content %}
-<!-- Welcome Message -->
-<div class="welcome-section" data-aos="fade-down" data-aos-duration="800" style="background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); border-radius: 15px; padding: 30px; color: white; margin-bottom: 30px; text-align: center;">
-    <h1 style="margin: 0 0 10px 0; font-size: 2.2rem;">Welcome Back, {{ user.first_name|default:user.username }}!</h1>
-    <p style="margin: 0; opacity: 0.9; font-size: 1.1rem;">Manage your restaurant content from this central dashboard</p>
-</div>
-
-<!-- Statistics Cards -->
-<div class="stats-grid" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-    <div class="stat-card">
-        <div class="stat-icon" style="background: #667eea;"><i class="fas fa-store"></i></div>
-        <div class="stat-content">
-            <div class="stat-number">{{ stats.total_branches|default:0 }}</div>
-            <div class="stat-label">Restaurant Branches</div>
-        </div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-icon" style="background: #f093fb;"><i class="fas fa-utensils"></i></div>
-        <div class="stat-content">
-            <div class="stat-number">{{ stats.total_menu_items|default:0 }}</div>
-            <div class="stat-label">Menu Items</div>
-        </div>
-    </div>
-</div>
-
-<!-- Quick Actions -->
+<!-- Quick Actions Only -->
 <div class="card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
     <div class="card-header">
         <h2 class="card-title">Quick Actions</h2>
@@ -36,6 +12,13 @@
     </div>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <a href="/admin/frontend/accessory/add/" class="action-card" style="text-decoration: none; color: inherit;">
+            <div style="background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%); border-radius: 10px; padding: 25px; color: white; text-align: center; transition: transform 0.3s ease;">
+                <i class="fas fa-toolbox" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">Add Equipment/Cages</h3>
+                <p style="opacity: 0.9; font-size: 0.9rem;">Add new equipment, cages, or accessories to display on cages.html</p>
+            </div>
+        </a>
         <a href="{% url 'branch_selection' %}" class="action-card" style="text-decoration: none; color: inherit;">
             <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; padding: 25px; color: white; text-align: center; transition: transform 0.3s ease;">
                 <i class="fas fa-utensils" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
@@ -43,8 +26,35 @@
                 <p style="opacity: 0.9; font-size: 0.9rem;">Add and edit menu items for different branches</p>
             </div>
         </a>
+
+          
+        <a href="{% url 'how_hear_responses' %}" class="action-card" style="text-decoration: none; color: inherit;">
+            <div style="background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); border-radius: 10px; padding: 25px; color: white; text-align: center; transition: transform 0.3s ease;">
+                <i class="fas fa-chart-bar" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">View Responses</h3>
+                <p style="opacity: 0.9; font-size: 0.9rem;">See survey statistics and answers</p>
+            </div>
+        </a>
         
-        <a href="{% url 'index' %}" class="action-card" style="text-decoration: none; color: inherit;">
+       
+        
+        <a href="{% url 'admin:frontend_masterclassevent_changelist' %}" class="action-card" style="text-decoration: none; color: inherit;">
+            <div style="background: linear-gradient(135deg, #00b4d8 0%, #48cae4 100%); border-radius: 10px; padding: 25px; color: white; text-align: center; transition: transform 0.3s ease;">
+                <i class="fas fa-calendar-edit" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">Update Masterclass Training</h3>
+                <p style="opacity: 0.9; font-size: 0.9rem;">Edit event details and schedule for the next masterclass</p>
+            </div>
+        </a>
+      
+         <a href="{% url 'edit_masterclass_schedule' %}" class="action-card" style="text-decoration: none; color: inherit;">
+            <div style="background: linear-gradient(135deg, #00b4d8 0%, #48cae4 100%); border-radius: 10px; padding: 25px; color: white; text-align: center; transition: transform 0.3s ease;">
+                <i class="fas fa-calendar-edit" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <h3 style="margin-bottom: 10px;">Custom Masterclass Editor</h3>
+                <p style="opacity: 0.9; font-size: 0.9rem;">Edit masterclass schedule in a table</p>
+            </div>
+        </a>
+      
+         <a href="{% url 'index' %}" class="action-card" style="text-decoration: none; color: inherit;">
             <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); border-radius: 10px; padding: 25px; color: white; text-align: center; transition: transform 0.3s ease;">
                 <i class="fas fa-external-link-alt" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
                 <h3 style="margin-bottom: 10px;">View Website</h3>
@@ -54,51 +64,18 @@
     </div>
 </div>
 
-<!-- Restaurant Branches Overview -->
-<div class="card" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800">
-    <div class="card-header">
-        <h2 class="card-title">Restaurant Branches</h2>
-    </div>
-    
-    {% if branches %}
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-        {% for branch in branches %}
-        <div class="branch-overview" style="border: 1px solid #e3e6f0; border-radius: 10px; padding: 20px;">
-            <h3 style="color: #2c3e50; margin-bottom: 10px;">{{ branch.name }}</h3>
-            <p style="color: #666; margin-bottom: 15px; font-size: 0.9rem;">{{ branch.address }}</p>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <span style="color: #999; font-size: 0.8rem;">Menu Items</span>
-                <span style="background: #e8f4fd; color: #2980b9; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">
-                    {{ branch.menu_items.count }}
-                </span>
-            </div>
-            
-            <div style="display: flex; gap: 8px;">
-                <a href="{% url 'branch_menu_items' branch.id %}" class="btn btn-primary" style="flex: 1; text-align: center; font-size: 0.85rem;">
-                    <i class="fas fa-list"></i> View Menu
-                </a>
-                <a href="{% url 'add_menu_item' branch.id %}" class="btn btn-success" style="flex: 1; text-align: center; font-size: 0.85rem;">
-                    <i class="fas fa-plus"></i> Add Item
-                </a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <div style="text-align: center; padding: 40px; color: #666;">
-        <i class="fas fa-store" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
-        <h3>No restaurant branches found</h3>
-        <p>Run the setup script to create initial restaurant branches and categories.</p>
-        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; text-align: left;">
-            <strong>To set up initial data:</strong><br>
-            1. Run: <code>python manage.py makemigrations frontend</code><br>
-            2. Run: <code>python manage.py migrate</code><br>
-            3. Run: <code>python manage.py shell < setup_data.py</code>
-        </div>
-    </div>
-    {% endif %}
-</div>
+<script>
+function showTab(evt, tabId) {
+    evt.preventDefault();
+    var tabs = document.querySelectorAll('.admin-tab-content');
+    var links = document.querySelectorAll('.admin-tab-link');
+    tabs.forEach(function(tab) { tab.style.display = 'none'; });
+    links.forEach(function(link) { link.classList.remove('active'); link.style.borderBottom = '3px solid transparent'; });
+    document.getElementById(tabId).style.display = 'block';
+    evt.currentTarget.classList.add('active');
+    evt.currentTarget.style.borderBottom = '3px solid #2d6a4f';
+}
+</script>
 
 <style>
 .action-card:hover > div {

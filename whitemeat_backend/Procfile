@@ -1,0 +1,1 @@
+web: gunicorn whitemeat_backend.wsgi

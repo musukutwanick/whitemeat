@@ -21,6 +21,9 @@ urlpatterns = [
     path('dashboard/branch/<int:branch_id>/menu/add/', views.add_menu_item, name='add_menu_item'),
     path('dashboard/branch/<int:branch_id>/menu/<int:item_id>/edit/', views.edit_menu_item, name='edit_menu_item'),
     path('dashboard/branch/<int:branch_id>/menu/<int:item_id>/delete/', views.delete_menu_item, name='delete_menu_item'),
+    path('dashboard/responses/', views.how_hear_responses, name='how_hear_responses'),
+    path('dashboard/masterclass-schedule/', views.edit_masterclass_schedule, name='edit_masterclass_schedule'),
+    path('dashboard/masterclass-schedule/save/', views.save_masterclass_schedule, name='save_masterclass_schedule'),
     
     # API URLs
     path('api/menu-items/', views.api_menu_items, name='api_menu_items'),

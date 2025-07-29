@@ -1,0 +1,43 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+{% block title %}Edit Masterclass Schedule{% endblock %}
+{% block content %}
+<h2>Edit Masterclass Schedule</h2>
+<form id="event-form" style="margin-bottom: 30px;">
+  <label for="event-title"><b>Event Title:</b></label>
+  <input type="text" id="event-title" name="event_title" value="{{ event.title }}" style="margin-right: 20px;" required>
+  <label for="event-date"><b>Date(s):</b></label>
+  <input type="text" id="event-date" name="event_date" value="{{ event.date_range }}" required>
+  <button type="submit" style="margin-left: 20px; background: #40916c; color: white; border: none; padding: 6px 16px; border-radius: 5px;">Save Event Info</button>
+</form>
+<div id="event-save-msg" style="color: #40916c; margin-bottom: 20px; display: none;">Event info saved!</div>
+<div id="masterclass-schedule-app"></div>
+<script src="{% static 'js/masterclass_schedule.js' %}"></script>
+<script>
+// Event info AJAX save
+const eventForm = document.getElementById('event-form');
+const eventSaveMsg = document.getElementById('event-save-msg');
+eventForm.onsubmit = function(e) {
+  e.preventDefault();
+  fetch('/dashboard/masterclass-schedule/save/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': (document.querySelector('[name=csrfmiddlewaretoken]')||{}).value || ''
+    },
+    body: JSON.stringify({
+      event_title: document.getElementById('event-title').value,
+      event_date: document.getElementById('event-date').value,
+      save_event: true
+    })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if(data.success) {
+      eventSaveMsg.style.display = 'block';
+      setTimeout(()=>{eventSaveMsg.style.display='none';}, 2000);
+    }
+  });
+};
+</script>
+{% endblock %}

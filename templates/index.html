@@ -8,6 +8,8 @@
   <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <link rel="stylesheet" href="{% static 'css/scroll-animations.css' %}" />
+  <!-- Font Awesome CDN for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6p+1QKQJQwQKQJQwQKQJQwQKQJQwQKQJQwQKQJQwQKQJQwQKQJQwQKQJQwQKQJQwQKQJQwQKQJQwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 </head>
 <body>
@@ -15,6 +17,13 @@
     <div class="logo">
       <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
     </div>
+
+      <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu" style="display:none; background:none; border:none; cursor:pointer; padding:8px; margin-left:auto;">
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+    </button>
+    
     <ul class="nav-links" id="nav-links">
       <li><a href="{% url 'index' %}" class="active">Home</a></li>
        <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
@@ -28,7 +37,7 @@
     <div class="overlay"></div>
     <div class="hero-content">
       <h1 id="typewriter-title" class="shine-text glow-text" data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">The White Meat Company</h1>
-      <p class="subheading" id="typewriter-subheading" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">Pioneering Zimbabwe's white meat revolution through leading the commercialization of rabbit farming through premium breeding stock, high-quality equipment, expert training and a guaranteed market for your produce nationwide. From farm to fork, our value chain includes The Rabbit Hole Bar & Grill, bringing white meat cuisine to life.</p>
+      <p class="subheading" id="typewriter-subheading" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">Pioneering Zimbabwe's white meat revolution through leading the commercialization of rabbit farming through premium breeding stock, high-quality equipment, expert training and a guaranteed market for your produce nationwide. From farm to table, our value chain includes The Rabbit Hole Bar & Grill, bringing white meat cuisine to life.</p>
      
     </div>
     <div class="bouncing-cylinder"></div>
@@ -46,7 +55,7 @@
   <div class="about-text scroll-animate slide-right delay-2">
     <h3>Our Story</h3>
     <p>
-      Founded in Harare, The White Meat Company was born from a bold vision to commercialize rabbit farming and position Zimbabwe as a regional powerhouse in the white meat value chain. By combining local expertise with modern techniques, we provide premium breeding stock, international standard cages and accessories, expert-led Masterclass training and guaranteed markets for our farmers. Our value chain extends to the The Rabbit Hole Bar & Grill, where we showcase the best of white meat cuisine and other food menu's.
+      Founded in Harare, The White Meat Company was born from a bold vision to commercialize rabbit farming and position Zimbabwe as a regional powerhouse in the white meat value chain. By combining local expertise with modern techniques, we provide premium breeding stock, international standard cages and accessories, expert-led Masterclass training and guaranteed markets for our farmers.
     </p>
 
     <div class="stats">
@@ -71,7 +80,7 @@
       </div>
       <h3>Our Mission</h3>
       <p>
-        To build a nationwide rabbit farm network and aggregate rabbit meat produce, and related by-products, into one huge supply quota for mainstream market distribution.
+        To build a nationwide rabbit farm network and aggregate rabbit meat produce and by-products, into one huge supply quota for mainstream market distribution.
       </p>
     </div>
     <div class="mv-box">
@@ -300,41 +309,114 @@
           Closed on Mondays
         </div>
       </div>
-      <div class="contact-social">
-        <span>Follow Us</span><br />
-        <a href="https://www.facebook.com/thewhitemeatco" class="social-icon" aria-label="Facebook" target="_blank">
-          <!-- Facebook SVG -->
-          <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
-            <rect width="36" height="36" rx="8" fill="#1877f2"/>
-            <path d="M22.5 12h-3a2 2 0 0 0-2 2v3h4l-0.5 3h-3.5v9h-3v-9h-3v-3h3v-3a5 5 0 0 1 5-5h3.5v3z" fill="#fff"/>
-          </svg>
-        </a>
-        <a href="https://x.com/WhiteMeatCompa1" class="social-icon" aria-label="X (Twitter)" target="_blank">
-          <!-- X (Twitter) SVG -->
-          <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
-            <rect width="36" height="36" rx="8" fill="#000"/>
-            <path d="M12.5 12.5l11 11m0-11l-11 11" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-        </a>
-        <a href="https://www.youtube.com/@brightt.makuchete2875" class="social-icon" aria-label="YouTube" target="_blank">
-          <!-- YouTube SVG -->
-          <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
-            <rect width="36" height="36" rx="8" fill="#ff0000"/>
-            <path d="M24 18l-8-5v10l8-5z" fill="#fff"/>
-            <path d="M28 14.5a2.5 2.5 0 0 0-2.5-2.5h-15A2.5 2.5 0 0 0 8 14.5v7a2.5 2.5 0 0 0 2.5 2.5h15a2.5 2.5 0 0 0 2.5-2.5v-7z" stroke="#fff" stroke-width="1.5" fill="none"/>
-          </svg>
-        </a>
-        <a href="https://whatsapp.com/channel/0029VaMwhvvEKyZDkNNk5H21" class="social-icon whatsapp-channel" aria-label="Join our WhatsApp channel" target="_blank">
-          <!-- WhatsApp SVG -->
-          <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
-            <rect width="36" height="36" rx="8" fill="#25d366"/>
-            <path d="M25.8 10.2A11.9 11.9 0 0 0 18 6c-6.6 0-12 5.4-12 12 0 2.1 0.5 4.1 1.6 5.9L6 30l6.3-1.6c1.7 0.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.2-8.6zM18 27.2c-1.8 0-3.6-0.5-5.1-1.3l-0.4-0.2-3.6 0.9 1-3.4-0.3-0.4c-0.9-1.5-1.4-3.3-1.4-5.1 0-5.3 4.3-9.6 9.6-9.6 2.6 0 5 1 6.8 2.8s2.8 4.2 2.8 6.8c0 5.3-4.3 9.6-9.6 9.6z" fill="#fff"/>
-            <path d="M22.5 19.5c-0.3 0-0.6-0.1-0.9-0.2-0.8-0.4-1.4-0.9-1.9-1.5-0.5-0.6-0.8-1.3-0.8-2.1 0-0.5 0.2-1 0.5-1.4 0.3-0.4 0.7-0.6 1.1-0.6s0.8 0.2 1.1 0.6c0.3 0.4 0.5 0.9 0.5 1.4 0 0.8-0.3 1.5-0.8 2.1-0.5 0.6-1.1 1.1-1.9 1.5-0.3 0.1-0.6 0.2-0.9 0.2z" fill="#fff"/>
-          </svg>
-        </a>
-      
-      </div>
-    </div>
+    
+ <div class="contact-social">
+  <span>Follow Us</span><br />
+  <div class="social-icons-pro">
+    <a href="https://www.facebook.com/thewhitemeatco" class="social-icon-pro" aria-label="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://x.com/WhiteMeatCompa1" class="social-icon-pro" aria-label="X (Twitter)" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://www.youtube.com/@brightt.makuchete2875" class="social-icon-pro" aria-label="YouTube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://www.tiktok.com/@thewhitemeatco" class="social-icon-pro" aria-label="TikTok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="https://whatsapp.com/channel/0029VaMwhvvEKyZDkNNk5H21" class="social-icon-pro whatsapp-bg" aria-label="Join our WhatsApp channel" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+</div>
+
+<style>
+.social-icons-pro {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.social-icon-pro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08), 0 1.5px 4px 0 rgba(0,0,0,0.06);
+  background: linear-gradient(145deg, #f8f8f8 60%, #eaeaea 100%);
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-icon-pro:hover {
+  transform: scale(1.13) translateY(-2px);
+  box-shadow: 0 4px 18px 0 rgba(0,0,0,0.16), 0 2px 8px 0 rgba(0,0,0,0.10);
+  z-index: 2;
+}
+
+.icon-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.07);
+  padding: 0;
+}
+
+
+/* Fixed: explicit pixel size for Font Awesome icons */
+.social-icon-pro i {
+  font-size: 24px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Brand colors for icons */
+.social-icon-pro[aria-label="Facebook"] i {
+  color: #1877f2;
+}
+.social-icon-pro[aria-label="X (Twitter)"] i {
+  color: #000;
+}
+.social-icon-pro[aria-label="YouTube"] i {
+  color: #ff0000;
+}
+.social-icon-pro[aria-label="TikTok"] i {
+  color: #000;
+}
+.social-icon-pro.whatsapp-bg i {
+  color: #25d366;
+}
+}
+
+.facebook-bg {
+  background: linear-gradient(135deg, #1877f2 70%, #3b5998 100%);
+}
+.x-bg {
+  background: linear-gradient(135deg, #000 70%, #222 100%);
+}
+.youtube-bg {
+  background: linear-gradient(135deg, #ff0000 70%, #c20000 100%);
+}
+.tiktok-bg {
+  background: linear-gradient(135deg, #000 60%, #25F4EE 100%);
+}
+.whatsapp-bg {
+  background: linear-gradient(135deg, #25d366 70%, #128c7e 100%);
+}
+
+@media (max-width: 600px) {
+  .social-icons-pro {
+    gap: 10px;
+  }
+  .social-icon-pro {
+    width: 40px;
+    height: 40px;
+  }
+  .social-icon-pro i {
+    font-size: 20px;
+  }
+}
+</style>
+
+</div>
     <form class="contact-form" id="contactForm">
       <h3>Send Us a Message</h3>
       <div class="form-row">
@@ -358,6 +440,41 @@
     </form>
   </div>
 </section>
+
+<section class="how-hear-section" id="how-hear-section">
+  <div class="how-hear-container">
+    <!-- LEFT TEXT -->
+    <div class="how-hear-text">
+      <h2>How Did You Hear About Us?</h2>
+      <p>We'd love to know how you discovered The White Meat Company. Your feedback helps us improve our services and reach more people like you.</p>
+    </div>
+
+    <!-- RIGHT CARD -->
+    <div class="how-hear-card">
+      <h3>Help us understand how you discovered our product</h3>
+      {% if how_hear_submitted %}
+        <div class="how-hear-success">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align:middle;margin-right:8px;"><circle cx="16" cy="16" r="16" fill="#2d6a4f"/><path d="M10 17l4 4 8-8" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Thank you for your feedback!</span>
+        </div>
+      {% else %}
+        <form method="post" action="#how-hear-section" class="how-hear-django-form">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          <div class="how-hear-form-fields">
+            {{ form.choice.errors }}
+            {{ form.choice }}
+            {{ form.other_text.errors }}
+            {{ form.other_text }}
+          </div>
+          <button type="submit" name="how_hear_submit">Submit</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
 
 <!-- Map/Location Section -->
 <section class="map-section animate-on-scroll fade-in">
@@ -506,5 +623,27 @@
       window.open(whatsappURL, '_blank');
     });
   </script>
+
+ 
 </body>
+
+  <script>
+    // Navbar hamburger toggle for mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      var hamburger = document.getElementById('navbar-hamburger');
+      var navLinks = document.getElementById('nav-links');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+          navLinks.classList.toggle('open');
+        });
+        // Hide nav links when resizing to tablet/desktop
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 768) {
+            navLinks.classList.remove('open');
+          }
+        });
+      }
+    });
+  </script>
+
 </html>

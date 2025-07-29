@@ -1,0 +1,52 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}How Did You Hear About Us Responses{% endblock %}
+{% block page_title %}Survey Responses{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-bottom: 30px;">
+    <div class="card-header">
+        <h2 class="card-title">Survey Statistics</h2>
+    </div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        {% for stat in stats %}
+        <div style="background:#f8fafd; border-radius:10px; padding:18px 24px; min-width:180px; text-align:center; box-shadow:0 2px 8px rgba(44,62,80,0.04);">
+            <div style="font-size:2rem; font-weight:700; color:#2d6a4f;">{{ stat.count }}</div>
+            <div style="font-size:1rem; color:#34495e; margin-top:6px;">{{ stat.label }}</div>
+        </div>
+        {% empty %}
+        <div style="color:#888;">No responses yet.</div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Recent Responses</h2>
+    </div>
+    {% if responses %}
+    <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse;">
+            <thead>
+                <tr style="background:#f8fafd; color:#2c3e50;">
+                    <th style="padding:8px 12px; border-bottom:1.5px solid #e0e6ed; text-align:left;">Choice</th>
+                    <th style="padding:8px 12px; border-bottom:1.5px solid #e0e6ed; text-align:left;">Other (if specified)</th>
+                    <th style="padding:8px 12px; border-bottom:1.5px solid #e0e6ed; text-align:left;">Submitted At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in responses %}
+                <tr style="border-bottom:1px solid #f0f0f0;">
+                    <td style="padding:8px 12px;">{{ entry.get_choice_display }}</td>
+                    <td style="padding:8px 12px;">{{ entry.other_text|default:'—' }}</td>
+                    <td style="padding:8px 12px;">{{ entry.submitted_at|date:'Y-m-d H:i' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div style="padding:20px; color:#888; text-align:center;">No survey responses yet.</div>
+    {% endif %}
+</div>
+{% endblock %}

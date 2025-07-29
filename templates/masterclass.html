@@ -1,5 +1,6 @@
-<!DOCTYPE html>
 {% load static %}
+{% load masterclass_utils %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14,6 +15,13 @@
     <div class="logo">
       <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
     </div>
+
+     <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu" style="display:none; background:none; border:none; cursor:pointer; padding:8px; margin-left:auto;">
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+    </button>
+
     <ul class="nav-links" id="nav-links">
       <li><a href="{% url 'index' %}">Home</a></li>
        <li><a href="{% url 'masterclass' %}" class="active">Masterclass Training</a></li>
@@ -140,128 +148,51 @@
 </section>
 
 <section class="benefits">
-    <h1>Upcoming Masterclass - August 2025</h1>
-
+    {% if event %}
+    <h1>{{ event.title }}{% if event.date_range %} - {{ event.date_range }}{% endif %}</h1>
     <div class="date-box">
-      August 2nd & 3rd, 2025
+      {{ event.date_range }}
     </div>
-
+    {% if event.fact or event.fact_description %}
     <div class="fact-box">
-      <h2>FACT: Rabbit farming is 5x more profitable than chicken farming!</h2>
-      <p>Through our business, the White Meat Company, we guarantee you a market for your produce! We are pioneering the commercialization of rabbit farming in Zimbabwe.</p>
+      {% if event.fact %}<h2>{{ event.fact }}</h2>{% endif %}
+      {% if event.fact_description %}<p>{{ event.fact_description }}</p>{% endif %}
     </div>
-
-    <p class="description">
-      During this training, we will share with you our experiences over the last 7 years so that you can become a successful and profitable rabbit farmer!
-    </p>
+    {% endif %}
+    {% if event.description %}
+    <p class="description">{{ event.description }}</p>
+    {% endif %}
+    {% else %}
+    <h1>Upcoming Masterclass</h1>
+    <div class="date-box">TBA</div>
+    {% endif %}
   </section>
  <section class="schedule-section">
-    <h1>2-Day Training Schedule</h1>
-
-    <!-- Day 1 -->
-    <div class="schedule-card">
-      <div class="schedule-header">Day 1 - August 2nd, 2025</div>
-      <table class="schedule-table">
-        <tr>
-          <td class="time-col">8:00 AM</td>
-          <td>
-            <div class="session-title">Registration & Welcome</div>
-            <div class="session-desc">Coffee, networking, and course materials distribution</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">9:00 AM</td>
-          <td>
-            <div class="session-title">Rabbit Farming Fundamentals</div>
-            <div class="session-desc">Industry overview, profitability analysis, and market opportunities</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">11:00 AM</td>
-          <td>
-            <div class="session-title">Housing & Infrastructure Setup</div>
-            <div class="session-desc">Cage systems, ventilation, water systems, and facility design</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">1:00 PM</td>
-          <td>
-            <div class="session-title">Lunch Break</div>
-            <div class="session-desc">Networking lunch with rabbit meat tasting</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">2:00 PM</td>
-          <td>
-            <div class="session-title">Nutrition & Feeding Strategies</div>
-            <div class="session-desc">Feed formulation, feeding schedules, and cost optimization</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">4:00 PM</td>
-          <td>
-            <div class="session-title">Hands-On Practice Session 1</div>
-            <div class="session-desc">Animal handling, health assessment, and feeding procedures</div>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- Day 2 -->
-    <div class="schedule-card">
-      <div class="schedule-header">Day 2 - August 3rd, 2025</div>
-      <table class="schedule-table">
-        <tr>
-          <td class="time-col">8:00 AM</td>
-          <td>
-            <div class="session-title">Health Management & Disease Prevention</div>
-            <div class="session-desc">Vaccination protocols, common diseases, and treatment procedures</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">10:00 AM</td>
-          <td>
-            <div class="session-title">Breeding & Reproduction</div>
-            <div class="session-desc">Breeding programs, genetic selection, and production cycles</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">12:00 PM</td>
-          <td>
-            <div class="session-title">Business Planning & Financial Management</div>
-            <div class="session-desc">Cost analysis, pricing strategies, and scaling your operation</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">1:00 PM</td>
-          <td>
-            <div class="session-title">Lunch Break</div>
-            <div class="session-desc">Business networking and Q&A session</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">2:00 PM</td>
-          <td>
-            <div class="session-title">Market Access & Sales Strategies</div>
-            <div class="session-desc">Supply chain integration and guaranteed purchase agreements</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">3:30 PM</td>
-          <td>
-            <div class="session-title">Hands-On Practice Session 2</div>
-            <div class="session-desc">Breeding procedures, record keeping, and facility management</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="time-col">5:00 PM</td>
-          <td>
-            <div class="session-title">Graduation & Certificate Presentation</div>
-            <div class="session-desc">Course completion, resources distribution, and network building</div>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <h1>Training Schedule</h1>
+    {% if sessions_by_day.1 or sessions_by_day.2 %}
+      {% for day in days %}
+        {% with day_sessions=sessions_by_day|get_item:day %}
+        {% if day_sessions %}
+        <div class="schedule-card">
+          <div class="schedule-header">Day {{ day }}</div>
+          <table class="schedule-table">
+            {% for session in day_sessions %}
+            <tr>
+              <td class="time-col">{{ session.time }}</td>
+              <td>
+                <div class="session-title">{{ session.title }}</div>
+                <div class="session-desc">{{ session.description }}</div>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        {% endif %}
+        {% endwith %}
+      {% endfor %}
+    {% else %}
+      <p>Schedule will be announced soon.</p>
+    {% endif %}
   </section>
 
   <!-- Booking Section -->
@@ -273,7 +204,8 @@
     <div class="pricing-box">
       <h3>Complete 2-Day Masterclass</h3>
       <div class="price">$140</div>
-      <p class="note">Includes training materials, meals, hands-on practice, business plan template, and ongoing support access</p>
+      <p class="note">Includes training materials, meals, hands-on practice, business plan template, and ongoing support access <br/>
+      <strong>To pay an additional US$20 for certification</strong></p>
     </div>
 
     <form class="registration-form">

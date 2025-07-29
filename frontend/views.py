@@ -5,21 +5,47 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.paginator import Paginator
-from .models import MenuItem, MenuCategory, RestaurantBranch
+from .models import MenuItem, MenuCategory, RestaurantBranch, HowDidYouHearAboutUs, MasterclassEvent, MasterclassSession, Accessory
+from .forms import HowDidYouHearAboutUsForm
 import json
+from django.db.models import Count
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Page Views
 def index(request):
-    """Serve the main homepage"""
-    return render(request, 'index.html')
+    """Serve the main homepage and handle 'How Did You Hear About Us' form"""
+    submitted = False
+    if request.method == 'POST' and 'how_hear_submit' in request.POST:
+        form = HowDidYouHearAboutUsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            submitted = True
+            form = HowDidYouHearAboutUsForm()  # reset form after submit
+    else:
+        form = HowDidYouHearAboutUsForm()
+    return render(request, 'index.html', {'form': form, 'how_hear_submitted': submitted})
 
 def masterclass(request):
-    """Serve the masterclass training page"""
-    return render(request, 'masterclass.html')
+    """Serve the masterclass training page dynamically from DB"""
+    # Get the latest event (or the only one)
+    event = MasterclassEvent.objects.order_by('-id').first()
+    sessions_by_day = {1: [], 2: []}
+    days = [1, 2]
+    if event:
+        sessions = MasterclassSession.objects.filter(event=event)
+        for session in sessions:
+            sessions_by_day.get(session.day, []).append(session)
+    context = {
+        'event': event,
+        'sessions_by_day': sessions_by_day,
+        'days': days,
+    }
+    return render(request, 'masterclass.html', context)
 
 def cages(request):
-    """Serve the cages and accessories page"""
-    return render(request, 'cages.html')
+    """Serve the cages and accessories page with dynamic accessories"""
+    accessories = Accessory.objects.filter(is_available=True).order_by('-created_at')
+    return render(request, 'cages.html', {'accessories': accessories})
 
 def breeding(request):
     """Serve the breeding stock page"""
@@ -130,11 +156,27 @@ def admin_dashboard(request):
         'total_branches': branches.count(),
         'total_menu_items': MenuItem.objects.count(),
     }
-    
+
+    # Get latest 10 survey responses
+    from .models import HowDidYouHearAboutUs
+    recent_how_hear = HowDidYouHearAboutUs.objects.order_by('-submitted_at')[:10]
+
+    # Statistics for each choice
+    how_hear_stats = (
+        HowDidYouHearAboutUs.objects.values('choice')
+        .annotate(count=Count('id')).order_by('-count')
+    )
+    # Map choice to display name
+    CHOICE_LABELS = dict(HowDidYouHearAboutUs.CHOICES)
+    for stat in how_hear_stats:
+        stat['label'] = CHOICE_LABELS.get(stat['choice'], stat['choice'])
+
     context = {
         'branches': branches,
         'recent_menu_items': recent_menu_items,
         'stats': stats,
+        'recent_how_hear': recent_how_hear,
+        'how_hear_stats': how_hear_stats,
     }
     return render(request, 'admin/dashboard.html', context)
 
@@ -251,6 +293,22 @@ def admin_logout(request):
     logout(request)
     messages.success(request, 'Successfully logged out!')
     return redirect('login')
+
+@login_required
+def how_hear_responses(request):
+    stats = (
+        HowDidYouHearAboutUs.objects.values('choice')
+        .order_by('choice')
+        .annotate(count=Count('id'))
+    )
+    responses = HowDidYouHearAboutUs.objects.order_by('-submitted_at')[:50]
+    CHOICE_LABELS = dict(HowDidYouHearAboutUs.CHOICES)
+    for stat in stats:
+        stat['label'] = CHOICE_LABELS.get(stat['choice'], stat['choice'])
+    return render(request, 'admin/how_hear_responses.html', {
+        'stats': stats,
+        'responses': responses,
+    })
 
 # API Endpoints
 @csrf_exempt
@@ -444,3 +502,54 @@ def debug_menu_data(request):
         html.append("<p><strong>ERROR: Pagomo branch not found!</strong></p>")
     
     return HttpResponse("".join(html))
+
+def how_hear_about_us(request):
+    """Handle the 'How Did You Hear About Us' form submission"""
+    submitted = False
+    if request.method == 'POST':
+        form = HowDidYouHearAboutUsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            submitted = True
+    else:
+        form = HowDidYouHearAboutUsForm()
+    return render(request, 'how_hear_about_us.html', {'form': form, 'submitted': submitted})
+
+@staff_member_required
+def edit_masterclass_schedule(request):
+    event = MasterclassEvent.objects.order_by('-id').first()
+    sessions = MasterclassSession.objects.filter(event=event) if event else []
+    return render(request, 'admin/edit_masterclass_schedule.html', {
+        'event': event,
+        'sessions': sessions,
+    })
+
+@csrf_exempt
+@staff_member_required
+def save_masterclass_schedule(request):
+    if request.method == 'POST':
+        import json
+        data = json.loads(request.body)
+        event = MasterclassEvent.objects.order_by('-id').first()
+        if not event:
+            return JsonResponse({'success': False, 'error': 'No event found.'}, status=400)
+        # Save event info if requested
+        if data.get('save_event'):
+            event.title = data.get('event_title', event.title)
+            event.date_range = data.get('event_date', event.date_range)
+            event.save()
+            return JsonResponse({'success': True})
+        # Remove all existing sessions for this event
+        MasterclassSession.objects.filter(event=event).delete()
+        # Add new sessions
+        sessions = data.get('sessions', [])
+        for s in sessions:
+            MasterclassSession.objects.create(
+                event=event,
+                day=int(s.get('day', 1)),
+                time=s.get('time', ''),
+                title=s.get('title', ''),
+                description=s.get('description', ''),
+            )
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)

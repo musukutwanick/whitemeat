@@ -1,4 +1,48 @@
 from django.db import models
+
+# Accessory model for cages/equipment accessories
+class Accessory(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    image = models.ImageField(upload_to='accessory_images/', blank=True, null=True, help_text="Upload accessory image")
+    is_available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at', 'name']
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def image_url(self):
+        if self.image:
+            return self.image.url
+        return '/static/images/default-accessory.jpg'
+
+class MasterclassEvent(models.Model):
+    title = models.CharField(max_length=200, default="Upcoming Masterclass")
+    date_range = models.CharField(max_length=100, help_text="e.g. August 2nd & 3rd, 2025")
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.title
+
+class MasterclassSession(models.Model):
+    event = models.ForeignKey(MasterclassEvent, on_delete=models.CASCADE, related_name='sessions')
+    day = models.PositiveSmallIntegerField(choices=[(1, 'Day 1'), (2, 'Day 2')])
+    time = models.CharField(max_length=20)
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['day', 'time']
+
+    def __str__(self):
+        return f"Day {self.day} {self.time} - {self.title}"
+from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -200,3 +244,21 @@ class Notice(models.Model):
     
     class Meta:
         ordering = ['-created_at']
+
+class HowDidYouHearAboutUs(models.Model):
+    CHOICES = [
+        ('search_engine', 'Search Engine (Google, Bing)'),
+        ('facebook', 'Facebook'),
+        ('twitter', 'X (Twitter)'),
+        ('friend', 'Friend or Colleague'),
+        ('radio', 'Radio'),
+        ('blog', 'Blog/Article'),
+        ('ad', 'Online Advertisement'),
+        ('other', 'Other'),
+    ]
+    choice = models.CharField(max_length=32, choices=CHOICES)
+    other_text = models.CharField(max_length=255, blank=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.get_choice_display()} ({self.submitted_at:%Y-%m-%d %H:%M})"

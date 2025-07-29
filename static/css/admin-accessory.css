@@ -1,0 +1,41 @@
+fieldset.module {
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 24px;
+    padding: 18px 24px;
+}
+fieldset.module legend {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d6a4f;
+}
+.form-row label {
+    font-weight: 500;
+    color: #2d6a4f;
+}
+.form-row input, .form-row textarea, .form-row select {
+    border-radius: 6px;
+    border: 1px solid #b7e4c7;
+    padding: 10px;
+    font-size: 1rem;
+    background: #fff;
+    margin-bottom: 10px;
+}
+input[type="file"] {
+    background: #fff;
+    border: none;
+}
+input[type="submit"], .button.default {
+    background: #2d6a4f;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+input[type="submit"]:hover, .button.default:hover {
+    background: #40916c;
+}
