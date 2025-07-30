@@ -119,7 +119,7 @@
         <li>✓ Californian</li>
         <li>✓ Health certified stock</li>
       </ul>
-      <a href="breeding.html" class="service-btn">Check Details</a>
+      <a href="{% url 'breeding' %}" class="service-btn">Check Details</a>
     </div>
 
     <!-- Card 2 -->
@@ -135,7 +135,7 @@
         <li>✓ Water drinkers</li>
         <li>✓ Advanced manure & urine collection system</li>
       </ul>
-      <a href="cages.html" class="service-btn">View Equipment</a>
+      <a href="{% url 'cages' %}" class="service-btn">View Equipment</a>
     </div>
 
     <!-- Card 3 -->
@@ -152,12 +152,10 @@
         <li>✓ Health management</li>
         <li>✓ Business planning</li>
       </ul>
-      <a href="masterclass.html" class="service-btn">Book Masterclass</a>
+      <a href="{% url 'masterclass' %}" class="service-btn">Book Masterclass</a>
     </div>
   </div>
 </section>
-
-
 
 
 <div class="farming-tips fade-in">
@@ -360,10 +358,7 @@
 .social-icon-pro[aria-label="TikTok"] i {
   color: #000;
 }
-.social-icon-pro.whatsapp-bg i {
-  color: #25d366;
-}
-}
+
 
 .facebook-bg {
   background: linear-gradient(135deg, #1877f2 70%, #3b5998 100%);
@@ -400,7 +395,7 @@
       <h3>Send Us a Message</h3>
       <div class="form-row">
         <input type="text" name="name" id="contactName" placeholder="Name" required />
-        <input type="email" name="email" id="contactEmail" placeholder="Email" required />
+        
       </div>
       <div class="form-row">
         <select name="subject" id="contactSubject" required>
