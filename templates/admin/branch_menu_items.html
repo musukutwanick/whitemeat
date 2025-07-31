@@ -5,12 +5,12 @@
 
 {% block content %}
 <div class="card">
-    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="card-header">
         <div>
             <h2 class="card-title">{{ branch.name }} Menu Items</h2>
-            <p style="color: #666; margin-top: 5px;">{{ branch.address }}</p>
+            <p class="branch-address">{{ branch.address }}</p>
         </div>
-        <div style="display: flex; gap: 10px;">
+        <div class="header-actions">
             <a href="{% url 'branch_selection' %}" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Back to Branches
             </a>
@@ -22,34 +22,34 @@
     
     {% if menu_items %}
     <!-- Category Filter -->
-    <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-        <button class="filter-btn active" data-category="all" style="padding: 8px 16px; border: 1px solid #ddd; background: #3498db; color: white; border-radius: 20px; cursor: pointer;">
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-category="all">
             All Items ({{ menu_items.count }})
         </button>
         {% for category in categories %}
-        <button class="filter-btn" data-category="{{ category.slug }}" style="padding: 8px 16px; border: 1px solid #ddd; background: white; color: #666; border-radius: 20px; cursor: pointer;">
+        <button class="filter-btn" data-category="{{ category.slug }}">
             {{ category.name }} ({{ category.menu_items.count }})
         </button>
         {% endfor %}
     </div>
 
     <!-- Menu Items Grid -->
-    <div class="menu-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
+    <div class="menu-grid">
         {% for item in menu_items %}
-        <div class="menu-item-card" data-category="{{ item.category.slug }}" style="border: 1px solid #e3e6f0; border-radius: 10px; overflow: hidden; background: white; transition: all 0.3s ease;">
-            <div class="item-image" style="height: 200px; background: #f8f9fa; position: relative; overflow: hidden;">
+        <div class="menu-item-card" data-category="{{ item.category.slug }}">
+            <div class="item-image">
                 {% if item.image %}
-                    <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
                 {% else %}
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #ccc;">
-                        <i class="fas fa-utensils" style="font-size: 3rem;"></i>
+                    <div class="no-image">
+                        <i class="fas fa-utensils"></i>
                     </div>
                 {% endif %}
                 
                 <!-- Status Badges -->
-                <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 5px;">
+                <div class="badge-container">
                     {% if item.is_featured %}
-                    <span class="badge" style="background: #f39c12; color: white; padding: 4px 8px; border-radius: 10px; font-size: 10px;">FEATURED</span>
+                    <span class="badge badge-featured">FEATURED</span>
                     {% endif %}
                     {% if not item.is_available %}
                     <span class="badge badge-danger">UNAVAILABLE</span>
@@ -57,32 +57,30 @@
                 </div>
             </div>
             
-            <div style="padding: 20px;">
-                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
-                    <h3 style="color: #2c3e50; font-size: 1.2rem; margin: 0;">{{ item.name }}</h3>
-                    <span style="color: #27ae60; font-weight: bold; font-size: 1.1rem;">${{ item.price }}</span>
+            <div class="item-content">
+                <div class="item-title">
+                    <h3>{{ item.name }}</h3>
+                    <span class="price">${{ item.price }}</span>
                 </div>
                 
-                <p style="color: #666; margin-bottom: 15px; line-height: 1.4; font-size: 0.9rem;">
+                <p class="description">
                     {{ item.description|truncatewords:20 }}
                 </p>
                 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <span class="badge" style="background: #e8f4fd; color: #2980b9; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem;">
-                        {{ item.category.name }}
-                    </span>
+                <div class="meta-info">
+                    <span class="badge badge-category">{{ item.category.name }}</span>
                     {% if item.preparation_time %}
-                    <span style="color: #999; font-size: 0.8rem;">
+                    <span class="prep-time">
                         <i class="fas fa-clock"></i> {{ item.preparation_time }}min
                     </span>
                     {% endif %}
                 </div>
                 
-                <div style="display: flex; gap: 8px;">
-                    <a href="{% url 'edit_menu_item' branch.id item.id %}" class="btn btn-warning" style="flex: 1; text-align: center; font-size: 0.85rem;">
+                <div class="item-actions">
+                    <a href="{% url 'edit_menu_item' branch.id item.id %}" class="btn btn-warning">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <a href="{% url 'delete_menu_item' branch.id item.id %}" class="btn btn-danger" style="flex: 1; text-align: center; font-size: 0.85rem;" onclick="return confirm('Are you sure you want to delete this menu item?')">
+                    <a href="{% url 'delete_menu_item' branch.id item.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this menu item?')">
                         <i class="fas fa-trash"></i> Delete
                     </a>
                 </div>
@@ -91,10 +89,10 @@
         {% endfor %}
     </div>
     {% else %}
-    <div style="text-align: center; padding: 60px 20px;">
-        <i class="fas fa-utensils" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
-        <h3 style="color: #666; margin-bottom: 10px;">No menu items found</h3>
-        <p style="color: #999; margin-bottom: 25px;">Start by adding your first menu item for {{ branch.name }}.</p>
+    <div class="empty-state">
+        <i class="fas fa-utensils"></i>
+        <h3>No menu items found</h3>
+        <p>Start by adding your first menu item for {{ branch.name }}.</p>
         <a href="{% url 'add_menu_item' branch.id %}" class="btn btn-success">
             <i class="fas fa-plus"></i> Add First Menu Item
         </a>
@@ -102,47 +100,268 @@
     {% endif %}
 </div>
 
+<!-- Styles -->
 <style>
-.menu-item-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+/* Card container */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
 }
 
+/* Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.card-title {
+    font-size: 1.3rem;
+    margin: 0;
+}
+.branch-address {
+    color: #666;
+    margin-top: 5px;
+}
+.header-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #666;
+    border-radius: 20px;
+    cursor: pointer;
+}
 .filter-btn.active {
-    background: #3498db !important;
-    color: white !important;
+    background: #3498db;
+    color: #fff;
 }
-
 .filter-btn:hover {
     background: #ecf0f1;
     color: #2c3e50;
 }
 
-.btn-secondary {
-    background: #95a5a6;
-    color: white;
+/* Grid */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
 }
 
-.btn-secondary:hover {
-    background: #7f8c8d;
+/* Menu Card */
+.menu-item-card {
+    border: 1px solid #e3e6f0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.menu-item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Image */
+.item-image {
+    height: 200px;
+    background: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+}
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #ccc;
+    font-size: 3rem;
+}
+
+/* Badges */
+.badge-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+.badge {
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+}
+.badge-featured {
+    background: #f39c12;
+    color: #fff;
+}
+.badge-danger {
+    background: #e74c3c;
+    color: #fff;
+}
+
+/* Content */
+.item-content {
+    padding: 20px;
+}
+.item-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.item-title h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+.price {
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.description {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.badge-category {
+    background: #e8f4fd;
+    color: #2980b9;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+.prep-time {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+/* Actions */
+.item-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.btn {
+    flex: 1;
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+.btn-warning {
+    background: #f39c12;
+    color: #fff;
+}
+.btn-danger {
+    background: #e74c3c;
+    color: #fff;
+}
+.btn-secondary {
+    background: #95a5a6;
+    color: #fff;
+}
+.btn-success {
+    background: #27ae60;
+    color: #fff;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+.empty-state i {
+    font-size: 4rem;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+.empty-state h3 {
+    color: #666;
+    margin-bottom: 10px;
+}
+.empty-state p {
+    color: #999;
+    margin-bottom: 25px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 700px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    .item-image {
+        height: 150px;
+    }
+    .item-title h3 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    .item-image {
+        height: 120px;
+    }
+    .btn {
+        width: 100%;
+    }
 }
 </style>
 
+<!-- Script -->
 <script>
-// Category filtering
 document.addEventListener('DOMContentLoaded', function() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const menuItems = document.querySelectorAll('.menu-item-card');
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Update active filter
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             
             const category = this.getAttribute('data-category');
             
-            // Filter items
             menuItems.forEach(item => {
                 if (category === 'all' || item.getAttribute('data-category') === category) {
                     item.style.display = 'block';

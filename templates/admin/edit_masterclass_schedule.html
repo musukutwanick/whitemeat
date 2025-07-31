@@ -40,4 +40,52 @@ eventForm.onsubmit = function(e) {
   });
 };
 </script>
+<style>
+@media (max-width: 700px) {
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+  }
+  #event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  #event-form label {
+    margin-bottom: 2px;
+    font-size: 1rem;
+  }
+  #event-form input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 8px 10px;
+    margin-right: 0;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border: 1px solid #b0bec5;
+  }
+  #event-form button {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 8px;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+  #event-save-msg {
+    font-size: 0.98rem;
+    margin-bottom: 12px;
+  }
+  #masterclass-schedule-app {
+    overflow-x: auto;
+    padding: 0;
+  }
+}
+@media (max-width: 1000px) {
+  #masterclass-schedule-app {
+    overflow-x: auto;
+    padding: 0;
+  }
+}
+</style>
 {% endblock %}

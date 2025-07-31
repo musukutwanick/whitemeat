@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <td><select name="day[]"><option value="1">Day 1</option><option value="2">Day 2</option></select></td>
         <td><input name="time[]" placeholder="e.g. 8:00 AM" required></td>
         <td><input name="title[]" placeholder="Session title" required></td>
-        <td><input name="description[]" placeholder="Short description"></td>
+        <td><textarea name="description[]" placeholder="Short description" rows="1" style="resize:vertical;min-height:32px;max-height:180px;width:100%;overflow:auto;"></textarea></td>
         <td><button type="button" class="remove-session-btn">&times;</button></td>
       `;
       row.querySelector('.remove-session-btn').onclick = function() {
@@ -67,4 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .catch(() => alert('Network error.'));
     };
+    // Auto-expand textarea for description
+    app.addEventListener('input', function(e) {
+      if (e.target.tagName === 'TEXTAREA') {
+        e.target.style.height = 'auto';
+        e.target.style.height = (e.target.scrollHeight) + 'px';
+      }
+    });
 });

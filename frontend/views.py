@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import MenuItem, MenuCategory, RestaurantBranch, HowDidYouHearAboutUs, MasterclassEvent, MasterclassSession, Accessory
-from .forms import HowDidYouHearAboutUsForm
+from .forms import HowDidYouHearAboutUsForm, AccessoryForm
 import json
 from django.db.models import Count
 from django.contrib.admin.views.decorators import staff_member_required
@@ -46,6 +46,40 @@ def cages(request):
     """Serve the cages and accessories page with dynamic accessories"""
     accessories = Accessory.objects.filter(is_available=True).order_by('-created_at')
     return render(request, 'cages.html', {'accessories': accessories})
+
+
+# Admin: Add Accessory/Equipment
+@staff_member_required
+def add_accessory(request):
+
+    # Handle add/edit/delete
+    if request.method == 'POST':
+        if 'accessory_id' in request.POST:
+            # Edit existing accessory
+            accessory = get_object_or_404(Accessory, pk=request.POST['accessory_id'])
+            form = AccessoryForm(request.POST, request.FILES, instance=accessory)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Accessory updated successfully!')
+                return redirect('add_accessory')
+        elif 'delete_accessory_id' in request.POST:
+            # Delete accessory
+            accessory = get_object_or_404(Accessory, pk=request.POST['delete_accessory_id'])
+            accessory.delete()
+            messages.success(request, 'Accessory deleted successfully!')
+            return redirect('add_accessory')
+        else:
+            # Add new accessory
+            form = AccessoryForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Accessory added successfully!')
+                return redirect('add_accessory')
+    else:
+        form = AccessoryForm()
+
+    accessories = Accessory.objects.order_by('-created_at')
+    return render(request, 'admin/add_accessory.html', {'form': form, 'accessories': accessories})
 
 def breeding(request):
     """Serve the breeding stock page"""

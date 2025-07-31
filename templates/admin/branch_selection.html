@@ -4,50 +4,118 @@
 {% block page_title %}Select Restaurant Branch{% endblock %}
 
 {% block content %}
+
 <div class="card">
     <div class="card-header">
         <h2 class="card-title">Choose a Branch to Manage Menu</h2>
         <p style="color: #666; margin-top: 10px;">Select the restaurant branch you want to add or manage menu items for.</p>
     </div>
     
-    <div class="branches-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+    
+            <div class="branches-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
         {% for branch in branches %}
+        {% if branch.name != "Rabbit Hole Main" %}
         <div class="branch-card" style="border: 2px solid #e3e6f0; border-radius: 10px; padding: 25px; text-align: center; transition: all 0.3s ease; cursor: pointer;">
             <div class="branch-icon" style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
                 <i class="fas fa-store" style="font-size: 2rem; color: white;"></i>
             </div>
-            
             <h3 style="color: #2c3e50; margin-bottom: 10px; font-size: 1.4rem;">{{ branch.name }}</h3>
             <p style="color: #666; margin-bottom: 15px; line-height: 1.5;">{{ branch.address }}</p>
-            
             <div style="margin-bottom: 20px;">
                 <span style="display: inline-block; background: #e8f5e8; color: #2d5a2d; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
                     <i class="fas fa-phone" style="margin-right: 5px;"></i>
                     {{ branch.phone }}
                 </span>
             </div>
-            
             <div style="display: flex; gap: 10px; justify-content: center;">
                 <a href="{% url 'branch_menu_items' branch.id %}" class="btn btn-primary" style="flex: 1;">
                     <i class="fas fa-utensils" style="margin-right: 8px;"></i>
                     Manage Menu
                 </a>
-                <a href="{% url 'add_menu_item' branch.id %}" class="btn btn-success">
-                    <i class="fas fa-plus"></i>
-                </a>
             </div>
         </div>
-        {% empty %}
+        {% endif %}
+        {% endfor %}
+        {% if branches|length == 0 %}
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
             <i class="fas fa-store" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
             <h3 style="color: #666;">No restaurant branches found</h3>
             <p style="color: #999;">Contact the system administrator to add restaurant branches.</p>
         </div>
-        {% endfor %}
+        {% endif %}
     </div>
 </div>
 
 <style>
+.admin-hamburger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 18px auto 12px 18px;
+}
+.admin-hamburger span {
+  display: block;
+  height: 5px;
+  width: 32px;
+  background: #2d6a4f;
+  margin: 4px 0;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+@media (max-width: 900px) {
+  .admin-hamburger {
+    display: flex;
+  }
+  .admin-nav {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 18px 0;
+  }
+  .admin-nav a {
+    padding: 14px 24px;
+    color: #2d6a4f;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 1.08rem;
+  }
+  .admin-nav a:last-child {
+    border-bottom: none;
+  }
+  .branches-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .branch-card {
+    padding: 16px 6px;
+    font-size: 0.98rem;
+  }
+}
+@media (max-width: 700px) {
+  .card {
+    padding: 10px 4px;
+  }
+  .card-header {
+    padding: 10px 4px;
+  }
+  .card-title {
+    font-size: 1.2rem;
+  }
+}
+.branch-card {
+  min-width: 0;
+}
 .branch-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
@@ -58,4 +126,10 @@
     transform: scale(1.1);
 }
 </style>
+<script>
+function toggleAdminNav() {
+  var nav = document.getElementById('adminNav');
+  nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+}
+</script>
 {% endblock %}

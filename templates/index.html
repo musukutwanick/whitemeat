@@ -109,7 +109,7 @@
   <div class="service-cards">
     <!-- Card 1 -->
     <div class="service-card">
-      <img src="{% static 'images/rabbit.jpg' %}" alt="Live Rabbits">
+      <img src="{% static 'images/new.jpg' %}" alt="Live Rabbits">
       <h3>Suppliers of Pure Breeding Stock and Rabbit Stockfeed</h3>
       <p>
         Premium breeding stock from top-quality bloodline and health certified rabbit stock. We offer quality breeds suitable for meat production and breeding programs.
@@ -124,7 +124,7 @@
 
     <!-- Card 2 -->
     <div class="service-card">
-      <img src="{% static 'images/equip.webp' %}" alt="Farming Equipment">
+      <img src="{% static 'images/equip.jpg' %}" alt="Farming Equipment">
       <h3> Manufacturers & distributors of international standard rabbit cages & accessories 
 </h3>
       <p>Professional grade cages complete farming setups designed for optimal rabbit health and productivity. They come with the following features
@@ -141,7 +141,7 @@
     <!-- Card 3 -->
     <!-- Card 3 -->
     <div class="service-card">
-      <img src="{% static 'images/bunnies.jpg' %}" alt="Expert Consultation">
+      <img src="{% static 'images/master.jpg' %}" alt="Expert Consultation">
       <h3>Regular training through our Rabbitry Masterclasses</h3>
       <p>
         Personalized guidance from experienced rabbit farmers to help you establish and optimize your rabbit farming operation.
@@ -290,11 +290,21 @@
  <div class="contact-social">
   <span>Follow Us</span><br />
   <div class="social-icons-pro">
-    <a href="https://www.facebook.com/thewhitemeatco" class="social-icon-pro" aria-label="Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-    <a href="https://x.com/WhiteMeatCompa1" class="social-icon-pro" aria-label="X (Twitter)" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://www.youtube.com/@brightt.makuchete2875" class="social-icon-pro" aria-label="YouTube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-    <a href="https://www.tiktok.com/@thewhitemeatco" class="social-icon-pro" aria-label="TikTok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="https://whatsapp.com/channel/0029VaMwhvvEKyZDkNNk5H21" class="social-icon-pro whatsapp-bg" aria-label="Join our WhatsApp channel" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/thewhitemeatco" class="social-icon-pro" aria-label="Facebook" target="_blank">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+    <a href="https://x.com/WhiteMeatCompa1" class="social-icon-pro" aria-label="X (Twitter)" target="_blank">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+    <a href="https://www.youtube.com/@brightt.makuchete2875" class="social-icon-pro" aria-label="YouTube" target="_blank">
+      <i class="fa-brands fa-youtube"></i>
+    </a>
+    <a href="https://www.tiktok.com/@thewhitemeatco" class="social-icon-pro" aria-label="TikTok" target="_blank">
+      <i class="fa-brands fa-tiktok"></i>
+    </a>
+    <a href="https://whatsapp.com/channel/0029VaMwhvvEKyZDkNNk5H21" class="social-icon-pro whatsapp-bg" aria-label="WhatsApp" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
   </div>
 </div>
 
@@ -312,37 +322,24 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08), 0 1.5px 4px 0 rgba(0,0,0,0.06);
   background: linear-gradient(145deg, #f8f8f8 60%, #eaeaea 100%);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06);
   transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
   position: relative;
   overflow: hidden;
+  text-decoration: none; /* Remove underline */
+  color: inherit;        /* Prevent default blue link color */
 }
 
 .social-icon-pro:hover {
   transform: scale(1.13) translateY(-2px);
-  box-shadow: 0 4px 18px 0 rgba(0,0,0,0.16), 0 2px 8px 0 rgba(0,0,0,0.10);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.10);
   z-index: 2;
 }
 
-.icon-bg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.07);
-  padding: 0;
-}
-
-
-/* Fixed: explicit pixel size for Font Awesome icons */
 .social-icon-pro i {
   font-size: 24px;
   display: block;
-  margin: 0 auto;
 }
 
 /* Brand colors for icons */
@@ -358,22 +355,15 @@
 .social-icon-pro[aria-label="TikTok"] i {
   color: #000;
 }
+.whatsapp-bg i {
+  color: #25d366;
+}
 
-
-.facebook-bg {
-  background: linear-gradient(135deg, #1877f2 70%, #3b5998 100%);
-}
-.x-bg {
-  background: linear-gradient(135deg, #000 70%, #222 100%);
-}
-.youtube-bg {
-  background: linear-gradient(135deg, #ff0000 70%, #c20000 100%);
-}
-.tiktok-bg {
-  background: linear-gradient(135deg, #000 60%, #25F4EE 100%);
-}
-.whatsapp-bg {
-  background: linear-gradient(135deg, #25d366 70%, #128c7e 100%);
+/* Remove focus outline and shadow */
+.social-icon-pro:focus,
+.social-icon-pro:active {
+  outline: none;
+  box-shadow: none;
 }
 
 @media (max-width: 600px) {
