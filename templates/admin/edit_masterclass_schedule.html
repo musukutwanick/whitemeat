@@ -5,13 +5,28 @@
 <h2>Edit Masterclass Schedule</h2>
 <form id="event-form" style="margin-bottom: 30px;">
   <label for="event-title"><b>Event Title:</b></label>
-  <input type="text" id="event-title" name="event_title" value="{{ event.title }}" style="margin-right: 20px;" required>
+  <input type="text" id="event-title" name="event_title" value="{{ event.title }}" class="styled-event-input" required>
   <label for="event-date"><b>Date(s):</b></label>
-  <input type="text" id="event-date" name="event_date" value="{{ event.date_range }}" required>
+  <input type="text" id="event-date" name="event_date" value="{{ event.date_range }}" class="styled-event-input" required>
   <button type="submit" style="margin-left: 20px; background: #40916c; color: white; border: none; padding: 6px 16px; border-radius: 5px;">Save Event Info</button>
 </form>
 <div id="event-save-msg" style="color: #40916c; margin-bottom: 20px; display: none;">Event info saved!</div>
 <div id="masterclass-schedule-app"></div>
+<script>
+// Fetch latest sessions from backend on page load
+function loadMasterclassSessions() {
+  fetch('/dashboard/masterclass-schedule/sessions/')
+    .then(r => r.json())
+    .then(data => {
+      window.masterclassSessions = data.sessions || [];
+      if (window.renderMasterclassScheduleApp) {
+        window.renderMasterclassScheduleApp();
+      }
+    });
+}
+window.loadMasterclassSessions = loadMasterclassSessions;
+loadMasterclassSessions();
+</script>
 <script src="{% static 'js/masterclass_schedule.js' %}"></script>
 <script>
 // Event info AJAX save
@@ -41,6 +56,22 @@ eventForm.onsubmit = function(e) {
 };
 </script>
 <style>
+.styled-event-input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  border: 1px solid #b0bec5;
+  background: #f8fafb;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+.styled-event-input:focus {
+  border: 1.5px solid #40916c;
+  outline: none;
+  background: #fff;
+}
 @media (max-width: 700px) {
   h2 {
     font-size: 1.2rem;
