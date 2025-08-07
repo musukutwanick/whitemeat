@@ -10,6 +10,12 @@ from .forms import HowDidYouHearAboutUsForm, AccessoryForm
 import json
 from django.db.models import Count
 from django.contrib.admin.views.decorators import staff_member_required
+from django.conf import settings
+from django.views.decorators.http import require_POST
+from django.shortcuts import redirect
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Page Views
 def index(request):
@@ -97,21 +103,18 @@ def rabbithole(request):
         ).select_related('category').order_by('category__order', 'name')
         # Get all categories to display filter buttons
         categories = MenuCategory.objects.all().order_by('order')
-        
         context = {
             'branch': branch,
             'menu_items': menu_items,
             'categories': categories,
         }
-        return render(request, 'rabbithole.html', context)
     except RestaurantBranch.DoesNotExist:
-        # If Pagomo branch doesn't exist, render with empty data
         context = {
             'branch': None,
             'menu_items': [],
             'categories': MenuCategory.objects.all().order_by('order'),
         }
-        return render(request, 'rabbithole.html', context)
+    return render(request, 'rabbithole.html', context)
 
 def pagomo(request):
     """Serve the pagomo branch page with dynamic menu items"""
@@ -587,3 +590,5 @@ def save_masterclass_schedule(request):
             )
         return JsonResponse({'success': True})
     return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+
+

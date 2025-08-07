@@ -36,4 +36,7 @@ urlpatterns = [
     # Debug URL
     path('debug/', views.debug_static, name='debug_static'),
     path('debug-menu/', views.debug_menu_data, name='debug_menu_data'),
+
+    # Payment URLs
+    # Paynow payment endpoint removed
 ]

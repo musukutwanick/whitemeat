@@ -226,12 +226,12 @@
           <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
           <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
           <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
-          
+        
         </ul>
       </div>
       <div class="footer-col contact">
         <h4>Contact Info</h4>
-        <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br />info@whitemeatcompany.zw</p>
+        <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br /> +263 779 521 665<br/>info@whitemeatcompany.zw</p>
         <div style="margin-top: 20px;">
           <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
         </div>
@@ -252,6 +252,7 @@
       <span id="cart-total" style="color:#2d6a4f;">$0.00</span>
     </div>
     <button id="order-btn" style="background:#2d6a4f; color:#fff; border:none; border-radius:7px; padding:12px 0; font-size:1.08rem; font-weight:600; cursor:pointer; transition:background 0.18s;">Place Order</button>
+    <!-- Paynow button removed -->
     <button onclick="toggleCart(false)" style="background:none; border:none; color:#888; font-size:1.2rem; margin-top:2px; cursor:pointer;">Close</button>
   </div>
 
@@ -401,6 +402,20 @@
     function closeDetails() {
       document.getElementById('detailsModal').style.display = 'none';
     }
+  </script>
+
+  <!-- Paynow payment integration removed -->
+            if (data.redirect_url) {
+              window.location.href = data.redirect_url;
+            } else {
+              alert('Payment error: ' + (data.error || 'Unknown error'));
+            }
+          })
+          .catch(() => alert('Network error. Please try again.'));
+        });
+      }
+    });
+  })();
   </script>
 </body>
 </html>

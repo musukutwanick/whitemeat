@@ -184,6 +184,7 @@
             </div>
             
             <button id="place-order-btn" style="width: 100%; background: #5cb3a8; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s;">Make Reservation</button>
+            <!-- Paynow button removed -->
           </div>
         </div>
       </div>
@@ -211,7 +212,7 @@
       </div>
       <div class="footer-col contact">
         <h4>Contact Info</h4>
-        <p>PaGomo Branch<br />Golden Quarry Rd<br/>Harare, Zimbabwe<br />+263 772 333 369<br />pagomo@rabbitholerestaurant.com</p>
+        <p>PaGomo Branch<br />Golden Quarry Rd<br/>Harare, Zimbabwe<br />+263 772 333 369<br/>+263 779 521 665<br/>pagomo@rabbitholerestaurant.com</p>
         <div style="margin-top: 20px;">
           <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
         </div>
@@ -424,6 +425,20 @@
     
     // Initialize cart display
     updateCartDisplay();
+  </script>
+
+  <!-- Paynow payment integration removed -->
+            if (data.redirect_url) {
+              window.location.href = data.redirect_url;
+            } else {
+              alert('Payment error: ' + (data.error || 'Unknown error'));
+            }
+          })
+          .catch(() => alert('Network error. Please try again.'));
+        });
+      }
+    });
+  })();
   </script>
   
   <!-- AOS Animation Library -->

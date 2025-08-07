@@ -74,34 +74,41 @@
     display: none;
     flex-direction: column;
     background: #fff;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 32px rgba(44,62,80,0.13);
     position: absolute;
     top: 60px;
     left: 0;
     width: 100%;
-    z-index: 100;
-    padding: 18px 0;
+    z-index: 2000;
+    padding: 22px 0 18px 0;
+    border-radius: 0 0 18px 18px;
+    animation: adminNavSlide 0.25s ease;
   }
   .admin-nav a {
-    padding: 14px 24px;
+    padding: 16px 32px;
     color: #2d6a4f;
     font-weight: 600;
     text-decoration: none;
     border-bottom: 1px solid #e9ecef;
-    font-size: 1.08rem;
+    font-size: 1.13rem;
+    border-left: 4px solid transparent;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+  }
+  .admin-nav a:hover, .admin-nav a.active {
+    background: #f3f7f5;
+    color: #256844;
+    border-left: 4px solid #667eea;
   }
   .admin-nav a:last-child {
     border-bottom: none;
   }
-  .branches-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .branch-card {
-    padding: 16px 6px;
-    font-size: 0.98rem;
-  }
 }
+
+@keyframes adminNavSlide {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 700px) {
   .card {
     padding: 10px 4px;
@@ -111,6 +118,25 @@
   }
   .card-title {
     font-size: 1.2rem;
+  }
+}
+@media (max-width: 600px) {
+  .branches-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .branch-card {
+    padding: 14px 4px !important;
+    font-size: 0.97rem !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+  }
+  .branch-card .btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 1rem !important;
+    padding: 13px 0 !important;
+    margin-bottom: 0 !important;
   }
 }
 .branch-card {
