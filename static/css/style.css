@@ -1209,6 +1209,13 @@ textarea {
   margin-bottom: 0;
 }
 
+/* Make footer phone numbers white on mobile */
+@media (max-width: 768px) {
+  .footer-col.contact p {
+    color: #fff !important;
+  }
+}
+
 .footer-divider {
   border: none;
   margin: 0 auto 18px auto;
@@ -2112,7 +2119,7 @@ h1 {
 }
 
 .contact-card p {
-    color: #5d6c7b;
+    color: #222;
     font-size: 1rem;
     line-height: 1.6;
     margin: 0;
