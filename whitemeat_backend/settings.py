@@ -204,7 +204,7 @@ def _start_self_ping():
         app_url = os.getenv("APP_URL", "https://whitemeat-3.onrender.com/")  # Set APP_URL in Render env
         while True:
             try:
-                requests.get(f"{app_url}/health/", timeout=5)
+                requests.get(f"{app_url}/health/", timeout=10)
                 print("Self-ping successful")
             except Exception as e:
                 print(f"Self-ping failed: {e}")
