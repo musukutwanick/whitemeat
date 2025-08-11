@@ -591,4 +591,7 @@ def save_masterclass_schedule(request):
         return JsonResponse({'success': True})
     return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
 
+def health_check(request):
+    return HttpResponse("OK")
+
 

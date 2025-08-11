@@ -195,3 +195,23 @@ LOGGING = {
     },
 }
 
+# --- Self-ping logic for Render ---
+import threading
+import time
+import requests
+
+def _start_self_ping():
+    def ping_self():
+        app_url = os.getenv("APP_URL", "https://whitemeat-3.onrender.com/")  # Set APP_URL in Render env
+        while True:
+            try:
+                requests.get(f"{app_url}/health/", timeout=5)
+                print("Self-ping successful")
+            except Exception as e:
+                print(f"Self-ping failed: {e}")
+            time.sleep(300)  # every 5 minutes
+    threading.Thread(target=ping_self, daemon=True).start()
+
+if os.getenv("RENDER", "False").lower() == "true":
+    _start_self_ping()
+

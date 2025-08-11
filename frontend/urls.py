@@ -39,4 +39,7 @@ urlpatterns = [
 
     # Payment URLs
     # Paynow payment endpoint removed
+
+    # Health Check URL
+    path('health/', views.health_check, name='health_check'),
 ]
