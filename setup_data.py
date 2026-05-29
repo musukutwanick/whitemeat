@@ -19,7 +19,7 @@ branches_data = [
         'slug': 'rabbit-hole-main',
         'address': 'Belvedere, Harare, Zimbabwe',
         'phone': '+263 772 333 369',
-        'email': 'info@whitemeatcompany.zw'
+        'email': 'rabbitholezim@gmail.com'
     },
     {
         'name': 'Rabbit Hole - PaGomo',
