@@ -27,7 +27,7 @@ def setup_branch_and_menu():
             'name': 'Rabbit Hole Pagomo',
             'address': 'Pagomo, Harare, Zimbabwe',
             'phone': '+263 772 333 369',
-            'email': 'pagomo@rabbithole.zw',
+            'email': 'therabbithole@gmail.com',
             'is_active': True,
         }
     )

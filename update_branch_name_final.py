@@ -20,8 +20,8 @@ try:
             name="Rabbit Hole Premium",
             slug="rabbit-hole-main",
             address="Belvedere, Harare, Zimbabwe",
-            phone="+263 123 456 789",
-            email="premium@rabbithole.co.zw",
+            phone="+263 77 952 1665",
+            email="therabbithole@gmail.com",
             is_active=True
         )
         print(f"✓ Created: {premium_branch.name}")
@@ -32,8 +32,8 @@ try:
             defaults={
                 'name': "Rabbit Hole - PaGomo",
                 'address': "PaGomo, Harare, Zimbabwe",
-                'phone': "+263 987 654 321",
-                'email': "pagomo@rabbithole.co.zw",
+                'phone': "+263 77 952 1665",
+                'email': "therabbithole@gmail.com",
                 'is_active': True
             }
         )
@@ -61,7 +61,7 @@ try:
                 slug="rabbit-hole-main",
                 address="Belvedere, Harare, Zimbabwe",
                 phone="+263 123 456 789",
-                email="premium@rabbithole.co.zw",
+                email="therabbithole@gmail.com",
                 is_active=True
             )
             print(f"✓ Created: {premium_branch.name}")

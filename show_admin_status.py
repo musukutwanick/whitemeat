@@ -27,14 +27,14 @@ def show_admin_summary():
                 'slug': 'pagomo',
                 'address': 'PaGomo Shopping Center, Harare',
                 'phone': '+263 772 333 369',
-                'email': 'pagomo@rabbitholeharare.zw'
+                'email': 'therabbithole@gmail.com'
             },
             {
                 'name': 'The Rabbit Hole Belvedere',
                 'slug': 'belvedere',
                 'address': 'Belvedere, Harare',
                 'phone': '+263 779 521 665',
-                'email': 'belvedere@rabbitholeharare.zw'
+                'email': 'therabbithole@gmail.com'
             }
         ]
         

@@ -25,8 +25,8 @@ branches_data = [
         'name': 'Rabbit Hole - PaGomo',
         'slug': 'rabbit-hole-pagomo',
         'address': 'PaGomo, Harare, Zimbabwe',
-        'phone': '+263 772 333 370',
-        'email': 'pagomo@rabbitholerestaurant.com'
+        'phone': '+263 77 952 1665',
+        'email': 'therabbithole@gmail.com'
     }
 ]
 

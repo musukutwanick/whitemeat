@@ -21,7 +21,7 @@ def add_sample_menu_items():
             slug="pagomo",
             address="PaGomo Shopping Center, Harare",
             phone="+263 772 333 369",
-            email="pagomo@rabbitholeharare.zw",
+            email="therabbithole@gmail.com",
             is_active=True
         )
         print(f"✓ Created branch: {pagomo_branch.name}")
