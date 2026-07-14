@@ -3237,3 +3237,9 @@ h1 {
     transform: translateY(0);
   }
 }
+
+/* Prevent telephone numbers from appearing as blue links on mobile devices */
+a[href^="tel:"] {
+  color: inherit !important;
+  text-decoration: none !important;
+}

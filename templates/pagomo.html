@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="format-detection" content="telephone=no" />
   <title>Rabbit Hole PaGomo</title>
   <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -177,8 +178,8 @@
               <h4 style="color: #2c3e50; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Reservation Information</h4>
               <input type="text" placeholder="Full Name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
               <input type="text" placeholder="Phone Number" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
-              <input type="date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
-              <input type="time" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
+              <input type="text" id="reservation-date" placeholder="Reservation Date" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
+              <input type="text" id="reservation-time" placeholder="Reservation Time" onfocus="(this.type='time')" onblur="if(!this.value)this.type='text'" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
               <input type="number" placeholder="Number of People" min="1" max="20" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; font-size: 0.9rem;">
               <textarea placeholder="Special Requests (Optional)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; font-size: 0.9rem; min-height: 60px; resize: vertical;"></textarea>
             </div>
@@ -217,14 +218,11 @@
       <div class="footer-col contact">
         <h4>Contact Info</h4>
         <p>PaGomo Branch<br />Bulawayo road & Golden Quarry Rd<br/>Harare, Zimbabwe<br />+263 772 333 369<br/>+263 779 521 665<br/>pagomo@rabbitholerestaurant.com</p>
-        <div style="margin-top: 20px;">
-          <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
-        </div>
       </div>
     </div>
     <hr class="footer-divider" />
     <div class="footer-bottom">
-      &copy; 2025 The White Meat Company. All rights reserved.
+      &copy; 2026 The White Meat Company. All rights reserved.
     </div>
   </footer>
 
@@ -353,8 +351,8 @@
       
       const fullName = document.querySelector('input[placeholder="Full Name"]').value;
       const phoneNumber = document.querySelector('input[placeholder="Phone Number"]').value;
-      const reservationDate = document.querySelector('input[type="date"]').value;
-      const reservationTime = document.querySelector('input[type="time"]').value;
+      const reservationDate = document.getElementById('reservation-date').value;
+      const reservationTime = document.getElementById('reservation-time').value;
       const numberOfPeople = document.querySelector('input[placeholder="Number of People"]').value;
       const specialRequests = document.querySelector('textarea[placeholder="Special Requests (Optional)"]').value;
       
@@ -421,18 +419,19 @@
       updateCartDisplay();
       document.querySelector('input[placeholder="Full Name"]').value = '';
       document.querySelector('input[placeholder="Phone Number"]').value = '';
-      document.querySelector('input[type="date"]').value = '';
-      document.querySelector('input[type="time"]').value = '';
+      const dateInput = document.getElementById('reservation-date');
+      dateInput.value = '';
+      dateInput.type = 'text';
+      
+      const timeInput = document.getElementById('reservation-time');
+      timeInput.value = '';
+      timeInput.type = 'text';
       document.querySelector('input[placeholder="Number of People"]').value = '';
       document.querySelector('textarea[placeholder="Special Requests (Optional)"]').value = '';
     });
     
     // Initialize cart display
     updateCartDisplay();
-  </script>
-
-  <!-- Paynow payment integration removed -->
-  })();
   </script>
   
   <!-- AOS Animation Library -->
