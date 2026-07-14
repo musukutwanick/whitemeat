@@ -1,4 +1,7 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+from datetime import datetime
 
 # Accessory model for cages/equipment accessories
 class Accessory(models.Model):
@@ -42,11 +45,6 @@ class MasterclassSession(models.Model):
 
     def __str__(self):
         return f"Day {self.day} {self.time} - {self.title}"
-from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import User
-from datetime import datetime
-
 class RestaurantBranch(models.Model):
     """Model representing restaurant branches"""
     name = models.CharField(max_length=100)
@@ -111,44 +109,6 @@ class MenuItem(models.Model):
         elif self.image_filename:
             return f'/static/images/{self.image_filename}'
         return '/static/images/default-menu-item.jpg'
-
-class Notice(models.Model):
-    """Model for admin notices/announcements"""
-    NOTICE_TYPES = [
-        ('general', 'General Notice'),
-        ('promotion', 'Promotion'),
-        ('event', 'Event'),
-        ('announcement', 'Announcement'),
-        ('maintenance', 'Maintenance'),
-    ]
-
-    title = models.CharField(max_length=200)
-    content = models.TextField(blank=True)
-    notice_type = models.CharField(max_length=20, choices=NOTICE_TYPES, default='general')
-    image = models.ImageField(upload_to='notice_images/', blank=True, null=True)
-    document = models.FileField(upload_to='notice_documents/', blank=True, null=True)
-    branch = models.ForeignKey(RestaurantBranch, on_delete=models.CASCADE, null=True, blank=True, 
-                              help_text="Leave blank for system-wide notices")
-    is_active = models.BooleanField(default=True)
-    start_date = models.DateTimeField(default=datetime.now)
-    end_date = models.DateTimeField(null=True, blank=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['-created_at']
-
-    def __str__(self):
-        return self.title
-
-    @property
-    def is_current(self):
-        """Check if notice is currently active"""
-        now = timezone.now()
-        if self.end_date:
-            return self.start_date <= now <= self.end_date
-        return self.start_date <= now
 
 class RestaurantLocation(models.Model):
     name = models.CharField(max_length=200)

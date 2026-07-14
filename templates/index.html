@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The White Meat Company</title>
   <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <link rel="stylesheet" href="{% static 'css/scroll-animations.css' %}" />
   <!-- Font Awesome CDN for social icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 </head>
+
 <body>
   <nav class="navbar">
     <div class="logo">
       <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
     </div>
 
-<button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu" style="background:none; border:none; cursor:pointer; padding:8px; margin-left:auto;">
+    <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu"
+      style="background:none; border:none; cursor:pointer; padding:8px; margin-left:auto;">
       <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
       <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
       <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
     </button>
-    
+
     <ul class="nav-links" id="nav-links">
       <li><a href="{% url 'index' %}" class="active">Home</a></li>
-       <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+      <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
       <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
       <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
       <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
@@ -36,391 +40,433 @@
   <section class="hero" id="hero" data-aos="fade-in" data-aos-duration="1000">
     <div class="overlay"></div>
     <div class="hero-content">
-      <h1 id="typewriter-title" class="shine-text glow-text" data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">The White Meat Company</h1>
-      <p class="subheading" id="typewriter-subheading" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">Pioneering Zimbabwe's white meat revolution through leading the commercialization of rabbit farming through premium breeding stock, high-quality equipment, expert training and a guaranteed market for your produce nationwide. From farm to table, our value chain includes The Rabbit Hole Bar & Grill, bringing white meat cuisine to life.</p>
-     
+      <h1 id="typewriter-title" class="shine-text glow-text" data-aos="fade-down" data-aos-delay="300"
+        data-aos-duration="800">The White Meat Company</h1>
+      <p class="subheading" id="typewriter-subheading" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+        Pioneering Zimbabwe's white meat revolution through leading the commercialization of rabbit farming through
+        premium breeding stock, high-quality equipment, expert training and a guaranteed market for your produce
+        nationwide. From farm to table, our value chain includes The Rabbit Hole Bar & Grill, bringing white meat
+        cuisine to life.</p>
+
     </div>
     <div class="bouncing-cylinder"></div>
   </section>
 
   <section class="about scroll-animate fade-in" id="about">
-  <h2 class="section-heading text-reveal">About The White Meat Company</h2>
-  
+    <h2 class="section-heading text-reveal">About The White Meat Company</h2>
 
-  <div class="about-content">
-  <div class="about-image scroll-animate slide-left">
-    <img src="{% static 'images/about.png' %}" alt="Rabbit" />
-  </div>
 
-  <div class="about-text scroll-animate slide-right delay-2">
-    <h3>Our Story</h3>
-    <p>
-      Founded in Harare, The White Meat Company was born from a bold vision to commercialize rabbit farming and position Zimbabwe as a regional powerhouse in the white meat value chain. By combining local expertise with modern techniques, we provide premium breeding stock, international standard cages and accessories, expert-led Masterclass training and guaranteed markets for our farmers.
+    <div class="about-content">
+      <div class="about-image scroll-animate slide-left">
+        <img src="{% static 'images/about.png' %}" alt="Rabbit" />
+      </div>
+
+      <div class="about-text scroll-animate slide-right delay-2">
+        <h3>Our Story</h3>
+        <p>
+          Founded in Harare, The White Meat Company was born from a bold vision to commercialize rabbit farming and
+          position Zimbabwe as a regional powerhouse in the white meat value chain. By combining local expertise with
+          modern techniques, we provide premium breeding stock, international standard cages and accessories, expert-led
+          Masterclass training and guaranteed markets for our farmers.
+        </p>
+
+        <div class="stats">
+          <div class="stat-box blue card-animate delay-3">500+ satisfied customers</div>
+          <div class="stat-box pink card-animate delay-4">1000+ masterclass graduates</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="mission-vision scroll-animate fade-in" id="mission-vision">
+    <h2 class="section-heading">Our Mission and Vision</h2>
+    <div class="mv-boxes">
+      <div class="mv-box">
+        <div class="icon-circle green">
+          <!-- Mission: Checkmark Circle SVG -->
+          <svg width="48" height="48" fill="none" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="22" fill="#2e7d32" />
+            <path d="M16 24l6 6 10-10" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <h3>Our Mission</h3>
+        <p>
+          To build a nationwide rabbit farm network and aggregate rabbit meat produce and by-products, into one huge
+          supply quota for mainstream market distribution.
+        </p>
+      </div>
+      <div class="mv-box">
+        <div class="icon-circle brown">
+          <!-- Vision: Eye SVG -->
+          <svg width="48" height="48" fill="none" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="22" fill="#8d6e63" />
+            <ellipse cx="24" cy="24" rx="8" ry="5" fill="#fff" />
+            <circle cx="24" cy="24" r="2.5" fill="#8d6e63" />
+          </svg>
+        </div>
+        <h3>Our Vision</h3>
+        <p>
+          To build a huge rabbit farming industry which will see Zimbabwe become a regional powerhouse and a global
+          player in the rabbit farming value chain.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-section">
+    <h2 class="services-heading">Our Services</h2>
+    <p class="services-subheading">
+      Everything you need for successful rabbit farming – from live rabbits to equipment and expert guidance.
     </p>
 
-    <div class="stats">
-      <div class="stat-box blue card-animate delay-3">500+ satisfied customers</div>
-      <div class="stat-box pink card-animate delay-4">1000+ masterclass graduates</div>
-    </div>
-  </div>
-</div>
-</section>
-
-
-<section class="mission-vision scroll-animate fade-in" id="mission-vision">
-  <h2 class="section-heading">Our Mission and Vision</h2>
-  <div class="mv-boxes">
-    <div class="mv-box">
-      <div class="icon-circle green">
-        <!-- Mission: Checkmark Circle SVG -->
-        <svg width="48" height="48" fill="none" viewBox="0 0 48 48">
-          <circle cx="24" cy="24" r="22" fill="#2e7d32" />
-          <path d="M16 24l6 6 10-10" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+    <div class="service-cards">
+      <!-- Card 1 -->
+      <div class="service-card">
+        <img src="{% static 'images/new.jpg' %}" alt="Live Rabbits">
+        <h3>Suppliers of Pure Breeding Stock and Rabbit Stockfeed</h3>
+        <p>
+          Premium breeding stock from top-quality bloodline and health certified rabbit stock. We offer quality breeds
+          suitable for meat production and breeding programs.
+        </p>
+        <ul>
+          <li>✓ New Zealand White</li>
+          <li>✓ Californian</li>
+          <li>✓ Health certified stock</li>
+        </ul>
+        <a href="{% url 'breeding' %}" class="service-btn">Check Details</a>
       </div>
-      <h3>Our Mission</h3>
-      <p>
-        To build a nationwide rabbit farm network and aggregate rabbit meat produce and by-products, into one huge supply quota for mainstream market distribution.
-      </p>
-    </div>
-    <div class="mv-box">
-      <div class="icon-circle brown">
-        <!-- Vision: Eye SVG -->
-        <svg width="48" height="48" fill="none" viewBox="0 0 48 48">
-          <circle cx="24" cy="24" r="22" fill="#8d6e63" />
-          <ellipse cx="24" cy="24" rx="8" ry="5" fill="#fff" />
-          <circle cx="24" cy="24" r="2.5" fill="#8d6e63" />
-        </svg>
+
+      <!-- Card 2 -->
+      <div class="service-card">
+        <img src="{% static 'images/equip.jpg' %}" alt="Farming Equipment">
+        <h3> Manufacturers & distributors of international standard rabbit cages & accessories
+        </h3>
+        <p>Professional grade cages complete farming setups designed for optimal rabbit health and productivity. They
+          come with the following features
+        </p>
+        <ul>
+          <li>✓ Galvanized wire cages</li>
+          <li>✓ Feeding troughs</li>
+          <li>✓ Water drinkers</li>
+          <li>✓ Advanced manure & urine collection system</li>
+        </ul>
+        <a href="{% url 'cages' %}" class="service-btn">View Equipment</a>
       </div>
-      <h3>Our Vision</h3>
-      <p>
-        To build a huge rabbit farming industry which will see Zimbabwe become a regional powerhouse and a global player in the rabbit farming value chain.
-      </p>
-    </div>
-  </div>
-</section>
 
-<section class="services-section">
-  <h2 class="services-heading">Our Services</h2>
-  <p class="services-subheading">
-    Everything you need for successful rabbit farming – from live rabbits to equipment and expert guidance.
-  </p>
-
-  <div class="service-cards">
-    <!-- Card 1 -->
-    <div class="service-card">
-      <img src="{% static 'images/new.jpg' %}" alt="Live Rabbits">
-      <h3>Suppliers of Pure Breeding Stock and Rabbit Stockfeed</h3>
-      <p>
-        Premium breeding stock from top-quality bloodline and health certified rabbit stock. We offer quality breeds suitable for meat production and breeding programs.
-      </p>
-      <ul>
-        <li>✓ New Zealand White</li>
-        <li>✓ Californian</li>
-        <li>✓ Health certified stock</li>
-      </ul>
-      <a href="{% url 'breeding' %}" class="service-btn">Check Details</a>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="service-card">
-      <img src="{% static 'images/equip.jpg' %}" alt="Farming Equipment">
-      <h3> Manufacturers & distributors of international standard rabbit cages & accessories 
-</h3>
-      <p>Professional grade cages complete farming setups designed for optimal rabbit health and productivity. They come with the following features
-             </p>
-      <ul>
-        <li>✓ Galvanized wire cages</li>
-        <li>✓ Feeding troughs</li>
-        <li>✓ Water drinkers</li>
-        <li>✓ Advanced manure & urine collection system</li>
-      </ul>
-      <a href="{% url 'cages' %}" class="service-btn">View Equipment</a>
-    </div>
-
-    <!-- Card 3 -->
-    <!-- Card 3 -->
-    <div class="service-card">
-      <img src="{% static 'images/master.jpg' %}" alt="Expert Consultation">
-      <h3>Regular training through our Rabbitry Masterclasses</h3>
-      <p>
-        Personalized guidance from experienced rabbit farmers to help you establish and optimize your rabbit farming operation.
-      </p>
-      <ul>
-        <li>✓ Setup planning</li>
-        <li>✓ Breeding programs</li>
-        <li>✓ Health management</li>
-        <li>✓ Business planning</li>
-      </ul>
-      <a href="{% url 'masterclass' %}" class="service-btn">Book Masterclass</a>
-    </div>
-  </div>
-</section>
-
-
-<div class="farming-tips fade-in">
-  <h2>Essential Rabbit Farming Tips</h2>
-  <div class="tips-grid">
-    <div class="tip-box">
-      <div class="tip-icon">
-        <!-- Housing: Folder SVG -->
-        <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="20" fill="#dfece5" />
-          <rect x="12" y="18" width="16" height="8" rx="2" fill="#42594a" fill-opacity="0.15"/>
-          <rect x="12" y="14" width="7" height="4" rx="1" fill="#42594a" fill-opacity="0.15"/>
-          <rect x="12" y="18" width="16" height="8" rx="2" stroke="#42594a" stroke-width="2"/>
-          <rect x="12" y="14" width="7" height="4" rx="1" stroke="#42594a" stroke-width="2"/>
-        </svg>
+      <!-- Card 3 -->
+      <!-- Card 3 -->
+      <div class="service-card">
+        <img src="{% static 'images/master.jpg' %}" alt="Expert Consultation">
+        <h3>Regular training through our Rabbitry Masterclasses</h3>
+        <p>
+          Personalized guidance from experienced rabbit farmers to help you establish and optimize your rabbit farming
+          operation.
+        </p>
+        <ul>
+          <li>✓ Setup planning</li>
+          <li>✓ Breeding programs</li>
+          <li>✓ Health management</li>
+          <li>✓ Business planning</li>
+        </ul>
+        <a href="{% url 'masterclass' %}" class="service-btn">Book Masterclass</a>
       </div>
-      <h4>Housing</h4>
-      <p>Provide adequate space, ventilation, and protection from weather conditions.</p>
     </div>
-    <div class="tip-box">
-      <div class="tip-icon">
-        <!-- Nutrition: Basket/Bucket SVG -->
-        <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="20" fill="#dfece5" />
-          <rect x="15" y="18" width="10" height="8" rx="2" fill="#42594a" fill-opacity="0.15"/>
-          <rect x="15" y="18" width="10" height="8" rx="2" stroke="#42594a" stroke-width="2"/>
-          <rect x="18" y="14" width="4" height="4" rx="1" stroke="#42594a" stroke-width="2"/>
-        </svg>
-      </div>
-      <h4>Nutrition</h4>
-      <p>Balanced diet with quality pellets, fresh vegetables, and unlimited clean water.</p>
-    </div>
-    <div class="tip-box">
-      <div class="tip-icon">
-        <!-- Health Care: Heart SVG -->
-        <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="20" fill="#dfece5" />
-          <path d="M20 28s-7-4.5-7-9.5a4 4 0 0 1 7-2.5A4 4 0 0 1 27 18.5c0 5-7 9.5-7 9.5z" stroke="#42594a" stroke-width="2" fill="none"/>
-        </svg>
-      </div>
-      <h4>Health Care</h4>
-      <p>Regular health checks, vaccinations, and immediate treatment of any issues.</p>
-    </div>
-    <div class="tip-box">
-      <div class="tip-icon">
-        <!-- Records: Dollar Sign SVG -->
-        <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="20" fill="#dfece5" />
-          <text x="20" y="26" text-anchor="middle" font-size="20" fill="#42594a" font-family="Arial, sans-serif">$</text>
-        </svg>
-      </div>
-      <h4>Records</h4>
-      <p>Keep detailed records of breeding, health, and production for better management.</p>
-    </div>
-  </div>
-</div>
+  </section>
 
 
-
-
-
-<!-- Contact Us Section -->
-<section class="contact-section animate-on-scroll fade-in" id="contact">
-  <h2 class="contact-title">Contact Us</h2>
-  <p class="contact-subtitle">
-    Get in touch with us for inquiries about rabbit farming, equipment, masterclass bookings, or restaurant reservations.
-  </p>
-  <div class="contact-content">
-    <div class="contact-info">
-      <h3>Get In Touch</h3>
-      <div class="contact-info-item">
-        <span class="contact-icon">
-          <!-- Address: Location Pin SVG -->
-          <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
-            <rect width="22" height="22" rx="6" fill="#2d6a4f"/>
-            <path d="M11 6.5a4 4 0 0 0-4 4c0 2.5 4 7 4 7s4-4.5 4-7a4 4 0 0 0-4-4zm0 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" fill="#fff"/>
+  <div class="farming-tips fade-in">
+    <h2>Essential Rabbit Farming Tips</h2>
+    <div class="tips-grid">
+      <div class="tip-box">
+        <div class="tip-icon">
+          <!-- Housing: Folder SVG -->
+          <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="20" fill="#dfece5" />
+            <rect x="12" y="18" width="16" height="8" rx="2" fill="#42594a" fill-opacity="0.15" />
+            <rect x="12" y="14" width="7" height="4" rx="1" fill="#42594a" fill-opacity="0.15" />
+            <rect x="12" y="18" width="16" height="8" rx="2" stroke="#42594a" stroke-width="2" />
+            <rect x="12" y="14" width="7" height="4" rx="1" stroke="#42594a" stroke-width="2" />
           </svg>
-        </span>
-        <div>
-          <strong>Address</strong><br />
-          Belvedere, Harare, Zimbabwe<br />
-          The White Meat Company & The Rabbit Hole Bar & Grill
         </div>
+        <h4>Housing</h4>
+        <p>Provide adequate space, ventilation, and protection from weather conditions.</p>
       </div>
-      <div class="contact-info-item">
-        <span class="contact-icon">
-          <!-- Phone: Phone SVG -->
-          <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
-            <rect width="22" height="22" rx="6" fill="#2d6a4f"/>
-            <path d="M16 14.5v2a1 1 0 0 1-1.09 1A13.05 13.05 0 0 1 5.5 7.09 1 1 0 0 1 6.5 6h2a1 1 0 0 1 1 0.76l0.5 2a1 1 0 0 1-0.23 1L9 11a10.5 10.5 0 0 0 4 4l1.24-1.24a1 1 0 0 1 1-0.23l2 0.5a1 1 0 0 1 0.76 1z" fill="#fff"/>
+      <div class="tip-box">
+        <div class="tip-icon">
+          <!-- Nutrition: Basket/Bucket SVG -->
+          <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="20" fill="#dfece5" />
+            <rect x="15" y="18" width="10" height="8" rx="2" fill="#42594a" fill-opacity="0.15" />
+            <rect x="15" y="18" width="10" height="8" rx="2" stroke="#42594a" stroke-width="2" />
+            <rect x="18" y="14" width="4" height="4" rx="1" stroke="#42594a" stroke-width="2" />
           </svg>
-        </span>
-        <div>
-          <strong>Phone & WhatsApp</strong><br />
-          +263 772 333 369<br />
-          +263 779 521 665<br />
-          Available 08:00 - 17:00
         </div>
+        <h4>Nutrition</h4>
+        <p>Balanced diet with quality pellets, fresh vegetables, and unlimited clean water.</p>
       </div>
-      <div class="contact-info-item">
-        <span class="contact-icon">
-          <!-- Email: Envelope SVG -->
-          <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
-            <rect width="22" height="22" rx="6" fill="#2d6a4f"/>
-            <path d="M6 8.5l5 4 5-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="6" y="7.5" width="10" height="7" rx="2" stroke="#fff" stroke-width="1.5"/>
+      <div class="tip-box">
+        <div class="tip-icon">
+          <!-- Health Care: Heart SVG -->
+          <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="20" fill="#dfece5" />
+            <path d="M20 28s-7-4.5-7-9.5a4 4 0 0 1 7-2.5A4 4 0 0 1 27 18.5c0 5-7 9.5-7 9.5z" stroke="#42594a"
+              stroke-width="2" fill="none" />
           </svg>
-        </span>
-        <div>
-          <strong>Email</strong><br />
-          rabbitholezim@gmail.com
         </div>
+        <h4>Health Care</h4>
+        <p>Regular health checks, vaccinations, and immediate treatment of any issues.</p>
       </div>
-      <div class="contact-info-item">
-        <span class="contact-icon">
-          <!-- Business Hours: Clock SVG -->
-          <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
-            <rect width="22" height="22" rx="6" fill="#2d6a4f"/>
-            <circle cx="11" cy="11" r="5" stroke="#fff" stroke-width="1.5"/>
-            <path d="M11 8.5v3l2 2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="tip-box">
+        <div class="tip-icon">
+          <!-- Records: Dollar Sign SVG -->
+          <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="20" fill="#dfece5" />
+            <text x="20" y="26" text-anchor="middle" font-size="20" fill="#42594a"
+              font-family="Arial, sans-serif">$</text>
           </svg>
-        </span>
-        <div>
-          <strong>Business Hours</strong><br />
-          Farming: Tuesday - Friday, 08:00 - 11:30<br />
-          Restaurant: Tuesday - Sunday, 09:30 - 22:00<br/>
-          Closed on Mondays
         </div>
+        <h4>Records</h4>
+        <p>Keep detailed records of breeding, health, and production for better management.</p>
       </div>
-    
- <div class="contact-social">
-  <span>Follow Us</span><br />
-  <div class="social-icons-pro">
-    <a href="https://www.facebook.com/thewhitemeatco" class="social-icon-pro" aria-label="Facebook" target="_blank">
-      <i class="fa-brands fa-facebook-f"></i>
-    </a>
-    <a href="https://x.com/WhiteMeatCompa1" class="social-icon-pro" aria-label="X (Twitter)" target="_blank">
-      <i class="fa-brands fa-x-twitter"></i>
-    </a>
-    <a href="https://www.youtube.com/@brightt.makuchete2875" class="social-icon-pro" aria-label="YouTube" target="_blank">
-      <i class="fa-brands fa-youtube"></i>
-    </a>
-    <a href="https://www.tiktok.com/@thewhitemeatco" class="social-icon-pro" aria-label="TikTok" target="_blank">
-      <i class="fa-brands fa-tiktok"></i>
-    </a>
-    <a href="https://whatsapp.com/channel/0029VaMwhvvEKyZDkNNk5H21" class="social-icon-pro whatsapp-bg" aria-label="WhatsApp" target="_blank">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
-  </div>
-</div>
-
-<style>
-.social-icons-pro {
-  display: flex;
-  gap: 18px;
-  margin-top: 10px;
-}
-
-.social-icon-pro {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #f8f8f8 60%, #eaeaea 100%);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06);
-  transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
-  position: relative;
-  overflow: hidden;
-  text-decoration: none; /* Remove underline */
-  color: inherit;        /* Prevent default blue link color */
-}
-
-.social-icon-pro:hover {
-  transform: scale(1.13) translateY(-2px);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.10);
-  z-index: 2;
-}
-
-.social-icon-pro i {
-  font-size: 24px;
-  display: block;
-}
-
-/* Brand colors for icons */
-.social-icon-pro[aria-label="Facebook"] i {
-  color: #1877f2;
-}
-.social-icon-pro[aria-label="X (Twitter)"] i {
-  color: #000;
-}
-.social-icon-pro[aria-label="YouTube"] i {
-  color: #ff0000;
-}
-.social-icon-pro[aria-label="TikTok"] i {
-  color: #000;
-}
-.whatsapp-bg i {
-  color: #25d366;
-}
-
-/* Remove focus outline and shadow */
-.social-icon-pro:focus,
-.social-icon-pro:active {
-  outline: none;
-  box-shadow: none;
-}
-
-@media (max-width: 600px) {
-  .social-icons-pro {
-    gap: 10px;
-  }
-  .social-icon-pro {
-    width: 40px;
-    height: 40px;
-  }
-  .social-icon-pro i {
-    font-size: 20px;
-  }
-}
-</style>
-
-</div>
-    <form class="contact-form" id="contactForm">
-      <h3>Send Us a Message</h3>
-      <div class="form-row">
-        <input type="text" name="name" id="contactName" placeholder="Name" required />
-      </div>
-      
-      <div class="form-row">
-        <select name="subject" id="contactSubject" required>
-          <option value="">Select a topic</option>
-          <option value="farming">Rabbit Farming</option>
-          <option value="equipment">Equipment</option>
-          <option value="masterclass">Masterclass</option>
-          <option value="restaurant">Restaurant Reservation</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <textarea name="message" id="contactMessage" rows="5" placeholder="Tell us how we can help you..." required></textarea>
-      </div>
-      <button type="submit" class="btn contact-btn">Send Message</button>
-    </form>
-  </div>
-</section>
-
-<section class="how-hear-section" id="how-hear-section">
-  <div class="how-hear-container">
-    <!-- LEFT TEXT -->
-    <div class="how-hear-text">
-      <h2>How Did You Hear About Us?</h2>
-      <p>We'd love to know how you discovered The White Meat Company. Your feedback helps us improve our services and reach more people like you.</p>
     </div>
+  </div>
 
-    <!-- RIGHT CARD -->
-    <div class="how-hear-card">
-      <h3>Help us understand how you discovered our product</h3>
-      {% if how_hear_submitted %}
+
+
+
+
+  <!-- Contact Us Section -->
+  <section class="contact-section animate-on-scroll fade-in" id="contact">
+    <h2 class="contact-title">Contact Us</h2>
+    <p class="contact-subtitle">
+      Get in touch with us for inquiries about rabbit farming, equipment, masterclass bookings, or restaurant
+      reservations.
+    </p>
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <div class="contact-info-item">
+          <span class="contact-icon">
+            <!-- Address: Location Pin SVG -->
+            <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
+              <rect width="22" height="22" rx="6" fill="#2d6a4f" />
+              <path
+                d="M11 6.5a4 4 0 0 0-4 4c0 2.5 4 7 4 7s4-4.5 4-7a4 4 0 0 0-4-4zm0 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                fill="#fff" />
+            </svg>
+          </span>
+          <div>
+            <strong>Address</strong><br />
+            Farming - 17793 Tredgold Avenue, Belvedere, Harare<br />
+            Rabbit Hole Restaurant - Golden Quarry Road & Bulawayo Road, Harare
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-icon">
+            <!-- Phone: Phone SVG -->
+            <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
+              <rect width="22" height="22" rx="6" fill="#2d6a4f" />
+              <path
+                d="M16 14.5v2a1 1 0 0 1-1.09 1A13.05 13.05 0 0 1 5.5 7.09 1 1 0 0 1 6.5 6h2a1 1 0 0 1 1 0.76l0.5 2a1 1 0 0 1-0.23 1L9 11a10.5 10.5 0 0 0 4 4l1.24-1.24a1 1 0 0 1 1-0.23l2 0.5a1 1 0 0 1 0.76 1z"
+                fill="#fff" />
+            </svg>
+          </span>
+          <div>
+            <strong>Phone & WhatsApp</strong><br />
+            +263 772 333 369<br />
+            +263 779 521 665<br />
+            Available 08:00 - 17:00
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-icon">
+            <!-- Email: Envelope SVG -->
+            <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
+              <rect width="22" height="22" rx="6" fill="#2d6a4f" />
+              <path d="M6 8.5l5 4 5-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <rect x="6" y="7.5" width="10" height="7" rx="2" stroke="#fff" stroke-width="1.5" />
+            </svg>
+          </span>
+          <div>
+            <strong>Email</strong><br />
+            rabbitholezim@gmail.com
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-icon">
+            <!-- Business Hours: Clock SVG -->
+            <svg width="22" height="22" fill="none" viewBox="0 0 22 22">
+              <rect width="22" height="22" rx="6" fill="#2d6a4f" />
+              <circle cx="11" cy="11" r="5" stroke="#fff" stroke-width="1.5" />
+              <path d="M11 8.5v3l2 2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <div>
+            <strong>Business Hours</strong><br />
+            Belvedere Office: Monday to Friday 08:00 - 17:00<br />
+            Saturday: 08:00 - 15:00<br />
+            <br />
+            Rabbit Hole Restaurant: Sunday to Thursday 09:00 - 19:00<br />
+            Friday & Saturday 09:00 - 22:00 <br />
+
+
+          </div>
+        </div>
+
+        <div class="contact-social">
+          <span>Follow Us</span><br />
+          <div class="social-icons-pro">
+            <a href="https://www.facebook.com/thewhitemeatco" class="social-icon-pro" aria-label="Facebook"
+              target="_blank">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://x.com/WhiteMeatCompa1" class="social-icon-pro" aria-label="X (Twitter)" target="_blank">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.youtube.com/@brightt.makuchete2875" class="social-icon-pro" aria-label="YouTube"
+              target="_blank">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://www.tiktok.com/@thewhitemeatco" class="social-icon-pro" aria-label="TikTok"
+              target="_blank">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VaMwhvvEKyZDkNNk5H21" class="social-icon-pro whatsapp-bg"
+              aria-label="WhatsApp" target="_blank">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <style>
+          .social-icons-pro {
+            display: flex;
+            gap: 18px;
+            margin-top: 10px;
+          }
+
+          .social-icon-pro {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #f8f8f8 60%, #eaeaea 100%);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 1.5px 4px rgba(0, 0, 0, 0.06);
+            transition: transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.18s;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            /* Remove underline */
+            color: inherit;
+            /* Prevent default blue link color */
+          }
+
+          .social-icon-pro:hover {
+            transform: scale(1.13) translateY(-2px);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.10);
+            z-index: 2;
+          }
+
+          .social-icon-pro i {
+            font-size: 24px;
+            display: block;
+          }
+
+          /* Brand colors for icons */
+          .social-icon-pro[aria-label="Facebook"] i {
+            color: #1877f2;
+          }
+
+          .social-icon-pro[aria-label="X (Twitter)"] i {
+            color: #000;
+          }
+
+          .social-icon-pro[aria-label="YouTube"] i {
+            color: #ff0000;
+          }
+
+          .social-icon-pro[aria-label="TikTok"] i {
+            color: #000;
+          }
+
+          .whatsapp-bg i {
+            color: #25d366;
+          }
+
+          /* Remove focus outline and shadow */
+          .social-icon-pro:focus,
+          .social-icon-pro:active {
+            outline: none;
+            box-shadow: none;
+          }
+
+          @media (max-width: 600px) {
+            .social-icons-pro {
+              gap: 10px;
+            }
+
+            .social-icon-pro {
+              width: 40px;
+              height: 40px;
+            }
+
+            .social-icon-pro i {
+              font-size: 20px;
+            }
+          }
+        </style>
+
+      </div>
+      <form class="contact-form" id="contactForm">
+        <h3>Send Us a Message</h3>
+        <div class="form-row">
+          <input type="text" name="name" id="contactName" placeholder="Name" required />
+        </div>
+
+        <div class="form-row">
+          <select name="subject" id="contactSubject" required>
+            <option value="">Select a topic</option>
+            <option value="farming">Rabbit Farming</option>
+            <option value="equipment">Equipment</option>
+            <option value="masterclass">Masterclass</option>
+            <option value="restaurant">Restaurant Reservation</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <textarea name="message" id="contactMessage" rows="5" placeholder="Tell us how we can help you..."
+            required></textarea>
+        </div>
+        <button type="submit" class="btn contact-btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="how-hear-section" id="how-hear-section">
+    <div class="how-hear-container">
+      <!-- LEFT TEXT -->
+      <div class="how-hear-text">
+        <h2>How Did You Hear About Us?</h2>
+        <p>We'd love to know how you discovered The White Meat Company. Your feedback helps us improve our services and
+          reach more people like you.</p>
+      </div>
+
+      <!-- RIGHT CARD -->
+      <div class="how-hear-card">
+        <h3>Help us understand how you discovered our product</h3>
+        {% if how_hear_submitted %}
         <div class="how-hear-success">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align:middle;margin-right:8px;"><circle cx="16" cy="16" r="16" fill="#2d6a4f"/><path d="M10 17l4 4 8-8" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align:middle;margin-right:8px;">
+            <circle cx="16" cy="16" r="16" fill="#2d6a4f" />
+            <path d="M10 17l4 4 8-8" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
           <span>Thank you for your feedback!</span>
         </div>
-      {% else %}
+        {% else %}
         <form method="post" action="#how-hear-section" class="how-hear-django-form">
           {% csrf_token %}
           {{ form.non_field_errors }}
@@ -432,58 +478,62 @@
           </div>
           <button type="submit" name="how_hear_submit">Submit</button>
         </form>
-      {% endif %}
+        {% endif %}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
 
-<!-- Map/Location Section -->
-<section class="map-section animate-on-scroll fade-in">
-  <div class="map-card">
-    <h2 class="map-title">Find Us in Belvedere, Harare</h2>
-    <div class="map-placeholder" style="padding:0;">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3798.1300762967035!2d31.002710299999997!3d-17.8325362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a5625e2989af%3A0x5e54f2f976050108!2sThe%20Rabbit%20Hole%20Bar%20%26%20Grill!5e0!3m2!1sen!2szw!4v1751555295219!5m2!1sen!2szw" width="100%" height="350" style="border:0; border-radius: 9px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <!-- Map/Location Section -->
+  <section class="map-section animate-on-scroll fade-in">
+    <div class="map-card">
+      <h2 class="map-title">Find Us in Belvedere, Harare</h2>
+      <div class="map-placeholder" style="padding:0;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3798.1300762967035!2d31.002710299999997!3d-17.8325362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a5625e2989af%3A0x5e54f2f976050108!2sThe%20Rabbit%20Hole%20Bar%20%26%20Grill!5e0!3m2!1sen!2szw!4v1751555295219!5m2!1sen!2szw"
+          width="100%" height="350" style="border:0; border-radius: 9px;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
-<!-- Footer Section -->
-<footer class="footer-section animate-on-scroll fade-in">
-  <div class="footer-content">
-    <div class="footer-col company">
-      <h3>The White Meat Company</h3>
-      <p>Industry leaders in the provision of rabbit farming equipment and prime breeding stock in Zimbabwe.</p>
-      
-    </div>
-    <div class="footer-col links">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
-        <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
-        <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
-        <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
+  <!-- Footer Section -->
+  <footer class="footer-section animate-on-scroll fade-in">
+    <div class="footer-content">
+      <div class="footer-col company">
+        <h3>The White Meat Company</h3>
+        <p>Industry leaders in the provision of rabbit farming equipment and prime breeding stock in Zimbabwe.</p>
+
+      </div>
+      <div class="footer-col links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
+          <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
+          <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+          <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
         </ul>
       </div>
-    <div class="footer-col contact">
-      <h4>Contact Info</h4>
-      <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br /> +263 779 521 665<br/>rabbitholezim@gmail.com</p>
-      <div style="margin-top: 20px;">
-        <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
+      <div class="footer-col contact">
+        <h4>Contact Info</h4>
+        <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br /> +263 779 521 665<br />rabbitholezim@gmail.com</p>
+        <div style="margin-top: 20px;">
+          <a href="{% url 'login' %}"
+            style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
+        </div>
       </div>
     </div>
-  </div>
-  <hr class="footer-divider" />
-  <div class="footer-bottom">
-    &copy; 2025 The White Meat Company. All rights reserved.
-  </div>
-</footer>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      &copy; 2026 The White Meat Company. All rights reserved.
+    </div>
+  </footer>
 
   <!-- Custom Scroll Animations -->
   <script src="{% static 'js/scroll-animations.js' %}"></script>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({
@@ -532,9 +582,9 @@
     window.addEventListener('DOMContentLoaded', () => {
       const title = document.getElementById('typewriter-title');
       const subheading = document.getElementById('typewriter-subheading');
-      
+
       subheading.style.visibility = 'hidden';
-      
+
       typeWriter(title, title.textContent, 60, () => {
         subheading.style.visibility = 'visible';
         typeWriter(subheading, subheading.textContent, 15);
@@ -544,7 +594,7 @@
   <script>
     // Gallery filter functionality
     document.querySelectorAll('.gallery-filter').forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         // Remove active from all
         document.querySelectorAll('.gallery-filter').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
@@ -561,7 +611,7 @@
   </script>
   <script>
     // Contact form WhatsApp integration
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const name = document.getElementById('contactName').value;
       const subject = document.getElementById('contactSubject').value;
@@ -574,26 +624,26 @@
     });
   </script>
 
- 
+
 </body>
 
-  <script>
-    // Navbar hamburger toggle for mobile
-    document.addEventListener('DOMContentLoaded', function() {
-      var hamburger = document.getElementById('navbar-hamburger');
-      var navLinks = document.getElementById('nav-links');
-      if (hamburger && navLinks) {
-        hamburger.addEventListener('click', function() {
-          navLinks.classList.toggle('open');
-        });
-        // Hide nav links when resizing to tablet/desktop
-        window.addEventListener('resize', function() {
-          if (window.innerWidth > 768) {
-            navLinks.classList.remove('open');
-          }
-        });
-      }
-    });
-  </script>
+<script>
+  // Navbar hamburger toggle for mobile
+  document.addEventListener('DOMContentLoaded', function () {
+    var hamburger = document.getElementById('navbar-hamburger');
+    var navLinks = document.getElementById('nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function () {
+        navLinks.classList.toggle('open');
+      });
+      // Hide nav links when resizing to tablet/desktop
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+          navLinks.classList.remove('open');
+        }
+      });
+    }
+  });
+</script>
 
 </html>

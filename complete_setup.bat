@@ -4,26 +4,34 @@ echo Django Database Setup
 echo ========================================
 echo.
 
-cd /d "c:\Users\josh\Desktop\whitemeat"
+:: Navigate to the directory containing this script
+cd /d "%~dp0"
 
-echo Activating virtual environment...
-call .venv\Scripts\activate.bat
+:: Check if a local virtual environment exists
+if exist .venv\Scripts\python.exe (
+    echo Local virtual environment found. Activating...
+    call .venv\Scripts\activate.bat
+    set PYTHON_CMD=.venv\Scripts\python.exe
+) else (
+    echo No local virtual environment (.venv) found. Using global python.
+    set PYTHON_CMD=python
+)
 
 echo.
 echo Step 1: Creating migrations...
-.venv\Scripts\python.exe manage.py makemigrations frontend
+%PYTHON_CMD% manage.py makemigrations frontend
 
 echo.
 echo Step 2: Applying migrations...
-.venv\Scripts\python.exe manage.py migrate
+%PYTHON_CMD% manage.py migrate
 
 echo.
 echo Step 3: Setting up initial data...
-.venv\Scripts\python.exe setup_data.py
+%PYTHON_CMD% setup_data.py
 
 echo.
 echo Step 4: Checking superuser...
-.venv\Scripts\python.exe setup_user.py
+%PYTHON_CMD% setup_user.py
 
 echo.
 echo ========================================
@@ -35,6 +43,6 @@ echo Starting Django server...
 echo Go to: http://localhost:8000/login/
 echo.
 
-.venv\Scripts\python.exe manage.py runserver
+%PYTHON_CMD% manage.py runserver
 
 pause

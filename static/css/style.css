@@ -1,31 +1,6 @@
-/* Hamburger menu mobile fix: hide nav-links by default on mobile, show only when .open is present */
-/* Hide hamburger on desktop */
+/* Hide hamburger by default (desktop) */
 .navbar-hamburger {
   display: none;
-}
-
-@media (max-width: 760px) {
-  .navbar-hamburger {
-    display: block;
-  }
-}
-@media (max-width: 760px) {
-  .nav-links {
-    display: none !important;
-  }
-  .nav-links.open {
-    display: flex !important;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 16px;
-    background: #fff;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    border-radius: 10px;
-    min-width: 160px;
-    z-index: 1000;
-    padding: 18px 0;
-  }
 }
 * {
   margin: 0;
@@ -3116,24 +3091,118 @@ h1 {
 @media (max-width: 760px) {
   .navbar-hamburger {
     display: block !important;
+    z-index: 10001 !important; /* Keep it above the overlay */
   }
+  
+  /* Smooth transition on spans */
+  .navbar-hamburger span {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, background-color 0.3s ease !important;
+  }
+
   .nav-links {
     display: none !important;
   }
+  
   .nav-links.open {
     display: flex !important;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 16px;
-    background: #fff;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    border-radius: 10px;
-    min-width: 160px;
-    z-index: 1000;
-    padding: 18px 0;
+    flex-direction: column !important;
+    position: fixed !important;
+    top: 55px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 55px) !important;
+    background: rgba(45, 106, 79, 0.98) !important; /* Premium dark green branding */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 30px !important;
+    z-index: 10000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    animation: fadeInMenu 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .nav-links.open li {
+    width: auto !important;
+    text-align: center !important;
+    flex: none !important;
+    min-width: auto !important;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .nav-links.open li:nth-child(1) { animation-delay: 0.05s; }
+  .nav-links.open li:nth-child(2) { animation-delay: 0.1s; }
+  .nav-links.open li:nth-child(3) { animation-delay: 0.15s; }
+  .nav-links.open li:nth-child(4) { animation-delay: 0.25s; }
+  .nav-links.open li:nth-child(5) { animation-delay: 0.3s; }
+
+  .nav-links.open li a {
+    font-size: 1.6rem !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    padding: 12px 24px !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    line-height: normal !important;
+    display: inline-block !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  .nav-links.open li a:hover,
+  .nav-links.open li a.active {
+    color: #b7e4c7 !important; /* Premium light mint green hover */
+    text-shadow: 0 0 15px rgba(183, 228, 199, 0.6) !important;
+    transform: scale(1.08);
+  }
+
+  .nav-links.open li a.active::after {
+    display: none !important;
   }
 }
+
+@media (max-width: 480px) {
+  .nav-links.open {
+    top: 50px !important;
+    height: calc(100vh - 50px) !important;
+  }
+  .nav-links.open li a {
+    font-size: 1.4rem !important;
+    padding: 10px 20px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .nav-links.open {
+    top: 48px !important;
+    height: calc(100vh - 48px) !important;
+  }
+  .nav-links.open li a {
+    font-size: 1.2rem !important;
+    padding: 8px 16px !important;
+  }
+}
+
+/* Animate Hamburger spans to form an X when menu is open */
+.navbar:has(.nav-links.open) .navbar-hamburger span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg) !important;
+  background: #ffffff !important; /* Switch to white on green overlay */
+}
+.navbar:has(.nav-links.open) .navbar-hamburger span:nth-child(2) {
+  opacity: 0 !important;
+}
+.navbar:has(.nav-links.open) .navbar-hamburger span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg) !important;
+  background: #ffffff !important;
+}
+
 @media (min-width: 761px) {
   .navbar-hamburger {
     display: none !important;
@@ -3146,5 +3215,25 @@ h1 {
     flex-direction: row;
     min-width: unset;
     padding: 0;
+  }
+}
+
+@keyframes fadeInMenu {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    background: rgba(45, 106, 79, 0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(15px);
+    background: rgba(45, 106, 79, 0.98);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -1,8 +1,13 @@
 # PowerShell script to start Django server
-Set-Location "c:\Users\josh\Desktop\whitemeat"
+Set-Location $PSScriptRoot
 
-# Activate virtual environment
-& ".\\.venv\\Scripts\\Activate.ps1"
+# Activate virtual environment if it exists
+if (Test-Path ".venv\Scripts\Activate.ps1") {
+    Write-Host "Activating local virtual environment..." -ForegroundColor Green
+    & ".venv\Scripts\Activate.ps1"
+} else {
+    Write-Host "No local virtual environment found. Using system Python." -ForegroundColor Yellow
+}
 
 # Apply migrations
 Write-Host "Applying database migrations..." -ForegroundColor Green

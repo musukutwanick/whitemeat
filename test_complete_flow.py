@@ -30,22 +30,22 @@ def test_complete_admin_flow():
         print("\n1. Checking Pagomo branch...")
         try:
             branch = RestaurantBranch.objects.get(slug='rabbit-hole-pagomo', is_active=True)
-            print(f"✓ Found Pagomo branch: {branch.name} (ID: {branch.id})")
+            print(f"[OK] Found Pagomo branch: {branch.name} (ID: {branch.id})")
         except RestaurantBranch.DoesNotExist:
-            print("✗ ERROR: Pagomo branch not found!")
+            print("[ERROR] ERROR: Pagomo branch not found!")
             return False
         
         # 2. Check categories
         print("\n2. Checking menu categories...")
         categories = MenuCategory.objects.all().order_by('order')
-        print(f"✓ Found {categories.count()} categories:")
+        print(f"[OK] Found {categories.count()} categories:")
         for cat in categories:
             print(f"   - {cat.name} (slug: {cat.slug})")
         
         # 3. Get initial menu item count
         print("\n3. Getting initial menu item count...")
         initial_count = MenuItem.objects.filter(branch=branch, is_available=True).count()
-        print(f"✓ Initial menu items for Pagomo: {initial_count}")
+        print(f"[OK] Initial menu items for Pagomo: {initial_count}")
         
         # 4. Add a new test menu item (simulating admin action)
         print("\n4. Adding new test menu item (simulating admin)...")
@@ -64,16 +64,16 @@ def test_complete_admin_flow():
             is_available=True,
             is_featured=True
         )
-        print(f"✓ Created test item: {new_item.name} (ID: {new_item.id})")
+        print(f"[OK] Created test item: {new_item.name} (ID: {new_item.id})")
         
         # 5. Check new menu item count
         print("\n5. Verifying menu item was added...")
         new_count = MenuItem.objects.filter(branch=branch, is_available=True).count()
-        print(f"✓ New menu items count: {new_count}")
+        print(f"[OK] New menu items count: {new_count}")
         if new_count == initial_count + 1:
-            print("✓ Menu item count increased correctly!")
+            print("[OK] Menu item count increased correctly!")
         else:
-            print(f"✗ Expected {initial_count + 1}, got {new_count}")
+            print(f"[ERROR] Expected {initial_count + 1}, got {new_count}")
         
         # 6. Test Pagomo view (simulating user visiting page)
         print("\n6. Testing user-facing Pagomo page...")
@@ -82,7 +82,7 @@ def test_complete_admin_flow():
         request.user = AnonymousUser()
         
         response = pagomo(request)
-        print(f"✓ Pagomo page response status: {response.status_code}")
+        print(f"[OK] Pagomo page response status: {response.status_code}")
         
         # 7. Check if new item appears in view context
         print("\n7. Checking if new item appears in page context...")
@@ -102,33 +102,33 @@ def test_complete_admin_flow():
             for item in menu_items_for_view:
                 if item.name == test_item_name:
                     found_test_item = True
-                    print(f"✓ Found test item in view context: {item.name}")
+                    print(f"[OK] Found test item in view context: {item.name}")
                     break
             
             if not found_test_item:
-                print(f"✗ Test item '{test_item_name}' NOT found in view context!")
+                print(f"[ERROR] Test item '{test_item_name}' NOT found in view context!")
             
-            print(f"✓ Total items in view context: {menu_items_for_view.count()}")
+            print(f"[OK] Total items in view context: {menu_items_for_view.count()}")
             
         except Exception as e:
-            print(f"✗ Error checking view context: {e}")
+            print(f"[ERROR] Error checking view context: {e}")
         
         # 8. List all current menu items
         print(f"\n8. Current menu items for {branch.name}:")
         all_items = MenuItem.objects.filter(branch=branch, is_available=True).order_by('category__name', 'name')
         for item in all_items:
-            marker = "★" if item.name == test_item_name else " "
+            marker = "*" if item.name == test_item_name else " "
             print(f"   {marker} {item.name} ({item.category.name}) - ${item.price}")
         
         print(f"\n{'='*60}")
-        print("✓ ADMIN MENU FUNCTIONALITY TEST COMPLETED SUCCESSFULLY!")
-        print("✓ Admin can add menu items and they appear immediately on user pages!")
+        print("[OK] ADMIN MENU FUNCTIONALITY TEST COMPLETED SUCCESSFULLY!")
+        print("[OK] Admin can add menu items and they appear immediately on user pages!")
         print(f"{'='*60}")
         
         return True
         
     except Exception as e:
-        print(f"\n✗ ERROR during test: {e}")
+        print(f"\n[ERROR] ERROR during test: {e}")
         import traceback
         traceback.print_exc()
         return False

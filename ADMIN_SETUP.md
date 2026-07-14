@@ -4,7 +4,7 @@
 
 ### Step 1: Open Terminal/Command Prompt
 1. Press `Windows + R`, type `cmd`, press Enter
-2. Navigate to your project: `cd "c:\Users\josh\Desktop\whitemeat"`
+2. Navigate to your project: `cd \path\to\whitemeat`
 
 ### Step 2: Activate Virtual Environment
 ```bash

@@ -5,7 +5,7 @@ This script helps you set up Django admin access.
 
 INSTRUCTIONS:
 1. Open a new terminal/command prompt
-2. Navigate to your project directory: cd "c:\Users\josh\Desktop\whitemeat"
+2. Navigate to your project directory: cd \path\to\whitemeat
 3. Activate virtual environment: .venv\Scripts\activate
 4. Run the following commands one by one:
 
@@ -60,7 +60,7 @@ def main():
     print("🚀 Django Admin Setup for The White Meat Company")
     print("=" * 50)
     
-    project_dir = r"c:\Users\josh\Desktop\whitemeat"
+    project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     venv_python = r".venv\Scripts\python.exe"
     
     print(f"Project Directory: {project_dir}")
