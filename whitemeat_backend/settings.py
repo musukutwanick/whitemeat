@@ -25,7 +25,22 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
+raw_allowed_hosts = os.environ.get(
+    "ALLOWED_HOSTS",
+    "whitemeatcompany.com,www.whitemeatcompany.com,localhost,127.0.0.1,.onrender.com,*"
+)
+ALLOWED_HOSTS = [h.strip() for h in raw_allowed_hosts.split(",") if h.strip()]
+
+# Trusted origins for CSRF protection over HTTPS
+raw_csrf_trusted = os.environ.get(
+    "CSRF_TRUSTED_ORIGINS",
+    "https://whitemeatcompany.com,https://www.whitemeatcompany.com,https://*.onrender.com,http://localhost:8000,http://127.0.0.1:8000"
+)
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_csrf_trusted.split(",") if origin.strip()]
+
+# Tell Django to trust the X-Forwarded-Proto header from Render's reverse proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Application definition
 
@@ -126,35 +141,15 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# CORS settings for frontend integration
+# CORS settings
 CORS_ALLOWED_ORIGINS = [
+    "https://whitemeatcompany.com",
+    "https://www.whitemeatcompany.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
 ]
-
-
-# STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-
-
-# Correct MIDDLEWARE for Django admin and static files (no whitenoise)
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-
-
-
 
 CORS_ALLOW_ALL_ORIGINS = True  # Only for development
 
@@ -201,7 +196,7 @@ import requests
 
 def _start_self_ping():
     def ping_self():
-        app_url = os.getenv("APP_URL", "https://whitemeat-3.onrender.com/")  # Set APP_URL in Render env
+        app_url = os.getenv("APP_URL", "https://whitemeatcompany.com")  # Set APP_URL in Render env
         while True:
             try:
                 requests.get(f"{app_url}/health/", timeout=10)
@@ -213,4 +208,5 @@ def _start_self_ping():
 
 if os.getenv("RENDER", "False").lower() == "true":
     _start_self_ping()
+
 

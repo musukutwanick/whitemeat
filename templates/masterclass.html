@@ -5,7 +5,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="format-detection" content="telephone=no" />
   <title>The White Meat Company</title>
   <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -200,7 +199,7 @@
 <section id="book" class="booking-section">
   <div class="booking-container">
     <h2>Secure Your Spot Today</h2>
-    <p class="subtitle">Limited seats available – Join Zimbabwe’s most successful rabbit farming program</p>
+    <p class="subtitle">Limited seats available  Join Zimbabwe’s most successful rabbit farming program</p>
 
     <div class="pricing-box">
       <h3>Complete 2-Day Masterclass</h3>
@@ -263,11 +262,14 @@
     <div class="footer-col contact">
       <h4>Contact Info</h4>
       <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br /> +263 779 521 665<br/>rabbitholezim@gmail.com</p>
+      <div style="margin-top: 20px;">
+        <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
+      </div>
     </div>
   </div>
   <hr class="footer-divider" />
   <div class="footer-bottom">
-    &copy; 2026 The White Meat Company. All rights reserved.
+    &copy; 2025 The White Meat Company. All rights reserved.
   </div>
 </footer>
 
@@ -360,7 +362,7 @@
       }
 
       // Create WhatsApp message
-      let message = `Hi! I'm interested in booking the {{ event.title|default:"Rabbitry Masterclass" }}.\n\n`;
+      let message = `Hi! I'm interested in booking the Rabbit Farming Masterclass for August 2025.\n\n`;
       message += `📋 MY DETAILS:\n`;
       message += `• Name: ${name}\n`;
       message += `• Email: ${email}\n`;
@@ -376,7 +378,7 @@
       }
       
       message += `\n💰 Course Fee: $140\n`;
-      message += `📅 Dates: {{ event.date_range|default:"15 & 16 August 2026" }}\n\n`;
+      message += `📅 Dates: August 2nd & 3rd, 2025\n\n`;
       message += `Please confirm my booking and send payment details. Thank you!`;
 
       // Encode message for URL
