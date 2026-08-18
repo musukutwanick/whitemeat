@@ -1,273 +1,760 @@
 {% extends 'admin/base.html' %}
+{% load static %}
 
-{% block title %}Add Accessory{% endblock %}
-
-{% block content_title %}Add New Equipment / Accessory{% endblock %}
+{% block title %}Manage Equipment & Accessories{% endblock %}
+{% block page_title %}Equipment & Accessories Management{% endblock %}
 
 {% block content %}
-{% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
-<form method="post" enctype="multipart/form-data" class="custom-accessory-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Add Accessory</button>
-</form>
+<div class="accessory-admin-container">
+  <!-- Header / Breadcrumbs -->
+  <div class="admin-header-row">
+    <div>
+      <h2 class="section-main-title">Equipment & Accessories</h2>
+      <p class="section-subtitle">Add, edit, and manage cages, feeding troughs, drinkers, and breeding accessories.</p>
+    </div>
+    <div class="header-actions">
+      <a href="{% url 'admin_dashboard' %}" class="btn-secondary-custom">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+      </a>
+      <a href="{% url 'cages' %}" target="_blank" class="btn-outline-custom">
+        <i class="fas fa-external-link-alt"></i> View Public Page
+      </a>
+    </div>
+  </div>
 
-{% if accessories %}
-  <h3 style="margin-top:40px;">Current Equipment & Accessories</h3>
-  <div class="accessory-list">
-    {% for accessory in accessories %}
-      <div class="accessory-item" id="accessory-{{ accessory.id }}">
-        <div class="accessory-info">
-          {% if accessory.image_url %}
-            <img src="{{ accessory.image_url }}" alt="{{ accessory.name }}" class="accessory-thumb">
-          {% endif %}
-          <div class="accessory-details">
-            <strong>{{ accessory.name }}</strong><br>
-            <span style="color:#666;">{{ accessory.description }}</span><br>
-            <span style="font-weight:500;">${{ accessory.price }}</span>
-            <span class="badge {% if accessory.is_available %}badge-success{% else %}badge-danger{% endif %}" style="margin-left:10px;">{% if accessory.is_available %}Available{% else %}Unavailable{% endif %}</span>
-          </div>
-          <div class="accessory-actions">
-            <button type="button" class="btn btn-edit" onclick="toggleEditForm({{ accessory.id }})">Edit</button>
-            <form method="post" style="display:inline;">
-              {% csrf_token %}
-              <input type="hidden" name="delete_accessory_id" value="{{ accessory.id }}">
-              <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this accessory?');">Delete</button>
-            </form>
+  {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+        <div class="alert-box {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+          <i class="fas {% if message.tags == 'error' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}"></i>
+          <span>{{ message }}</span>
+          <button type="button" class="alert-close" onclick="this.parentElement.remove();">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="admin-grid-layout">
+    <!-- Left Column: Add New Form -->
+    <div class="admin-card add-card">
+      <div class="card-head">
+        <div class="card-icon"><i class="fas fa-plus-circle"></i></div>
+        <div>
+          <h3>Add New Equipment</h3>
+          <p>Fill in the details to publish a new item</p>
+        </div>
+      </div>
+
+      <form method="post" enctype="multipart/form-data" class="modern-form" id="create-accessory-form">
+        {% csrf_token %}
+        <div class="form-field">
+          <label for="acc-name">Equipment / Accessory Name <span class="req">*</span></label>
+          <input type="text" id="acc-name" name="name" placeholder="e.g. Automatic Drinker System" required>
+        </div>
+
+        <div class="form-field">
+          <label for="acc-price">Price (USD $) <span class="req">*</span></label>
+          <div class="input-with-prefix">
+            <span class="currency-prefix">$</span>
+            <input type="number" id="acc-price" name="price" step="0.01" min="0" placeholder="0.00" required>
           </div>
         </div>
-        <form method="post" enctype="multipart/form-data" class="accessory-edit-form" id="edit-form-{{ accessory.id }}" style="display:none;margin-top:18px;">
-          {% csrf_token %}
-          <input type="hidden" name="accessory_id" value="{{ accessory.id }}">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" name="name" value="{{ accessory.name }}" required>
+
+        <div class="form-field">
+          <label for="acc-description">Description <span class="req">*</span></label>
+          <textarea id="acc-description" name="description" rows="3" placeholder="Highlight specifications, capacity, and benefits..." required></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="acc-image">Equipment Image</label>
+          <div class="file-upload-wrapper">
+            <input type="file" id="acc-image" name="image" accept="image/*" onchange="previewImage(this, 'add-preview-img', 'add-preview-box')">
+            <div class="file-upload-placeholder" id="add-placeholder">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span>Click to select an image (JPG, PNG, WebP)</span>
+            </div>
+            <div class="image-preview-box" id="add-preview-box" style="display: none;">
+              <img id="add-preview-img" src="" alt="Preview">
+              <button type="button" class="remove-preview-btn" onclick="clearImagePreview('acc-image', 'add-preview-img', 'add-preview-box')">Remove</button>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Description</label>
-            <textarea name="description" rows="2" required>{{ accessory.description }}</textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="acc-avail">Availability Status</label>
+          <select id="acc-avail" name="is_available">
+            <option value="True" selected>In Stock & Available</option>
+            <option value="False">Out of Stock</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary-custom full-width">
+          <i class="fas fa-plus"></i> Add Equipment
+        </button>
+      </form>
+    </div>
+
+    <!-- Right Column: Current Inventory -->
+    <div class="admin-card list-card">
+      <div class="card-head between">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="card-icon"><i class="fas fa-boxes"></i></div>
+          <div>
+            <h3>Current Inventory</h3>
+            <p>{{ accessories.count }} equipment items listed</p>
           </div>
-          <div class="form-group">
-            <label>Price</label>
-            <input type="number" name="price" step="0.01" min="0" value="{{ accessory.price }}" required>
-          </div>
-          <div class="form-group">
-            <label>Image</label>
-            <input type="file" name="image" accept="image/*">
-          </div>
-          <div class="form-group">
-            <label>Available?</label>
-            <select name="is_available">
-              <option value="True" {% if accessory.is_available %}selected{% endif %}>Yes</option>
-              <option value="False" {% if not accessory.is_available %}selected{% endif %}>No</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-success">Save Changes</button>
-          <button type="button" class="btn btn-cancel" onclick="toggleEditForm({{ accessory.id }})">Cancel</button>
-        </form>
+        </div>
+        <span class="inventory-count-pill">{{ accessories.count }} Items</span>
       </div>
-    {% endfor %}
+
+      {% if accessories %}
+        <div class="accessory-grid">
+          {% for item in accessories %}
+            <div class="item-tile" id="tile-{{ item.id }}">
+              <div class="tile-img-box">
+                <img src="{{ item.image_url }}" alt="{{ item.name }}" loading="lazy">
+                <span class="status-pill {% if item.is_available %}status-active{% else %}status-inactive{% endif %}">
+                  {% if item.is_available %}Available{% else %}Out of Stock{% endif %}
+                </span>
+              </div>
+
+              <div class="tile-content">
+                <div class="tile-header">
+                  <h4 class="tile-title">{{ item.name }}</h4>
+                  <span class="tile-price">${{ item.price }}</span>
+                </div>
+                <p class="tile-desc">{{ item.description|truncatewords:16 }}</p>
+
+                <div class="tile-actions">
+                  <button type="button" class="btn-action-edit" onclick="openEditModal({{ item.id }})">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                  <form method="post" style="display: inline-block; flex: 1;">
+                    {% csrf_token %}
+                    <input type="hidden" name="delete_accessory_id" value="{{ item.id }}">
+                    <button type="submit" class="btn-action-delete" onclick="return confirm('Are you sure you want to delete \'{{ item.name|escapejs }}\'?');">
+                      <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Inline / Modal Edit Form -->
+              <div class="edit-drawer" id="edit-drawer-{{ item.id }}" style="display: none;">
+                <div class="drawer-header">
+                  <h5>Edit "{{ item.name }}"</h5>
+                  <button type="button" class="drawer-close" onclick="closeEditModal({{ item.id }})">&times;</button>
+                </div>
+
+                <form method="post" enctype="multipart/form-data" class="modern-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="accessory_id" value="{{ item.id }}">
+
+                  <div class="form-field">
+                    <label>Name</label>
+                    <input type="text" name="name" value="{{ item.name }}" required>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Price (USD $)</label>
+                    <div class="input-with-prefix">
+                      <span class="currency-prefix">$</span>
+                      <input type="number" name="price" step="0.01" min="0" value="{{ item.price }}" required>
+                    </div>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Description</label>
+                    <textarea name="description" rows="3" required>{{ item.description }}</textarea>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Replace Image (Optional)</label>
+                    {% if item.image %}
+                      <div class="current-img-preview">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 4px;">
+                        <span>Current file uploaded</span>
+                      </div>
+                    {% endif %}
+                    <input type="file" name="image" accept="image/*">
+                  </div>
+
+                  <div class="form-field">
+                    <label>Availability</label>
+                    <select name="is_available">
+                      <option value="True" {% if item.is_available %}selected{% endif %}>In Stock & Available</option>
+                      <option value="False" {% if not item.is_available %}selected{% endif %}>Out of Stock</option>
+                    </select>
+                  </div>
+
+                  <div class="drawer-btn-row">
+                    <button type="submit" class="btn-primary-custom" style="flex: 1;">Save Changes</button>
+                    <button type="button" class="btn-secondary-custom" onclick="closeEditModal({{ item.id }})">Cancel</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-inventory">
+          <i class="fas fa-boxes"></i>
+          <h4>No Equipment Listed Yet</h4>
+          <p>Use the form on the left to add your first rabbit cage, accessory, or feeding system.</p>
+        </div>
+      {% endif %}
+    </div>
   </div>
-  <script>
-    function toggleEditForm(id) {
-      var form = document.getElementById('edit-form-' + id);
-      if (form.style.display === 'none') {
-        form.style.display = 'block';
-      } else {
-        form.style.display = 'none';
-      }
-    }
-  </script>
-{% endif %}
+</div>
+
+<script>
+function previewImage(input, previewId, boxId) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById(previewId).src = e.target.result;
+      document.getElementById(boxId).style.display = 'block';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function clearImagePreview(inputId, previewId, boxId) {
+  document.getElementById(inputId).value = '';
+  document.getElementById(previewId).src = '';
+  document.getElementById(boxId).style.display = 'none';
+}
+
+function openEditModal(id) {
+  const drawer = document.getElementById('edit-drawer-' + id);
+  if (drawer) {
+    drawer.style.display = 'block';
+    drawer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function closeEditModal(id) {
+  const drawer = document.getElementById('edit-drawer-' + id);
+  if (drawer) {
+    drawer.style.display = 'none';
+  }
+}
+</script>
 
 <style>
-.custom-accessory-form {
-  max-width: 500px;
+.accessory-admin-container {
+  max-width: 1300px;
   margin: 0 auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-  padding: 32px 28px 28px 28px;
+  padding: 10px;
+  font-family: inherit;
 }
-.custom-accessory-form .form-group {
-  margin-bottom: 18px;
+
+.admin-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
 }
-.custom-accessory-form label {
+
+.section-main-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1b4332;
+  margin: 0 0 6px 0;
+}
+
+.section-subtitle {
+  color: #666;
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-secondary-custom {
+  background: #f0f3f4;
+  color: #2c3e50;
+  border: 1px solid #d5dbdb;
+  padding: 9px 18px;
+  border-radius: 8px;
   font-weight: 600;
-  margin-bottom: 6px;
-  display: block;
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
 }
-.custom-accessory-form input,
-.custom-accessory-form textarea,
-.custom-accessory-form select {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #cfd8dc;
-  border-radius: 6px;
-  font-size: 1rem;
-  background: #f7f8f6;
-  outline: none;
-  transition: border 0.2s;
+.btn-secondary-custom:hover {
+  background: #e5e8e8;
+  color: #1b4332;
 }
-.custom-accessory-form input:focus,
-.custom-accessory-form textarea:focus,
-.custom-accessory-form select:focus {
+
+.btn-outline-custom {
+  background: transparent;
+  color: #2d6a4f;
   border: 1.5px solid #2d6a4f;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
 }
-.custom-accessory-form .btn-success {
+.btn-outline-custom:hover {
   background: #2d6a4f;
   color: #fff;
-  font-size: 1.08rem;
-  font-weight: bold;
-  padding: 13px 0;
-  border-radius: 6px;
-  border: none;
-  margin-top: 8px;
-  transition: background 0.2s;
-  cursor: pointer;
 }
-.custom-accessory-form .btn-success:hover {
-  background: #24513d;
+
+.messages-container {
+  margin-bottom: 20px;
 }
-.accessory-list {
-  max-width: 700px;
-  margin: 0 auto;
-}
-.accessory-item {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-  padding: 18px 22px;
-  margin-bottom: 28px;
-}
-.accessory-info {
+.alert-box {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
 }
-.accessory-thumb {
-  max-width: 80px;
-  max-height: 60px;
-  border-radius: 6px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+.alert-success {
+  background: #d8f3dc;
+  color: #1b4332;
+  border-left: 4px solid #2d6a4f;
 }
-.accessory-details {
-  flex: 1;
-  min-width: 0;
+.alert-error {
+  background: #ffe5d9;
+  color: #9d0208;
+  border-left: 4px solid #d90429;
 }
-.accessory-actions {
+.alert-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Grid Layout */
+.admin-grid-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.admin-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 26px;
+  border: 1px solid #edf2f4;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f2f5;
+}
+.card-head.between {
+  justify-content: space-between;
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  background: #e8f5e9;
+  color: #2d6a4f;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.card-head h3 {
+  margin: 0 0 3px 0;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+.card-head p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+
+.inventory-count-pill {
+  background: #e8f5e9;
+  color: #2d6a4f;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Modern Form */
+.modern-form .form-field {
+  margin-bottom: 18px;
+}
+.modern-form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #34495e;
+  margin-bottom: 6px;
+}
+.modern-form .req {
+  color: #e63946;
+}
+
+.modern-form input[type="text"],
+.modern-form input[type="number"],
+.modern-form textarea,
+.modern-form select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #dcdfe6;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  background: #fbfcfd;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+.modern-form input:focus,
+.modern-form textarea:focus,
+.modern-form select:focus {
+  border-color: #2d6a4f;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
+  outline: none;
+}
+
+.input-with-prefix {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.currency-prefix {
+  position: absolute;
+  left: 14px;
+  font-weight: 700;
+  color: #2d6a4f;
+  font-size: 1.05rem;
+  pointer-events: none;
+}
+.input-with-prefix input {
+  padding-left: 30px !important;
+}
+
+/* File Upload */
+.file-upload-wrapper {
+  position: relative;
+  border: 2px dashed #cfd8dc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  background: #fafbfc;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.file-upload-wrapper:hover {
+  border-color: #2d6a4f;
+}
+.file-upload-wrapper input[type="file"] {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.file-upload-placeholder i {
+  font-size: 2rem;
+  color: #2d6a4f;
+  display: block;
+  margin-bottom: 6px;
+}
+.file-upload-placeholder span {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+.image-preview-box {
+  margin-top: 10px;
+  position: relative;
+}
+.image-preview-box img {
+  max-width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.remove-preview-btn {
+  position: absolute;
+  top: 6px; right: 6px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.btn-primary-custom {
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.btn-primary-custom:hover {
+  background: #1b4332;
+  transform: translateY(-1px);
+}
+.btn-primary-custom.full-width {
+  width: 100%;
+}
+
+/* Inventory Tile Grid */
+.accessory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.item-tile {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+.item-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tile-img-box {
+  width: 100%;
+  height: 160px;
+  background: #f1f5f9;
+  position: relative;
+  overflow: hidden;
+}
+.tile-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-pill {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.status-active {
+  background: #2d6a4f;
+  color: #ffffff;
+}
+.status-inactive {
+  background: #e63946;
+  color: #ffffff;
+}
+
+.tile-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 8px;
+  margin-bottom: 8px;
 }
-.btn.btn-edit {
+.tile-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+.tile-price {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #2d6a4f;
+  white-space: nowrap;
+}
+
+.tile-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0 0 16px 0;
+  flex: 1;
+}
+
+.tile-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+.btn-action-edit {
+  flex: 1;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.btn-action-edit:hover {
   background: #2d6a4f;
   color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 7px 16px;
-  font-size: 0.95rem;
+  border-color: #2d6a4f;
+}
+
+.btn-action-delete {
+  width: 100%;
+  background: #fff;
+  color: #e63946;
+  border: 1px solid #fecdd3;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
   cursor: pointer;
-  margin-bottom: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
 }
-.btn.btn-edit:hover {
-  background: #24513d;
-}
-.btn.btn-cancel {
-  background: #b0bec5;
-  color: #333;
-  border: none;
-  border-radius: 4px;
-  padding: 7px 16px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  margin-left: 8px;
-}
-.badge-success {
-  background: #2d6a4f;
-  color: #fff;
-  border-radius: 4px;
-  padding: 2px 8px;
-  font-size: 0.85rem;
-}
-.badge-danger {
+.btn-action-delete:hover {
   background: #e63946;
   color: #fff;
-  border-radius: 4px;
-  padding: 2px 8px;
-  font-size: 0.85rem;
 }
-@media (max-width: 1000px) {
-  .accessory-list {
-    max-width: 100%;
-    padding: 0 8px;
-  }
-  .accessory-item {
-    padding: 12px 6px;
-    margin-bottom: 18px;
+
+/* Edit Drawer */
+.edit-drawer {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #ffffff;
+  z-index: 10;
+  padding: 16px;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #edf2f4;
+}
+.drawer-header h5 {
+  margin: 0;
+  font-size: 1rem;
+  color: #2d6a4f;
+}
+.drawer-close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #64748b;
+}
+.drawer-btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.current-img-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.empty-inventory {
+  text-align: center;
+  padding: 60px 20px;
+  color: #94a3b8;
+}
+.empty-inventory i {
+  font-size: 3.5rem;
+  margin-bottom: 14px;
+  display: block;
+}
+.empty-inventory h4 {
+  font-size: 1.2rem;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .admin-grid-layout {
+    grid-template-columns: 1fr;
   }
 }
-@media (max-width: 700px) {
-  .custom-accessory-form {
-    max-width: 100%;
-    padding: 18px 6px 18px 6px;
+
+@media (max-width: 600px) {
+  .accessory-admin-container {
+    padding: 4px;
   }
-  .accessory-list {
-    max-width: 100%;
-    padding: 0 2px;
+  .admin-card {
+    padding: 18px 14px;
   }
-  .accessory-item {
-    padding: 10px 4px;
-    margin-bottom: 18px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  .section-main-title {
+    font-size: 1.4rem;
   }
-  .accessory-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .accessory-thumb {
-    max-width: 100px;
-    max-height: 70px;
-    margin-bottom: 8px;
-  }
-  .accessory-details {
-    font-size: 0.98rem;
-    margin-bottom: 6px;
-  }
-  .accessory-actions {
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
-    width: 100%;
-  }
-  .accessory-actions .btn {
-    width: 100%;
-    margin-left: 0;
-  }
-  .accessory-edit-form {
-    padding: 12px 2px;
-  }
-  .accessory-edit-form .form-group {
-    margin-bottom: 10px;
-  }
-  .accessory-edit-form input,
-  .accessory-edit-form textarea,
-  .accessory-edit-form select {
-    font-size: 0.98rem;
-    padding: 7px 8px;
-  }
-  .accessory-edit-form .btn-success,
-  .accessory-edit-form .btn-cancel {
-    font-size: 0.98rem;
-    padding: 8px 0;
-    margin-top: 6px;
+  .accessory-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

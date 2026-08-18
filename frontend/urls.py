@@ -23,6 +23,7 @@ urlpatterns = [
     path('dashboard/branch/<int:branch_id>/menu/<int:item_id>/delete/', views.delete_menu_item, name='delete_menu_item'),
     path('dashboard/responses/', views.how_hear_responses, name='how_hear_responses'),
     path('dashboard/masterclass-schedule/', views.edit_masterclass_schedule, name='edit_masterclass_schedule'),
+    path('dashboard/masterclass-schedule/sessions/', views.masterclass_sessions_api, name='masterclass_sessions_api'),
     path('dashboard/masterclass-schedule/save/', views.save_masterclass_schedule, name='save_masterclass_schedule'),
     path('dashboard/add-accessory/', views.add_accessory, name='add_accessory'),
     

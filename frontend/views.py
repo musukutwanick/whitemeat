@@ -583,41 +583,100 @@ def how_hear_about_us(request):
 @staff_member_required
 def edit_masterclass_schedule(request):
     event = MasterclassEvent.objects.order_by('-id').first()
-    sessions = MasterclassSession.objects.filter(event=event) if event else []
+    if not event:
+        event = MasterclassEvent.objects.create(
+            title="Rabbitry Masterclass",
+            date_range="August 2025",
+            description="Pioneering Zimbabwe's white meat revolution. Join our comprehensive 2-day intensive program."
+        )
+    sessions = MasterclassSession.objects.filter(event=event).order_by('day', 'time')
+    
+    # Serialize sessions for front-end JS table
+    sessions_data = [
+        {
+            'id': s.id,
+            'day': s.day,
+            'time': s.time,
+            'title': s.title,
+            'description': s.description or '',
+        }
+        for s in sessions
+    ]
+    
     return render(request, 'admin/edit_masterclass_schedule.html', {
         'event': event,
         'sessions': sessions,
+        'sessions_json': json.dumps(sessions_data),
+    })
+
+def masterclass_sessions_api(request):
+    """API endpoint to get masterclass sessions JSON"""
+    event = MasterclassEvent.objects.order_by('-id').first()
+    if not event:
+        return JsonResponse({'event': None, 'sessions': []})
+    sessions = MasterclassSession.objects.filter(event=event).order_by('day', 'time')
+    sessions_data = [
+        {
+            'id': s.id,
+            'day': s.day,
+            'time': s.time,
+            'title': s.title,
+            'description': s.description or '',
+        }
+        for s in sessions
+    ]
+    return JsonResponse({
+        'event': {
+            'title': event.title,
+            'date_range': event.date_range,
+            'description': event.description,
+        },
+        'sessions': sessions_data
     })
 
 @csrf_exempt
 @staff_member_required
 def save_masterclass_schedule(request):
     if request.method == 'POST':
-        import json
-        data = json.loads(request.body)
-        event = MasterclassEvent.objects.order_by('-id').first()
-        if not event:
-            return JsonResponse({'success': False, 'error': 'No event found.'}, status=400)
-        # Save event info if requested
-        if data.get('save_event'):
-            event.title = data.get('event_title', event.title)
-            event.date_range = data.get('event_date', event.date_range)
-            event.save()
-            return JsonResponse({'success': True})
-        # Remove all existing sessions for this event
-        MasterclassSession.objects.filter(event=event).delete()
-        # Add new sessions
-        sessions = data.get('sessions', [])
-        for s in sessions:
-            MasterclassSession.objects.create(
-                event=event,
-                day=int(s.get('day', 1)),
-                time=s.get('time', ''),
-                title=s.get('title', ''),
-                description=s.get('description', ''),
-            )
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+        try:
+            data = json.loads(request.body)
+            event = MasterclassEvent.objects.order_by('-id').first()
+            if not event:
+                event = MasterclassEvent.objects.create(
+                    title=data.get('event_title', 'Rabbitry Masterclass'),
+                    date_range=data.get('event_date', 'August 2025'),
+                    description=data.get('description', '')
+                )
+            
+            # Save event info if requested
+            if data.get('save_event'):
+                event.title = data.get('event_title', event.title).strip()
+                event.date_range = data.get('event_date', event.date_range).strip()
+                if 'description' in data:
+                    event.description = data.get('description', '').strip()
+                event.save()
+                return JsonResponse({'success': True, 'message': 'Event details updated!'})
+            
+            # Remove all existing sessions and replace with updated ones
+            MasterclassSession.objects.filter(event=event).delete()
+            sessions = data.get('sessions', [])
+            for s in sessions:
+                title = (s.get('title') or '').strip()
+                time_str = (s.get('time') or '').strip()
+                if title:  # Only save rows that have a title
+                    MasterclassSession.objects.create(
+                        event=event,
+                        day=int(s.get('day', 1)),
+                        time=time_str,
+                        title=title,
+                        description=(s.get('description') or '').strip(),
+                    )
+            return JsonResponse({'success': True, 'message': 'Schedule saved successfully!'})
+        except Exception as e:
+            logger.exception("Error saving masterclass schedule")
+            return JsonResponse({'success': False, 'error': str(e)}, status=500)
+            
+    return JsonResponse({'success': False, 'error': 'Invalid request method.'}, status=405)
 
 def health_check(request):
     return HttpResponse("OK")

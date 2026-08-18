@@ -361,8 +361,10 @@
         return;
       }
 
-      // Create WhatsApp message
-      let message = `Hi! I'm interested in booking the Rabbit Farming Masterclass for August 2025.\n\n`;
+      // Create WhatsApp message dynamically
+      const eventTitle = "{{ event.title|default:'Rabbit Farming Masterclass'|escapejs }}";
+      const eventDates = "{{ event.date_range|default:'Upcoming Dates'|escapejs }}";
+      let message = `Hi! I'm interested in booking the ${eventTitle}.\n\n`;
       message += `📋 MY DETAILS:\n`;
       message += `• Name: ${name}\n`;
       message += `• Email: ${email}\n`;
@@ -378,7 +380,7 @@
       }
       
       message += `\n💰 Course Fee: $140\n`;
-      message += `📅 Dates: August 2nd & 3rd, 2025\n\n`;
+      message += `📅 Dates: ${eventDates}\n\n`;
       message += `Please confirm my booking and send payment details. Thank you!`;
 
       // Encode message for URL
