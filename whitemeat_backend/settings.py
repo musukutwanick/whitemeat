@@ -25,18 +25,29 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
-raw_allowed_hosts = os.environ.get(
-    "ALLOWED_HOSTS",
-    "whitemeatcompany.com,www.whitemeatcompany.com,localhost,127.0.0.1,.onrender.com,*"
-)
-ALLOWED_HOSTS = [h.strip() for h in raw_allowed_hosts.split(",") if h.strip()]
+# Allowed Hosts: ensure domain and subdomains are always allowed, combined with env var
+default_hosts = [
+    "whitemeatcompany.com",
+    "www.whitemeatcompany.com",
+    ".whitemeatcompany.com",
+    ".onrender.com",
+    "localhost",
+    "127.0.0.1",
+    "*",
+]
+env_hosts = [h.strip() for h in os.environ.get("ALLOWED_HOSTS", "").split(",") if h.strip()]
+ALLOWED_HOSTS = list(dict.fromkeys(default_hosts + env_hosts))
 
 # Trusted origins for CSRF protection over HTTPS
-raw_csrf_trusted = os.environ.get(
-    "CSRF_TRUSTED_ORIGINS",
-    "https://whitemeatcompany.com,https://www.whitemeatcompany.com,https://*.onrender.com,http://localhost:8000,http://127.0.0.1:8000"
-)
-CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_csrf_trusted.split(",") if origin.strip()]
+default_csrf = [
+    "https://whitemeatcompany.com",
+    "https://www.whitemeatcompany.com",
+    "https://*.onrender.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+env_csrf = [origin.strip() for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if origin.strip()]
+CSRF_TRUSTED_ORIGINS = list(dict.fromkeys(default_csrf + env_csrf))
 
 # Tell Django to trust the X-Forwarded-Proto header from Render's reverse proxy
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
