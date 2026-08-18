@@ -622,25 +622,6 @@
   </script>
 
 
+  <script src="{% static 'js/navbar.js' %}"></script>
 </body>
-
-<script>
-  // Navbar hamburger toggle for mobile
-  document.addEventListener('DOMContentLoaded', function () {
-    var hamburger = document.getElementById('navbar-hamburger');
-    var navLinks = document.getElementById('nav-links');
-    if (hamburger && navLinks) {
-      hamburger.addEventListener('click', function () {
-        navLinks.classList.toggle('open');
-      });
-      // Hide nav links when resizing to tablet/desktop
-      window.addEventListener('resize', function () {
-        if (window.innerWidth > 768) {
-          navLinks.classList.remove('open');
-        }
-      });
-    }
-  });
-</script>
-
 </html>
