@@ -1,26 +1,56 @@
-/* Hamburger Navigation Toggle */
+/* =========================================================
+   HAMBURGER NAVIGATION — full control via media queries
+   ========================================================= */
 .navbar-hamburger {
-  display: none;
-  background: transparent;
-  border: none;
+  /* Hidden on desktop — shown ONLY via media query below */
+  display: none !important;
+  background: transparent !important;
+  border: none !important;
   cursor: pointer;
-  padding: 8px;
+  padding: 10px;
   margin-left: auto;
   z-index: 10002;
-  width: 44px;
-  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 .navbar-hamburger span {
-  display: block;
-  width: 26px;
+  display: block !important;
+  width: 28px;
   height: 3px;
   background: #2d6a4f;
   border-radius: 3px;
+  pointer-events: none;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, background-color 0.3s ease;
+}
+
+/* =========================================================
+   UNIFORM MENU CARD IMAGES
+   ========================================================= */
+/* Rabbithole-style full-card images */
+.menu-card-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Pagomo list-style row images */
+.menu-row-img {
+  width: 85px !important;
+  height: 85px !important;
+  min-width: 85px !important;
+  min-height: 85px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: 8px !important;
+  flex-shrink: 0 !important;
 }
 * {
   margin: 0;
@@ -3112,43 +3142,43 @@ h1 {
    ======================================================== */
 @media (max-width: 992px) {
   .navbar {
-    padding: 0 18px !important;
+    padding: 0 16px !important;
     height: 60px !important;
+    z-index: 1000 !important;
   }
 
+  /* Show the hamburger button */
   .navbar-hamburger {
     display: flex !important;
     position: relative !important;
     z-index: 10002 !important;
+    margin-left: auto !important;
   }
 
-  /* When open or active, animate to X icon */
-  .navbar-hamburger.active span:nth-child(1),
-  .navbar:has(.nav-links.open) .navbar-hamburger span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg) !important;
+  /* Hide desktop nav links */
+  .nav-links {
+    display: none !important;
+    visibility: hidden;
+  }
+
+  /* When open or active, animate hamburger bars to X */
+  .navbar-hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg) !important;
     background: #ffffff !important;
   }
-  
-  .navbar-hamburger.active span:nth-child(2),
-  .navbar:has(.nav-links.open) .navbar-hamburger span:nth-child(2) {
+  .navbar-hamburger.active span:nth-child(2) {
     opacity: 0 !important;
     transform: scaleX(0) !important;
   }
-  
-  .navbar-hamburger.active span:nth-child(3),
-  .navbar:has(.nav-links.open) .navbar-hamburger span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg) !important;
+  .navbar-hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg) !important;
     background: #ffffff !important;
   }
 
-  /* Desktop nav hidden by default on mobile */
-  .nav-links {
-    display: none !important;
-  }
-
-  /* Full Screen Overlay */
+  /* Full Screen Mobile Menu Overlay */
   .nav-links.open {
     display: flex !important;
+    visibility: visible !important;
     flex-direction: column !important;
     position: fixed !important;
     top: 0 !important;
@@ -3159,46 +3189,47 @@ h1 {
     height: 100vh !important;
     height: 100dvh !important;
     background: radial-gradient(circle at center, #1b4332 0%, #081c15 100%) !important;
-    backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(20px) !important;
     justify-content: center !important;
     align-items: center !important;
     gap: 22px !important;
-    z-index: 10000 !important;
-    padding: 60px 20px 40px !important;
+    z-index: 10001 !important;
+    padding: 80px 20px 40px !important;
     margin: 0 !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    animation: fadeInMobileNav 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    list-style: none !important;
+    animation: fadeInMobileNav 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
   }
 
   .nav-links.open li {
     width: 100% !important;
-    max-width: 320px !important;
+    max-width: 340px !important;
     text-align: center !important;
     flex: none !important;
+    list-style: none !important;
     opacity: 0;
     transform: translateY(20px);
     animation: slideUpMobileLink 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
   }
 
   .nav-links.open li:nth-child(1) { animation-delay: 0.05s !important; }
-  .nav-links.open li:nth-child(2) { animation-delay: 0.1s !important; }
+  .nav-links.open li:nth-child(2) { animation-delay: 0.10s !important; }
   .nav-links.open li:nth-child(3) { animation-delay: 0.15s !important; }
-  .nav-links.open li:nth-child(4) { animation-delay: 0.2s !important; }
+  .nav-links.open li:nth-child(4) { animation-delay: 0.20s !important; }
   .nav-links.open li:nth-child(5) { animation-delay: 0.25s !important; }
-  .nav-links.open li:nth-child(6) { animation-delay: 0.3s !important; }
+  .nav-links.open li:nth-child(6) { animation-delay: 0.30s !important; }
 
   .nav-links.open li a {
     display: block !important;
-    font-size: 1.45rem !important;
+    font-size: 1.5rem !important;
     color: #ffffff !important;
     font-weight: 700 !important;
-    padding: 12px 20px !important;
+    padding: 14px 24px !important;
     letter-spacing: 0.8px !important;
     text-transform: uppercase !important;
-    white-space: nowrap !important;
     border-radius: 12px !important;
     text-decoration: none !important;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -3208,7 +3239,7 @@ h1 {
   .nav-links.open li a:active,
   .nav-links.open li a.active {
     color: #95d5b2 !important;
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
     transform: scale(1.05) !important;
     text-shadow: 0 0 15px rgba(149, 213, 178, 0.6) !important;
   }
@@ -3218,18 +3249,23 @@ h1 {
   }
 }
 
+/* Desktop: hamburger hidden, nav links shown inline */
 @media (min-width: 993px) {
   .navbar-hamburger {
     display: none !important;
   }
   .nav-links {
     display: flex !important;
-    position: static;
-    background: none;
-    box-shadow: none;
-    flex-direction: row;
-    min-width: unset;
-    padding: 0;
+    visibility: visible !important;
+    position: static !important;
+    background: none !important;
+    box-shadow: none !important;
+    flex-direction: row !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    width: auto !important;
+    animation: none !important;
   }
 }
 

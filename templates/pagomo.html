@@ -90,10 +90,10 @@
       <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
     </div>
 
-<button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu" style="background:none; border:none; cursor:pointer; padding:8px; margin-left:auto;">
-      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
-      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
-      <span style="display:block; width:28px; height:3px; background:#2d6a4f; margin:6px 0; border-radius:2px;"></span>
+<button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
     <ul class="nav-links" id="nav-links">
@@ -142,7 +142,7 @@
             {% for item in menu_items %}
             <!-- {{ item.name }} -->
             <div class="menu-item pagomo-menu-item" data-category="{{ item.category.slug }}" style="display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid #eee;">
-              <img src="{{ item.image_url }}" alt="{{ item.name }}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">
+              <img src="{{ item.image_url }}" alt="{{ item.name }}" class="menu-row-img">
               <div style="flex: 1; min-width: 0;">
                 <h4 style="font-size: 1.1rem; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">{{ item.name }}</h4>
                 <p style="color: #666; font-size: 0.9rem; margin: 0 0 10px 0;">{{ item.description }}</p>
