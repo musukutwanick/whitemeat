@@ -32,13 +32,13 @@ branches_data = [
 
 # Create Menu Categories
 categories_data = [
-    {'name': 'Starters', 'slug': 'starters', 'description': 'Appetizers and light bites', 'order': 1},
-    {'name': 'Mains', 'slug': 'goch-goch', 'description': 'Main course dishes', 'order': 2},
-    {'name': 'Stews', 'slug': 'stews', 'description': 'Traditional stews and hearty dishes', 'order': 3},
-    {'name': 'Breakfast', 'slug': 'breakfast', 'description': 'Morning breakfast options', 'order': 4},
-    {'name': 'Desserts', 'slug': 'desserts', 'description': 'Sweet treats and desserts', 'order': 5},
+    {'name': 'Grills', 'slug': 'grills', 'description': 'Flame grilled rabbit, chicken, fish & meats', 'order': 1},
+    {'name': 'Stews', 'slug': 'stews', 'description': 'Hearty traditional stews & curries', 'order': 2},
+    {'name': 'Sides', 'slug': 'sides', 'description': 'Rice, sadza, salads, fries & traditional starches', 'order': 3},
+    {'name': 'Snacks', 'slug': 'snacks', 'description': 'Samoosas & quick bites', 'order': 4},
+    {'name': 'Starters', 'slug': 'starters', 'description': 'Appetizers and light bites', 'order': 5},
     {'name': 'Drinks', 'slug': 'drinks', 'description': 'Beverages and refreshments', 'order': 6},
-    {'name': 'Starches', 'slug': 'starch', 'description': 'Rice, sadza, and other starches', 'order': 7},
+    {'name': 'Desserts', 'slug': 'desserts', 'description': 'Sweet treats and desserts', 'order': 7},
 ]
 
 print("Creating restaurant branches...")

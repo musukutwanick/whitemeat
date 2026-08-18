@@ -93,56 +93,63 @@ def breeding(request):
 
 def rabbithole(request):
     """Serve the rabbit hole restaurant page with dynamic menu items"""
-    try:
-        # Get the Pagomo branch (since rabbithole.html shows menu from Pagomo branch)
-        branch = RestaurantBranch.objects.get(slug='rabbit-hole-pagomo', is_active=True)
-        # Get all available menu items for this branch, ordered by category
+    # Look for Pagomo branch or any active branch
+    branch = RestaurantBranch.objects.filter(slug__in=['rabbit-hole-pagomo', 'pagomo'], is_active=True).first()
+    if not branch:
+        branch = RestaurantBranch.objects.filter(is_active=True).first()
+    
+    if branch:
         menu_items = MenuItem.objects.filter(
             branch=branch, 
             is_available=True
         ).select_related('category').order_by('category__order', 'name')
-        # Get all categories to display filter buttons
-        categories = MenuCategory.objects.all().order_by('order')
-        context = {
-            'branch': branch,
-            'menu_items': menu_items,
-            'categories': categories,
-        }
-    except RestaurantBranch.DoesNotExist:
-        context = {
-            'branch': None,
-            'menu_items': [],
-            'categories': MenuCategory.objects.all().order_by('order'),
-        }
+    else:
+        menu_items = MenuItem.objects.filter(
+            is_available=True
+        ).select_related('category').order_by('category__order', 'name')
+
+    # If the specific branch has no items, fallback to any available menu items
+    if not menu_items.exists():
+        menu_items = MenuItem.objects.filter(
+            is_available=True
+        ).select_related('category').order_by('category__order', 'name')
+
+    categories = MenuCategory.objects.all().order_by('order')
+    context = {
+        'branch': branch,
+        'menu_items': menu_items,
+        'categories': categories,
+    }
     return render(request, 'rabbithole.html', context)
 
 def pagomo(request):
     """Serve the pagomo branch page with dynamic menu items"""
-    try:
-        # Get the Pagomo branch (using the actual slug from database)
-        branch = RestaurantBranch.objects.get(slug='rabbit-hole-pagomo', is_active=True)
-        # Get all available menu items for this branch, ordered by category
+    branch = RestaurantBranch.objects.filter(slug__in=['rabbit-hole-pagomo', 'pagomo'], is_active=True).first()
+    if not branch:
+        branch = RestaurantBranch.objects.filter(is_active=True).first()
+    
+    if branch:
         menu_items = MenuItem.objects.filter(
             branch=branch, 
             is_available=True
         ).select_related('category').order_by('category__order', 'name')
-        # Get all categories to display filter buttons
-        categories = MenuCategory.objects.all().order_by('order')
-        
-        context = {
-            'branch': branch,
-            'menu_items': menu_items,
-            'categories': categories,
-        }
-        return render(request, 'pagomo.html', context)
-    except RestaurantBranch.DoesNotExist:
-        # If Pagomo branch doesn't exist, render with empty data
-        context = {
-            'branch': None,
-            'menu_items': [],
-            'categories': MenuCategory.objects.all().order_by('order'),
-        }
-        return render(request, 'pagomo.html', context)
+    else:
+        menu_items = MenuItem.objects.filter(
+            is_available=True
+        ).select_related('category').order_by('category__order', 'name')
+    
+    if not menu_items.exists():
+        menu_items = MenuItem.objects.filter(
+            is_available=True
+        ).select_related('category').order_by('category__order', 'name')
+
+    categories = MenuCategory.objects.all().order_by('order')
+    context = {
+        'branch': branch,
+        'menu_items': menu_items,
+        'categories': categories,
+    }
+    return render(request, 'pagomo.html', context)
 
 def debug_static(request):
     """Debug view to test static file loading"""
@@ -230,10 +237,21 @@ def branch_menu_items(request, branch_id):
     menu_items = MenuItem.objects.filter(branch=branch).select_related('category').order_by('category__order', 'name')
     categories = MenuCategory.objects.all().order_by('order')
     
+    # Calculate category item counts specific to this branch
+    categories_with_counts = []
+    for cat in categories:
+        cat_count = menu_items.filter(category=cat).count()
+        categories_with_counts.append({
+            'name': cat.name,
+            'slug': cat.slug,
+            'count': cat_count,
+        })
+    
     context = {
         'branch': branch,
         'menu_items': menu_items,
         'categories': categories,
+        'categories_with_counts': categories_with_counts,
     }
     return render(request, 'admin/branch_menu_items.html', context)
 
@@ -245,23 +263,32 @@ def add_menu_item(request, branch_id):
     
     if request.method == 'POST':
         try:
-            menu_item = MenuItem.objects.create(
-                branch=branch,
-                name=request.POST.get('name'),
-                description=request.POST.get('description'),
-                price=request.POST.get('price'),
-                category_id=request.POST.get('category'),
-                image=request.FILES.get('image') if 'image' in request.FILES else None,
-                ingredients=request.POST.get('ingredients', ''),
-                allergens=request.POST.get('allergens', ''),
-                preparation_time=request.POST.get('preparation_time') or None,
-                calories=request.POST.get('calories') or None,
-                is_available=request.POST.get('is_available') == 'on',
-                is_featured=request.POST.get('is_featured') == 'on',
-            )
-            messages.success(request, f'Menu item "{menu_item.name}" added successfully!')
-            return redirect('branch_menu_items', branch_id=branch.id)
+            name = request.POST.get('name', '').strip()
+            price = request.POST.get('price', '').strip()
+            description = request.POST.get('description', '').strip()
+            category_id = request.POST.get('category')
+            
+            if not name or not price or not category_id:
+                messages.error(request, 'Please fill in all required fields.')
+            else:
+                menu_item = MenuItem.objects.create(
+                    branch=branch,
+                    name=name,
+                    description=description,
+                    price=price,
+                    category_id=category_id,
+                    image=request.FILES.get('image') if 'image' in request.FILES else None,
+                    ingredients=request.POST.get('ingredients', '').strip(),
+                    allergens=request.POST.get('allergens', '').strip(),
+                    preparation_time=request.POST.get('preparation_time') or None,
+                    calories=request.POST.get('calories') or None,
+                    is_available=request.POST.get('is_available') == 'on' or 'is_available' in request.POST,
+                    is_featured=request.POST.get('is_featured') == 'on',
+                )
+                messages.success(request, f'Menu item "{menu_item.name}" added successfully!')
+                return redirect('branch_menu_items', branch_id=branch.id)
         except Exception as e:
+            logger.exception("Error adding menu item")
             messages.error(request, f'Error adding menu item: {str(e)}')
     
     context = {
@@ -279,15 +306,15 @@ def edit_menu_item(request, branch_id, item_id):
     
     if request.method == 'POST':
         try:
-            menu_item.name = request.POST.get('name')
-            menu_item.description = request.POST.get('description')
-            menu_item.price = request.POST.get('price')
+            menu_item.name = request.POST.get('name', '').strip()
+            menu_item.description = request.POST.get('description', '').strip()
+            menu_item.price = request.POST.get('price', '').strip()
             menu_item.category_id = request.POST.get('category')
-            menu_item.ingredients = request.POST.get('ingredients', '')
-            menu_item.allergens = request.POST.get('allergens', '')
+            menu_item.ingredients = request.POST.get('ingredients', '').strip()
+            menu_item.allergens = request.POST.get('allergens', '').strip()
             menu_item.preparation_time = request.POST.get('preparation_time') or None
             menu_item.calories = request.POST.get('calories') or None
-            menu_item.is_available = request.POST.get('is_available') == 'on'
+            menu_item.is_available=request.POST.get('is_available') == 'on'
             menu_item.is_featured = request.POST.get('is_featured') == 'on'
             
             if 'image' in request.FILES:
@@ -297,6 +324,7 @@ def edit_menu_item(request, branch_id, item_id):
             messages.success(request, f'Menu item "{menu_item.name}" updated successfully!')
             return redirect('branch_menu_items', branch_id=branch.id)
         except Exception as e:
+            logger.exception("Error updating menu item")
             messages.error(request, f'Error updating menu item: {str(e)}')
     
     context = {
