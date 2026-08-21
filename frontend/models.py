@@ -8,7 +8,7 @@ class Accessory(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    image = models.ImageField(upload_to='accessory_images/', blank=True, null=True, help_text="Upload accessory image")
+    image = models.ImageField(upload_to='equipment/', blank=True, null=True, help_text="Upload accessory image")
     is_available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -22,7 +22,10 @@ class Accessory(models.Model):
     @property
     def image_url(self):
         if self.image:
-            return self.image.url
+            try:
+                return self.image.url
+            except Exception:
+                pass
         return '/static/images/default-accessory.jpg'
 
 class MasterclassEvent(models.Model):
@@ -82,8 +85,8 @@ class MenuItem(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.ForeignKey(MenuCategory, on_delete=models.CASCADE)
-    # Updated to support actual file uploads
-    image = models.ImageField(upload_to='menu_images/', blank=True, null=True, help_text="Upload menu item image")
+    # Updated to support actual file uploads to Supabase menu/ folder
+    image = models.ImageField(upload_to='menu/', blank=True, null=True, help_text="Upload menu item image")
     # Keep old field for backward compatibility
     image_filename = models.CharField(max_length=200, blank=True, help_text="Alternative: Image filename in static/images/")
     is_available = models.BooleanField(default=True)
@@ -105,7 +108,10 @@ class MenuItem(models.Model):
     @property
     def image_url(self):
         if self.image:
-            return self.image.url
+            try:
+                return self.image.url
+            except Exception:
+                pass
         elif self.image_filename:
             return f'/static/images/{self.image_filename}'
         return '/static/images/default-menu-item.jpg'

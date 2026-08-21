@@ -187,6 +187,21 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Supabase Storage Configuration
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+SUPABASE_BUCKET_NAME = os.environ.get("SUPABASE_BUCKET_NAME", "website-images")
+
+STORAGES = {
+    "default": {
+        "BACKEND": "whitemeat_backend.supabase_storage.SupabaseMediaStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+DEFAULT_FILE_STORAGE = "whitemeat_backend.supabase_storage.SupabaseMediaStorage"
+
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
     "https://whitemeatcompany.com",
