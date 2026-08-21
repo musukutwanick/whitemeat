@@ -1,0 +1,537 @@
+{
+  "run_time": "20260821_131632",
+  "dry_run": true,
+  "results": [
+    {
+      "id": 3,
+      "type": "Equipment",
+      "name": "Hay",
+      "old_path": "accessory_images/hay.jpeg",
+      "new_path": "equipment/dbe6821c_hay.jpeg",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/equipment/dbe6821c_hay.jpeg",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": 4,
+      "type": "Equipment",
+      "name": "Pellets",
+      "old_path": "accessory_images/Small_Pet_Select_Timothy_Based_Pellets_Rabbit_Food_10-lb_box.jpeg",
+      "new_path": "equipment/ab93203d_Small_Pet_Select_Timothy_Based_Pellets_Rabbit_Food_10-lb_box.jpeg",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/equipment/ab93203d_Small_Pet_Select_Timothy_Based_Pellets_Rabbit_Food_10-lb_box.jpeg",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": 5,
+      "type": "Equipment",
+      "name": "Nesting boxes",
+      "old_path": "accessory_images/nesting.jpeg",
+      "new_path": "equipment/aa5bdd4a_nesting.jpeg",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/equipment/aa5bdd4a_nesting.jpeg",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": 6,
+      "type": "Equipment",
+      "name": "Collection bottle",
+      "old_path": "accessory_images/collection.jpeg",
+      "new_path": "equipment/0e77fd22_collection.jpeg",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/equipment/0e77fd22_collection.jpeg",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": 19,
+      "type": "Menu",
+      "name": "Full Rabbit (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 20,
+      "type": "Menu",
+      "name": "Half Rabbit (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 21,
+      "type": "Menu",
+      "name": "Bream (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 22,
+      "type": "Menu",
+      "name": "Full chicken (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 23,
+      "type": "Menu",
+      "name": "Country style (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 24,
+      "type": "Menu",
+      "name": "Pork chop (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 25,
+      "type": "Menu",
+      "name": "Grilled Lamb (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 26,
+      "type": "Menu",
+      "name": "Rabbit curry (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 27,
+      "type": "Menu",
+      "name": "Knuckle bones (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 28,
+      "type": "Menu",
+      "name": "Maguru (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 29,
+      "type": "Menu",
+      "name": "Oxtail (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 30,
+      "type": "Menu",
+      "name": "Beef stew (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 31,
+      "type": "Menu",
+      "name": "Roadrunner (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 32,
+      "type": "Menu",
+      "name": "Haifiridzi (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 33,
+      "type": "Menu",
+      "name": "Stewed Lamb (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 34,
+      "type": "Menu",
+      "name": "Zviyo (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 35,
+      "type": "Menu",
+      "name": "Mhunga (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 36,
+      "type": "Menu",
+      "name": "Mapfunde (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 37,
+      "type": "Menu",
+      "name": "Rice dovi (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 38,
+      "type": "Menu",
+      "name": "Fries / chips (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 39,
+      "type": "Menu",
+      "name": "Plain rice (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 40,
+      "type": "Menu",
+      "name": "Braai salad (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 41,
+      "type": "Menu",
+      "name": "Mugaiwa (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 42,
+      "type": "Menu",
+      "name": "Samoosas (rabbit / beef) (Rabbit Hole - Main Branch)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 43,
+      "type": "Menu",
+      "name": "Full Rabbit (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 44,
+      "type": "Menu",
+      "name": "Half Rabbit (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 45,
+      "type": "Menu",
+      "name": "Bream (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 46,
+      "type": "Menu",
+      "name": "Full chicken (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 47,
+      "type": "Menu",
+      "name": "Country style (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 48,
+      "type": "Menu",
+      "name": "Pork chop (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 49,
+      "type": "Menu",
+      "name": "Grilled Lamb (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 50,
+      "type": "Menu",
+      "name": "Rabbit curry (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 51,
+      "type": "Menu",
+      "name": "Knuckle bones (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 52,
+      "type": "Menu",
+      "name": "Maguru (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 53,
+      "type": "Menu",
+      "name": "Oxtail (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 54,
+      "type": "Menu",
+      "name": "Beef stew (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 55,
+      "type": "Menu",
+      "name": "Roadrunner (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 56,
+      "type": "Menu",
+      "name": "Haifiridzi (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 57,
+      "type": "Menu",
+      "name": "Stewed Lamb (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 58,
+      "type": "Menu",
+      "name": "Zviyo (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 59,
+      "type": "Menu",
+      "name": "Mhunga (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 60,
+      "type": "Menu",
+      "name": "Mapfunde (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 61,
+      "type": "Menu",
+      "name": "Rice dovi (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 62,
+      "type": "Menu",
+      "name": "Fries / chips (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 63,
+      "type": "Menu",
+      "name": "Plain rice (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 64,
+      "type": "Menu",
+      "name": "Braai salad (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 65,
+      "type": "Menu",
+      "name": "Mugaiwa (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": 66,
+      "type": "Menu",
+      "name": "Samoosas (rabbit / beef) (Rabbit Hole - PaGomo)",
+      "old_path": "",
+      "new_path": "",
+      "new_url": "",
+      "status": "EMPTY (no image in DB)"
+    },
+    {
+      "id": "orphan",
+      "type": "Orphan/equipment",
+      "name": "2025_07_19_16_20_IMG_9564.JPG",
+      "old_path": "accessory_images/2025_07_19_16_20_IMG_9564.JPG",
+      "new_path": "equipment/7ff15187_2025_07_19_16_20_IMG_9564.JPG",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/equipment/7ff15187_2025_07_19_16_20_IMG_9564.JPG",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": "orphan",
+      "type": "Orphan/equipment",
+      "name": "fees.png",
+      "old_path": "accessory_images/fees.png",
+      "new_path": "equipment/ed0fdade_fees.png",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/equipment/ed0fdade_fees.png",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": "orphan",
+      "type": "Orphan/equipment",
+      "name": "school_id.jpg",
+      "old_path": "accessory_images/school_id.jpg",
+      "new_path": "equipment/af05c855_school_id.jpg",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/equipment/af05c855_school_id.jpg",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": "orphan",
+      "type": "Orphan/menu",
+      "name": "breakfast1.jpg",
+      "old_path": "menu_images/breakfast1.jpg",
+      "new_path": "menu/5c42e176_breakfast1.jpg",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/menu/5c42e176_breakfast1.jpg",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": "orphan",
+      "type": "Orphan/menu",
+      "name": "breakfast3.jpg",
+      "old_path": "menu_images/breakfast3.jpg",
+      "new_path": "menu/24064ba9_breakfast3.jpg",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/menu/24064ba9_breakfast3.jpg",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": "orphan",
+      "type": "Orphan/menu",
+      "name": "fees.png",
+      "old_path": "menu_images/fees.png",
+      "new_path": "menu/abdffe52_fees.png",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/menu/abdffe52_fees.png",
+      "status": "DRY_RUN"
+    },
+    {
+      "id": "orphan",
+      "type": "Orphan/menu",
+      "name": "lunch2.jpg",
+      "old_path": "menu_images/lunch2.jpg",
+      "new_path": "menu/521d0f76_lunch2.jpg",
+      "new_url": "https://testproject.supabase.co/storage/v1/object/public/website-images/menu/521d0f76_lunch2.jpg",
+      "status": "DRY_RUN"
+    }
+  ]
+}

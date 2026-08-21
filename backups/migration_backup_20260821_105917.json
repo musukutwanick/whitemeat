@@ -1,0 +1,417 @@
+{
+  "backup_time_utc": "20260821_105917",
+  "equipment": [
+    {
+      "id": 3,
+      "name": "Hay",
+      "image_field": "accessory_images/hay.jpeg",
+      "price": "5.00",
+      "is_available": true
+    },
+    {
+      "id": 4,
+      "name": "Pellets",
+      "image_field": "accessory_images/Small_Pet_Select_Timothy_Based_Pellets_Rabbit_Food_10-lb_box.jpeg",
+      "price": "12.00",
+      "is_available": true
+    },
+    {
+      "id": 5,
+      "name": "Nesting boxes",
+      "image_field": "accessory_images/nesting.jpeg",
+      "price": "10.00",
+      "is_available": true
+    },
+    {
+      "id": 6,
+      "name": "Collection bottle",
+      "image_field": "accessory_images/collection.jpeg",
+      "price": "7.00",
+      "is_available": true
+    }
+  ],
+  "menu_items": [
+    {
+      "id": 19,
+      "name": "Full Rabbit",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 20,
+      "name": "Half Rabbit",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 21,
+      "name": "Bream",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 22,
+      "name": "Full chicken",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 23,
+      "name": "Country style",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 24,
+      "name": "Pork chop",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 25,
+      "name": "Grilled Lamb",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 26,
+      "name": "Rabbit curry",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 27,
+      "name": "Knuckle bones",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 28,
+      "name": "Maguru",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 29,
+      "name": "Oxtail",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 30,
+      "name": "Beef stew",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 31,
+      "name": "Roadrunner",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 32,
+      "name": "Haifiridzi",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 33,
+      "name": "Stewed Lamb",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 34,
+      "name": "Zviyo",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 35,
+      "name": "Mhunga",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 36,
+      "name": "Mapfunde",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 37,
+      "name": "Rice dovi",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 38,
+      "name": "Fries / chips",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 39,
+      "name": "Plain rice",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 40,
+      "name": "Braai salad",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 41,
+      "name": "Mugaiwa",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 42,
+      "name": "Samoosas (rabbit / beef)",
+      "branch": "Rabbit Hole - Main Branch",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 43,
+      "name": "Full Rabbit",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 44,
+      "name": "Half Rabbit",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 45,
+      "name": "Bream",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 46,
+      "name": "Full chicken",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 47,
+      "name": "Country style",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 48,
+      "name": "Pork chop",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 49,
+      "name": "Grilled Lamb",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 50,
+      "name": "Rabbit curry",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 51,
+      "name": "Knuckle bones",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 52,
+      "name": "Maguru",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 53,
+      "name": "Oxtail",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 54,
+      "name": "Beef stew",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 55,
+      "name": "Roadrunner",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 56,
+      "name": "Haifiridzi",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 57,
+      "name": "Stewed Lamb",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 58,
+      "name": "Zviyo",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 59,
+      "name": "Mhunga",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 60,
+      "name": "Mapfunde",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 61,
+      "name": "Rice dovi",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 62,
+      "name": "Fries / chips",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 63,
+      "name": "Plain rice",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 64,
+      "name": "Braai salad",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 65,
+      "name": "Mugaiwa",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    },
+    {
+      "id": 66,
+      "name": "Samoosas (rabbit / beef)",
+      "branch": "Rabbit Hole - PaGomo",
+      "image_field": "",
+      "image_filename": ""
+    }
+  ],
+  "disk_files": [
+    {
+      "path": "accessory_images/2025_07_19_16_20_IMG_9564.JPG",
+      "size": 3697290
+    },
+    {
+      "path": "accessory_images/collection.jpeg",
+      "size": 75535
+    },
+    {
+      "path": "accessory_images/fees.png",
+      "size": 1240669
+    },
+    {
+      "path": "accessory_images/hay.jpeg",
+      "size": 100110
+    },
+    {
+      "path": "accessory_images/nesting.jpeg",
+      "size": 58485
+    },
+    {
+      "path": "accessory_images/school_id.jpg",
+      "size": 501639
+    },
+    {
+      "path": "accessory_images/Small_Pet_Select_Timothy_Based_Pellets_Rabbit_Food_10-lb_box.jpeg",
+      "size": 80882
+    },
+    {
+      "path": "menu_images/breakfast1.jpg",
+      "size": 932371
+    },
+    {
+      "path": "menu_images/breakfast3.jpg",
+      "size": 693688
+    },
+    {
+      "path": "menu_images/fees.png",
+      "size": 1240669
+    },
+    {
+      "path": "menu_images/lunch2.jpg",
+      "size": 836265
+    }
+  ]
+}
