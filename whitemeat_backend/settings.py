@@ -193,7 +193,7 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 SUPABASE_BUCKET_NAME = os.environ.get(
     "SUPABASE_BUCKET_NAME",
-    "website-images"
+    "Menu images"
 )
 
 STORAGES = {
