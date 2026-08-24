@@ -1,0 +1,892 @@
+[
+  {
+    "model": "frontend.accessory",
+    "pk": 3,
+    "fields": {
+      "name": "Hay",
+      "description": "dry hay bales",
+      "price": "5.00",
+      "image": "accessory_images/hay.jpeg",
+      "is_available": true,
+      "created_at": "2025-07-28T08:35:10.292Z",
+      "updated_at": "2025-07-28T08:35:10.292Z"
+    }
+  },
+  {
+    "model": "frontend.accessory",
+    "pk": 4,
+    "fields": {
+      "name": "Pellets",
+      "description": "Quality, healthy pellets. Comes in 5kg packest",
+      "price": "12.00",
+      "image": "accessory_images/Small_Pet_Select_Timothy_Based_Pellets_Rabbit_Food_10-lb_box.jpeg",
+      "is_available": true,
+      "created_at": "2025-07-28T08:36:37.062Z",
+      "updated_at": "2025-07-28T08:36:37.062Z"
+    }
+  },
+  {
+    "model": "frontend.accessory",
+    "pk": 5,
+    "fields": {
+      "name": "Nesting boxes",
+      "description": "Rabbit nesting boxes",
+      "price": "10.00",
+      "image": "accessory_images/nesting.jpeg",
+      "is_available": true,
+      "created_at": "2025-07-28T08:45:56.406Z",
+      "updated_at": "2025-07-28T08:45:56.406Z"
+    }
+  },
+  {
+    "model": "frontend.accessory",
+    "pk": 6,
+    "fields": {
+      "name": "Collection bottle",
+      "description": "urine collection bottle",
+      "price": "7.00",
+      "image": "accessory_images/collection.jpeg",
+      "is_available": true,
+      "created_at": "2025-07-28T08:48:30.303Z",
+      "updated_at": "2025-07-31T12:38:05.449Z"
+    }
+  },
+  {
+    "model": "frontend.masterclassevent",
+    "pk": 4,
+    "fields": {
+      "title": "Rabbitry Masterclass 2026",
+      "date_range": "15 & 16 August 2026",
+      "description": "Comprehensive masterclass training program."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 62,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "09:00",
+      "title": "Introduction & Welcome",
+      "description": "Overview of rabbit farming opportunities in Zimbabwe and course briefing."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 63,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "09:30",
+      "title": "Breed Selection",
+      "description": "Choosing the right rabbit breeds (New Zealand White, Californian, etc.) for commercial viability."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 64,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "10:15",
+      "title": "Setting up a Rabbitry",
+      "description": "Best practices for housing, ventilation, cages, accessories, and farm layouts."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 65,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "11:00",
+      "title": "Tea & Networking Break",
+      "description": "Connect with fellow aspiring rabbit farmers over refreshments."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 66,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "11:15",
+      "title": "Feeding & Daily Routine",
+      "description": "Feeding protocols, daily chores, and managing rabbit nutrition at all life stages."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 67,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "12:00",
+      "title": "Mating & Nesting Protocols",
+      "description": "Safe mating procedures, pregnancy detection, and preparing nesting boxes."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 68,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "12:45",
+      "title": "Lunch Break",
+      "description": "Catered lunch at The Rabbit Hole Restaurant."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 69,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "13:30",
+      "title": "Rabbit Management Software",
+      "description": "Introduction to software tools for tracking ancestry, health, and production."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 70,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "14:15",
+      "title": "Kindling & Weaning",
+      "description": "Doe care during birth (kindling), managing kits, and weaning protocols."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 71,
+    "fields": {
+      "event": 4,
+      "day": 1,
+      "time": "15:00",
+      "title": "Doe & Kit Care & Management",
+      "description": "Ensuring kit survival rates, nesting care, and health management during the critical first month."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 72,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "09:00",
+      "title": "Practical Demonstration",
+      "description": "Hands-on cage setup, feeding demonstration, and handling rabbits."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 73,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "10:00",
+      "title": "Harvesting & Butchering",
+      "description": "Humane harvesting methods and step-by-step butchering techniques."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 74,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "11:00",
+      "title": "Tea Break",
+      "description": "Short morning refreshment break."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 75,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "11:15",
+      "title": "Carcass Dressing & Packaging",
+      "description": "Standards for dressing rabbit carcasses and packaging for retail markets."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 76,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "12:00",
+      "title": "Sales & Marketing",
+      "description": "Accessing target markets, marketing strategies, and value chain integration."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 77,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "13:00",
+      "title": "Lunch Break",
+      "description": "Catered lunch break."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 78,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "13:45",
+      "title": "Cashflow Projections",
+      "description": "Financial modeling and preparing cashflow forecasts for a commercial rabbitry."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 79,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "14:30",
+      "title": "Costing & Pricing",
+      "description": "Calculating production costs per kg, pricing models, and profit margins."
+    }
+  },
+  {
+    "model": "frontend.masterclasssession",
+    "pk": 80,
+    "fields": {
+      "event": 4,
+      "day": 2,
+      "time": "15:15",
+      "title": "Packaging, Branding & Next Steps",
+      "description": "Branding your products, aggregate quotas, and course wrap-up."
+    }
+  },
+  {
+    "model": "frontend.restaurantbranch",
+    "pk": 2,
+    "fields": {
+      "name": "Rabbit Hole - PaGomo",
+      "slug": "rabbit-hole-pagomo",
+      "address": "PaGomo, Harare, Zimbabwe",
+      "phone": "+263 772 333 370",
+      "email": "pagomo@rabbitholerestaurant.com",
+      "is_active": true,
+      "created_at": "2025-07-19T03:34:06.468Z"
+    }
+  },
+  {
+    "model": "frontend.menucategory",
+    "pk": 18,
+    "fields": {
+      "name": "Grills",
+      "slug": "grills",
+      "description": "",
+      "order": 1
+    }
+  },
+  {
+    "model": "frontend.menucategory",
+    "pk": 19,
+    "fields": {
+      "name": "Stews",
+      "slug": "stews",
+      "description": "",
+      "order": 2
+    }
+  },
+  {
+    "model": "frontend.menucategory",
+    "pk": 20,
+    "fields": {
+      "name": "Sides",
+      "slug": "sides",
+      "description": "",
+      "order": 3
+    }
+  },
+  {
+    "model": "frontend.menucategory",
+    "pk": 21,
+    "fields": {
+      "name": "Snacks",
+      "slug": "snacks",
+      "description": "",
+      "order": 4
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 43,
+    "fields": {
+      "branch": 2,
+      "name": "Full Rabbit",
+      "description": "Whole rabbit flame-grilled to golden perfection, seasoned with our signature house blend of herbs and spices.",
+      "price": "15.00",
+      "category": 18,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.039Z",
+      "updated_at": "2026-07-14T13:39:15.039Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 44,
+    "fields": {
+      "branch": 2,
+      "name": "Half Rabbit",
+      "description": "Tender half rabbit grilled and basted with a savory garlic-herb butter sauce.",
+      "price": "8.00",
+      "category": 18,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.046Z",
+      "updated_at": "2026-07-14T13:39:15.046Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 45,
+    "fields": {
+      "branch": 2,
+      "name": "Bream",
+      "description": "Freshly caught local bream, grilled whole with lemon juice, herbs, and garlic.",
+      "price": "14.00",
+      "category": 18,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.052Z",
+      "updated_at": "2026-07-14T13:39:15.052Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 46,
+    "fields": {
+      "branch": 2,
+      "name": "Full chicken",
+      "description": "Juicy flame-grilled whole chicken, marinated in a rich lemon-herb or piri-piri sauce.",
+      "price": "15.00",
+      "category": 18,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.058Z",
+      "updated_at": "2026-07-14T13:39:15.058Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 47,
+    "fields": {
+      "branch": 2,
+      "name": "Country style",
+      "description": "Rustic, slow-grilled country-style cutlets seasoned with local spices.",
+      "price": "10.00",
+      "category": 18,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.063Z",
+      "updated_at": "2026-07-14T13:39:15.063Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 48,
+    "fields": {
+      "branch": 2,
+      "name": "Pork chop",
+      "description": "Succulent pork chop grilled with a light honey-mustard glaze.",
+      "price": "6.00",
+      "category": 18,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.069Z",
+      "updated_at": "2026-07-14T13:39:15.069Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 49,
+    "fields": {
+      "branch": 2,
+      "name": "Grilled Lamb",
+      "description": "Grilled lamb chops seasoned with fresh rosemary and garlic.",
+      "price": "10.00",
+      "category": 18,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.076Z",
+      "updated_at": "2026-07-14T13:39:15.076Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 50,
+    "fields": {
+      "branch": 2,
+      "name": "Rabbit curry",
+      "description": "Tender pieces of rabbit simmered in a rich, aromatic curry gravy with potatoes and carrots.",
+      "price": "8.00",
+      "category": 19,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.081Z",
+      "updated_at": "2026-07-14T13:39:15.081Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 51,
+    "fields": {
+      "branch": 2,
+      "name": "Knuckle bones",
+      "description": "Slow-cooked knuckle bones stewed in a thick, flavorful beef broth with fresh vegetables.",
+      "price": "7.00",
+      "category": 19,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.086Z",
+      "updated_at": "2026-07-14T13:39:15.086Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 52,
+    "fields": {
+      "branch": 2,
+      "name": "Maguru",
+      "description": "Traditional Zimbabwean beef tripe, slow-cooked in a savory tomato and onion gravy.",
+      "price": "7.00",
+      "category": 19,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.092Z",
+      "updated_at": "2026-07-14T13:39:15.092Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 53,
+    "fields": {
+      "branch": 2,
+      "name": "Oxtail",
+      "description": "Premium oxtail slow-cooked to fall-off-the-bone tenderness in a rich red wine reduction.",
+      "price": "14.00",
+      "category": 19,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.098Z",
+      "updated_at": "2026-07-14T13:39:15.098Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 54,
+    "fields": {
+      "branch": 2,
+      "name": "Beef stew",
+      "description": "Hearty, slow-simmered beef stew with carrots, potatoes, onions, and local spices.",
+      "price": "6.00",
+      "category": 19,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.104Z",
+      "updated_at": "2026-07-14T13:39:15.104Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 55,
+    "fields": {
+      "branch": 2,
+      "name": "Roadrunner",
+      "description": "Traditional free-range chicken stewed slowly to bring out its rich, deep natural flavor.",
+      "price": "8.00",
+      "category": 19,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.110Z",
+      "updated_at": "2026-07-14T13:39:15.110Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 56,
+    "fields": {
+      "branch": 2,
+      "name": "Haifiridzi",
+      "description": "A delicious and healthy local beef stew mixed with fresh green leafy vegetables.",
+      "price": "6.00",
+      "category": 19,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.115Z",
+      "updated_at": "2026-07-14T13:39:15.115Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 57,
+    "fields": {
+      "branch": 2,
+      "name": "Stewed Lamb",
+      "description": "Rich and hearty lamb stew simmered with root vegetables and fresh herbs.",
+      "price": "12.00",
+      "category": 19,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.120Z",
+      "updated_at": "2026-07-14T13:39:15.120Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 58,
+    "fields": {
+      "branch": 2,
+      "name": "Zviyo",
+      "description": "Traditional finger millet sadza, highly nutritious and flavorful.",
+      "price": "2.00",
+      "category": 20,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.127Z",
+      "updated_at": "2026-07-14T13:39:15.127Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 59,
+    "fields": {
+      "branch": 2,
+      "name": "Mhunga",
+      "description": "Traditional pearl millet sadza, a healthy and gluten-free starch option.",
+      "price": "2.00",
+      "category": 20,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.133Z",
+      "updated_at": "2026-07-14T13:39:15.133Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 60,
+    "fields": {
+      "branch": 2,
+      "name": "Mapfunde",
+      "description": "Traditional sorghum sadza, slow-cooked to a soft and satisfying texture.",
+      "price": "2.00",
+      "category": 20,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.139Z",
+      "updated_at": "2026-07-14T13:39:15.139Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 61,
+    "fields": {
+      "branch": 2,
+      "name": "Rice dovi",
+      "description": "Steamed white rice mixed with a rich and creamy peanut butter sauce.",
+      "price": "2.00",
+      "category": 20,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.145Z",
+      "updated_at": "2026-07-14T13:39:15.145Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 62,
+    "fields": {
+      "branch": 2,
+      "name": "Fries / chips",
+      "description": "Crispy, golden hand-cut potato fries lightly salted.",
+      "price": "2.00",
+      "category": 20,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.150Z",
+      "updated_at": "2026-07-14T13:39:15.150Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 63,
+    "fields": {
+      "branch": 2,
+      "name": "Plain rice",
+      "description": "Steamed fluffy white rice, a perfect neutral base for stews.",
+      "price": "1.50",
+      "category": 20,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.157Z",
+      "updated_at": "2026-07-14T13:39:15.157Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 64,
+    "fields": {
+      "branch": 2,
+      "name": "Braai salad",
+      "description": "A refreshing side salad of cabbage, carrots, onions, and a creamy dressing.",
+      "price": "1.50",
+      "category": 20,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.163Z",
+      "updated_at": "2026-07-14T13:39:15.163Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 65,
+    "fields": {
+      "branch": 2,
+      "name": "Mugaiwa",
+      "description": "Traditional stone-ground unrefined maize meal (sadza) with a rich texture.",
+      "price": "1.00",
+      "category": 20,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.169Z",
+      "updated_at": "2026-07-14T13:39:15.169Z"
+    }
+  },
+  {
+    "model": "frontend.menuitem",
+    "pk": 66,
+    "fields": {
+      "branch": 2,
+      "name": "Samoosas (rabbit / beef)",
+      "description": "Crispy golden pastry triangles filled with seasoned minced rabbit or beef.",
+      "price": "1.00",
+      "category": 21,
+      "image": "",
+      "image_filename": "",
+      "is_available": true,
+      "is_featured": false,
+      "ingredients": "",
+      "allergens": "",
+      "preparation_time": null,
+      "calories": null,
+      "created_at": "2026-07-14T13:39:15.175Z",
+      "updated_at": "2026-07-14T13:39:15.175Z"
+    }
+  },
+  {
+    "model": "frontend.howdidyouhearaboutus",
+    "pk": 1,
+    "fields": {
+      "choice": "friend",
+      "other_text": "",
+      "submitted_at": "2025-07-26T13:32:52.336Z"
+    }
+  },
+  {
+    "model": "frontend.howdidyouhearaboutus",
+    "pk": 2,
+    "fields": {
+      "choice": "search_engine",
+      "other_text": "",
+      "submitted_at": "2025-07-26T18:16:18.115Z"
+    }
+  },
+  {
+    "model": "frontend.howdidyouhearaboutus",
+    "pk": 3,
+    "fields": {
+      "choice": "search_engine",
+      "other_text": "",
+      "submitted_at": "2025-07-26T18:19:55.871Z"
+    }
+  },
+  {
+    "model": "frontend.howdidyouhearaboutus",
+    "pk": 4,
+    "fields": {
+      "choice": "search_engine",
+      "other_text": "",
+      "submitted_at": "2025-07-26T18:20:20.000Z"
+    }
+  },
+  {
+    "model": "frontend.howdidyouhearaboutus",
+    "pk": 5,
+    "fields": {
+      "choice": "search_engine",
+      "other_text": "",
+      "submitted_at": "2025-07-26T18:21:59.117Z"
+    }
+  },
+  {
+    "model": "frontend.howdidyouhearaboutus",
+    "pk": 6,
+    "fields": {
+      "choice": "facebook",
+      "other_text": "",
+      "submitted_at": "2025-07-26T18:30:41.778Z"
+    }
+  },
+  {
+    "model": "frontend.howdidyouhearaboutus",
+    "pk": 7,
+    "fields": {
+      "choice": "twitter",
+      "other_text": "",
+      "submitted_at": "2025-07-26T18:45:09.390Z"
+    }
+  }
+]
