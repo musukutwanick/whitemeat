@@ -46,10 +46,10 @@ import requests
 # ─────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
-MENU_BUCKET = os.environ.get("SUPABASE_MENU_BUCKET_NAME", "Menu images")
-EQUIPMENT_BUCKET = os.environ.get("SUPABASE_EQUIPMENT_BUCKET_NAME", "equipment")
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "").strip().rstrip("/")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "").strip()
+MENU_BUCKET = os.environ.get("SUPABASE_MENU_BUCKET_NAME", "Menu images").strip()
+EQUIPMENT_BUCKET = os.environ.get("SUPABASE_EQUIPMENT_BUCKET_NAME", "equipment").strip()
 BUCKET_FOR = {"equipment": EQUIPMENT_BUCKET, "menu": MENU_BUCKET}
 MEDIA_ROOT = str(settings.MEDIA_ROOT)
 BACKUP_DIR = os.path.join(str(BASE_DIR), "backups")

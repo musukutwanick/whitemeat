@@ -189,18 +189,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Supabase Storage Configuration
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "").strip()
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "").strip()
 
 # Two separate buckets, matching what was created in the Supabase dashboard.
+# .strip() guards against stray whitespace/newlines pasted into Render's
+# env var fields, which otherwise makes httpx blow up with a bare
+# "Invalid URL" error that's hard to trace back to its cause.
 SUPABASE_MENU_BUCKET_NAME = os.environ.get(
     "SUPABASE_MENU_BUCKET_NAME",
     "Menu images"
-)
+).strip()
 SUPABASE_EQUIPMENT_BUCKET_NAME = os.environ.get(
     "SUPABASE_EQUIPMENT_BUCKET_NAME",
     "equipment"
-)
+).strip()
 
 STORAGES = {
     # Fallback for any file field that doesn't specify storage= explicitly

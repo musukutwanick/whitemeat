@@ -37,19 +37,19 @@ class SupabaseMediaStorage(Storage):
                 "SUPABASE_BUCKET_NAME",
                 "website-images"
             )
-        )
+        ).strip()
 
         self.supabase_url = (
             supabase_url
             or getattr(settings, "SUPABASE_URL", "")
             or os.environ.get("SUPABASE_URL", "")
-        ).rstrip("/")
+        ).strip().rstrip("/")
 
         self.supabase_key = (
             supabase_key
             or getattr(settings, "SUPABASE_KEY", "")
             or os.environ.get("SUPABASE_KEY", "")
-        )
+        ).strip()
 
         self._client = None
 
@@ -314,9 +314,14 @@ class SupabaseMediaStorage(Storage):
                 "================================================"
             )
 
-            # IMPORTANT:
-            # Do NOT fall back to Render filesystem.
-            raise
+            # Re-raise with the actual config context attached, since bare
+            # exceptions like httpx's "Invalid URL" give no clue on their
+            # own (e.g. a stray space/newline pasted into an env var).
+            # This is what ends up shown in the admin's error message.
+            raise RuntimeError(
+                f"Supabase upload failed for bucket={self.bucket_name!r} "
+                f"url_host={self.supabase_url!r}: {e.__class__.__name__}: {e}"
+            ) from e
 
     # ---------------------------------------------------------
     # OPEN
