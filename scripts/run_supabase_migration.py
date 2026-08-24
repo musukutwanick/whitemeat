@@ -48,7 +48,9 @@ import requests
 # ─────────────────────────────────────────────
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
-BUCKET = os.environ.get("SUPABASE_BUCKET_NAME", "website-images")
+MENU_BUCKET = os.environ.get("SUPABASE_MENU_BUCKET_NAME", "Menu images")
+EQUIPMENT_BUCKET = os.environ.get("SUPABASE_EQUIPMENT_BUCKET_NAME", "equipment")
+BUCKET_FOR = {"equipment": EQUIPMENT_BUCKET, "menu": MENU_BUCKET}
 MEDIA_ROOT = str(settings.MEDIA_ROOT)
 BACKUP_DIR = os.path.join(str(BASE_DIR), "backups")
 os.makedirs(BACKUP_DIR, exist_ok=True)
@@ -139,13 +141,15 @@ def make_unique_name(dest_folder, original_filename):
     uid = uuid.uuid4().hex[:8]
     return f"{dest_folder}/{uid}_{base}{ext}"
 
-def public_url(path):
-    return f"{SUPABASE_URL}/storage/v1/object/public/{BUCKET}/{path}"
+def public_url(path, dest_folder):
+    bucket = BUCKET_FOR.get(dest_folder, EQUIPMENT_BUCKET)
+    return f"{SUPABASE_URL}/storage/v1/object/public/{bucket}/{path}"
 
 def upload_to_supabase(client, local_path, dest_folder, original_filename=None):
     if original_filename is None:
         original_filename = os.path.basename(local_path)
     dest_path = make_unique_name(dest_folder, original_filename)
+    bucket = BUCKET_FOR.get(dest_folder, EQUIPMENT_BUCKET)
 
     with open(local_path, 'rb') as fh:
         data = fh.read()
@@ -153,7 +157,7 @@ def upload_to_supabase(client, local_path, dest_folder, original_filename=None):
     content_type, _ = mimetypes.guess_type(local_path)
     content_type = content_type or "image/jpeg"
 
-    client.storage.from_(BUCKET).upload(
+    client.storage.from_(bucket).upload(
         path=dest_path,
         file=data,
         file_options={"content-type": content_type, "upsert": "true"}
@@ -252,7 +256,7 @@ def migrate(dry_run=False, verify=True):
         # Already migrated?
         if current_name.startswith("equipment/") and len(os.path.basename(current_name)) > 9:
             r["new_path"] = current_name
-            r["new_url"] = public_url(current_name)
+            r["new_url"] = public_url(current_name, "equipment")
             r["status"] = "ALREADY_MIGRATED"
             print(f"  [SKIP] ID {acc.id} {acc.name}: already in equipment/")
             results.append(r)
@@ -267,7 +271,7 @@ def migrate(dry_run=False, verify=True):
 
         original_filename = os.path.basename(local_path)
         dest_path = make_unique_name("equipment", original_filename)
-        url = public_url(dest_path)
+        url = public_url(dest_path, "equipment")
         r["new_path"] = dest_path
         r["new_url"] = url
 
@@ -323,7 +327,7 @@ def migrate(dry_run=False, verify=True):
         # Already migrated?
         if current_name.startswith("menu/") and len(os.path.basename(current_name)) > 9:
             r["new_path"] = current_name
-            r["new_url"] = public_url(current_name)
+            r["new_url"] = public_url(current_name, "menu")
             r["status"] = "ALREADY_MIGRATED"
             print(f"  [SKIP] ID {m.id} {m.name}: already in menu/")
             results.append(r)
@@ -338,7 +342,7 @@ def migrate(dry_run=False, verify=True):
 
         original_filename = os.path.basename(local_path)
         dest_path = make_unique_name("menu", original_filename)
-        url = public_url(dest_path)
+        url = public_url(dest_path, "menu")
         r["new_path"] = dest_path
         r["new_url"] = url
 
@@ -405,13 +409,13 @@ def migrate(dry_run=False, verify=True):
                 if dry_run:
                     dest_path = make_unique_name(folder, fname)
                     r_orphan["new_path"] = dest_path
-                    r_orphan["new_url"] = public_url(dest_path)
+                    r_orphan["new_url"] = public_url(dest_path, folder)
                     r_orphan["status"] = "DRY_RUN"
                     print(f"  [ORPHAN DRY RUN] {fname} -> {dest_path}")
                 else:
                     try:
                         dest_path = upload_to_supabase(client, full_p, folder, fname)
-                        url = public_url(dest_path)
+                        url = public_url(dest_path, folder)
                         r_orphan["new_path"] = dest_path
                         r_orphan["new_url"] = url
                         if verify:
@@ -448,7 +452,8 @@ if __name__ == "__main__":
     print("=" * 60)
     print(f"SUPABASE_URL  : {SUPABASE_URL[:40]}..." if len(SUPABASE_URL) > 40 else f"SUPABASE_URL  : {SUPABASE_URL}")
     print(f"SUPABASE_KEY  : {'****' + SUPABASE_KEY[-4:] if len(SUPABASE_KEY) > 4 else '(not set)'}")
-    print(f"BUCKET        : {BUCKET}")
+    print(f"MENU BUCKET       : {MENU_BUCKET}")
+    print(f"EQUIPMENT BUCKET  : {EQUIPMENT_BUCKET}")
     print(f"MEDIA_ROOT    : {MEDIA_ROOT}")
     print(f"DRY RUN       : {args.dry_run}")
     print(f"VERIFY URLs   : {not args.no_verify}")
