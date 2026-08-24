@@ -2,13 +2,14 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from datetime import datetime
+from whitemeat_backend.supabase_storage import get_menu_storage, get_equipment_storage
 
 # Accessory model for cages/equipment accessories
 class Accessory(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    image = models.ImageField(upload_to='equipment/', blank=True, null=True, help_text="Upload accessory image")
+    image = models.ImageField(upload_to='equipment/', storage=get_equipment_storage, blank=True, null=True, help_text="Upload accessory image")
     is_available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -86,7 +87,7 @@ class MenuItem(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.ForeignKey(MenuCategory, on_delete=models.CASCADE)
     # Updated to support actual file uploads to Supabase menu/ folder
-    image = models.ImageField(upload_to='menu/', blank=True, null=True, help_text="Upload menu item image")
+    image = models.ImageField(upload_to='menu/', storage=get_menu_storage, blank=True, null=True, help_text="Upload menu item image")
     # Keep old field for backward compatibility
     image_filename = models.CharField(max_length=200, blank=True, help_text="Alternative: Image filename in static/images/")
     is_available = models.BooleanField(default=True)

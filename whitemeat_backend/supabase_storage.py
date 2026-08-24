@@ -441,3 +441,30 @@ class SupabaseMediaStorage(Storage):
 
         # Not required for displaying images.
         return 0
+
+
+# ---------------------------------------------------------
+# Per-bucket storage factories
+#
+# Menu images and equipment images live in two separate
+# Supabase buckets ("Menu images" and "equipment"). These are
+# plain functions (not module-level instances) so Django's
+# migration serializer can reference them by import path and
+# so settings changes are picked up without restarting the
+# process. Assign via storage=get_menu_storage on ImageFields.
+# ---------------------------------------------------------
+
+def get_menu_storage():
+    return SupabaseMediaStorage(
+        bucket_name=getattr(
+            settings, "SUPABASE_MENU_BUCKET_NAME", "Menu images"
+        )
+    )
+
+
+def get_equipment_storage():
+    return SupabaseMediaStorage(
+        bucket_name=getattr(
+            settings, "SUPABASE_EQUIPMENT_BUCKET_NAME", "equipment"
+        )
+    )

@@ -191,14 +191,26 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
-SUPABASE_BUCKET_NAME = os.environ.get(
-    "SUPABASE_BUCKET_NAME",
+
+# Two separate buckets, matching what was created in the Supabase dashboard.
+SUPABASE_MENU_BUCKET_NAME = os.environ.get(
+    "SUPABASE_MENU_BUCKET_NAME",
     "Menu images"
+)
+SUPABASE_EQUIPMENT_BUCKET_NAME = os.environ.get(
+    "SUPABASE_EQUIPMENT_BUCKET_NAME",
+    "equipment"
 )
 
 STORAGES = {
+    # Fallback for any file field that doesn't specify storage= explicitly
+    # (e.g. Notice image/document). MenuItem/Accessory use get_menu_storage()
+    # / get_equipment_storage() directly - see frontend/models.py.
     "default": {
         "BACKEND": "whitemeat_backend.supabase_storage.SupabaseMediaStorage",
+        "OPTIONS": {
+            "bucket_name": SUPABASE_EQUIPMENT_BUCKET_NAME,
+        },
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",

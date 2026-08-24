@@ -108,7 +108,8 @@ class Command(BaseCommand):
 
         supabase_url = (getattr(settings, "SUPABASE_URL", None) or os.environ.get("SUPABASE_URL", "")).rstrip("/")
         supabase_key = getattr(settings, "SUPABASE_KEY", None) or os.environ.get("SUPABASE_KEY", "")
-        bucket = getattr(settings, "SUPABASE_BUCKET_NAME", None) or os.environ.get("SUPABASE_BUCKET_NAME", "website-images")
+        menu_bucket = getattr(settings, "SUPABASE_MENU_BUCKET_NAME", None) or os.environ.get("SUPABASE_MENU_BUCKET_NAME", "Menu images")
+        equipment_bucket = getattr(settings, "SUPABASE_EQUIPMENT_BUCKET_NAME", None) or os.environ.get("SUPABASE_EQUIPMENT_BUCKET_NAME", "equipment")
         media_root = str(settings.MEDIA_ROOT)
 
         # ── Preflight ──────────────────────────────────────────
@@ -128,7 +129,8 @@ class Command(BaseCommand):
         self.stdout.write(self.style.NOTICE("=" * 60))
         self.stdout.write(self.style.NOTICE("SUPABASE MEDIA MIGRATION"))
         self.stdout.write(self.style.NOTICE("=" * 60))
-        self.stdout.write(f"Bucket      : {bucket}")
+        self.stdout.write(f"Menu bucket      : {menu_bucket}")
+        self.stdout.write(f"Equipment bucket : {equipment_bucket}")
         self.stdout.write(f"MEDIA_ROOT  : {media_root}")
         self.stdout.write(f"Dry run     : {dry_run}")
         self.stdout.write(f"Verify URLs : {verify}\n")
@@ -153,7 +155,7 @@ class Command(BaseCommand):
             if cur.startswith("equipment/") and len(os.path.basename(cur)) > 9:
                 r["status"] = "ALREADY_MIGRATED"
                 r["new_path"] = cur
-                r["new_url"] = _public_url(supabase_url, bucket, cur)
+                r["new_url"] = _public_url(supabase_url, equipment_bucket, cur)
                 self.stdout.write(f"  SKIP  #{acc.id} {acc.name}: already in equipment/")
                 results.append(r)
                 continue
@@ -166,7 +168,7 @@ class Command(BaseCommand):
                 continue
 
             dest = _make_unique_path("equipment", os.path.basename(local))
-            url = _public_url(supabase_url, bucket, dest)
+            url = _public_url(supabase_url, equipment_bucket, dest)
             r["new_path"] = dest
             r["new_url"] = url
 
@@ -180,7 +182,7 @@ class Command(BaseCommand):
 
             try:
                 self.stdout.write(f"  UP    #{acc.id} {acc.name}: {os.path.basename(local)} -> {dest}")
-                _upload(client, bucket, local, dest)
+                _upload(client, equipment_bucket, local, dest)
 
                 if verify:
                     ok, msg = _verify_url(url)
@@ -221,7 +223,7 @@ class Command(BaseCommand):
             if cur.startswith("menu/") and len(os.path.basename(cur)) > 9:
                 r["status"] = "ALREADY_MIGRATED"
                 r["new_path"] = cur
-                r["new_url"] = _public_url(supabase_url, bucket, cur)
+                r["new_url"] = _public_url(supabase_url, menu_bucket, cur)
                 self.stdout.write(f"  SKIP  #{m.id} {m.name}: already in menu/")
                 results.append(r)
                 continue
@@ -234,7 +236,7 @@ class Command(BaseCommand):
                 continue
 
             dest = _make_unique_path("menu", os.path.basename(local))
-            url = _public_url(supabase_url, bucket, dest)
+            url = _public_url(supabase_url, menu_bucket, dest)
             r["new_path"] = dest
             r["new_url"] = url
 
@@ -248,7 +250,7 @@ class Command(BaseCommand):
 
             try:
                 self.stdout.write(f"  UP    #{m.id} {m.name}: {os.path.basename(local)} -> {dest}")
-                _upload(client, bucket, local, dest)
+                _upload(client, menu_bucket, local, dest)
 
                 if verify:
                     ok, msg = _verify_url(url)
@@ -289,7 +291,7 @@ class Command(BaseCommand):
                     continue
 
                 dest = _make_unique_path(folder, os.path.basename(local))
-                url = _public_url(supabase_url, bucket, dest)
+                url = _public_url(supabase_url, equipment_bucket, dest)
                 r["new_path"] = dest
                 r["new_url"] = url
 
@@ -300,7 +302,7 @@ class Command(BaseCommand):
                     continue
 
                 try:
-                    _upload(client, bucket, local, dest)
+                    _upload(client, equipment_bucket, local, dest)
                     if verify:
                         ok, msg = _verify_url(url)
                         if not ok:
@@ -340,8 +342,9 @@ class Command(BaseCommand):
                         if os.path.abspath(full_p) in linked:
                             continue
                         folder = "equipment" if ("accessory" in rel_dir.lower() or "equipment" in rel_dir.lower()) else "menu"
+                        orphan_bucket = equipment_bucket if folder == "equipment" else menu_bucket
                         dest = _make_unique_path(folder, fname)
-                        url = _public_url(supabase_url, bucket, dest)
+                        url = _public_url(supabase_url, orphan_bucket, dest)
                         r = {"id": "orphan", "type": f"Orphan/{folder}", "name": fname,
                              "old_path": f"{rel_dir}/{fname}", "new_path": dest, "new_url": url,
                              "status": "PENDING"}
@@ -350,7 +353,7 @@ class Command(BaseCommand):
                             self.stdout.write(self.style.NOTICE(f"  DRY   [orphan] {fname} -> {dest}"))
                         else:
                             try:
-                                _upload(client, bucket, full_p, dest)
+                                _upload(client, orphan_bucket, full_p, dest)
                                 if verify:
                                     ok, msg = _verify_url(url)
                                     r["status"] = "SUCCESS" if ok else f"UPLOADED (verify: {msg})"
