@@ -154,7 +154,7 @@
         {% for accessory in accessories %}
         <div class="accessory-public-card">
           <div class="accessory-card-image">
-            <img src="{{ accessory.image_url }}" alt="{{ accessory.name }}" loading="lazy">
+            <img src="{{ accessory.image_url }}" alt="{{ accessory.name }}" loading="lazy" onerror="this.onerror=null;this.src='{% static 'images/default-accessory.jpg' %}';">
           </div>
           <div class="accessory-card-body">
             <h3 class="accessory-card-title">{{ accessory.name }}</h3>

@@ -142,7 +142,7 @@
             {% for item in menu_items %}
             <!-- {{ item.name }} -->
             <div class="menu-item pagomo-menu-item" data-category="{{ item.category.slug }}" style="display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid #eee;">
-              <img src="{{ item.image_url }}" alt="{{ item.name }}" class="menu-row-img">
+              <img src="{{ item.image_url }}" alt="{{ item.name }}" class="menu-row-img" loading="lazy" onerror="this.onerror=null;this.src='{% static 'images/default-menu-item.jpg' %}';">
               <div style="flex: 1; min-width: 0;">
                 <h4 style="font-size: 1.1rem; font-weight: 600; color: #2c3e50; margin: 0 0 8px 0;">{{ item.name }}</h4>
                 <p style="color: #666; font-size: 0.9rem; margin: 0 0 10px 0;">{{ item.description }}</p>
