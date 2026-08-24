@@ -101,40 +101,49 @@ WSGI_APPLICATION = 'whitemeat_backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 import urllib.parse
 
-database_url = os.environ.get("DATABASE_URL")
+database_url = os.environ.get("DATABASE_URL", "").strip()
+DATABASES = None
+
 if database_url:
-    url = urllib.parse.urlparse(database_url)
-    if url.scheme in ["postgres", "postgresql"]:
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': url.path[1:],
-                'USER': url.username or '',
-                'PASSWORD': url.password or '',
-                'HOST': url.hostname or '',
-                'PORT': url.port or '5432',
-                'CONN_MAX_AGE': 600,
+    try:
+        url = urllib.parse.urlparse(database_url)
+        if url.scheme in ["postgres", "postgresql"]:
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.postgresql',
+                    'NAME': url.path[1:],
+                    'USER': url.username or '',
+                    'PASSWORD': url.password or '',
+                    'HOST': url.hostname or '',
+                    'PORT': url.port or '5432',
+                    'CONN_MAX_AGE': 600,
+                }
             }
-        }
-    elif url.scheme == "mysql":
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.mysql',
-                'NAME': url.path[1:],
-                'USER': url.username or '',
-                'PASSWORD': url.password or '',
-                'HOST': url.hostname or '',
-                'PORT': url.port or '3306',
+        elif url.scheme == "mysql":
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.mysql',
+                    'NAME': url.path[1:],
+                    'USER': url.username or '',
+                    'PASSWORD': url.password or '',
+                    'HOST': url.hostname or '',
+                    'PORT': url.port or '3306',
+                }
             }
-        }
-    else:
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': BASE_DIR / 'db.sqlite3',
-            }
-        }
-else:
+    except ValueError as e:
+        # A malformed DATABASE_URL (e.g. the "[YOUR-PASSWORD]" placeholder
+        # from Supabase's template pasted in unreplaced, which leaves
+        # literal square brackets in the string) must NOT crash the whole
+        # site at import time - fall through to SQLite below instead and
+        # print a loud warning that shows up in the deploy logs.
+        print(
+            "!!! DATABASE_URL is malformed and could not be parsed "
+            f"({e}). Falling back to SQLite. Fix DATABASE_URL on Render - "
+            "check for an unreplaced [YOUR-PASSWORD] placeholder or "
+            "unescaped special characters in the password. !!!"
+        )
+
+if DATABASES is None:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
