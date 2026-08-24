@@ -106,10 +106,10 @@ class Command(BaseCommand):
         verify = not options["no_verify"]
         upload_orphans = options["upload_orphans"]
 
-        supabase_url = (getattr(settings, "SUPABASE_URL", None) or os.environ.get("SUPABASE_URL", "")).rstrip("/")
-        supabase_key = getattr(settings, "SUPABASE_KEY", None) or os.environ.get("SUPABASE_KEY", "")
-        menu_bucket = getattr(settings, "SUPABASE_MENU_BUCKET_NAME", None) or os.environ.get("SUPABASE_MENU_BUCKET_NAME", "Menu images")
-        equipment_bucket = getattr(settings, "SUPABASE_EQUIPMENT_BUCKET_NAME", None) or os.environ.get("SUPABASE_EQUIPMENT_BUCKET_NAME", "equipment")
+        supabase_url = (getattr(settings, "SUPABASE_URL", None) or os.environ.get("SUPABASE_URL", "")).strip().rstrip("/")
+        supabase_key = (getattr(settings, "SUPABASE_KEY", None) or os.environ.get("SUPABASE_KEY", "")).strip()
+        menu_bucket = (getattr(settings, "SUPABASE_MENU_BUCKET_NAME", None) or os.environ.get("SUPABASE_MENU_BUCKET_NAME", "Menu images")).strip()
+        equipment_bucket = (getattr(settings, "SUPABASE_EQUIPMENT_BUCKET_NAME", None) or os.environ.get("SUPABASE_EQUIPMENT_BUCKET_NAME", "equipment")).strip()
         media_root = str(settings.MEDIA_ROOT)
 
         # ── Preflight ──────────────────────────────────────────
