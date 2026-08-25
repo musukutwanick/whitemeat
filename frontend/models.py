@@ -10,6 +10,10 @@ class Accessory(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     image = models.ImageField(upload_to='equipment/', storage=get_equipment_storage, blank=True, null=True, help_text="Upload accessory image")
+    # Keep alongside `image` for backward compatibility: a code-managed
+    # static image (bypasses admin upload / Supabase entirely). Mirrors
+    # MenuItem.image_filename.
+    image_filename = models.CharField(max_length=200, blank=True, help_text="Alternative: Image filename in static/images/")
     is_available = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -27,6 +31,8 @@ class Accessory(models.Model):
                 return self.image.url
             except Exception:
                 pass
+        elif self.image_filename:
+            return f'/static/images/{self.image_filename}'
         return '/static/images/default-accessory.jpg'
 
 class MasterclassEvent(models.Model):
