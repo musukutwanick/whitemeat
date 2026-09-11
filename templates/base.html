@@ -1,0 +1,67 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+
+  <title>{% block title %}{{ site.company_name }} - Rabbit farming equipment, breeding stock & training in Zimbabwe{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ site.company_name }} commercialises rabbit farming in Zimbabwe: premium breeding stock, international-standard cages and accessories, expert masterclass training, a guaranteed market, and the Rabbit Hole Bar & Grill.{% endblock %}">
+
+  {% block social_meta %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.company_name }}">
+  <meta property="og:title" content="{{ site.company_name }}">
+  <meta property="og:description" content="Rabbit farming equipment, breeding stock, masterclass training and white-meat cuisine.">
+  <meta property="og:image" content="{% static 'images/logo.png' %}">
+  <meta name="twitter:card" content="summary_large_image">
+  {% endblock %}
+
+  <link rel="icon" href="{% static 'images/logo.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/scroll-animations.css' %}">
+  <link rel="stylesheet" href="{% static 'css/whitemeat.css' %}">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="wm-page {% block body_class %}{% endblock %}">
+  <a href="#main" class="wm-skip-link">Skip to content</a>
+
+  {% include "partials/topbar.html" %}
+  {% include "partials/navbar.html" %}
+
+  <main id="main">
+    {% if messages %}
+    <div class="wm-container" style="padding-top:16px">
+      {% for message in messages %}
+      <div class="wm-alert wm-alert--{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "partials/footer.html" %}
+  {% include "partials/cart_widgets.html" %}
+  {% include "partials/checkout_modal.html" %}
+
+  <script src="{% static 'js/hero-slider.js' %}"></script>
+  <script src="{% static 'js/scroll-animations.js' %}"></script>
+  <script src="{% static 'js/site-animations.js' %}"></script>
+  <script src="{% static 'js/checkout.js' %}"></script>
+  <script src="{% static 'js/product-cart.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    if (window.AOS) AOS.init({ duration: 400, easing: 'ease-out-cubic', once: true, offset: 40 });
+  </script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load wm_icons %}
+{% block title %}Your Cart - {{ site.company_name }}{% endblock %}
+
+{% block content %}
+<section class="wm-page-hero">
+  <div class="wm-container">
+    <span class="wm-eyebrow">Cart</span>
+    <h1>Your cart</h1>
+    <p>A unified cart across breeding stock, equipment, accessories and butchery products is being built.</p>
+  </div>
+</section>
+
+<section class="wm-section">
+  <div class="wm-container wm-prose">
+    <p class="wm-notice">
+      For now, add items on the Cages &amp; Accessories page or order any product directly via WhatsApp.
+    </p>
+    <p style="text-align:center;margin-top:24px">
+      <a href="{% url 'cages' %}" class="wm-btn wm-btn--outline">Browse cages &amp; accessories {% wm_icon "arrow-right" size=15 %}</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

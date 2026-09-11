@@ -1,400 +1,252 @@
-{% load static %}
-{% load masterclass_utils %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The White Meat Company</title>
-  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-</head>
-<body>
-  <nav class="navbar">
-    <div class="logo">
-      <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
-    </div>
+{% extends "base.html" %}
+{% load static wm_icons masterclass_utils %}
+{% block title %}Rabbit Farming Masterclass - {{ site.company_name }}{% endblock %}
+{% block meta_description %}Book Zimbabwe's most complete rabbitry masterclass. View the calendar, pick a date, and register with {{ site.company_name }}.{% endblock %}
 
-<button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <ul class="nav-links" id="nav-links">
-      <li><a href="{% url 'index' %}">Home</a></li>
-       <li><a href="{% url 'masterclass' %}" class="active">Masterclass Training</a></li>
-      <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
-      <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
-      <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
-    </ul>
-  </nav>
-
-<section class="hero-masterclass" data-aos="fade-in" data-aos-duration="1000">
-  <div class="overlay"></div>
-  <div class="hero-content">
-    <h1 data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">Rabbit Farming Masterclass</h1>
-    <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
-      Transform your future with Zimbabwe's most comprehensive rabbit farming training program.
-      Learn from 7 years of proven success and guaranteed market access.
-    </p>
-    <a href="#book" class="btn green" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="800">Book Your Spot - $140</a>
+{% block content %}
+<section class="wm-page-hero wm-pattern">
+  <div class="wm-container">
+    <span class="wm-eyebrow">Masterclass</span>
+    <h1>Zimbabwe's most complete rabbit farming training</h1>
+    <p>A comprehensive, hands-on programme covering setup, nutrition, health, breeding, records and
+      business planning &mdash; with guaranteed market access on completion.</p>
+    <a href="#calendar" class="wm-btn wm-btn--primary" style="margin-top:8px">
+      Book your spot {% if event %}&mdash; ${{ event.price }}{% endif %} {% wm_icon "arrow-right" size=15 %}
+    </a>
   </div>
 </section>
 
-<section class="about-masterclass">
-  <h2>What is the Rabbit Farming Masterclass?</h2>
-  <div class="about-content">
-    <div class="text">
-      <h3>Comprehensive Professional Training</h3>
-      <p>
-        Our Rabbit Farming Masterclass is a comprehensive 2-day intensive program designed to equip you with all the knowledge, skills, and practical experience needed to establish and operate a successful rabbit farming business.
-      </p>
-      <p>
-        Developed by The White Meat Company with over 7 years of commercial rabbit farming experience, this masterclass combines theoretical knowledge with hands-on practical training, business planning, and guaranteed market access.
-      </p>
-      <p>
-        Whether you're a complete beginner or looking to scale your existing operation, our masterclass provides the roadmap to profitable rabbit farming in Zimbabwe.
-      </p>
-    </div>
-    <div class="image">
-      <img src="{% static 'images/master.jpg' %}" alt="Rabbitry" />
+<section class="wm-section">
+  <div class="wm-container">
+    <div class="wm-promo">
+      <div class="wm-promo__media"><img src="{% static 'images/master.jpg' %}" alt="Rabbitry masterclass training"></div>
+      <div>
+        <span class="wm-eyebrow">What is the masterclass?</span>
+        <h2>Comprehensive, professional training</h2>
+        <p>Our Rabbit Farming Masterclass is an intensive programme designed to equip you with all the
+          knowledge, skills and practical experience needed to establish and operate a successful rabbit
+          farming business.</p>
+        <p>Developed from over 7 years of commercial rabbit farming experience, it combines theory with
+          hands-on practice, business planning and guaranteed market access &mdash; whether you're a complete
+          beginner or scaling an existing operation.</p>
+      </div>
     </div>
   </div>
 </section>
 
-
-<section class="key-features">
-  <h2>Key Areas Covered in the Masterclass</h2>
-  <div class="features-grid">
-
-    <div class="feature-card">
-      <div class="icon">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-          <polyline points="9,22 9,12 15,12 15,22"/>
-        </svg>
-      </div>
-      <h3>Setup & Infrastructure</h3>
-      <p>Learn optimal housing design, ventilation systems, and equipment selection for maximum productivity and animal welfare.</p>
+<section class="wm-section wm-section--surface-2">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Curriculum</span>
+      <h2>Key areas covered</h2>
     </div>
-
-    <div class="feature-card">
-      <div class="icon">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-          <circle cx="12" cy="8" r="2"/>
-          <path d="M12 10v4"/>
-        </svg>
+    <div class="wm-services__grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "equipment" %}</span>
+        <h3>Setup &amp; Infrastructure</h3>
+        <p>Optimal housing design, ventilation systems and equipment selection for productivity and welfare.</p>
       </div>
-      <h3>Nutrition & Feeding</h3>
-      <p>Master feed formulation, nutritional requirements and cost-effective feeding strategies for all life stages.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="icon">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          <circle cx="12" cy="6" r="3"/>
-        </svg>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "leaf" %}</span>
+        <h3>Nutrition &amp; Feeding</h3>
+        <p>Feed formulation, nutritional requirements and cost-effective feeding strategies for all life stages.</p>
       </div>
-      <h3>Health Management</h3>
-      <p>Comprehensive health protocols, disease prevention, vaccination schedules and treatment procedures.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="icon">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          <circle cx="8" cy="12" r="2"/>
-          <circle cx="16" cy="12" r="2"/>
-        </svg>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "breeding" %}</span>
+        <h3>Health Management</h3>
+        <p>Health protocols, disease prevention, vaccination schedules and treatment procedures.</p>
       </div>
-      <h3>Breeding Programs</h3>
-      <p>Selective breeding techniques, genetic improvement, breeding schedules and record keeping systems.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="icon">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M12 1v6"/>
-          <path d="M12 17v6"/>
-        </svg>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "masterclass" %}</span>
+        <h3>Breeding Programs</h3>
+        <p>Selective breeding techniques, genetic improvement, schedules and record-keeping systems.</p>
       </div>
-      <h3>Business Management</h3>
-      <p>Financial planning, cost analysis, market strategies and scaling your operation for maximum profitability.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="icon">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="9" cy="21" r="1"/>
-          <circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-          <path d="M12 2v10"/>
-          <path d="M8 6l8 8"/>
-          <path d="M16 6l-8 8"/>
-        </svg>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "shop" %}</span>
+        <h3>Business Management</h3>
+        <p>Financial planning, cost analysis, market strategy and scaling for maximum profitability.</p>
       </div>
-      <h3>Market Access</h3>
-      <p>Direct access to our established supply chain and guaranteed market for your premium rabbit meat production.</p>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "truck" %}</span>
+        <h3>Market Access</h3>
+        <p>Direct access to our established supply chain and a guaranteed market for your produce.</p>
+      </div>
     </div>
-
   </div>
 </section>
 
-<section class="benefits">
-    {% if event %}
-    <h1>{{ event.title }}{% if event.date_range %} - {{ event.date_range }}{% endif %}</h1>
-    <div class="date-box">
-      {{ event.date_range }}
+{% if event %}
+<section class="wm-section">
+  <div class="wm-container wm-prose" style="text-align:center">
+    <span class="wm-eyebrow">{{ event.date_range }}</span>
+    <h2>{{ event.title }}</h2>
+    {% if event.description %}<p>{{ event.description }}</p>{% endif %}
+  </div>
+</section>
+{% endif %}
+
+{% if sessions_by_day.1 or sessions_by_day.2 %}
+<section class="wm-section wm-section--surface-2">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Agenda</span>
+      <h2>Training schedule</h2>
     </div>
-    {% if event.fact or event.fact_description %}
-    <div class="fact-box">
-      {% if event.fact %}<h2>{{ event.fact }}</h2>{% endif %}
-      {% if event.fact_description %}<p>{{ event.fact_description }}</p>{% endif %}
-    </div>
-    {% endif %}
-    {% if event.description %}
-    <p class="description">{{ event.description }}</p>
-    {% endif %}
-    {% else %}
-    <h1>Upcoming Masterclass</h1>
-  
-    {% endif %}
-  </section>
- <section class="schedule-section">
-    <h1>Training Schedule</h1>
-    {% if sessions_by_day.1 or sessions_by_day.2 %}
+    <div class="wm-schedule">
       {% for day in days %}
-        {% with day_sessions=sessions_by_day|get_item:day %}
-        {% if day_sessions %}
-        <div class="schedule-card">
-          <div class="schedule-header">Day {{ day }}</div>
-          <table class="schedule-table">
-            {% for session in day_sessions %}
-            <tr>
-              <td class="time-col">{{ session.time }}</td>
-              <td>
-                <div class="session-title">{{ session.title }}</div>
-                <div class="session-desc">{{ session.description }}</div>
-              </td>
-            </tr>
-            {% endfor %}
-          </table>
+      {% with day_sessions=sessions_by_day|get_item:day %}
+      {% if day_sessions %}
+      <div class="wm-schedule__card">
+        <div class="wm-schedule__head">Day {{ day }}</div>
+        {% for session in day_sessions %}
+        <div class="wm-schedule__row">
+          <span class="wm-schedule__time">{{ session.time }}</span>
+          <div>
+            <div class="wm-schedule__title">{{ session.title }}</div>
+            {% if session.description %}<div class="wm-schedule__desc">{{ session.description }}</div>{% endif %}
+          </div>
         </div>
-        {% endif %}
-        {% endwith %}
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
       {% endfor %}
-    {% else %}
-      <p>Schedule will be announced soon.</p>
-    {% endif %}
-  </section>
+    </div>
+  </div>
+</section>
+{% endif %}
 
-  <!-- Booking Section -->
-<section id="book" class="booking-section">
-  <div class="booking-container">
-    <h2>Secure Your Spot Today</h2>
-    <p class="subtitle">Limited seats available  Join Zimbabwe’s most successful rabbit farming program</p>
-
-    <div class="pricing-box">
-      <h3>Complete 2-Day Masterclass</h3>
-      <div class="price">$140</div>
-      <p class="note">Includes training materials, meals, hands-on practice, business plan template, and ongoing support access <br/>
-      <strong>To pay an additional US$20 for certification</strong></p>
+<!-- ---------------- CALENDAR ---------------- -->
+<section class="wm-section" id="calendar">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Calendar</span>
+      <h2>Choose your masterclass date</h2>
+      <p>Every date on this calendar is managed by our team and kept up to date &mdash; pick one below to
+        start your booking.</p>
     </div>
 
-    <form class="registration-form">
-      <h4>Registration Form</h4>
+    <div class="wm-calendar">
+      <div class="wm-calendar__nav">
+        <a href="?month={{ prev_month }}&amp;year={{ prev_year }}#calendar" class="wm-calendar__nav-btn" aria-label="Previous month">&larr;</a>
+        <h3>{{ calendar_month_name }} {{ calendar_year }}</h3>
+        <a href="?month={{ next_month }}&amp;year={{ next_year }}#calendar" class="wm-calendar__nav-btn" aria-label="Next month">&rarr;</a>
+      </div>
+      <div class="wm-calendar__weekdays">
+        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <div class="wm-calendar__grid">
+        {% for week in calendar_weeks %}
+          {% for cell in week %}
+            {% if cell %}
+              {% if cell.mc_date and not cell.is_past %}
+              <button type="button"
+                      class="wm-calendar__day {% if cell.mc_date.is_bookable %}is-available{% else %}is-full{% endif %}{% if cell.is_today %} is-today{% endif %}"
+                      {% if cell.mc_date.is_bookable %}onclick="wmSelectMasterclassDate({{ cell.mc_date.id }})"{% else %}disabled{% endif %}
+                      title="{{ cell.mc_date.spaces_left }} space(s) left">
+                <span class="wm-calendar__num">{{ cell.day }}</span>
+                <span class="wm-calendar__dot"></span>
+              </button>
+              {% else %}
+              <div class="wm-calendar__day{% if cell.is_past %} is-past{% endif %}{% if cell.is_today %} is-today{% endif %}">
+                <span class="wm-calendar__num">{{ cell.day }}</span>
+              </div>
+              {% endif %}
+            {% else %}
+              <div class="wm-calendar__day is-empty"></div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div class="wm-calendar__legend">
+        <span><i class="wm-calendar__dot" style="background:var(--wm-green)"></i> Available</span>
+        <span><i class="wm-calendar__dot" style="background:var(--wm-accent)"></i> Full / closed</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <label for="name">Full Name *</label>
-      <input type="text" id="name" name="name" required>
+<!-- ---------------- BOOKING FORM ---------------- -->
+<section class="wm-section wm-section--surface-2" id="book">
+  <div class="wm-container" style="max-width:720px">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Registration</span>
+      <h2>Secure your spot</h2>
+      <p>Seats are limited per date.
+        {% if event %}Course fee: <strong>${{ event.price }}</strong> per attendee.
+        {% if event.certification_fee %}An optional certification adds <strong>${{ event.certification_fee }}</strong>.{% endif %}
+        {% endif %}
+      </p>
+    </div>
 
-      <label for="email">Email Address *</label>
-      <input type="email" id="email" name="email" required>
+    {% if booking_success %}
+    <div class="wm-alert wm-alert--success" style="text-align:center;padding:32px;margin-bottom:28px">
+      <h3 style="margin:0 0 10px">Booking received!</h3>
+      <p style="margin:0 0 20px">
+        Your booking is <strong>pending</strong> until we verify your payment &mdash;
+        it is not confirmed yet. Tap below to send your details on WhatsApp so we can confirm faster.
+      </p>
+      <a href="{{ whatsapp_url }}" target="_blank" rel="noopener" class="wm-btn wm-btn--primary">
+        {% wm_icon "whatsapp" size=16 %} Continue on WhatsApp
+      </a>
+    </div>
+    {% endif %}
 
-      <label for="phone">Phone Number *</label>
-      <input type="tel" id="phone" name="phone" required>
+    <div class="wm-notice wm-notice--warning">
+      <strong>Please note:</strong> registering at the door on the day of the masterclass incurs a late
+      registration fee of <strong>${{ event.door_fee|default:"10" }}</strong>, in addition to the course fee.
+      Book in advance via this page to avoid it.
+    </div>
 
-      <label for="location">Location/City *</label>
-      <input type="text" id="location" name="location" required>
-
-      <label for="experience">Farming Experience</label>
-      <select id="experience" name="experience">
-        <option value="">Select your experience level</option>
-        <option value="none">No experience</option>
-        <option value="beginner">Beginner</option>
-        <option value="intermediate">Intermediate</option>
-        <option value="advanced">Advanced</option>
-      </select>
-
-      <label for="interest">Why are you interested in rabbit farming?</label>
-      <textarea id="interest" name="interest" rows="4" placeholder="Tell us about your goals and expectations..."></textarea>
-
-      <button type="button" class="book-button" onclick="submitToWhatsApp()">Book Now – $140</button>
-      <p class="small-note">Click to send your details via WhatsApp. Secure payment options available. Full refund if cancelled 48 hours before the event.</p>
+    <form method="post" enctype="multipart/form-data" class="wm-contact__form" id="masterclassBookingForm" style="margin-top:24px">
+      {% csrf_token %}
+      {{ booking_form.non_field_errors }}
+      <label>{{ booking_form.masterclass_date.label }}
+        {{ booking_form.masterclass_date.errors }}
+        {{ booking_form.masterclass_date }}
+      </label>
+      <label>Full name
+        {{ booking_form.name.errors }}
+        {{ booking_form.name }}
+      </label>
+      <label>Email address
+        {{ booking_form.email.errors }}
+        {{ booking_form.email }}
+      </label>
+      <label>Phone number
+        {{ booking_form.phone.errors }}
+        {{ booking_form.phone }}
+      </label>
+      <label>Number of attendees
+        {{ booking_form.attendees.errors }}
+        {{ booking_form.attendees }}
+      </label>
+      <label>Proof of payment (image or PDF)
+        {{ booking_form.payment_proof.errors }}
+        {{ booking_form.payment_proof }}
+      </label>
+      <label>Anything else? (optional)
+        {{ booking_form.notes.errors }}
+        {{ booking_form.notes }}
+      </label>
+      <button type="submit" class="wm-btn wm-btn--primary">
+        {% wm_icon "whatsapp" size=16 %} Submit &amp; continue on WhatsApp
+      </button>
+      <p class="small-note" style="margin-top:14px;font-size:.85rem;color:var(--wm-muted)">
+        Your booking stays <strong>pending</strong> until our team verifies your payment proof.
+      </p>
     </form>
   </div>
 </section>
+{% endblock %}
 
-<!-- Footer Section -->
-<footer class="footer-section animate-on-scroll fade-in">
-  <div class="footer-content">
-    <div class="footer-col company">
-      <h3>The White Meat Company</h3>
-      <p>Industry leaders in the provision of rabbit farming equipment and prime breeding stock in Zimbabwe.</p>
-      
-    </div>
-    <div class="footer-col links">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
-        <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
-        <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
-        <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
-        
-      </ul>
-    </div>
-    <div class="footer-col contact">
-      <h4>Contact Info</h4>
-      <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br /> +263 779 521 665<br/>rabbitholezim@gmail.com</p>
-      <div style="margin-top: 20px;">
-        <a href="{% url 'login' %}" style="color: #2d6a4f; font-weight: bold; text-decoration: none; font-size: 16px;">LOGIN</a>
-      </div>
-    </div>
-  </div>
-  <hr class="footer-divider" />
-  <div class="footer-bottom">
-    &copy; 2025 The White Meat Company. All rights reserved.
-  </div>
-</footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init();</script>
-  <script>
-    // Intersection Observer for fade-in scroll animations
-    const fadeObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => {
-      fadeObserver.observe(el);
-    });
-  </script>
-  <script>
-    // Typewriter effect for hero section
-    function typeWriter(element, text, speed = 50, callback) {
-      let i = 0;
-      element.textContent = '';
-      const cursor = document.createElement('span');
-      cursor.className = 'typewriter-cursor';
-      cursor.textContent = '|';
-      element.appendChild(cursor);
-      function type() {
-        if (i < text.length) {
-          element.insertBefore(document.createTextNode(text.charAt(i)), cursor);
-          i++;
-          setTimeout(type, speed);
-        } else {
-          cursor.remove();
-          if (callback) callback();
-        }
-      }
-      type();
-    }
-    window.addEventListener('DOMContentLoaded', () => {
-      const title = document.getElementById('typewriter-title');
-      const subheading = document.getElementById('typewriter-subheading');
-      const desc = document.getElementById('typewriter-desc');
-      subheading.style.visibility = 'hidden';
-      desc.style.visibility = 'hidden';
-      typeWriter(title, title.textContent, 60, () => {
-        subheading.style.visibility = 'visible';
-        typeWriter(subheading, subheading.textContent, 30, () => {
-          desc.style.visibility = 'visible';
-          typeWriter(desc, desc.textContent, 15);
-        });
-      });
-    });
-  </script>
-  <script>
-    // Gallery filter functionality
-    document.querySelectorAll('.gallery-filter').forEach(btn => {
-      btn.addEventListener('click', function() {
-        // Remove active from all
-        document.querySelectorAll('.gallery-filter').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        const filter = this.getAttribute('data-filter');
-        document.querySelectorAll('.gallery-grid img').forEach(img => {
-          if (filter === 'all' || img.getAttribute('data-category') === filter) {
-            img.style.display = '';
-          } else {
-            img.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
-
-  <script>
-    // WhatsApp form submission function
-    function submitToWhatsApp() {
-      // Get form data
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const location = document.getElementById('location').value;
-      const experience = document.getElementById('experience').value;
-      const interest = document.getElementById('interest').value;
-
-      // Validate required fields
-      if (!name || !email || !phone || !location) {
-        alert('Please fill in all required fields (marked with *)');
-        return;
-      }
-
-      // Create WhatsApp message dynamically
-      const eventTitle = "{{ event.title|default:'Rabbit Farming Masterclass'|escapejs }}";
-      const eventDates = "{{ event.date_range|default:'Upcoming Dates'|escapejs }}";
-      let message = `Hi! I'm interested in booking the ${eventTitle}.\n\n`;
-      message += `📋 MY DETAILS:\n`;
-      message += `• Name: ${name}\n`;
-      message += `• Email: ${email}\n`;
-      message += `• Phone: ${phone}\n`;
-      message += `• Location: ${location}\n`;
-      
-      if (experience) {
-        message += `• Farming Experience: ${experience}\n`;
-      }
-      
-      if (interest) {
-        message += `• Why I'm interested: ${interest}\n`;
-      }
-      
-      message += `\n💰 Course Fee: $140\n`;
-      message += `📅 Dates: ${eventDates}\n\n`;
-      message += `Please confirm my booking and send payment details. Thank you!`;
-
-      // Encode message for URL
-      const encodedMessage = encodeURIComponent(message);
-      
-      // Create WhatsApp URL
-      const whatsappURL = `https://wa.me/263772333369?text=${encodedMessage}`;
-      
-      // Open WhatsApp
-      window.open(whatsappURL, '_blank');
-    }
-  </script>
-
-
-  <script src="{% static 'js/navbar.js' %}"></script>
-</body>
-</html>
+{% block extra_js %}
+<script>
+  function wmSelectMasterclassDate(id) {
+    var sel = document.getElementById('id_masterclass_date');
+    if (sel) { sel.value = id; }
+    var form = document.getElementById('masterclassBookingForm');
+    if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+{% endblock %}

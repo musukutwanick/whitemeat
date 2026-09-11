@@ -1,0 +1,12 @@
+<section class="wm-servicebar" aria-label="What we offer">
+  <div class="wm-container">
+    <div class="wm-servicebar__row">
+      {% for card in service_cards %}
+      <a class="wm-servicebar__item" href="{{ card.url }}"{% if card.description %} title="{{ card.description }}"{% endif %}>
+        <span class="wm-servicebar__icon"><i class="{{ card.fa_class }}" aria-hidden="true"></i></span>
+        <span class="wm-servicebar__label">{{ card.title }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

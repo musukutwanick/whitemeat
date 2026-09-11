@@ -35,7 +35,7 @@ class SupabaseMediaStorage(Storage):
             or getattr(
                 settings,
                 "SUPABASE_BUCKET_NAME",
-                "website-images"
+                "images"
             )
         ).strip()
 
@@ -449,27 +449,58 @@ class SupabaseMediaStorage(Storage):
 
 
 # ---------------------------------------------------------
-# Per-bucket storage factories
+# Storage factories
 #
-# Menu images and equipment images live in two separate
-# Supabase buckets ("Menu images" and "equipment"). These are
-# plain functions (not module-level instances) so Django's
-# migration serializer can reference them by import path and
-# so settings changes are picked up without restarting the
-# process. Assign via storage=get_menu_storage on ImageFields.
+# Every upload on the site shares ONE Supabase bucket ("images" by
+# default - override with SUPABASE_BUCKET_NAME). Each model's own
+# `upload_to=` keeps things organised into folders within that bucket
+# (menu/, equipment/, hero/, cages/, order_proofs/2026/09/, ...), so
+# nothing actually collides.
+#
+# These stay as separate named functions (rather than one shared
+# storage= value) purely so each model field's intent stays obvious at
+# the call site, and so Django's migration serializer can reference them
+# by import path. Assign via storage=get_menu_storage on ImageFields.
 # ---------------------------------------------------------
 
-def get_menu_storage():
+def supabase_is_configured():
+    """True only when the Supabase package is installed AND both
+    SUPABASE_URL and SUPABASE_KEY are set. When this is False every
+    storage factory below falls back to Django's local FileSystemStorage
+    (files land in MEDIA_ROOT and are served from MEDIA_URL), so image
+    uploads work out of the box in local dev and only switch to Supabase
+    once the env vars are added - no code change needed.
+    """
+    url = (getattr(settings, "SUPABASE_URL", "") or "").strip()
+    key = (getattr(settings, "SUPABASE_KEY", "") or "").strip()
+    return bool(HAS_SUPABASE and url and key)
+
+
+def _storage():
+    if not supabase_is_configured():
+        from django.core.files.storage import FileSystemStorage
+        return FileSystemStorage()
     return SupabaseMediaStorage(
-        bucket_name=getattr(
-            settings, "SUPABASE_MENU_BUCKET_NAME", "Menu images"
-        )
+        bucket_name=getattr(settings, "SUPABASE_BUCKET_NAME", "images")
     )
+
+
+def get_menu_storage():
+    return _storage()
 
 
 def get_equipment_storage():
-    return SupabaseMediaStorage(
-        bucket_name=getattr(
-            settings, "SUPABASE_EQUIPMENT_BUCKET_NAME", "equipment"
-        )
-    )
+    return _storage()
+
+
+def get_masterclass_storage():
+    """Storage for masterclass proof-of-payment uploads (images/masterclass_proofs/).
+    Falls back to local FileSystemStorage when Supabase isn't configured."""
+    return _storage()
+
+
+def get_order_storage():
+    """Storage for shop-order proof-of-payment uploads (images/order_proofs/) -
+    cages, sheds, accessories, breeding stock, restaurant orders/reservations.
+    Falls back to local FileSystemStorage when Supabase isn't configured."""
+    return _storage()

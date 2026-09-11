@@ -2,131 +2,104 @@
 {% load static %}
 
 {% block title %}Masterclass Schedule Editor{% endblock %}
-{% block page_title %}Masterclass Schedule Editor{% endblock %}
+{% block content_title %}Masterclass Schedule{% endblock %}
 
 {% block content %}
-<div class="schedule-editor-wrapper">
-  <!-- Header / Action Row -->
-  <div class="admin-header-row">
+<div class="mc-editor">
+
+  <div class="mc-pagehead">
     <div>
-      <h2 class="section-main-title">Masterclass Training Schedule</h2>
-      <p class="section-subtitle">Manage upcoming 2-day training program dates, curriculum, and session time slots.</p>
+      <h2>Masterclass Training Schedule</h2>
+      <p>Manage the 2-day training program: event details and the session-by-session curriculum.</p>
     </div>
-    <div class="header-actions">
-      <a href="{% url 'admin_dashboard' %}" class="btn-secondary-custom">
-        <i class="fas fa-arrow-left"></i> Back to Dashboard
-      </a>
-      <a href="{% url 'masterclass' %}" target="_blank" class="btn-outline-custom">
-        <i class="fas fa-external-link-alt"></i> View Public Page
-      </a>
+    <div class="mc-pagehead__actions">
+      <a href="{% url 'admin_dashboard' %}" class="btn btn--ghost btn--sm"><i class="fas fa-arrow-left"></i> Dashboard</a>
+      <a href="{% url 'masterclass' %}" target="_blank" class="btn btn--ghost btn--sm"><i class="fas fa-arrow-up-right-from-square"></i> View public page</a>
     </div>
   </div>
 
-  <!-- Notification Banner -->
-  <div id="save-alert" class="alert-box alert-success" style="display: none;">
-    <i class="fas fa-check-circle"></i>
-    <span id="save-alert-msg">Changes saved successfully!</span>
+  <div id="save-alert" class="alert" style="display:none;align-items:center;gap:10px;margin-bottom:18px;">
+    <i class="fas fa-circle-check"></i>
+    <span id="save-alert-msg">Changes saved.</span>
   </div>
 
-  <!-- Event Overview Card -->
-  <div class="admin-card mb-4">
-    <div class="card-head">
-      <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+  <!-- Event Overview -->
+  <div class="card">
+    <div class="card-header">
       <div>
-        <h3>Event Overview</h3>
-        <p>Main title and date range shown on the website and WhatsApp booking message</p>
+        <h3>Event overview</h3>
+        <p class="mc-sub">Title and date range shown on the website and in the WhatsApp booking message.</p>
       </div>
     </div>
-
-    <form id="event-details-form" class="event-form-grid">
-      {% csrf_token %}
-      <div class="form-field">
-        <label for="event-title">Event Title <span class="req">*</span></label>
-        <input type="text" id="event-title" name="event_title" value="{{ event.title|default:'Rabbitry Masterclass' }}" placeholder="e.g. Rabbitry Masterclass" required>
-      </div>
-
-      <div class="form-field">
-        <label for="event-date">Event Date(s) <span class="req">*</span></label>
-        <input type="text" id="event-date" name="event_date" value="{{ event.date_range|default:'August 2025' }}" placeholder="e.g. August 2nd & 3rd, 2025" required>
-      </div>
-
-      <div class="form-field full-span">
-        <label for="event-description">Short Description / Subtitle</label>
-        <textarea id="event-description" name="description" rows="2" placeholder="Brief introduction to this masterclass...">{{ event.description }}</textarea>
-      </div>
-
-      <div class="full-span" style="display: flex; justify-content: flex-end;">
-        <button type="submit" class="btn-primary-custom" id="save-event-btn">
-          <i class="fas fa-save"></i> Save Event Details
-        </button>
-      </div>
-    </form>
+    <div class="card-body">
+      <form id="event-details-form" class="mc-grid">
+        {% csrf_token %}
+        <div class="form-row">
+          <label for="event-title">Event title <span class="mc-req">*</span></label>
+          <input type="text" class="form-control" id="event-title" name="event_title" value="{{ event.title|default:'Rabbitry Masterclass' }}" placeholder="e.g. Rabbitry Masterclass" required>
+        </div>
+        <div class="form-row">
+          <label for="event-date">Event date(s) <span class="mc-req">*</span></label>
+          <input type="text" class="form-control" id="event-date" name="event_date" value="{{ event.date_range|default:'August 2025' }}" placeholder="e.g. August 2nd &amp; 3rd, 2025" required>
+        </div>
+        <div class="form-row mc-grid__full">
+          <label for="event-description">Short description / subtitle</label>
+          <textarea class="form-control" id="event-description" name="description" rows="2" placeholder="Brief introduction to this masterclass...">{{ event.description }}</textarea>
+        </div>
+        <div class="mc-grid__full" style="display:flex;justify-content:flex-end;">
+          <button type="submit" class="btn" id="save-event-btn"><i class="fas fa-floppy-disk"></i> Save event details</button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <!-- Sessions Curriculum Card -->
-  <div class="admin-card">
-    <div class="card-head between">
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <div class="card-icon"><i class="fas fa-list-ol"></i></div>
-        <div>
-          <h3>Curriculum & Sessions</h3>
-          <p>Configure Day 1 and Day 2 schedule items</p>
-        </div>
+  <!-- Curriculum & Sessions -->
+  <div class="card" style="margin-top:20px;">
+    <div class="card-header">
+      <div>
+        <h3>Curriculum &amp; sessions</h3>
+        <p class="mc-sub">Configure the Day 1 and Day 2 schedule items.</p>
       </div>
-      <div class="schedule-actions-head">
-        <button type="button" class="btn-primary-custom" onclick="addNewSessionRow()">
-          <i class="fas fa-plus"></i> Add Session
+      <button type="button" class="btn" onclick="addNewSessionRow()"><i class="fas fa-plus"></i> Add session</button>
+    </div>
+    <div class="card-body">
+
+      <div class="mc-tabs">
+        <button type="button" class="day-tab active" data-day="all" onclick="filterDay('all', this)">All (<span id="count-all">0</span>)</button>
+        <button type="button" class="day-tab" data-day="1" onclick="filterDay('1', this)">Day 1 (<span id="count-d1">0</span>)</button>
+        <button type="button" class="day-tab" data-day="2" onclick="filterDay('2', this)">Day 2 (<span id="count-d2">0</span>)</button>
+      </div>
+
+      <div style="overflow-x:auto;border:1px solid var(--line);border-radius:10px;">
+        <table class="table" id="schedule-table">
+          <thead>
+            <tr>
+              <th style="width:110px;">Day</th>
+              <th style="width:130px;">Time</th>
+              <th style="width:260px;">Session title</th>
+              <th>Description &amp; key topics</th>
+              <th style="width:60px;text-align:center;">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody id="sessions-tbody"></tbody>
+        </table>
+      </div>
+
+      <div id="no-sessions-msg" class="empty-state" style="display:none;">
+        <i class="fas fa-calendar-xmark"></i>
+        <strong>No sessions yet</strong>
+        <div>Click &ldquo;Add session&rdquo; to start building the schedule.</div>
+      </div>
+
+      <div class="mc-savefoot">
+        <button type="button" class="btn" id="save-all-sessions-btn" onclick="saveAllSessions()" style="padding:13px 26px;">
+          <i class="fas fa-check"></i> Save full schedule
         </button>
       </div>
-    </div>
-
-    <!-- Day Filter Tabs -->
-    <div class="day-filter-tabs">
-      <button type="button" class="day-tab active" data-day="all" onclick="filterDay('all', this)">
-        All Sessions (<span id="count-all">0</span>)
-      </button>
-      <button type="button" class="day-tab" data-day="1" onclick="filterDay('1', this)">
-        Day 1 (<span id="count-d1">0</span>)
-      </button>
-      <button type="button" class="day-tab" data-day="2" onclick="filterDay('2', this)">
-        Day 2 (<span id="count-d2">0</span>)
-      </button>
-    </div>
-
-    <!-- Responsive Table / Card Container -->
-    <div class="table-responsive">
-      <table class="modern-schedule-table" id="schedule-table">
-        <thead>
-          <tr>
-            <th style="width: 110px;">Day</th>
-            <th style="width: 130px;">Time</th>
-            <th style="width: 280px;">Session Title</th>
-            <th>Description & Key Topics</th>
-            <th style="width: 70px; text-align: center;">Action</th>
-          </tr>
-        </thead>
-        <tbody id="sessions-tbody">
-          <!-- Rows dynamically generated via JS -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Empty State -->
-    <div id="no-sessions-msg" class="empty-inventory" style="display: none;">
-      <i class="fas fa-calendar-times"></i>
-      <h4>No Sessions Added Yet</h4>
-      <p>Click "Add Session" above to start adding topics to the schedule.</p>
-    </div>
-
-    <div class="save-footer">
-      <button type="button" class="btn-primary-custom btn-large" id="save-all-sessions-btn" onclick="saveAllSessions()">
-        <i class="fas fa-check"></i> Save Full Schedule
-      </button>
     </div>
   </div>
 </div>
 
-<!-- Serialized initial sessions from view -->
 <script>
   window.initialSessions = {{ sessions_json|safe }};
 </script>
@@ -136,16 +109,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const tbody = document.getElementById('sessions-tbody');
   const noSessionsMsg = document.getElementById('no-sessions-msg');
 
-  // Render initial sessions
   if (window.initialSessions && window.initialSessions.length > 0) {
     window.initialSessions.forEach(session => renderRow(session));
   } else {
-    // Add default row if empty
     renderRow({ day: 1, time: '09:00 AM', title: '', description: '' });
   }
   updateCounts();
 
-  // Event Details Form Submission
   const eventForm = document.getElementById('event-details-form');
   eventForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -169,16 +139,16 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(r => r.json())
     .then(data => {
       btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-save"></i> Save Event Details';
+      btn.innerHTML = '<i class="fas fa-floppy-disk"></i> Save event details';
       if (data.success) {
-        showNotification(data.message || 'Event details updated successfully!', 'success');
+        showNotification(data.message || 'Event details updated.', 'success');
       } else {
         showNotification('Error: ' + (data.error || 'Failed to save event.'), 'error');
       }
     })
     .catch(err => {
       btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-save"></i> Save Event Details';
+      btn.innerHTML = '<i class="fas fa-floppy-disk"></i> Save event details';
       showNotification('Network error occurred.', 'error');
     });
   });
@@ -197,24 +167,22 @@ function renderRow(data) {
 
   row.innerHTML = `
     <td data-label="Day">
-      <select class="form-control-table session-day" onchange="this.closest('tr').dataset.day = this.value; updateCounts();">
+      <select class="form-control form-control--sm session-day" onchange="this.closest('tr').dataset.day = this.value; updateCounts();">
         <option value="1" ${data && data.day == 1 ? 'selected' : ''}>Day 1</option>
         <option value="2" ${data && data.day == 2 ? 'selected' : ''}>Day 2</option>
       </select>
     </td>
     <td data-label="Time">
-      <input type="text" class="form-control-table session-time" placeholder="e.g. 09:00 AM" value="${data ? escapeHtml(data.time) : ''}" required>
+      <input type="text" class="form-control form-control--sm session-time" placeholder="e.g. 09:00 AM" value="${data ? escapeHtml(data.time) : ''}" required>
     </td>
     <td data-label="Title">
-      <input type="text" class="form-control-table session-title" placeholder="Session title" value="${data ? escapeHtml(data.title) : ''}" required>
+      <input type="text" class="form-control form-control--sm session-title" placeholder="Session title" value="${data ? escapeHtml(data.title) : ''}" required>
     </td>
     <td data-label="Description">
-      <textarea class="form-control-table session-desc" rows="1" placeholder="Brief outline...">${data ? escapeHtml(data.description) : ''}</textarea>
+      <textarea class="form-control form-control--sm session-desc" rows="1" placeholder="Brief outline...">${data ? escapeHtml(data.description) : ''}</textarea>
     </td>
-    <td data-label="Remove" style="text-align: center;">
-      <button type="button" class="btn-remove-row" onclick="removeRow(this)" title="Delete session">
-        <i class="fas fa-trash"></i>
-      </button>
+    <td data-label="Remove" style="text-align:center;">
+      <button type="button" class="mc-remove" onclick="removeRow(this)" title="Delete session"><i class="fas fa-trash"></i></button>
     </td>
   `;
 
@@ -228,7 +196,6 @@ function addNewSessionRow() {
   renderRow({ day: dayVal, time: '', title: '', description: '' });
   updateCounts();
 
-  // Scroll smoothly to the new row
   const rows = document.querySelectorAll('.session-row');
   const lastRow = rows[rows.length - 1];
   if (lastRow) {
@@ -256,31 +223,22 @@ function updateCounts() {
   document.getElementById('count-d2').textContent = d2Rows.length;
 
   const noMsg = document.getElementById('no-sessions-msg');
-  if (rows.length === 0) {
-    noMsg.style.display = 'block';
-  } else {
-    noMsg.style.display = 'none';
-  }
+  noMsg.style.display = rows.length === 0 ? 'block' : 'none';
 }
 
 function filterDay(day, tabBtn) {
   document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
   tabBtn.classList.add('active');
 
-  const rows = document.querySelectorAll('.session-row');
-  rows.forEach(row => {
-    if (day === 'all' || row.dataset.day === day) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
+  document.querySelectorAll('.session-row').forEach(row => {
+    row.style.display = (day === 'all' || row.dataset.day === day) ? '' : 'none';
   });
 }
 
 function saveAllSessions() {
   const btn = document.getElementById('save-all-sessions-btn');
   btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving Schedule...';
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving schedule...';
 
   const rows = Array.from(document.querySelectorAll('.session-row'));
   const sessions = rows.map(row => ({
@@ -301,16 +259,16 @@ function saveAllSessions() {
   .then(r => r.json())
   .then(data => {
     btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-check"></i> Save Full Schedule';
+    btn.innerHTML = '<i class="fas fa-check"></i> Save full schedule';
     if (data.success) {
-      showNotification(data.message || 'Schedule saved successfully!', 'success');
+      showNotification(data.message || 'Schedule saved.', 'success');
     } else {
       showNotification('Error: ' + (data.error || 'Failed to save.'), 'error');
     }
   })
   .catch(err => {
     btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-check"></i> Save Full Schedule';
+    btn.innerHTML = '<i class="fas fa-check"></i> Save full schedule';
     showNotification('Network error occurred.', 'error');
   });
 }
@@ -318,14 +276,11 @@ function saveAllSessions() {
 function showNotification(msg, type) {
   const alert = document.getElementById('save-alert');
   const alertMsg = document.getElementById('save-alert-msg');
-  alert.className = 'alert-box ' + (type === 'error' ? 'alert-error' : 'alert-success');
+  alert.style.borderLeftColor = (type === 'error') ? '#888' : '#111';
   alertMsg.textContent = msg;
   alert.style.display = 'flex';
   alert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-  setTimeout(() => {
-    alert.style.display = 'none';
-  }, 4000);
+  setTimeout(() => { alert.style.display = 'none'; }, 4000);
 }
 
 function escapeHtml(text) {
@@ -337,196 +292,69 @@ function escapeHtml(text) {
 </script>
 
 <style>
-.schedule-editor-wrapper {
-  max-width: 1250px;
-  margin: 0 auto;
-  padding: 10px;
-}
+.mc-editor { max-width: 1000px; margin: 0 auto; }
 
-.mb-4 {
-  margin-bottom: 26px;
+.mc-pagehead {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 18px;
 }
+.mc-pagehead h2 { margin: 0 0 4px; font-size: 1.3rem; color: var(--ink); }
+.mc-pagehead p { margin: 0; color: var(--muted); font-size: .92rem; max-width: 620px; }
+.mc-pagehead__actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-.event-form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
-.event-form-grid .full-span {
-  grid-column: 1 / -1;
-}
+.mc-sub { margin: 4px 0 0; color: var(--muted); font-size: .85rem; font-weight: 400; }
+.mc-req { color: #111; }
 
-/* Day Filter Tabs */
-.day-filter-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 18px;
-  flex-wrap: wrap;
-}
+.mc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.mc-grid .form-row { margin-bottom: 0; }
+.mc-grid__full { grid-column: 1 / -1; }
+
+.mc-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 .day-tab {
-  background: #f1f5f9;
-  color: #475569;
-  border: 1px solid #cbd5e1;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.92rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  background: #fff; color: var(--ink-soft);
+  border: 1px solid var(--line);
+  padding: 7px 16px; border-radius: 999px;
+  font-weight: 600; font-size: .85rem; cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
 }
-.day-tab:hover {
-  background: #e2e8f0;
+.day-tab:hover { background: var(--hover); }
+.day-tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+#schedule-table td { vertical-align: top; }
+.form-control--sm { padding: 7px 10px; font-size: .86rem; border-radius: 6px; }
+textarea.form-control--sm { min-height: 38px; resize: vertical; }
+
+.mc-remove {
+  background: #fff; color: var(--ink);
+  border: 1px solid var(--line);
+  width: 34px; height: 34px; border-radius: 6px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .15s, color .15s, border-color .15s;
 }
-.day-tab.active {
-  background: #2d6a4f;
-  color: #ffffff;
-  border-color: #2d6a4f;
+.mc-remove:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.mc-savefoot {
+  display: flex; justify-content: flex-end;
+  margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line-soft);
 }
 
-/* Modern Schedule Table */
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  border-radius: 10px;
-  border: 1px solid #edf2f7;
-  background: #fff;
-}
-.modern-schedule-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 0.95rem;
-}
-.modern-schedule-table th {
-  background: #f8fafc;
-  color: #475569;
-  font-weight: 700;
-  padding: 12px 14px;
-  border-bottom: 2px solid #e2e8f0;
-  white-space: nowrap;
-}
-.modern-schedule-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid #f1f5f9;
-  vertical-align: top;
-}
-.modern-schedule-table tr:hover td {
-  background: #fafcfb;
-}
-
-.form-control-table {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 0.92rem;
-  color: #1f2937;
-  background: #fdfdfd;
-  box-sizing: border-box;
-  transition: border-color 0.15s ease;
-}
-.form-control-table:focus {
-  border-color: #2d6a4f;
-  background: #ffffff;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.12);
-}
-
-.btn-remove-row {
-  background: #fee2e2;
-  color: #ef4444;
-  border: none;
-  width: 34px;
-  height: 34px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-.btn-remove-row:hover {
-  background: #ef4444;
-  color: #ffffff;
-}
-
-.save-footer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid #f0f2f5;
-}
-.btn-large {
-  padding: 14px 28px !important;
-  font-size: 1.05rem !important;
-}
-
-/* Mobile & Tablet Card Transformation */
 @media (max-width: 768px) {
-  .event-form-grid {
-    grid-template-columns: 1fr;
+  .mc-grid { grid-template-columns: 1fr; }
+  #schedule-table thead { display: none; }
+  #schedule-table, #schedule-table tbody, #schedule-table tr, #schedule-table td { display: block; width: 100%; }
+  #schedule-table tr {
+    margin-bottom: 14px; border: 1px solid var(--line); border-radius: 10px; padding: 12px;
   }
-
-  .modern-schedule-table,
-  .modern-schedule-table thead,
-  .modern-schedule-table tbody,
-  .modern-schedule-table tr {
-    display: block;
-    width: 100%;
+  #schedule-table td { border: none; padding: 6px 0; }
+  #schedule-table td:before {
+    content: attr(data-label); display: block;
+    font-weight: 700; font-size: .72rem; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--muted); margin-bottom: 4px;
   }
-
-  .modern-schedule-table thead {
-    display: none;
-  }
-
-  .modern-schedule-table tr {
-    margin-bottom: 18px;
-    background: #ffffff;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  }
-
-  .modern-schedule-table td {
-    display: flex;
-    flex-direction: column;
-    padding: 6px 0;
-    border: none;
-  }
-
-  .modern-schedule-table td:before {
-    content: attr(data-label);
-    font-weight: 700;
-    color: #2d6a4f;
-    font-size: 0.85rem;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-  }
-
-  .modern-schedule-table td[data-label="Remove"] {
-    align-items: flex-end;
-    margin-top: 8px;
-  }
-
-  .btn-remove-row {
-    width: 100%;
-    height: 38px;
-    border-radius: 6px;
-  }
-  .btn-remove-row:after {
-    content: ' Delete This Session';
-    font-weight: 600;
-    margin-left: 6px;
-  }
-
-  .save-footer {
-    justify-content: stretch;
-  }
-  .btn-large {
-    width: 100%;
-  }
+  #schedule-table td[data-label="Remove"]:before { content: none; }
+  .mc-remove { width: 100%; }
+  .mc-savefoot { justify-content: stretch; }
+  .mc-savefoot .btn { width: 100%; justify-content: center; }
 }
 </style>
 {% endblock %}

@@ -1,0 +1,60 @@
+{% load wm_icons %}
+<!-- Shared checkout modal: every cart on the site (cages, sheds, accessories,
+     breeding stock, restaurant orders) opens this to collect the customer's
+     details, show payment info, and take proof of payment or a cash choice
+     before handing the order to WhatsApp. Driven by static/js/checkout.js. -->
+<div id="wm-checkout-modal" class="wm-modal wm-checkout" aria-hidden="true">
+  <div class="wm-modal__card wm-checkout__card">
+    <button type="button" class="wm-modal__close" onclick="WMCheckout.close()" aria-label="Close">&times;</button>
+    <h2>Complete your order</h2>
+
+    <div class="wm-checkout__summary">
+      <div id="wm-checkout-items"></div>
+      <div class="wm-checkout__total"><span>Total</span><strong id="wm-checkout-total">$0.00</strong></div>
+    </div>
+
+    {% include "partials/payment_info.html" %}
+
+    <form id="wm-checkout-form" class="wm-contact__form" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="source" id="wm-checkout-source">
+      <input type="hidden" name="items_summary" id="wm-checkout-items-field">
+      <input type="hidden" name="total" id="wm-checkout-total-field">
+
+      <label for="wm-co-name">Full name
+        <input type="text" id="wm-co-name" name="customer_name" required>
+      </label>
+      <label for="wm-co-phone">Phone number
+        <input type="tel" id="wm-co-phone" name="customer_phone" required>
+      </label>
+
+      <label style="margin-bottom:8px">Payment method</label>
+      <div class="wm-checkout__methods">
+        <label class="wm-checkout__method">
+          <input type="radio" name="payment_method" value="proof" checked>
+          I&rsquo;ve paid &mdash; attach proof of payment
+        </label>
+        <label class="wm-checkout__method">
+          <input type="radio" name="payment_method" value="cash">
+          I&rsquo;ll pay cash on collection/delivery
+        </label>
+      </div>
+
+      <div id="wm-checkout-proof-row" style="margin-top:16px">
+        <label for="wm-co-proof">Proof of payment (screenshot or PDF)
+          <input type="file" id="wm-co-proof" name="proof_of_payment" accept=".pdf,.jpg,.jpeg,.png,.webp">
+        </label>
+      </div>
+
+      <label for="wm-co-notes">Notes (optional)
+        <textarea id="wm-co-notes" name="notes" rows="2"></textarea>
+      </label>
+
+      <p class="wm-checkout__error" id="wm-checkout-error" hidden></p>
+
+      <button type="submit" class="wm-btn wm-btn--accent" id="wm-checkout-submit" style="width:100%;justify-content:center">
+        {% wm_icon "whatsapp" size=16 %} Send order on WhatsApp
+      </button>
+    </form>
+  </div>
+</div>

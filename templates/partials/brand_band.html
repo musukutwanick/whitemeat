@@ -1,0 +1,6 @@
+<section class="wm-brand-band" aria-label="Our philosophy">
+  <div class="wm-brand-band__words wm-slogan">
+    {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}<span>{{ part }}</span>{% endfor %}
+  </div>
+  <p>White meat is lean, high in protein and low in cholesterol. Every part of what we do &mdash; from breeding stock to the Rabbit Hole kitchen &mdash; serves that promise.</p>
+</section>

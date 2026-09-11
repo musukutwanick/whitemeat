@@ -1,12 +1,19 @@
 from django.urls import path
 from . import views
+from . import dashboard
 
 urlpatterns = [
     # Page URLs
     path('', views.index, name='index'),
     path('masterclass/', views.masterclass, name='masterclass'),
+    path('equipment/', views.equipment, name='equipment'),
     path('cages/', views.cages, name='cages'),
+    path('sheds/', views.sheds, name='sheds'),
+    path('accessories/', views.accessories, name='accessories'),
+    path('outgrowers/', views.outgrowers, name='outgrowers'),
     path('breeding/', views.breeding, name='breeding'),
+    path('butchery/', views.butchery, name='butchery'),
+    path('cart/', views.cart, name='cart'),
     path('rabbithole/', views.rabbithole, name='rabbithole'),
     path('pagomo/', views.pagomo, name='pagomo'),
     
@@ -25,14 +32,21 @@ urlpatterns = [
     path('dashboard/masterclass-schedule/', views.edit_masterclass_schedule, name='edit_masterclass_schedule'),
     path('dashboard/masterclass-schedule/sessions/', views.masterclass_sessions_api, name='masterclass_sessions_api'),
     path('dashboard/masterclass-schedule/save/', views.save_masterclass_schedule, name='save_masterclass_schedule'),
-    path('dashboard/add-accessory/', views.add_accessory, name='add_accessory'),
-    
+
+    # Generic content management (cages, accessories, breeding, butchery,
+    # hero slides, masterclass dates) - see frontend/dashboard.py
+    path('dashboard/c/<slug:section>/', dashboard.content_list, name='content_list'),
+    path('dashboard/c/<slug:section>/new/', dashboard.content_edit, name='content_add'),
+    path('dashboard/c/<slug:section>/<int:pk>/', dashboard.content_edit, name='content_edit'),
+    path('dashboard/c/<slug:section>/<int:pk>/delete/', dashboard.content_delete, name='content_delete'),
+
     # API URLs
     path('api/menu-items/', views.api_menu_items, name='api_menu_items'),
     path('api/locations/', views.api_restaurant_locations, name='api_locations'),
     path('api/contact/', views.api_contact_form, name='api_contact'),
     path('api/reservation/', views.api_reservation, name='api_reservation'),
     path('api/newsletter/', views.api_newsletter_signup, name='api_newsletter'),
+    path('api/place-order/', views.place_order, name='place_order'),
     
     # Debug URL
     path('debug/', views.debug_static, name='debug_static'),

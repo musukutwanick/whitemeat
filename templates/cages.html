@@ -1,392 +1,138 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="format-detection" content="telephone=no" />
-  <title>The White Meat Company</title>
-  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% extends "base.html" %}
+{% load static wm_icons %}
+{% block title %}Rabbit Cages - {{ site.company_name }}{% endblock %}
+{% block meta_description %}Galvanised steel breeder and weaner rabbit cages, built as complete units, from {{ site.company_name }}.{% endblock %}
 
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-</head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">
-      <img src="{% static 'images/logo.svg' %}" alt="The White Meat Company Logo" />
-    </div>
-<button class="navbar-hamburger" id="navbar-hamburger" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    
-    <ul class="nav-links" id="nav-links">
-      <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
-      <li><a href="{% url 'cages' %}" class="active">Cages+Accessories</a></li>
-      <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
-      <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
-    </ul>
-  </nav>
+{% block content %}
+<section class="wm-page-hero wm-pattern">
+  <div class="wm-container">
+    <span class="wm-eyebrow">Cages</span>
+    <h1>Premium rabbit cages, built to last</h1>
+    <p>Industry-leading galvanised steel cages with complete feeding and waste-management systems &mdash;
+      professional-grade equipment for maximum productivity and animal welfare.</p>
+  </div>
+</section>
 
-  <!-- Cages Hero Section -->
-  <section class="cages-hero" data-aos="fade-in" data-aos-duration="1000">
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1 data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">Premium Rabbit Cages & Equipment</h1>
-      <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
-        Industry-leading galvanized steel cages with complete feeding and waste management systems.
-        Professional-grade equipment designed for maximum productivity and animal welfare.
-      </p>
-      <a href="#equipment" class="btn green" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="800">View Products</a>
-    </div>
-  </section>
-
-  <!-- Equipment Info Section -->
-  <section class="equipment-section">
-    <div class="container">
-      <div class="equipment-header">
-        <h2>Industry Leaders in Rabbit Farming Equipment</h2>
-        <p>The White Meat Company provides premium breeding stock and professional-grade equipment in Zimbabwe</p>
+<section class="wm-section">
+  <div class="wm-container">
+    <div class="wm-promo">
+      <div class="wm-promo__media"><img src="{% static 'images/cage2.jpg' %}" alt="Rabbit cage with dimensions"></div>
+      <div>
+        <span class="wm-eyebrow">Complete farming solutions</span>
+        <h2>Everything you need, in one unit</h2>
+        <p>Our steel galvanised cages come complete with water drinkers, feeding troughs and an advanced
+          manure &amp; urine collection system &mdash; everything you need to start a professional rabbit
+          farming operation. Innovative drainage and durable construction stand up to Zimbabwe's climate.</p>
+        <ul class="wm-promo__list">
+          <li>{% wm_icon "equipment" %} Trusted by commercial farmers across Zimbabwe</li>
+          <li>{% wm_icon "equipment" %} Designed for animal welfare and easy cleaning</li>
+        </ul>
       </div>
-
-      <div class="equipment-content">
-        <div class="equipment-text">
-          <h3>Complete Farming Solutions</h3>
-          <p>
-            Our steel galvanized cages come complete with water drinkers, feeding troughs, and an advanced manure & urine
-            collection system – everything you need to start your professional rabbit farming operation.
-          </p>
-          <p>
-            Designed for optimal animal welfare and maximum productivity, our cages feature innovative drainage systems
-            and durable construction that withstands Zimbabwe’s climate conditions.
-          </p>
-
-          <div class="highlight-box">
-            <div class="icon">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 9l6 6 6-6"/>
-                <path d="M12 3v9"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
-            </div>
-            <div class="highlight-text">
-              <strong>Professional Grade Equipment</strong>
-              <p>Trusted by commercial farmers across Zimbabwe for durability, efficiency, and outstanding animal care standards.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="equipment-image">
-          <img src="{% static 'images/cage2.jpg' %}" alt="Rabbit cage with dimensions">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cage Products Section -->
-  <section id="equipment" class="cage-section">
-    <div class="container">
-      <div class="cage-header">
-        <h2>Our Premium Cage Systems</h2>
-        <p>Professional-grade galvanized steel cages designed for commercial rabbit farming success</p>
-      </div>
-
-      <div class="cage-grid">
-        <!-- Breeders Cage Card -->
-        <div class="cage-card">
-          <div class="cage-image">
-            <img src="{% static 'images/cage3.jpg' %}" alt="12Sdx Breeders Cage">
-            <span class="cage-tag breeders">BREEDERS</span>
-          </div>
-          <div class="cage-body">
-            <h3>12Sdx Breeders Cage</h3>
-            <p>Professional breeding system with 12 compartments designed to house 1 buck and 11 does for optimal breeding efficiency.</p>
-            <div class="price-order">
-              <span class="price">$<strong>455</strong></span>
-             
-              <button class="cart-btn" onclick="addToCart('12Sdx Breeders Cage', 455, '{% static 'images/cage3.jpg' %}')" style="background:#2d6a4f; color:#fff; border:none; border-radius:22px; padding:7px 18px; font-size:0.98rem; font-weight:600; box-shadow:0 2px 8px rgba(45,106,79,0.08); cursor:pointer; transition:background 0.18s, transform 0.13s, box-shadow 0.18s; letter-spacing:0.2px; outline:none; position:relative; overflow:hidden;">Add to Cart</button>
-              <button class="details-btn" onclick="showDetails('breeders')" style="background:#2d6a4f; color:#fff; border:none; border-radius:22px; padding:7px 18px; font-size:0.98rem; font-weight:600; box-shadow:0 2px 8px rgba(45,106,79,0.08); cursor:pointer; transition:background 0.18s, transform 0.13s, box-shadow 0.18s; letter-spacing:0.2px; outline:none; position:relative; overflow:hidden;">View Details</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Weaners Cage Card -->
-        <div class="cage-card">
-          <div class="cage-image">
-            <img src="{% static 'images/cage4.jpg' %}" alt="6Sdx Weaners Cage">
-            <span class="cage-tag weaners">WEANERS</span>
-          </div>
-          <div class="cage-body">
-            <h3>6Sdx Weaners Cage</h3>
-            <p>High-capacity weaning system with 6 compartments designed to house up to 90 weaners for efficient growth management.</p>
-            <div class="price-order">
-              <span class="price">$<strong>455</strong></span>
-             
-              <button class="cart-btn" onclick="addToCart('6Sdx Weaners Cage', 455, '{% static 'images/cage4.jpg' %}')" style="background:#2d6a4f; color:#fff; border:none; border-radius:22px; padding:7px 18px; font-size:0.98rem; font-weight:600; box-shadow:0 2px 8px rgba(45,106,79,0.08); cursor:pointer; transition:background 0.18s, transform 0.13s, box-shadow 0.18s; letter-spacing:0.2px; outline:none; position:relative; overflow:hidden;">Add to Cart</button>
-              <button class="details-btn" onclick="showDetails('weaners')" style="background:#2d6a4f; color:#fff; border:none; border-radius:22px; padding:7px 18px; font-size:0.98rem; font-weight:600; box-shadow:0 2px 8px rgba(45,106,79,0.08); cursor:pointer; transition:background 0.18s, transform 0.13s, box-shadow 0.18s; letter-spacing:0.2px; outline:none; position:relative; overflow:hidden;">View Details</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Accessories Section (unchanged layout) -->
-  <!-- Accessories Section -->
-<!-- Accessories Section -->
-<section class="accessories-section" style="padding: 70px 20px; background: #f8f8f8;">
-  <div class="container" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
-    <div class="accessories-header" style="text-align: center; margin-bottom: 38px;">
-      <h2 class="cage-header-title" style="margin-bottom: 12px; font-size: 2.2rem; font-weight: 700; color:#1b4332;">
-        Equipment & Accessories
-      </h2>
-      <p class="cage-header-desc" style="max-width: 750px; margin: 0 auto; color:#555; font-size: 1.05rem; line-height:1.6;">
-        Browse additional equipment, drinkers, feeders, nesting boxes, and nutrition to enhance your rabbit farming operation. 
-      </p>
-    </div>
-
-    <div id="accessories-list" class="accessories-grid-responsive">
-      {% if accessories %}
-        {% for accessory in accessories %}
-        <div class="accessory-public-card">
-          <div class="accessory-card-image">
-            <img src="{{ accessory.image_url }}" alt="{{ accessory.name }}" loading="lazy" onerror="this.onerror=null;this.src='{% static 'images/default-accessory.jpg' %}';">
-          </div>
-          <div class="accessory-card-body">
-            <h3 class="accessory-card-title">{{ accessory.name }}</h3>
-            <p class="accessory-card-desc">{{ accessory.description|truncatewords:20 }}</p>
-            <div class="accessory-card-footer">
-              <span class="accessory-card-price">${{ accessory.price }}</span>
-              <button class="accessory-card-btn"
-                      onclick="addToCart('{{ accessory.name|escapejs }}', {{ accessory.price }}, '{{ accessory.image_url }}')">
-                <i class="fas fa-shopping-cart"></i> Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      {% else %}
-        <div style="color:#888; font-size:1.1rem; padding:32px 0; width:100%; text-align:center;">
-          No accessories available at the moment.
-        </div>
-      {% endif %}
     </div>
   </div>
 </section>
 
-  <!-- Delivery Section -->
-  <section class="delivery-section">
-    <div class="container">
-      <div class="delivery-content">
-        <div class="delivery-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="3" width="15" height="13"/>
-            <polygon points="16,8 20,8 23,11 23,16 16,16"/>
-            <circle cx="5.5" cy="18.5" r="2.5"/>
-            <circle cx="18.5" cy="18.5" r="2.5"/>
-          </svg>
+<section class="wm-section wm-section--surface-2" id="equipment">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Cage systems</span>
+      <h2>Our premium cage systems</h2>
+      <p>Professional-grade galvanised steel cages designed for commercial rabbit farming success.</p>
+    </div>
+
+    <div class="wm-product-grid">
+      {% for cage in cages %}
+      <div class="wm-product-card"
+           data-name="{{ cage.name }}"
+           data-price="{{ cage.price|floatformat:'-2' }}"
+           data-img="{{ cage.image_url }}"
+           data-desc="{{ cage.description }}"
+           data-capacity="{{ cage.capacity }}"
+           data-features="{{ cage.features }}">
+        <div class="wm-product-card__media">
+          <img src="{{ cage.image_url }}" alt="{{ cage.image_alt|default:cage.name }}">
+          <span class="wm-product-card__tag">{{ cage.get_category_display }}</span>
         </div>
-        <h2>Delivery & Installation</h2>
-        <p>Customers to provide their own delivery services. Our cages come in complete units, with full installation.</p>
-       
+        <div class="wm-product-card__body">
+          <h3>{{ cage.name }}</h3>
+          <p>{{ cage.description|truncatewords:28 }}</p>
+          <div class="wm-product-card__footer">
+            <span class="wm-product-card__price">${{ cage.price|floatformat:'-2' }}</span>
+            <div class="wm-product-card__actions">
+              <button class="wm-btn wm-btn--outline wm-btn--sm" onclick="showDetails(this)">Details</button>
+              <button class="wm-btn wm-btn--primary wm-btn--sm"
+                      onclick="WMProductCart.add('{{ cage.name|escapejs }}', {{ cage.price|floatformat:'-2' }})">
+                {% wm_icon "shop" size=13 %} Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer-section animate-on-scroll fade-in">
-    <div class="footer-content">
-      <div class="footer-col company">
-        <h3>The White Meat Company</h3>
-        <p>Industry leaders in the provision of rabbit farming equipment and prime breeding stock in Zimbabwe. 
-</p>
-      </div>
-      <div class="footer-col links">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="{% url 'masterclass' %}">Masterclass Training</a></li>
-          <li><a href="{% url 'cages' %}">Cages+Accessories</a></li>
-          <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
-          <li><a href="{% url 'rabbithole' %}">Rabbit Hole</a></li>
-        
-        </ul>
-      </div>
-      <div class="footer-col contact">
-        <h4>Contact Info</h4>
-        <p>Belvedere, Harare<br />Zimbabwe<br />+263 772 333 369<br /> +263 779 521 665<br/>rabbitholezim@gmail.com</p>
-      </div>
-    </div>
-    <hr class="footer-divider" />
-    <div class="footer-bottom">
-      &copy; 2026 The White Meat Company. All rights reserved.
-    </div>
-  </footer>
-
-  <!-- Cart Sidebar -->
-  <div id="cart-sidebar" style="position:fixed; top:80px; right:30px; width:340px; max-width:95vw; background:#fff; box-shadow:0 4px 24px rgba(0,0,0,0.13); border-radius:14px; z-index:9999; padding:28px 22px 22px 22px; display:none; flex-direction:column; gap:18px;">
-    <h3 style="margin:0 0 10px 0; font-size:1.3rem; font-weight:700; color:#2d6a4f; text-align:center;">Your Cart</h3>
-    <div id="cart-items-list" style="min-height:60px; margin-bottom:10px;"></div>
-    <div style="display:flex; justify-content:space-between; align-items:center; font-size:1.1rem; font-weight:600; margin-bottom:10px;">
-      <span>Total:</span>
-      <span id="cart-total" style="color:#2d6a4f;">$0.00</span>
-    </div>
-    <button id="order-btn" style="background:#2d6a4f; color:#fff; border:none; border-radius:7px; padding:12px 0; font-size:1.08rem; font-weight:600; cursor:pointer; transition:background 0.18s;">Place Order</button>
-    <!-- Paynow button removed -->
-    <button onclick="toggleCart(false)" style="background:none; border:none; color:#888; font-size:1.2rem; margin-top:2px; cursor:pointer;">Close</button>
-  </div>
-
-  <!-- Floating Cart Button -->
-  <button id="open-cart-btn" onclick="toggleCart(true)" style="position:fixed; bottom:32px; right:32px; z-index:9998; background:#2d6a4f; color:#fff; border:none; border-radius:50%; width:60px; height:60px; font-size:2rem; box-shadow:0 2px 10px rgba(0,0,0,0.13); cursor:pointer; display:none; align-items:center; justify-content:center;">
-    🛒<span id="cart-count-badge" style="position:absolute; top:10px; right:10px; background:#e74c3c; color:#fff; border-radius:50%; width:22px; height:22px; font-size:1rem; display:none; align-items:center; justify-content:center; font-weight:700;">0</span>
-  </button>
-
-  <!-- View Details Modal -->
-  <div id="detailsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:10000;">
-    <div style="background:#fff; padding:24px; border-radius:8px; max-width:500px; width:90%; position:relative;">
-      <button onclick="closeDetails()" style="position:absolute; top:8px; right:12px; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-      <div id="modalDetailsContent"></div>
+      {% empty %}
+      <p style="grid-column:1/-1;text-align:center;color:var(--wm-muted)">
+        Our cage catalogue is being updated &mdash; please check back soon or contact us for current stock.
+      </p>
+      {% endfor %}
     </div>
   </div>
+</section>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init();</script>
+<section class="wm-section wm-section--tight">
+  <div class="wm-container" style="text-align:center">
+    <p style="margin:0 0 18px;color:var(--wm-muted)">Looking for nesting boxes, drinkers, feeders or pellets?</p>
+    <a href="{% url 'accessories' %}" class="wm-btn wm-btn--primary">Browse accessories {% wm_icon "arrow-right" size=15 %}</a>
+  </div>
+</section>
 
-  <script>
-    // Navbar hamburger toggle for mobile
-    document.addEventListener('DOMContentLoaded', function() {
-      var hamburger = document.getElementById('navbar-hamburger');
-      var navLinks = document.getElementById('nav-links');
-      if (hamburger && navLinks) {
-        hamburger.addEventListener('click', function() {
-          navLinks.classList.toggle('open');
-        });
-        // Hide nav links when resizing to tablet/desktop
-        window.addEventListener('resize', function() {
-          if (window.innerWidth > 600) {
-            navLinks.classList.remove('open');
-          }
-        });
-      }
-    });
-  </script>
+<section class="wm-section wm-section--surface-2 wm-section--tight">
+  <div class="wm-container" style="max-width:720px;text-align:center">
+    <span class="wm-svc__icon" style="margin:0 auto 16px">{% wm_icon "equipment" size=24 %}</span>
+    <h3 style="margin:0 0 8px">Delivery &amp; installation</h3>
+    <p style="margin:0;color:var(--wm-muted)">Customers arrange their own delivery. Our cages come as
+      complete units, with full installation on-site.</p>
+  </div>
+</section>
 
-  <script>
-    let cart = [];
+<!-- View Details Modal -->
+<div id="detailsModal" class="wm-modal">
+  <div class="wm-modal__card">
+    <button onclick="closeDetails()" class="wm-modal__close" aria-label="Close">&times;</button>
+    <div id="modalDetailsContent"></div>
+  </div>
+</div>
+{% endblock %}
 
-    function addToCart(name, price, img) {
-      cart.push({ name, price, img });
-      updateCartDisplay();
-      document.getElementById('open-cart-btn').style.display = 'flex';
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () { WMProductCart.init('cages'); });
+
+  function showDetails(btn) {
+    const card = btn.closest('.wm-product-card');
+    if (!card) return;
+    const name = card.dataset.name || '';
+    const desc = card.dataset.desc || '';
+    const price = card.dataset.price || '';
+    const img = card.dataset.img || '';
+    const capacity = card.dataset.capacity || '';
+    const features = (card.dataset.features || '')
+      .split('\n').map(f => f.trim()).filter(Boolean);
+
+    let html = `<h2>${name}</h2>`;
+    if (capacity) html += `<p style="color:var(--wm-accent);font-weight:600;margin:0 0 8px;">${capacity}</p>`;
+    html += `<p>${desc}</p>`;
+    if (features.length) {
+      html += '<ul style="margin:12px 0 0;padding-left:18px;line-height:1.7">' +
+        features.map(f => `<li>${f}</li>`).join('') + '</ul>';
     }
+    if (price) html += `<p style="font-weight:700;font-size:1.15rem;margin-top:14px;">$${price}</p>`;
+    if (img) html += `<img src="${img}" alt="${name}" style="width:100%;margin-top:12px;">`;
 
-    function removeFromCart(idx) {
-      cart.splice(idx, 1);
-      updateCartDisplay();
-      if (cart.length === 0) document.getElementById('open-cart-btn').style.display = 'none';
-    }
+    document.getElementById('modalDetailsContent').innerHTML = html;
+    document.getElementById('detailsModal').classList.add('is-open');
+  }
 
-    function updateCartDisplay() {
-      const cartList = document.getElementById('cart-items-list');
-      const cartTotal = document.getElementById('cart-total');
-      const cartBadge = document.getElementById('cart-count-badge');
-
-      if (!cartList || !cartTotal || !cartBadge) return;
-
-      if (cart.length === 0) {
-        cartList.innerHTML = '<p style="text-align:center;color:#888;">Your cart is empty</p>';
-        cartTotal.textContent = '$0.00';
-        cartBadge.style.display = 'none';
-        cartBadge.textContent = '0';
-        return;
-      }
-
-      cartBadge.style.display = 'flex';
-      cartBadge.textContent = cart.length;
-
-      const grouped = {};
-      cart.forEach(item => {
-        const key = item.name + '|' + item.price;
-        if (!grouped[key]) grouped[key] = { ...item, qty: 1, total: item.price };
-        else { grouped[key].qty += 1; grouped[key].total += item.price; }
-      });
-
-      let html = '';
-      let total = 0;
-      Object.values(grouped).forEach((item, idx) => {
-        html += `<div style="display:flex;justify-content:space-between;margin-bottom:10px;">
-          <div><strong>${item.name}</strong><br><span>$${item.price} × ${item.qty}</span></div>
-          <div><span style="margin-right:8px;">$${item.total}</span>
-          <button onclick="removeFromCart(${idx})" style="background:none;border:none;font-size:1.2rem;color:#e74c3c;cursor:pointer;">×</button></div>
-        </div>`;
-        total += item.total;
-      });
-
-      cartList.innerHTML = html;
-      cartTotal.textContent = `$${total.toFixed(2)}`;
-    }
-
-
-    function toggleCart(show) {
-      document.getElementById('cart-sidebar').style.display = show ? 'flex' : 'none';
-    }
-
-    // WhatsApp order integration for cart sidebar
-    document.addEventListener('DOMContentLoaded', function() {
-      var orderBtn = document.getElementById('order-btn');
-      if (orderBtn) {
-        orderBtn.addEventListener('click', function() {
-          if (cart.length === 0) {
-            alert('Your cart is empty!');
-            return;
-          }
-          let message = 'Hello, I would like to place an order for the following items:%0A';
-          const grouped = {};
-          cart.forEach(item => {
-            const key = item.name + '|' + item.price;
-            if (!grouped[key]) grouped[key] = { ...item, qty: 1, total: item.price };
-            else { grouped[key].qty += 1; grouped[key].total += item.price; }
-          });
-          Object.values(grouped).forEach(item => {
-            message += `- ${item.name} ($${item.price} x ${item.qty}) = $${item.total}%0A`;
-          });
-          let total = Object.values(grouped).reduce((sum, item) => sum + item.total, 0);
-          message += `%0ATotal: $${total.toFixed(2)}%0A`;
-          message += 'Name: [Your Name Here]%0APlease contact me to confirm.';
-          const whatsappURL = `https://wa.me/263772333369?text=${message}`;
-          window.open(whatsappURL, '_blank');
-        });
-      }
-    });
-
-    function showDetails(type) {
-      let html = '';
-      if (type === 'breeders') {
-        html = `
-          <h2>12Sdx Breeders Cage</h2>
-          <p>Professional breeding cage with 12 compartments: 1 buck + 11 does. Optimized for efficient breeding cycles and animal welfare.</p>
-          <img src="{% static 'images/cage3.jpg' %}" alt="Breeders Cage" style="width:100%;margin-top:12px;border-radius:8px;">
-        `;
-      } else if (type === 'weaners') {
-        html = `
-          <h2>6Sdx Weaners Cage</h2>
-          <p>Weaning system with 6 compartments to house up to 90 weaners, ensuring controlled growth and separation for health management.</p>
-          <img src="{% static 'images/cage4.jpg' %}" alt="Weaners Cage" style="width:100%;margin-top:12px;border-radius:8px;">
-        `;
-      }
-      document.getElementById('modalDetailsContent').innerHTML = html;
-      document.getElementById('detailsModal').style.display = 'flex';
-    }
-
-    function closeDetails() {
-      document.getElementById('detailsModal').style.display = 'none';
-    }
-  </script>
-
-  <script src="{% static 'js/navbar.js' %}"></script>
-</body>
-</html>
+  function closeDetails() {
+    document.getElementById('detailsModal').classList.remove('is-open');
+  }
+</script>
+{% endblock %}

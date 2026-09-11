@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static wm_icons %}
+{% block title %}Rabbit Farm Equipment - {{ site.company_name }}{% endblock %}
+{% block meta_description %}Galvanised steel rabbit cages, drinkers, feeders, nesting boxes and nutrition from {{ site.company_name }}.{% endblock %}
+
+{% block content %}
+<div class="wm-herowrap wm-herowrap--tabs">
+  {% include "partials/hero_slider.html" %}
+
+  <div class="wm-eqcta">
+    <a href="{% url 'cages' %}" class="wm-btn wm-btn--primary">
+      {% wm_icon "equipment" size=16 %} Cages {% wm_icon "arrow-right" size=15 %}
+    </a>
+    <a href="{% url 'sheds' %}" class="wm-btn wm-btn--ghost">
+      {% wm_icon "equipment" size=16 %} Sheds {% wm_icon "arrow-right" size=15 %}
+    </a>
+    <a href="{% url 'accessories' %}" class="wm-btn wm-btn--ghost">
+      {% wm_icon "shop" size=16 %} Accessories {% wm_icon "arrow-right" size=15 %}
+    </a>
+  </div>
+</div>
+
+<section class="wm-section">
+  <div class="wm-container">
+
+    <div class="wm-promo">
+      <div class="wm-promo__media"><img src="{% static 'images/cage3.jpg' %}" alt="Galvanised steel rabbit breeder cage"></div>
+      <div>
+        <span class="wm-eyebrow">Cages</span>
+        <h2>Breeder &amp; weaner systems in galvanised steel</h2>
+        <p>Professional-grade cages that come as complete units: water drinkers, feed troughs and an
+          advanced manure &amp; urine collection system built in. Designed for animal welfare, easy
+          cleaning and Zimbabwe's climate, with full installation on delivery.</p>
+        <ul class="wm-promo__list">
+          <li>{% wm_icon "equipment" %} 12Sdx breeder cage &mdash; 1 buck + 11 does</li>
+          <li>{% wm_icon "equipment" %} 6Sdx weaner cage &mdash; up to 90 weaners</li>
+          <li>{% wm_icon "equipment" %} Galvanised wire, integrated drainage</li>
+        </ul>
+        <a href="{% url 'cages' %}" class="wm-btn wm-btn--primary">See cage models {% wm_icon "arrow-right" size=15 %}</a>
+      </div>
+    </div>
+
+    <div class="wm-promo wm-promo--flip" style="margin-top:88px">
+      <div class="wm-promo__media"><img src="{% static 'images/house.jpg' %}" alt="Timber rabbit shed with galvanised roof"></div>
+      <div>
+        <span class="wm-eyebrow">Sheds</span>
+        <h2>Weatherproof housing built around your cages</h2>
+        <p>Treated-timber rabbit sheds with galvanised IBR roofing and ventilated mesh sides &mdash;
+          cool in summer, dry in the rains and secure year-round. Sized to take a full run of breeder
+          and weaner cages, supplied and assembled on your site.</p>
+        <ul class="wm-promo__list">
+          <li>{% wm_icon "equipment" %} Treated timber frame &amp; galvanised roof</li>
+          <li>{% wm_icon "equipment" %} Ventilated mesh sides, lockable access door</li>
+          <li>{% wm_icon "equipment" %} Standard sizes or custom-built to your plan</li>
+        </ul>
+        <a href="{% url 'sheds' %}" class="wm-btn wm-btn--primary">See shed models {% wm_icon "arrow-right" size=15 %}</a>
+      </div>
+    </div>
+
+    <div class="wm-promo" style="margin-top:88px">
+      <div class="wm-promo__media"><img src="{% static 'images/equip.jpg' %}" alt="Rabbit farming accessories"></div>
+      <div>
+        <span class="wm-eyebrow">Accessories</span>
+        <h2>Everything else your rabbitry needs</h2>
+        <p>Nesting boxes, water bottles, feeders, urine collection bottles, hay and quality pellets &mdash;
+          the consumables and add-ons that keep a commercial rabbitry running.</p>
+        <ul class="wm-promo__list">
+          <li>{% wm_icon "shop" %} Nesting boxes &amp; collection bottles</li>
+          <li>{% wm_icon "shop" %} Drinkers, feeders &amp; troughs</li>
+          <li>{% wm_icon "leaf" %} Hay bales &amp; 5&nbsp;kg pellet packs</li>
+        </ul>
+        <a href="{% url 'accessories' %}" class="wm-btn wm-btn--primary">Browse accessories {% wm_icon "arrow-right" size=15 %}</a>
+      </div>
+    </div>
+
+    <p class="wm-notice" style="margin-top:56px">
+      A full illustrated catalogue with specifications, pricing and online ordering is coming to these pages.
+    </p>
+  </div>
+</section>
+{% endblock %}
