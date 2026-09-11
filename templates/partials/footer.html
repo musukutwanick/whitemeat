@@ -31,7 +31,6 @@
         <li><a href="{% url 'rabbithole' %}">All branches</a></li>
         <li><a href="{% url 'pagomo' %}">Pagomo branch</a></li>
         <li><a href="{% url 'index' %}#contact">Contact us</a></li>
-        <li><a href="{% url 'login' %}">Staff login</a></li>
       </ul>
     </div>
 
@@ -53,6 +52,8 @@
 
   <div class="wm-container wm-footer__bar">
     <span>&copy; {% now "Y" %} {{ site.company_name }}. All rights reserved.</span>
-    <span class="wm-brand-slogan">{{ site.brand_slogan }}</span>
+    <span class="wm-eyebrow wm-slogan wm-brand-slogan">
+      {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}{{ part }}{% endfor %}
+    </span>
   </div>
 </footer>
