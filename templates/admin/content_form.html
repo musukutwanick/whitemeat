@@ -1,0 +1,49 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{% if instance %}Edit{% else %}Add{% endif %} {{ cfg.singular }}{% endblock %}
+{% block content_title %}{% if instance %}Edit {{ cfg.singular }}{% else %}Add {{ cfg.singular }}{% endif %}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>{% if instance %}Edit &ldquo;{{ instance }}&rdquo;{% else %}New {{ cfg.singular }}{% endif %}</h2>
+        <a href="{% url 'content_list' section=section %}" class="btn btn--ghost btn--sm"><i class="fas fa-arrow-left"></i> Back to list</a>
+    </div>
+    <div class="card-body">
+        {% if form.non_field_errors %}
+        <div class="alert alert-error" style="margin-bottom:16px;">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        {% if image %}
+        <div class="current-image">
+            <div class="form-help" style="margin-bottom:6px;">Current image</div>
+            <img src="{{ image }}" alt="">
+        </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-row">
+                {% if field.field.widget.input_type == 'checkbox' %}
+                <div class="form-check">
+                    {{ field }}
+                    <label for="{{ field.id_for_label }}" style="margin:0;">{{ field.label }}</label>
+                </div>
+                {% else %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% endif %}
+                {% if field.help_text %}<div class="form-help">{{ field.help_text|safe }}</div>{% endif %}
+                {% if field.errors %}<div class="form-errors">{{ field.errors|striptags }}</div>{% endif %}
+            </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn"><i class="fas fa-floppy-disk"></i> {% if instance %}Save changes{% else %}Create{% endif %}</button>
+                <a href="{% url 'content_list' section=section %}" class="btn btn--ghost">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

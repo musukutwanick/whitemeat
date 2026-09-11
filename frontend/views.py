@@ -5,9 +5,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.paginator import Paginator
-from .models import MenuItem, MenuCategory, RestaurantBranch, HowDidYouHearAboutUs, MasterclassEvent, MasterclassSession, Accessory
-from .forms import HowDidYouHearAboutUsForm, AccessoryForm
+from .models import (
+    MenuItem, MenuCategory, RestaurantBranch, HowDidYouHearAboutUs,
+    MasterclassEvent, MasterclassSession, Accessory,
+    HeroSlide, HomeServiceCard, Breed,
+    MasterclassDate, MasterclassBooking, SiteSettings, ButcheryProduct, Cage, Shed,
+    Order,
+)
+from .forms import HowDidYouHearAboutUsForm, MasterclassBookingForm, OrderForm
 import json
+import calendar as cal_module
+from datetime import date
+from urllib.parse import quote
+from django.utils import timezone
 from django.db.models import Count
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
@@ -29,11 +39,44 @@ def index(request):
             form = HowDidYouHearAboutUsForm()  # reset form after submit
     else:
         form = HowDidYouHearAboutUsForm()
-    return render(request, 'index.html', {'form': form, 'how_hear_submitted': submitted})
+    context = {
+        'form': form,
+        'how_hear_submitted': submitted,
+        'hero_slides': HeroSlide.objects.filter(is_active=True, page='home'),
+        'service_cards': HomeServiceCard.objects.filter(is_active=True),
+    }
+    return render(request, 'index.html', context)
+
+
+def equipment(request):
+    """Rabbit Farm Equipment landing page (catalogue arrives in a later phase)."""
+    context = {
+        'hero_slides': HeroSlide.objects.filter(is_active=True, page='equipment'),
+    }
+    return render(request, 'equipment.html', context)
+
+
+def outgrowers(request):
+    """Outgrower Initiatives page (fleshed out in a later phase)."""
+    return render(request, 'outgrowers.html')
+
+
+def butchery(request):
+    """Whitemeat Butchery: products + WhatsApp ordering."""
+    products = ButcheryProduct.objects.filter(is_available=True)
+    present = [c for c in products.values_list('category', flat=True).distinct()]
+    categories = [(k, v) for k, v in ButcheryProduct.CATEGORY_CHOICES if k in present]
+    return render(request, 'butchery.html', {'products': products, 'categories': categories})
+
+
+def cart(request):
+    """Shopping cart placeholder (server-side cart arrives in a later phase)."""
+    return render(request, 'cart.html')
 
 def masterclass(request):
-    """Serve the masterclass training page dynamically from DB"""
-    # Get the latest event (or the only one)
+    """Serve the masterclass page: dynamic content, a year-round admin-managed
+    calendar of dates, and a booking form (with proof-of-payment upload) that
+    hands off to WhatsApp to confirm."""
     event = MasterclassEvent.objects.order_by('-id').first()
     sessions_by_day = {1: [], 2: []}
     days = [1, 2]
@@ -41,55 +84,123 @@ def masterclass(request):
         sessions = MasterclassSession.objects.filter(event=event)
         for session in sessions:
             sessions_by_day.get(session.day, []).append(session)
+
+    today = timezone.localdate()
+    try:
+        month = int(request.GET.get('month', today.month))
+        year = int(request.GET.get('year', today.year))
+    except (TypeError, ValueError):
+        month, year = today.month, today.year
+    if month < 1:
+        month, year = 12, year - 1
+    elif month > 12:
+        month, year = 1, year + 1
+
+    dates_this_month = MasterclassDate.objects.filter(is_active=True, date__year=year, date__month=month)
+    dates_by_day = {d.date.day: d for d in dates_this_month}
+
+    month_weeks = cal_module.Calendar(firstweekday=6).monthdayscalendar(year, month)
+    calendar_weeks = []
+    for week in month_weeks:
+        row = []
+        for day_num in week:
+            if day_num == 0:
+                row.append(None)
+            else:
+                d = date(year, month, day_num)
+                row.append({
+                    'day': day_num,
+                    'is_today': d == today,
+                    'is_past': d < today,
+                    'mc_date': dates_by_day.get(day_num),
+                })
+        calendar_weeks.append(row)
+
+    prev_month, prev_year = (12, year - 1) if month == 1 else (month - 1, year)
+    next_month, next_year = (1, year + 1) if month == 12 else (month + 1, year)
+    upcoming_dates = MasterclassDate.objects.filter(is_active=True, date__gte=today).order_by('date')[:12]
+
+    booking_success = False
+    whatsapp_url = None
+
+    if request.method == 'POST':
+        form = MasterclassBookingForm(request.POST, request.FILES)
+        if form.is_valid():
+            booking = form.save()
+            proof_url = None
+            if booking.payment_proof:
+                try:
+                    proof_url = request.build_absolute_uri(booking.payment_proof.url)
+                except Exception:
+                    proof_url = None
+
+            lines = [
+                f"Hi! I'd like to confirm my Masterclass booking (Ref #{booking.id}).",
+                "",
+                f"Name: {booking.name}",
+                f"Email: {booking.email}",
+                f"Phone: {booking.phone}",
+                f"Date: {booking.masterclass_date.date:%A, %d %B %Y}",
+                f"Attendees: {booking.attendees}",
+            ]
+            if event:
+                lines.append(f"Course fee: ${event.price} per attendee")
+            lines.append(f"Payment proof: {proof_url}" if proof_url else "Payment proof: (will send separately)")
+            lines.append("")
+            lines.append("Please confirm my booking. Thank you!")
+            message = "\n".join(lines)
+
+            site = SiteSettings.load()
+            digits = "".join(ch for ch in site.whatsapp_number if ch.isdigit())
+            whatsapp_url = f"https://wa.me/{digits}?text={quote(message)}"
+            booking_success = True
+            form = MasterclassBookingForm()  # fresh form for a follow-up booking
+    else:
+        form = MasterclassBookingForm()
+
     context = {
         'event': event,
         'sessions_by_day': sessions_by_day,
         'days': days,
+        'calendar_weeks': calendar_weeks,
+        'calendar_month': month,
+        'calendar_year': year,
+        'calendar_month_name': cal_module.month_name[month],
+        'prev_month': prev_month, 'prev_year': prev_year,
+        'next_month': next_month, 'next_year': next_year,
+        'upcoming_dates': upcoming_dates,
+        'booking_form': form,
+        'booking_success': booking_success,
+        'whatsapp_url': whatsapp_url,
     }
     return render(request, 'masterclass.html', context)
 
 def cages(request):
-    """Serve the cages and accessories page with dynamic accessories"""
+    """Serve the cage products page (admin-managed via the Cage model)."""
+    cages = Cage.objects.filter(is_available=True)
+    return render(request, 'cages.html', {'cages': cages})
+
+
+def sheds(request):
+    """Serve the rabbit shed / housing page (admin-managed via the Shed model)."""
+    sheds = Shed.objects.filter(is_available=True)
+    return render(request, 'sheds.html', {'sheds': sheds})
+
+
+def accessories(request):
+    """Serve the accessories catalogue page (split out from /cages/)"""
     accessories = Accessory.objects.filter(is_available=True).order_by('-created_at')
-    return render(request, 'cages.html', {'accessories': accessories})
+    return render(request, 'accessories.html', {'accessories': accessories})
 
-
-# Admin: Add Accessory/Equipment
-@staff_member_required
-def add_accessory(request):
-
-    # Handle add/edit/delete
-    if request.method == 'POST':
-        if 'accessory_id' in request.POST:
-            # Edit existing accessory
-            accessory = get_object_or_404(Accessory, pk=request.POST['accessory_id'])
-            form = AccessoryForm(request.POST, request.FILES, instance=accessory)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Accessory updated successfully!')
-                return redirect('add_accessory')
-        elif 'delete_accessory_id' in request.POST:
-            # Delete accessory
-            accessory = get_object_or_404(Accessory, pk=request.POST['delete_accessory_id'])
-            accessory.delete()
-            messages.success(request, 'Accessory deleted successfully!')
-            return redirect('add_accessory')
-        else:
-            # Add new accessory
-            form = AccessoryForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Accessory added successfully!')
-                return redirect('add_accessory')
-    else:
-        form = AccessoryForm()
-
-    accessories = Accessory.objects.order_by('-created_at')
-    return render(request, 'admin/add_accessory.html', {'form': form, 'accessories': accessories})
+# Accessories are managed from the staff dashboard's generic content CRUD
+# (section='accessories' - see frontend/dashboard.py) alongside cages, sheds,
+# breeding stock and butchery. The old bespoke add_accessory view/template
+# was a duplicate, unlinked UI left over from before that existed.
 
 def breeding(request):
-    """Serve the breeding stock page"""
-    return render(request, 'breeding.html')
+    """Serve the breeding stock page with dynamic breeds"""
+    breeds = Breed.objects.filter(is_available=True)
+    return render(request, 'breeding.html', {'breeds': breeds})
 
 def rabbithole(request):
     """Serve the rabbit hole restaurant page with dynamic menu items"""
@@ -190,16 +301,32 @@ def logout_view(request):
     return redirect('index')
 
 # Admin Dashboard Views
-@login_required
+@staff_member_required
 def admin_dashboard(request):
     """Main admin dashboard"""
+    from .dashboard import SECTIONS, SECTION_ORDER
     branches = RestaurantBranch.objects.filter(is_active=True)
     recent_menu_items = MenuItem.objects.select_related('branch', 'category').order_by('-created_at')[:5]
-    
+
     stats = {
         'total_branches': branches.count(),
         'total_menu_items': MenuItem.objects.count(),
     }
+
+    # Live counts for each managed content section, for the landing tiles.
+    content_tiles = [
+        {
+            'slug': slug,
+            'label': SECTIONS[slug]['label'],
+            'icon': SECTIONS[slug]['icon'],
+            'count': SECTIONS[slug]['model'].objects.count(),
+        }
+        for slug in SECTION_ORDER
+    ]
+    pending_bookings = MasterclassBooking.objects.exclude(
+        status__in=['confirmed', 'cancelled']
+    ).count()
+    pending_orders = Order.objects.filter(status='pending').count()
 
     # Get latest 10 survey responses
     from .models import HowDidYouHearAboutUs
@@ -219,6 +346,12 @@ def admin_dashboard(request):
         'branches': branches,
         'recent_menu_items': recent_menu_items,
         'stats': stats,
+        'content_tiles': content_tiles,
+        'pending_bookings': pending_bookings,
+        'pending_orders': pending_orders,
+        'total_branches': branches.count(),
+        'total_menu_items': MenuItem.objects.count(),
+        'total_responses': HowDidYouHearAboutUs.objects.count(),
         'recent_how_hear': recent_how_hear,
         'how_hear_stats': how_hear_stats,
     }
@@ -677,6 +810,54 @@ def save_masterclass_schedule(request):
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
             
     return JsonResponse({'success': False, 'error': 'Invalid request method.'}, status=405)
+
+@require_POST
+def place_order(request):
+    """Unified checkout endpoint for every cart on the site (cages, sheds,
+    accessories, breeding stock, restaurant orders/reservations). Saves the
+    Order (with proof of payment if attached), then hands off to WhatsApp -
+    same pattern as the masterclass booking flow."""
+    form = OrderForm(request.POST, request.FILES)
+    if not form.is_valid():
+        return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+
+    order = form.save()
+
+    proof_url = None
+    if order.proof_of_payment:
+        try:
+            proof_url = request.build_absolute_uri(order.proof_of_payment.url)
+        except Exception:
+            proof_url = None
+
+    lines = [
+        f"New order - {order.get_source_display()}",
+        "",
+        "Items:",
+        order.items_summary,
+        "",
+        f"Total: ${order.total}",
+        "",
+        f"Name: {order.customer_name}",
+        f"Phone: {order.customer_phone}",
+    ]
+    if order.payment_method == 'cash':
+        lines.append("Payment: Cash on collection/delivery")
+    else:
+        lines.append("Payment: EcoCash/bank transfer - proof attached")
+        lines.append(f"Proof of payment: {proof_url}" if proof_url else "Proof of payment: (attached, link unavailable)")
+    if order.notes:
+        lines.append(f"Notes: {order.notes}")
+    lines.append("")
+    lines.append(f"Order ref #{order.id}. Please confirm my order. Thank you!")
+    message = "\n".join(lines)
+
+    site = SiteSettings.load()
+    digits = ''.join(ch for ch in site.whatsapp_number if ch.isdigit())
+    whatsapp_url = f"https://wa.me/{digits}?text={quote(message)}"
+
+    return JsonResponse({'success': True, 'whatsapp_url': whatsapp_url, 'order_id': order.id})
+
 
 def health_check(request):
     return HttpResponse("OK")

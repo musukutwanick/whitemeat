@@ -1,0 +1,18 @@
+{% load wm_icons %}
+<!-- Shared product-cart sidebar + floating button. Paired with
+     static/js/product-cart.js - call WMProductCart.init('<source>') on the
+     page and WMProductCart.add(name, price) from each "Add to cart" button. -->
+<div id="cart-sidebar" class="wm-cart-sidebar">
+  <h3>Your Cart</h3>
+  <div id="cart-items-list" class="wm-cart-sidebar__items"></div>
+  <div class="wm-cart-sidebar__total">
+    <span>Total:</span>
+    <span id="cart-total">$0.00</span>
+  </div>
+  <button id="order-btn" class="wm-btn wm-btn--primary" style="width:100%;justify-content:center">Checkout</button>
+  <button type="button" onclick="WMProductCart.toggle(false)" class="wm-cart-sidebar__close">Close</button>
+</div>
+
+<button id="open-cart-btn" onclick="WMProductCart.toggle(true)" class="wm-cart-fab" aria-label="Open cart">
+  {% wm_icon "shop" size=24 %}<span id="cart-count-badge" class="wm-cart-fab__badge">0</span>
+</button>

@@ -1,0 +1,59 @@
+{% load static wm_icons %}
+<footer class="wm-footer">
+  <div class="wm-container wm-footer__grid">
+    <div class="wm-footer__brand">
+      <img src="{% static 'images/logo.png' %}" alt="{{ site.company_name }} logo">
+      <p>{{ site.tagline }} Industry leaders in rabbit farming equipment, prime breeding stock, training and white-meat cuisine in Zimbabwe.</p>
+      <div class="wm-footer__social">
+        {% if site.facebook_url %}<a href="{{ site.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>{% endif %}
+        {% if site.instagram_url %}<a href="{{ site.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>{% endif %}
+        {% if site.twitter_url %}<a href="{{ site.twitter_url }}" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
+        {% if site.youtube_url %}<a href="{{ site.youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>{% endif %}
+        {% if site.tiktok_url %}<a href="{{ site.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>{% endif %}
+        {% if site.whatsapp_channel_url %}<a href="{{ site.whatsapp_channel_url }}" target="_blank" rel="noopener" aria-label="WhatsApp channel"><i class="fa-brands fa-whatsapp"></i></a>{% endif %}
+      </div>
+    </div>
+
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="{% url 'equipment' %}">Rabbit Farm Equipment</a></li>
+        <li><a href="{% url 'breeding' %}">Breeding Stock</a></li>
+        <li><a href="{% url 'outgrowers' %}">Outgrower Initiatives</a></li>
+        <li><a href="{% url 'masterclass' %}">Masterclass</a></li>
+        <li><a href="{% url 'butchery' %}">Whitemeat Butchery</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Rabbit Hole</h4>
+      <ul>
+        <li><a href="{% url 'rabbithole' %}">All branches</a></li>
+        <li><a href="{% url 'pagomo' %}">Pagomo branch</a></li>
+        <li><a href="{% url 'index' %}#contact">Contact us</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Get in touch</h4>
+      <ul class="wm-footer__contact">
+        {% if site.office_address %}<li>{% wm_icon "pin" size=16 %}<span>{{ site.office_address }}</span></li>{% endif %}
+        {% if site.phone_primary %}
+        <li>{% wm_icon "phone" size=16 %}<span>Call<br>
+          <a href="tel:{{ site.phone_primary|cut:' ' }}">{{ site.phone_primary }}</a>
+          {% if site.phone_secondary %}<br><a href="tel:{{ site.phone_secondary|cut:' ' }}">{{ site.phone_secondary }}</a>{% endif %}
+        </span></li>
+        {% endif %}
+        {% if site.email %}<li>{% wm_icon "mail" size=16 %}<a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
+        {% if site.business_hours %}<li>{% wm_icon "clock" size=16 %}<span>{{ site.business_hours|linebreaksbr }}</span></li>{% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="wm-container wm-footer__bar">
+    <span>&copy; {% now "Y" %} {{ site.company_name }}. All rights reserved.</span>
+    <span class="wm-eyebrow wm-slogan wm-brand-slogan">
+      {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}{{ part }}{% endfor %}
+    </span>
+  </div>
+</footer>

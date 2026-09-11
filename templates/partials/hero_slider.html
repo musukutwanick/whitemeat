@@ -1,0 +1,45 @@
+{% load static wm_icons %}
+<section class="wm-hero" data-wm-hero data-interval="6500" aria-roledescription="carousel" aria-label="Featured">
+  <div class="wm-hero__track">
+    {% for slide in hero_slides %}
+    <div class="wm-hero__slide{% if forloop.first %} is-active{% endif %}"
+         data-overlay="{{ slide.overlay }}"
+         style="background-image:url('{{ slide.image_url }}')"
+         role="group" aria-roledescription="slide" aria-label="{{ forloop.counter }} of {{ hero_slides|length }}">
+      {% if slide.video_url %}
+      <video class="wm-hero__video" autoplay muted loop playsinline preload="metadata">
+        <source src="{{ slide.video_url }}" type="video/mp4">
+      </video>
+      {% endif %}
+      <div class="wm-hero__inner">
+        <div class="wm-hero__copy">
+          <span class="wm-eyebrow wm-slogan">
+            {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}{{ part }}{% endfor %}
+          </span>
+          <h1>{{ slide.heading }}</h1>
+          {% if slide.subheading %}<p>{{ slide.subheading }}</p>{% endif %}
+        </div>
+        {% if slide.cta_primary_label %}
+        <div class="wm-hero__actions">
+          <a href="{{ slide.cta_primary_url }}" class="wm-btn wm-btn--primary">
+            {{ slide.cta_primary_label }} {% wm_icon "arrow-right" size=16 %}
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if hero_slides|length > 1 %}
+  <button class="wm-hero__arrow wm-hero__arrow--prev" aria-label="Previous slide">{% wm_icon "arrow-right" size=20 class="wm-icon" %}</button>
+  <button class="wm-hero__arrow wm-hero__arrow--next" aria-label="Next slide">{% wm_icon "arrow-right" size=20 class="wm-icon" %}</button>
+  <div class="wm-hero__dots" role="tablist" aria-label="Choose slide">
+    {% for slide in hero_slides %}
+    <button role="tab" class="{% if forloop.first %}is-active{% endif %}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-label="Slide {{ forloop.counter }}"></button>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>

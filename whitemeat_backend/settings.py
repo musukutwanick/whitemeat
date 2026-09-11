@@ -15,6 +15,17 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables from a local .env file if one exists.
+# This is a no-op in production (Render injects real env vars, and
+# python-dotenv does NOT override variables that are already set), so
+# the same settings file works locally and on Render unchanged.
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(BASE_DIR / ".env")
+except ImportError:
+    pass
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -89,6 +100,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'frontend.context_processors.site_settings',
+                'frontend.context_processors.admin_nav',
             ],
         },
     },
@@ -201,29 +214,34 @@ MEDIA_ROOT = BASE_DIR / 'media'
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "").strip()
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "").strip()
 
-# Two separate buckets, matching what was created in the Supabase dashboard.
+# Everything (menu photos, equipment/cage/breed/butchery images, hero
+# slides, masterclass + order payment proofs) shares this ONE bucket.
+# Each model's own `upload_to=` keeps files organised into folders within
+# it (menu/, equipment/, hero/, order_proofs/2026/09/, ...).
 # .strip() guards against stray whitespace/newlines pasted into Render's
 # env var fields, which otherwise makes httpx blow up with a bare
 # "Invalid URL" error that's hard to trace back to its cause.
-SUPABASE_MENU_BUCKET_NAME = os.environ.get(
-    "SUPABASE_MENU_BUCKET_NAME",
-    "Menu images"
-).strip()
-SUPABASE_EQUIPMENT_BUCKET_NAME = os.environ.get(
-    "SUPABASE_EQUIPMENT_BUCKET_NAME",
-    "equipment"
+SUPABASE_BUCKET_NAME = os.environ.get(
+    "SUPABASE_BUCKET_NAME",
+    "images"
 ).strip()
 
+# Fallback for any file field that doesn't specify storage= explicitly
+# (e.g. Notice image/document). MenuItem/Accessory/Cage/Breed/etc. use the
+# get_*_storage() factories directly - see frontend/models.py.
+# When Supabase isn't configured (no URL/KEY), everything - including these
+# factories - falls back to local FileSystemStorage so uploads work in dev
+# and only switch to Supabase once the env vars are set.
+_supabase_ready = bool(SUPABASE_URL and SUPABASE_KEY)
 STORAGES = {
-    # Fallback for any file field that doesn't specify storage= explicitly
-    # (e.g. Notice image/document). MenuItem/Accessory use get_menu_storage()
-    # / get_equipment_storage() directly - see frontend/models.py.
-    "default": {
-        "BACKEND": "whitemeat_backend.supabase_storage.SupabaseMediaStorage",
-        "OPTIONS": {
-            "bucket_name": SUPABASE_EQUIPMENT_BUCKET_NAME,
-        },
-    },
+    "default": (
+        {
+            "BACKEND": "whitemeat_backend.supabase_storage.SupabaseMediaStorage",
+            "OPTIONS": {"bucket_name": SUPABASE_BUCKET_NAME},
+        }
+        if _supabase_ready
+        else {"BACKEND": "django.core.files.storage.FileSystemStorage"}
+    ),
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },

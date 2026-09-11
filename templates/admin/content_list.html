@@ -1,0 +1,55 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{{ cfg.label }}{% endblock %}
+{% block content_title %}{{ cfg.label }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>{{ cfg.label }} <span style="color:#9aa8a1;font-weight:400;">({{ rows|length }})</span></h2>
+        <a href="{% url 'content_add' section=section %}" class="btn"><i class="fas fa-plus"></i> Add {{ cfg.singular }}</a>
+    </div>
+
+    {% if rows %}
+    <div style="overflow-x:auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    {% if cfg.image_attr %}<th style="width:76px;">Image</th>{% endif %}
+                    {% for h in headers %}<th>{{ h }}</th>{% endfor %}
+                    {% if cfg.flag %}<th>{{ cfg.flag_label }}</th>{% endif %}
+                    <th style="width:130px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    {% if cfg.image_attr %}
+                    <td>{% if row.image %}<img class="thumb" src="{{ row.image }}" alt="">{% else %}<span style="color:#c3ccc7;">&mdash;</span>{% endif %}</td>
+                    {% endif %}
+                    {% for cell in row.cells %}<td>{{ cell }}</td>{% endfor %}
+                    {% if cfg.flag %}
+                    <td>{% if row.flag %}<span class="pill pill--on">Yes</span>{% else %}<span class="pill pill--off">No</span>{% endif %}</td>
+                    {% endif %}
+                    <td>
+                        <a href="{% url 'content_edit' section=section pk=row.pk %}" class="btn btn--ghost btn--sm"><i class="fas fa-pen"></i></a>
+                        <form method="post" action="{% url 'content_delete' section=section pk=row.pk %}" style="display:inline;"
+                              onsubmit="return confirm('Delete this {{ cfg.singular }}? This cannot be undone.');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn--danger btn--sm"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <i class="fas {{ cfg.icon }}"></i>
+        No {{ cfg.label|lower }} yet.
+        <div style="margin-top:14px;"><a href="{% url 'content_add' section=section %}" class="btn"><i class="fas fa-plus"></i> Add the first one</a></div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

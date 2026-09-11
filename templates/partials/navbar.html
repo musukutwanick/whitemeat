@@ -1,0 +1,52 @@
+{% load static wm_icons %}
+{% with path=request.path %}
+<nav class="wm-nav" aria-label="Primary">
+  <div class="wm-nav__inner">
+    <a href="{% url 'index' %}" class="wm-nav__brand" aria-label="{{ site.company_name }} home">
+      <img src="{% static 'images/logo.png' %}" alt="{{ site.company_name }} logo">
+    </a>
+
+    <ul class="wm-nav__links" id="wm-nav-links">
+      <li><a href="{% url 'index' %}" class="{% if path == '/' %}is-active{% endif %}">Home</a></li>
+
+      <li>
+        <a href="{% url 'equipment' %}" class="{% if '/equipment' in path or path == '/cages/' or path == '/sheds/' or path == '/accessories/' %}is-active{% endif %}">
+          Rabbit Farm Equipment {% wm_icon "chevron-down" size=14 %}
+        </a>
+        <div class="wm-nav__drop">
+          <a href="{% url 'equipment' %}">Equipment overview</a>
+          <a href="{% url 'cages' %}">Cages</a>
+          <a href="{% url 'sheds' %}">Sheds</a>
+          <a href="{% url 'accessories' %}">Accessories</a>
+        </div>
+      </li>
+
+      <li><a href="{% url 'outgrowers' %}" class="{% if '/outgrowers' in path %}is-active{% endif %}">Outgrower Initiatives</a></li>
+      <li><a href="{% url 'breeding' %}" class="{% if path == '/breeding/' %}is-active{% endif %}">Breeding Stock</a></li>
+      <li><a href="{% url 'masterclass' %}" class="{% if path == '/masterclass/' %}is-active{% endif %}">Masterclass</a></li>
+
+      <li>
+        <a href="{% url 'rabbithole' %}" class="{% if '/rabbithole' in path or '/pagomo' in path %}is-active{% endif %}">
+          Rabbit Hole {% wm_icon "chevron-down" size=14 %}
+        </a>
+        <div class="wm-nav__drop">
+          <a href="{% url 'rabbithole' %}">All branches</a>
+          <a href="{% url 'pagomo' %}">Pagomo branch</a>
+        </div>
+      </li>
+
+      <li><a href="{% url 'butchery' %}" class="{% if '/butchery' in path %}is-active{% endif %}">Whitemeat Butchery</a></li>
+    </ul>
+
+    <div class="wm-nav__cta">
+      <button type="button" class="wm-nav__cart" id="wm-nav-cart-btn" onclick="WMProductCart.toggle(true)" aria-label="Open cart">
+        {% wm_icon "shop" size=18 %}<span id="nav-cart-badge" class="wm-nav__cart-badge">0</span>
+      </button>
+      <button class="wm-nav__burger" id="wm-nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="wm-nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="wm-nav__scrim" aria-hidden="true"></div>
+{% endwith %}

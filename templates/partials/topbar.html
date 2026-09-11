@@ -1,0 +1,17 @@
+{% load static %}
+<div class="wm-topbar">
+  <div class="wm-topbar__inner">
+    <nav class="wm-topbar__links" aria-label="Secondary">
+      <a href="{% url 'index' %}#about">About</a>
+      <a href="{% url 'index' %}#contact">Contact us</a>
+    </nav>
+    <div class="wm-topbar__social" aria-label="Social media">
+      {% if site.facebook_url %}<a href="{{ site.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>{% endif %}
+      {% if site.instagram_url %}<a href="{{ site.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>{% endif %}
+      {% if site.twitter_url %}<a href="{{ site.twitter_url }}" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
+      {% if site.youtube_url %}<a href="{{ site.youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>{% endif %}
+      {% if site.tiktok_url %}<a href="{{ site.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>{% endif %}
+      {% if site.whatsapp_channel_url %}<a href="{{ site.whatsapp_channel_url }}" target="_blank" rel="noopener" aria-label="WhatsApp channel"><i class="fa-brands fa-whatsapp"></i></a>{% endif %}
+    </div>
+  </div>
+</div>

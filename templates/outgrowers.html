@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static wm_icons %}
+{% block title %}Outgrower Initiatives - {{ site.company_name }}{% endblock %}
+{% block meta_description %}Join {{ site.company_name }}'s outgrower programme: certified training, a commercial cage setup and a guaranteed buy-back market for your rabbits.{% endblock %}
+
+{% block content %}
+<section class="wm-hero-photo wm-hero-photo--video">
+  <video class="wm-hero-photo__video" autoplay muted loop playsinline preload="auto">
+    <source src="{% static 'videos/out.mp4' %}" type="video/mp4">
+  </video>
+  <div class="wm-hero-photo__inner">
+    <span class="wm-eyebrow wm-slogan" style="justify-content:center">
+      {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}{{ part }}{% endfor %}
+    </span>
+    <h1>Farm rabbits with a guaranteed market</h1>
+    <p>We supply the bloodline, the training and the buy-back contract. You supply the care.</p>
+  </div>
+</section>
+
+<section class="wm-section">
+  <div class="wm-container wm-prose">
+    <p>The outgrower programme connects trained farmers to The White Meat Company's established supply chain.
+      Complete the Rabbitry Masterclass, set up a commercial cage system to programme specification, maintain
+      pure New Zealand White or Californian bloodlines, and we buy back your rabbits at transparent, published
+      prices.</p>
+  </div>
+</section>
+
+<section class="wm-section wm-section--surface-2">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Program benefits</span>
+      <h2>Exclusive Outgrower Program</h2>
+      <p>Join Zimbabwe's premier rabbit farming network with guaranteed market access and premium pricing
+        for your produce.</p>
+    </div>
+    <div class="wm-services__grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "outgrower" %}</span>
+        <h3>Guaranteed Market Access</h3>
+        <p>We guarantee a market for all your produce, ensuring stable income and business growth through
+          our established supply chain network.</p>
+      </div>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "masterclass" %}</span>
+        <h3>Certified Training</h3>
+        <p>Hold a certificate in rabbit farming from The White Meat Company masterclass program.</p>
+      </div>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "equipment" %}</span>
+        <h3>Commercial Scale</h3>
+        <p>Operate with minimum 51x36 breeders cages and 63x64 weaner cages for commercial viability.</p>
+      </div>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "truck" %}</span>
+        <h3>Regular Deliveries</h3>
+        <p>Maintain consistent supply through regular deliveries. Cages exceeding daily capacity must fit
+          program specifications.</p>
+      </div>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "breeding" %}</span>
+        <h3>Pure Bloodlines</h3>
+        <p>Maintain New Zealand White pure breeds from WWCO parent stock without crossbreeding from
+          unapproved sources.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wm-section">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Terms</span>
+      <h2>Buy-Back Terms &amp; Pricing</h2>
+      <p>Transparent pricing and clear terms for all outgrower program participants.</p>
+    </div>
+
+    <div class="wm-buyback">
+      <div class="wm-buyback__conditions">
+        <h3>{% wm_icon "outgrower" size=18 %} Buy-Back Conditions</h3>
+        <ul>
+          <li>We buy 'PURE' New Zealand White &amp; Californian rabbits ONLY</li>
+          <li>Rabbits must be 3 months old &amp; weigh 2.1&ndash;2.4 kg live weight</li>
+          <li>All rabbits will be thoroughly inspected for quality</li>
+          <li>We do NOT buy produce from non-outgrowers</li>
+          <li>Deliveries must be pre-arranged 48 hours in advance</li>
+          <li>Receiving bay open: 8:30am&ndash;11:30am (Monday&ndash;Friday)</li>
+          <li>Dispatch bay open: All day (Thursday&ndash;Friday)</li>
+          <li>Delivery quantities must match expected cage output</li>
+        </ul>
+      </div>
+
+      <div class="wm-buyback__pricing">
+        <h3>{% wm_icon "shop" size=18 %} Current Pricing</h3>
+        <div class="wm-buyback__price-row"><span>Bucks (Meat)</span><strong>$7 each</strong></div>
+        <div class="wm-buyback__price-row"><span>Does (Breeders)</span><strong>$10 each</strong></div>
+        <div class="wm-buyback__note">
+          <h4>{% wm_icon "truck" size=16 %} Delivery Requirements</h4>
+          <p>Meat rabbit deliveries must be accompanied by an equal or greater number of breeders to
+            maintain program balance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wm-req-box">
+      <h4>Program Requirements</h4>
+      <p><strong>Training:</strong> Complete our masterclass certification program</p>
+      <p><strong>Scale:</strong> Minimum commercial cage setup required</p>
+      <p style="margin-bottom:0"><strong>Payment:</strong> 21 days from invoice date</p>
+    </div>
+  </div>
+</section>
+
+<section class="wm-section wm-section--surface-2 wm-section--tight">
+  <div class="wm-container" style="max-width:640px">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Questions?</span>
+      <h2>For more info, contact us</h2>
+      <p>Tell us what you'd like to know about requirements, pricing or joining the programme &mdash;
+        we'll get back to you on WhatsApp.</p>
+    </div>
+    <form id="outgrowerContactForm" class="wm-contact__form">
+      <label>Your message
+        <textarea id="outgrowerMessage" rows="5" placeholder="Ask us about requirements, pricing, or how to join..." required></textarea>
+      </label>
+      <button type="submit" class="wm-btn wm-btn--primary">{% wm_icon "whatsapp" size=16 %} Send via WhatsApp</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    var form = document.getElementById('outgrowerContactForm');
+    if (!form) return;
+    var waNumber = "{{ site.whatsapp_number|escapejs }}";
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var msg = document.getElementById('outgrowerMessage').value.trim();
+      if (!msg) { alert('Please enter a message.'); return; }
+      var text = "Hello! I'm interested in the Outgrower Initiative.\n\n" + msg;
+      window.open('https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text), '_blank');
+    });
+  })();
+</script>
+{% endblock %}

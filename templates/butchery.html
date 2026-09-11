@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static wm_icons %}
+{% block title %}Whitemeat Butchery - {{ site.company_name }}{% endblock %}
+{% block meta_description %}Fresh rabbit meat from {{ site.company_name }} - whole, portioned, mince, sausages and bulk orders. Order online via WhatsApp.{% endblock %}
+
+{% block content %}
+<section class="wm-hero-photo wm-hero-photo--video">
+  <video class="wm-hero-photo__video" autoplay muted loop playsinline preload="auto"
+         poster="{% static 'images/default-menu-item.jpg' %}">
+    <source src="{% static 'videos/butchery.mp4' %}" type="video/mp4">
+  </video>
+  <div class="wm-hero-photo__inner">
+    <span class="wm-eyebrow wm-slogan" style="justify-content:center">
+      {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}{{ part }}{% endfor %}
+    </span>
+    <h1>Fresh rabbit meat, cut to order</h1>
+    <p>Lean, high in protein and low in cholesterol &mdash; the same rabbits that supply the Rabbit Hole
+      kitchen, prepared for your table. Order online and we'll confirm on WhatsApp.</p>
+    <a href="#shop" class="wm-btn wm-btn--accent">Shop the butchery {% wm_icon "arrow-right" size=15 %}</a>
+  </div>
+</section>
+
+<section class="wm-section">
+  <div class="wm-container">
+    <div class="wm-promo">
+      <div class="wm-promo__media"><img src="{% static 'images/butchery.jpg' %}" alt="Freshly butchered white meat, cut and ready"></div>
+      <div>
+        <span class="wm-eyebrow">Farm to counter</span>
+        <h2>Traceable, additive-free white meat</h2>
+        <p>Every cut comes from our own outgrower network of pure New Zealand White and Californian rabbits.
+          Slaughtered and dressed under strict hygiene, chilled straight away, and cut the way you want it.</p>
+        <ul class="wm-promo__list">
+          <li>{% wm_icon "leaf" %} No hormones, no additives &mdash; just clean white meat</li>
+          <li>{% wm_icon "breeding" %} Fully traceable to the farm</li>
+          <li>{% wm_icon "equipment" %} Custom cuts &amp; portioning on request</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wm-section wm-section--surface-2">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">How it works</span>
+      <h2>Buying from the butchery</h2>
+    </div>
+    <div class="wm-services__grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "leaf" %}</span>
+        <h3>Fresh daily</h3>
+        <p>Whole and half rabbits dressed fresh each morning. Frozen packs also available.</p>
+      </div>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "shop" %}</span>
+        <h3>Vacuum-sealed</h3>
+        <p>Portions are trimmed, vacuum-sealed and kept in the cold chain until collection.</p>
+      </div>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "outgrower" %}</span>
+        <h3>Bulk &amp; restaurant</h3>
+        <p>Wholesale pricing for restaurants, butcheries and events &mdash; from 20&nbsp;kg.</p>
+      </div>
+      <div class="wm-svc" style="cursor:default">
+        <span class="wm-svc__icon">{% wm_icon "truck" %}</span>
+        <h3>Collect or deliver</h3>
+        <p>Collect from Belvedere, or arrange delivery around Harare. Pay on collection or by transfer.</p>
+      </div>
+    </div>
+
+    {% if site.business_hours %}
+    <div class="wm-req-box" style="margin-top:32px;display:flex;gap:16px;align-items:flex-start">
+      {% wm_icon "clock" size=22 %}
+      <div>
+        <h4 style="margin:0 0 6px">Butchery hours</h4>
+        <p style="margin:0">{{ site.business_hours|linebreaksbr }}{% if site.office_address %}<br>{{ site.office_address }}{% endif %}</p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="wm-section" id="shop">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Shop</span>
+      <h2>Our products</h2>
+      <p>Add what you need to your order, then send it to us on WhatsApp to confirm price and collection.</p>
+    </div>
+
+    {% if categories %}
+    <div class="wm-menu-tabs wm-menu-tabs--ink" style="margin-bottom:36px">
+      <button class="wm-menu-tab is-active" data-filter="all">All</button>
+      {% for key, label in categories %}
+      <button class="wm-menu-tab" data-filter="{{ key }}">{{ label }}</button>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if products %}
+    <div class="wm-product-grid" id="wm-butchery-grid">
+      {% for p in products %}
+      <div class="wm-product-card" data-category="{{ p.category }}">
+        <div class="wm-product-card__media">
+          <img src="{{ p.image_url }}" alt="{{ p.image_alt|default:p.name }}" loading="lazy"
+               onerror="this.onerror=null;this.src='{% static 'images/default-menu-item.jpg' %}';">
+          {% if p.stock_note %}<span class="wm-product-card__tag">{{ p.stock_note }}</span>{% endif %}
+        </div>
+        <div class="wm-product-card__body">
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.description }}</p>
+          <div class="wm-product-card__footer">
+            <span class="wm-product-card__price">${{ p.price }}<span class="wm-breed-buy__unit">{{ p.unit }}</span></span>
+            <div class="wm-product-card__actions">
+              <input type="number" min="1" value="1" class="wm-qty-input" id="qty-{{ p.slug }}" aria-label="Quantity">
+              <button class="wm-btn wm-btn--primary wm-btn--sm"
+                      onclick="addButcheryToCart('{{ p.name|escapejs }} ({{ p.unit|escapejs }})', {{ p.price }}, document.getElementById('qty-{{ p.slug }}').value)">
+                {% wm_icon "shop" size=13 %} Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="wm-notice">No products available right now &mdash; please check back soon or contact us for a quote.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    WMProductCart.init('butchery');
+
+    // category filter
+    var tabs = document.querySelectorAll('.wm-menu-tab');
+    var cards = document.querySelectorAll('#wm-butchery-grid .wm-product-card');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        var f = tab.dataset.filter;
+        cards.forEach(function (c) { c.style.display = (f === 'all' || c.dataset.category === f) ? '' : 'none'; });
+      });
+    });
+  });
+
+  function addButcheryToCart(name, price, qty) {
+    qty = Math.max(1, parseInt(qty, 10) || 1);
+    for (let i = 0; i < qty; i++) WMProductCart.add(name, price);
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static wm_icons %}
+{% block title %}Rabbit Sheds &amp; Housing - {{ site.company_name }}{% endblock %}
+{% block meta_description %}Timber-framed rabbit sheds and housing units, weatherproof and ventilated, supplied and installed by {{ site.company_name }}.{% endblock %}
+
+{% block content %}
+<section class="wm-page-hero wm-pattern">
+  <div class="wm-container">
+    <span class="wm-eyebrow">Sheds</span>
+    <h1>Purpose-built rabbit sheds &amp; housing</h1>
+    <p>Weatherproof, well-ventilated timber structures sized to hold a full run of breeder and weaner
+      cages &mdash; the foundation of a serious commercial rabbitry, supplied and installed on site.</p>
+  </div>
+</section>
+
+<section class="wm-section">
+  <div class="wm-container">
+    <div class="wm-promo">
+      <div class="wm-promo__media"><img src="{% static 'images/house.jpg' %}" alt="Timber rabbit shed with galvanised roof"></div>
+      <div>
+        <span class="wm-eyebrow">Complete housing solutions</span>
+        <h2>Shelter that protects your stock and your investment</h2>
+        <p>Our rabbit sheds are built from treated timber with galvanised IBR roofing and full-length mesh
+          sides for airflow. They keep rabbits cool in summer, dry in the rains and secure year-round &mdash;
+          engineered for Zimbabwe's climate and ready for your cage units to move straight in.</p>
+        <ul class="wm-promo__list">
+          <li>{% wm_icon "equipment" %} Treated timber frame &amp; galvanised roof</li>
+          <li>{% wm_icon "equipment" %} Ventilated mesh sides, lockable access</li>
+          <li>{% wm_icon "equipment" %} Sized around your breeder &amp; weaner cages</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wm-section wm-section--surface-2" id="equipment">
+  <div class="wm-container">
+    <div class="wm-section__head">
+      <span class="wm-eyebrow">Shed models</span>
+      <h2>Our rabbit shed range</h2>
+      <p>Standard and custom-built housing units for commercial rabbit farming operations.</p>
+    </div>
+
+    <div class="wm-product-grid">
+      {% for shed in sheds %}
+      <div class="wm-product-card"
+           data-name="{{ shed.name }}"
+           data-price="{{ shed.price|floatformat:'-2' }}"
+           data-img="{{ shed.image_url }}"
+           data-desc="{{ shed.description }}"
+           data-capacity="{{ shed.capacity }}"
+           data-features="{{ shed.features }}">
+        <div class="wm-product-card__media">
+          <img src="{{ shed.image_url }}" alt="{{ shed.image_alt|default:shed.name }}">
+          <span class="wm-product-card__tag">{{ shed.get_category_display }}</span>
+        </div>
+        <div class="wm-product-card__body">
+          <h3>{{ shed.name }}</h3>
+          <p>{{ shed.description|truncatewords:28 }}</p>
+          <div class="wm-product-card__footer">
+            <span class="wm-product-card__price">${{ shed.price|floatformat:'-2' }}</span>
+            <div class="wm-product-card__actions">
+              <button class="wm-btn wm-btn--outline wm-btn--sm" onclick="showDetails(this)">Details</button>
+              <button class="wm-btn wm-btn--primary wm-btn--sm"
+                      onclick="WMProductCart.add('{{ shed.name|escapejs }}', {{ shed.price|floatformat:'-2' }})">
+                {% wm_icon "shop" size=13 %} Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p style="grid-column:1/-1;text-align:center;color:var(--wm-muted)">
+        Our shed range is being updated &mdash; please check back soon or contact us for a quote.
+      </p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="wm-section wm-section--tight">
+  <div class="wm-container" style="text-align:center">
+    <p style="margin:0 0 18px;color:var(--wm-muted)">Need the cages to go inside your shed?</p>
+    <a href="{% url 'cages' %}" class="wm-btn wm-btn--primary">View cage models {% wm_icon "arrow-right" size=15 %}</a>
+  </div>
+</section>
+
+<section class="wm-section wm-section--surface-2 wm-section--tight">
+  <div class="wm-container" style="max-width:720px;text-align:center">
+    <span class="wm-svc__icon" style="margin:0 auto 16px">{% wm_icon "equipment" size=24 %}</span>
+    <h3 style="margin:0 0 8px">Built &amp; installed on site</h3>
+    <p style="margin:0;color:var(--wm-muted)">Sheds are quoted per size and site. Our team delivers the
+      materials and assembles the structure at your farm &mdash; talk to us about custom dimensions.</p>
+  </div>
+</section>
+
+<!-- View Details Modal -->
+<div id="detailsModal" class="wm-modal">
+  <div class="wm-modal__card">
+    <button onclick="closeDetails()" class="wm-modal__close" aria-label="Close">&times;</button>
+    <div id="modalDetailsContent"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () { WMProductCart.init('sheds'); });
+
+  function showDetails(btn) {
+    const card = btn.closest('.wm-product-card');
+    if (!card) return;
+    const name = card.dataset.name || '';
+    const desc = card.dataset.desc || '';
+    const price = card.dataset.price || '';
+    const img = card.dataset.img || '';
+    const capacity = card.dataset.capacity || '';
+    const features = (card.dataset.features || '')
+      .split('\n').map(f => f.trim()).filter(Boolean);
+
+    let html = `<h2>${name}</h2>`;
+    if (capacity) html += `<p style="color:var(--wm-accent);font-weight:600;margin:0 0 8px;">${capacity}</p>`;
+    html += `<p>${desc}</p>`;
+    if (features.length) {
+      html += '<ul style="margin:12px 0 0;padding-left:18px;line-height:1.7">' +
+        features.map(f => `<li>${f}</li>`).join('') + '</ul>';
+    }
+    if (price) html += `<p style="font-weight:700;font-size:1.15rem;margin-top:14px;">From $${price}</p>`;
+    if (img) html += `<img src="${img}" alt="${name}" style="width:100%;margin-top:12px;">`;
+
+    document.getElementById('modalDetailsContent').innerHTML = html;
+    document.getElementById('detailsModal').classList.add('is-open');
+  }
+
+  function closeDetails() {
+    document.getElementById('detailsModal').classList.remove('is-open');
+  }
+</script>
+{% endblock %}

@@ -47,7 +47,7 @@ class ScrollAnimations {
         // Add a small delay for smoother effect
         setTimeout(() => {
             element.classList.add('visible');
-        }, 50);
+        }, 15);
     }
 
     // Fallback for browsers without Intersection Observer

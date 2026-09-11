@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static wm_icons %}
+{% block title %}Rabbit Farming Accessories - {{ site.company_name }}{% endblock %}
+{% block meta_description %}Nesting boxes, water bottles, feeders, collection bottles, hay and pellets from {{ site.company_name }}.{% endblock %}
+
+{% block content %}
+<section class="wm-page-hero wm-pattern">
+  <div class="wm-container">
+    <span class="wm-eyebrow">Accessories</span>
+    <h1>Everything else your rabbitry needs</h1>
+    <p>Nesting boxes, water bottles, feeders, urine collection bottles, hay and quality pellets &mdash;
+      the consumables and add-ons that keep a commercial rabbitry running.</p>
+  </div>
+</section>
+
+<section class="wm-section">
+  <div class="wm-container">
+    {% if accessories %}
+    <div class="wm-product-grid">
+      {% for accessory in accessories %}
+      <div class="wm-product-card">
+        <div class="wm-product-card__media">
+          <img src="{{ accessory.image_url }}" alt="{{ accessory.name }}" loading="lazy"
+               onerror="this.onerror=null;this.src='{% static 'images/default-accessory.jpg' %}';">
+        </div>
+        <div class="wm-product-card__body">
+          <h3>{{ accessory.name }}</h3>
+          <p>{{ accessory.description|truncatewords:20 }}</p>
+          <div class="wm-product-card__footer">
+            <span class="wm-product-card__price">${{ accessory.price }}</span>
+            <div class="wm-product-card__actions">
+              <button class="wm-btn wm-btn--primary wm-btn--sm"
+                      onclick="WMProductCart.add('{{ accessory.name|escapejs }}', {{ accessory.price }})">
+                {% wm_icon "shop" size=13 %} Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="wm-notice">No accessories available at the moment.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="wm-section wm-section--tight wm-section--surface-2">
+  <div class="wm-container" style="text-align:center">
+    <p style="margin:0 0 18px;color:var(--wm-muted)">Looking for breeder or weaner cages?</p>
+    <a href="{% url 'cages' %}" class="wm-btn wm-btn--outline">View cages {% wm_icon "arrow-right" size=15 %}</a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () { WMProductCart.init('accessories'); });
+</script>
+{% endblock %}

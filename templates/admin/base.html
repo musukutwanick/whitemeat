@@ -5,438 +5,309 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Admin Dashboard{% endblock %} - The White Meat Company</title>
-    <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/scroll-animations.css' %}" />
+    <link rel="icon" href="{% static 'images/logo.png' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <style>
+        :root {
+            --ink: #111111;
+            --ink-soft: #3a3a3a;
+            --muted: #6b6b6b;
+            --line: #e3e3e3;
+            --line-soft: #eeeeee;
+            --bg: #f4f4f4;
+            --hover: #f0f0f0;
+            --sidebar-w: 244px;
+        }
+        * { box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
+            background: var(--bg);
             margin: 0;
-            padding: 0;
+            color: var(--ink-soft);
         }
-        
-        .admin-header {
-            background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        a { color: var(--ink); }
+
+        /* ---------- Layout ---------- */
+        .admin-shell { display: flex; min-height: 100vh; }
+
+        .admin-sidebar {
+            width: var(--sidebar-w);
+            flex-shrink: 0;
+            background: #ffffff;
+            border-right: 1px solid var(--line);
+            color: var(--ink-soft);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0; bottom: 0; left: 0;
+            z-index: 200;
+            transition: transform .25s ease;
         }
-        
-        .admin-header h1 {
-            margin: 0;
-            font-size: 1.8rem;
+        .admin-sidebar__brand {
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid var(--line);
+        }
+        .admin-sidebar__brand img { height: 74px; width: auto; display: block; }
+        .admin-sidebar__nav { flex: 1; overflow-y: auto; padding: 12px 0 20px; }
+        .admin-sidebar__nav a {
+            display: flex; align-items: center; gap: 12px;
+            padding: 11px 20px;
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: .92rem;
+            border-left: 3px solid transparent;
+            transition: background .12s, color .12s, border-color .12s;
+        }
+        .admin-sidebar__nav a i { width: 18px; text-align: center; font-size: .95rem; color: var(--muted); }
+        .admin-sidebar__nav a:hover { background: var(--hover); color: var(--ink); }
+        .admin-sidebar__nav a:hover i { color: var(--ink); }
+        .admin-sidebar__nav a.is-active {
+            background: var(--ink);
+            color: #fff;
+            border-left-color: var(--ink);
             font-weight: 600;
         }
-        
-        .admin-nav {
-            background: white;
-            padding: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border-bottom: 3px solid #2d6a4f;
+        .admin-sidebar__nav a.is-active i { color: #fff; }
+        .admin-sidebar__sep {
+            margin: 14px 20px 6px;
+            font-size: .68rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #9a9a9a;
         }
-        
-        .admin-nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+
+        .admin-main { flex: 1; margin-left: var(--sidebar-w); min-width: 0; }
+        .admin-topbar {
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+            padding: 14px 26px;
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            position: sticky; top: 0; z-index: 100;
         }
-        
-        .admin-nav li {
-            margin: 0;
+        .admin-topbar h1 { margin: 0; font-size: 1.15rem; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .admin-navbtn { flex-shrink: 0; }
+        .admin-topbar__user { font-size: .85rem; color: var(--muted); text-align: right; flex-shrink: 0; }
+        .admin-topbar__user strong { display: block; color: var(--ink); }
+        .admin-burger {
+            display: none;
+            background: none; border: 0; cursor: pointer;
+            font-size: 1.4rem; color: var(--ink);
         }
-        
-        .admin-nav a {
-            display: block;
-            padding: 15px 25px;
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
+
+        .admin-container { max-width: 1100px; margin: 0 auto; padding: 26px; }
+
+        /* ---------- Messages ---------- */
+        .messages { margin-bottom: 18px; display: grid; gap: 8px; }
+        .alert {
+            padding: 12px 16px; border-radius: 8px; font-size: .92rem;
+            background: #fff; border: 1px solid var(--line); color: var(--ink-soft);
+            border-left: 4px solid var(--ink);
         }
-        
-        .admin-nav a:hover,
-        .admin-nav a.active {
-            background: #f8f9fa;
-            border-bottom-color: #2d6a4f;
-            color: #2d6a4f;
-        }
-        
-        .admin-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        .admin-content {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        .alert-success { border-left-color: #111; }
+        .alert-error, .alert-danger { border-left-color: #111; background: #f7f7f7; }
+        .alert-warning { border-left-color: #888; }
+        .alert-info { border-left-color: #888; }
+
+        /* ---------- Card ---------- */
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
             overflow: hidden;
         }
-        
-        .content-header {
-            background: #f8f9fa;
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #dee2e6;
+        .card + .card { margin-top: 20px; }
+        .card-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--line-soft);
+            display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
         }
-        
-        .content-header h2 {
-            margin: 0;
-            color: #333;
-            font-size: 1.5rem;
-        }
-        
-        .content-body {
-            padding: 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #2d6a4f;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background: #1e4b36;
-            transform: translateY(-1px);
-        }
-        
-        .btn-danger {
-            background: #dc3545;
-        }
-        
-        .btn-danger:hover {
-            background: #c82333;
-        }
-        
-        .btn-secondary {
-            background: #6c757d;
-        }
-        
-        .btn-secondary:hover {
-            background: #545b62;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #333;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #2d6a4f;
-            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-        }
-        
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        
-        .table th,
-        .table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
-        
-        .table th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .table tr:hover {
-            background: #f8f9fa;
-        }
-        
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .status-active {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .status-inactive {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        .actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .actions a {
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 3px;
-        }
-        
-        .messages {
-            margin-bottom: 1rem;
-        }
-        
-        .alert {
-            padding: 12px 16px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-        
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        .stat-content {
-            flex: 1;
-            text-align: left;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2d6a4f;
-            margin-bottom: 0.3rem;
-            line-height: 1;
-        }
-        
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        
-        .pagination a {
-            padding: 8px 12px;
-            margin: 0 5px;
-            text-decoration: none;
-            color: #2d6a4f;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-        }
-        
-        .pagination a:hover,
-        .pagination .current {
-            background: #2d6a4f;
-            color: white;
-        }
+        .card-title, .card-header h2, .card-header h3 { margin: 0; font-size: 1.05rem; color: var(--ink); }
+        .card-body { padding: 22px; }
 
-        @media (max-width: 900px) {
-          .admin-header {
-            padding: 1rem 0.5rem;
-          }
-          .admin-hamburger {
-            display: flex !important;
-            width: 38px;
-            height: 38px;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* ---------- Buttons ---------- */
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 18px;
+            background: var(--ink);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid var(--ink);
             cursor: pointer;
-            margin-left: 12px;
-          }
-          .admin-hamburger span {
-            display: block;
-            height: 5px;
-            width: 32px;
-            background: #fff;
-            margin: 4px 0;
-            border-radius: 3px;
-            transition: 0.3s;
-          }
-          .admin-header .admin-header-actions {
-            display: none;
-          }
+            font-size: .88rem;
+            font-weight: 600;
+            font-family: inherit;
+            transition: background .15s, color .15s, transform .1s;
         }
-        @media (min-width: 901px) {
-          .admin-hamburger {
-            display: none !important;
-          }
+        .btn:hover { background: #000; color: #fff; }
+        .btn:active { transform: translateY(1px); }
+        .btn--ghost { background: #fff; color: var(--ink); border-color: var(--line); }
+        .btn--ghost:hover { background: var(--hover); color: var(--ink); border-color: #cfcfcf; }
+        .btn--danger { background: #fff; color: var(--ink); border-color: var(--ink); }
+        .btn--danger:hover { background: var(--ink); color: #fff; }
+        .btn--sm { padding: 6px 12px; font-size: .8rem; }
+
+        /* ---------- Table ---------- */
+        .table { width: 100%; border-collapse: collapse; }
+        .table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line-soft); font-size: .9rem; }
+        .table th { background: #fafafa; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; font-size: .72rem; letter-spacing: .05em; }
+        .table tr:hover td { background: #fafafa; }
+        .table img.thumb { height: 42px; width: 60px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); }
+        .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .74rem; font-weight: 700; }
+        .pill--on { background: var(--ink); color: #fff; }
+        .pill--off { background: #ededed; color: #8a8a8a; }
+
+        /* ---------- Forms ---------- */
+        .form-row { margin-bottom: 16px; }
+        .form-row label { display: block; margin-bottom: 6px; font-weight: 600; font-size: .85rem; color: var(--ink); }
+        .form-control, .form-control-file {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: .9rem;
+            font-family: inherit;
+            background: #fff;
+            color: var(--ink);
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--ink);
+            box-shadow: 0 0 0 3px rgba(0,0,0,.08);
+        }
+        .form-check { display: flex; align-items: center; gap: 9px; }
+        .form-check-input { width: 17px; height: 17px; accent-color: #111; }
+        .form-help { font-size: .78rem; color: var(--muted); margin-top: 4px; }
+        .form-errors { color: #111; font-weight: 600; font-size: .8rem; margin-top: 4px; }
+        .form-actions { display: flex; gap: 10px; margin-top: 8px; }
+        .current-image { margin-bottom: 16px; }
+        .current-image img { max-height: 150px; border-radius: 8px; border: 1px solid var(--line); }
+
+        /* ---------- Stat tiles ---------- */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+        .stat {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex; align-items: center; gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform .15s, box-shadow .15s;
+        }
+        .stat:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+        .stat__icon {
+            width: 44px; height: 44px; flex-shrink: 0;
+            border-radius: 10px;
+            display: grid; place-items: center;
+            background: var(--ink); color: #fff;
+            font-size: 1.1rem;
+        }
+        .stat__n { font-size: 1.5rem; font-weight: 800; line-height: 1; color: var(--ink); }
+        .stat__l { font-size: .8rem; color: var(--muted); margin-top: 3px; }
+
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
+        .empty-state i { font-size: 2rem; margin-bottom: 10px; display: block; opacity: .4; }
+
+        /* ---------- Mobile ---------- */
+        .admin-scrim {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,.45);
+            z-index: 150;
+        }
+        @media (max-width: 900px) {
+            .admin-sidebar { transform: translateX(-100%); }
+            .admin-sidebar.is-open { transform: translateX(0); }
+            .admin-main { margin-left: 0; }
+            .admin-burger { display: block; }
+            .admin-scrim.is-open { display: block; }
+            .admin-container { padding: 18px 14px; }
+            .admin-navbtn__label { display: none; }
+            .admin-navbtn { padding: 6px 10px; }
+        }
+        @media (max-width: 560px) {
+            .admin-topbar__user { display: none; }
         }
     </style>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <header class="admin-header">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h1 style="margin: 0;">{% block header_title %}Admin Dashboard{% endblock %}</h1>
-                <p style="margin: 5px 0 0 0; opacity: 0.8; font-size: 0.9rem;">The White Meat Company Management</p>
-            </div>
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <div style="text-align: right;">
-                    <div style="font-weight: 500;">{{ user.first_name|default:user.username }}</div>
-                    <div style="font-size: 0.8rem; opacity: 0.8;">Administrator</div>
-                </div>
-                <!-- Hamburger for mobile -->
-                <div class="admin-hamburger" onclick="toggleAdminNav()">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-            </div>
+<div class="admin-shell">
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="admin-sidebar__brand">
+            <img src="{% static 'images/logo.png' %}" alt="The White Meat Company">
         </div>
-    </header>
-    
-    
-    
-    <div class="admin-container">
-        {% if messages %}
+        <nav class="admin-sidebar__nav">
+            {% url 'admin_dashboard' as u_dash %}
+            <a href="{{ u_dash }}" class="{% if request.path == u_dash %}is-active{% endif %}"><i class="fas fa-gauge-high"></i> Dashboard</a>
+
+            <div class="admin-sidebar__sep">Content</div>
+            {% url 'branch_selection' as u_menus %}
+            <a href="{{ u_menus }}" class="{% if '/menu' in request.path or request.path == u_menus %}is-active{% endif %}"><i class="fas fa-utensils"></i> Menus</a>
+            {% for slug, label, icon in sections %}
+            <a href="{% url 'content_list' section=slug %}"
+               class="{% if section == slug %}is-active{% endif %}"><i class="fas {{ icon }}"></i> {{ label }}</a>
+            {% endfor %}
+            {% url 'edit_masterclass_schedule' as u_mc %}
+            <a href="{{ u_mc }}" class="{% if request.path == u_mc %}is-active{% endif %}"><i class="fas fa-chalkboard-user"></i> Masterclass Schedule</a>
+
+            <div class="admin-sidebar__sep">Insights</div>
+            {% url 'how_hear_responses' as u_resp %}
+            <a href="{{ u_resp }}" class="{% if request.path == u_resp %}is-active{% endif %}"><i class="fas fa-chart-column"></i> Survey Responses</a>
+
+            <div class="admin-sidebar__sep">Other</div>
+            <a href="{% url 'index' %}" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> View Website</a>
+            <a href="{% url 'admin_logout' %}"><i class="fas fa-right-from-bracket"></i> Log Out</a>
+        </nav>
+    </aside>
+    <div class="admin-scrim" id="adminScrim" onclick="toggleSidebar(false)"></div>
+
+    <div class="admin-main">
+        <header class="admin-topbar">
+            <div style="display:flex;align-items:center;gap:12px;min-width:0;">
+                <button class="admin-burger" onclick="toggleSidebar(true)" aria-label="Menu"><i class="fas fa-bars"></i></button>
+                {% if request.path != u_dash %}
+                <button type="button" class="btn btn--ghost btn--sm admin-navbtn" onclick="history.back()" title="Go back">
+                    <i class="fas fa-arrow-left"></i><span class="admin-navbtn__label"> Back</span>
+                </button>
+                <a href="{{ u_dash }}" class="btn btn--ghost btn--sm admin-navbtn" title="Dashboard home">
+                    <i class="fas fa-house"></i><span class="admin-navbtn__label"> Home</span>
+                </a>
+                {% endif %}
+                <h1>{% block header_title %}{% block content_title %}{% block page_title %}Dashboard{% endblock %}{% endblock %}{% endblock %}</h1>
+            </div>
+            <div class="admin-topbar__user">
+                <strong>{{ user.first_name|default:user.username }}</strong>
+                Administrator
+            </div>
+        </header>
+
+        <div class="admin-container">
+            {% if messages %}
             <div class="messages">
                 {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
-                    </div>
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
                 {% endfor %}
             </div>
-        {% endif %}
-        
-        <div class="admin-content">
-            <div class="content-header">
-                <h2>{% block content_title %}Dashboard{% endblock %}</h2>
-                {% block header_actions %}{% endblock %}
-            </div>
-            <div class="content-body">
-                {% block content %}{% endblock %}
-            </div>
+            {% endif %}
+
+            {% block header_actions %}{% endblock %}
+            {% block content %}{% endblock %}
         </div>
     </div>
+</div>
 
-    <!-- Responsive admin nav for hamburger -->
-    <nav class="admin-nav" id="adminNav" style="display:none;flex-direction:column;position:absolute;top:60px;right:0;width:220px;z-index:999;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:18px 0;">
-      <a href="{% url 'admin_dashboard' %}">Dashboard</a>
-      <a href="{% url 'branch_selection' %}">Manage Menus</a>
-      <a href="{% url 'how_hear_responses' %}">View Responses</a>
-      <a href="{% url 'edit_masterclass_schedule' %}">Masterclass Editor</a>
-      <a href="{% url 'add_accessory' %}">Add Accessory</a>
-      <a href="{% url 'index' %}">View Website</a>
-    </nav>
-    
-    <!-- AOS Animation Library -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 600,
-            easing: 'ease-out',
-            once: true,
-            offset: 50
-        });
-
-        function toggleAdminNav() {
-          var nav = document.getElementById('adminNav');
-          nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        // Ensure nav closes on click outside or on link
-        window.addEventListener('click', function(e) {
-          var nav = document.getElementById('adminNav');
-          var burger = document.querySelector('.admin-hamburger');
-          if (nav && nav.style.display === 'flex' && !nav.contains(e.target) && !burger.contains(e.target)) {
-            nav.style.display = 'none';
-          }
-        });
-        Array.from(document.querySelectorAll('.admin-nav a')).forEach(function(link) {
-          link.addEventListener('click', function() {
-            document.getElementById('adminNav').style.display = 'none';
-          });
-        });
-    </script>
+<script>
+    function toggleSidebar(open) {
+        document.getElementById('adminSidebar').classList.toggle('is-open', open);
+        document.getElementById('adminScrim').classList.toggle('is-open', open);
+    }
+</script>
+{% block extra_js %}{% endblock %}
 </body>
 </html>
