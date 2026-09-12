@@ -414,7 +414,7 @@
   .wm-page .wm-nav__cta .wm-btn { display: none; }
   .wm-nav__links {
     position: fixed;
-    inset: var(--wm-nav-h) 0 0 auto;
+    inset: var(--wm-nav-offset, var(--wm-nav-h)) 0 0 auto;
     width: min(360px, 84vw);
     flex-direction: column;
     align-items: stretch;
@@ -443,7 +443,7 @@
   }
   .wm-nav__scrim {
     position: fixed;
-    inset: var(--wm-nav-h) 0 0 0;
+    inset: var(--wm-nav-offset, var(--wm-nav-h)) 0 0 0;
     background: rgba(15, 25, 20, .4);
     opacity: 0;
     visibility: hidden;
@@ -690,6 +690,10 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
+/* 4-across variant (butchery "how it works") - a modifier class rather
+   than an inline style so the responsive breakpoints below can still
+   override it; an inline style would beat them at every width. */
+.wm-services__grid--4 { grid-template-columns: repeat(4, 1fr); }
 .wm-svc {
   display: flex;
   flex-direction: column;
