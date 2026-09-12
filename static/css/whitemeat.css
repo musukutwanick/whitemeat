@@ -410,6 +410,15 @@
 .wm-nav__burger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 @media (max-width: 1080px) {
+  /* .wm-nav's backdrop-filter makes it a "containing block" for any
+     position:fixed descendant (a well-known CSS gotcha - filter/
+     backdrop-filter/transform/will-change/contain all do this), so
+     .wm-nav__links below was being sized and positioned relative to the
+     ~74px-tall navbar itself instead of the viewport: it opened as a
+     sliver a few px tall instead of a full-height slide-in panel. Drop
+     the blur on mobile so the fixed panel positions against the
+     viewport like it's meant to. */
+  .wm-nav { backdrop-filter: none; }
   .wm-nav .wm-nav__burger { display: flex; }
   .wm-page .wm-nav__cta .wm-btn { display: none; }
   .wm-nav__links {
