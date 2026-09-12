@@ -1381,6 +1381,7 @@ button.wm-calendar__day.is-full {
 .wm-checkout__paymethod { margin-bottom: 8px; font-size: .92rem; color: var(--wm-body); }
 .wm-checkout__paymethod:last-child { margin-bottom: 0; }
 .wm-checkout__paymethod strong { display: block; color: var(--wm-ink); font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px; }
+.wm-checkout__paymethod-caveat { display: block; margin-top: 4px; font-size: .8rem; color: var(--wm-muted); font-style: italic; }
 .wm-checkout__methods { display: grid; gap: 8px; }
 .wm-checkout__method {
   display: flex; align-items: center; gap: 9px;

@@ -7,6 +7,7 @@
   <div class="wm-checkout__paymethod">
     <strong>EcoCash / Mobile Money</strong>
     <span>{{ site.payment_ecocash_number }}{% if site.payment_ecocash_name %} &mdash; {{ site.payment_ecocash_name }}{% endif %}</span>
+    <span class="wm-checkout__paymethod-caveat">Please include the applicable withdrawal charges when sending via EcoCash.</span>
   </div>
   {% endif %}
   {% if site.payment_bank_details %}
