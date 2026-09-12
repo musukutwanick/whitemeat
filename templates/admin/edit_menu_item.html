@@ -1,62 +1,69 @@
 {% extends 'admin/base.html' %}
 
 {% block title %}Edit Menu Item{% endblock %}
-
-{% block content_title %}Edit Menu Item: {{ menu_item.name }}{% endblock %}
+{% block content_title %}Edit &ldquo;{{ menu_item.name }}&rdquo;{% endblock %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    
-    <div class="form-group">
-        <label for="name">Name *</label>
-        <input type="text" id="name" name="name" value="{{ menu_item.name }}" required>
+<div class="card">
+    <div class="card-header">
+        <h2>{{ branch.name }}</h2>
+        <a href="{% url 'branch_menu_items' branch.id %}" class="btn btn--ghost btn--sm"><i class="fas fa-arrow-left"></i> Back to menu</a>
     </div>
-    
-    <div class="form-group">
-        <label for="description">Description *</label>
-        <textarea id="description" name="description" rows="4" required>{{ menu_item.description }}</textarea>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <label for="name">Name *</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ menu_item.name }}" required>
+            </div>
+
+            <div class="form-row">
+                <label for="description">Description *</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required>{{ menu_item.description }}</textarea>
+            </div>
+
+            <div class="form-row">
+                <label for="price">Price *</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" value="{{ menu_item.price }}" required>
+            </div>
+
+            <div class="form-row">
+                <label for="category">Category *</label>
+                <select class="form-control" id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == menu_item.category.id %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="image">Image</label>
+                {% if menu_item.image %}
+                <div class="current-image">
+                    <img src="{{ menu_item.image.url }}" alt="{{ menu_item.name }}">
+                    <div class="form-help">Current image</div>
+                </div>
+                {% endif %}
+                <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
+                <div class="form-help">
+                    {% if menu_item.image %}Upload a new image to replace the current one.{% else %}Upload an image for this menu item.{% endif %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="is_available" name="is_available" {% if menu_item.is_available %}checked{% endif %}>
+                    <label for="is_available" style="margin:0;">Available for order</label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn"><i class="fas fa-floppy-disk"></i> Update menu item</button>
+                <a href="{% url 'branch_menu_items' branch.id %}" class="btn btn--ghost">Cancel</a>
+            </div>
+        </form>
     </div>
-    
-    <div class="form-group">
-        <label for="price">Price *</label>
-        <input type="number" id="price" name="price" step="0.01" min="0" value="{{ menu_item.price }}" required>
-    </div>
-    
-    <div class="form-group">
-        <label for="category">Category *</label>
-        <select id="category" name="category" required>
-            <option value="">Select a category</option>
-            {% for category in categories %}
-            <option value="{{ category.id }}" {% if category.id == menu_item.category.id %}selected{% endif %}>{{ category.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label for="image">Image</label>
-        {% if menu_item.image %}
-        <div style="margin-bottom: 10px;">
-            <img src="{{ menu_item.image.url }}" alt="{{ menu_item.name }}" style="max-width: 200px; max-height: 150px; object-fit: cover; border-radius: 5px;">
-            <p style="margin: 5px 0; color: #666; font-size: 14px;">Current image</p>
-        </div>
-        {% endif %}
-        <input type="file" id="image" name="image" accept="image/*">
-        <small style="color: #666; display: block; margin-top: 5px;">
-            {% if menu_item.image %}Upload a new image to replace the current one.{% else %}Upload an image for this menu item.{% endif %}
-        </small>
-    </div>
-    
-    <div class="form-group">
-        <div class="checkbox-group">
-            <input type="checkbox" id="is_available" name="is_available" {% if menu_item.is_available %}checked{% endif %}>
-            <label for="is_available">Available for order</label>
-        </div>
-    </div>
-    
-    <div style="margin-top: 2rem;">
-        <button type="submit" class="btn">Update Menu Item</button>
-        <a href="{% url 'branch_menu_items' branch.id %}" class="btn btn-secondary" style="margin-left: 10px;">Cancel</a>
-    </div>
-</form>
+</div>
 {% endblock %}
