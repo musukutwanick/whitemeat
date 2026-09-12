@@ -67,6 +67,14 @@
     var scrim = document.querySelector(".wm-nav__scrim");
 
     function setOpen(open) {
+      if (open) {
+        // The topbar sits above the nav and isn't sticky, so when the page
+        // hasn't been scrolled yet the nav's real bottom edge is further
+        // down than --wm-nav-h alone accounts for. Measure it live each
+        // time the menu opens instead of trusting the static var.
+        var offset = Math.round(nav.getBoundingClientRect().bottom);
+        document.documentElement.style.setProperty("--wm-nav-offset", offset + "px");
+      }
       burger.classList.toggle("is-open", open);
       links.classList.toggle("is-open", open);
       if (scrim) scrim.classList.toggle("is-open", open);
