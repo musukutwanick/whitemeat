@@ -451,8 +451,13 @@ def edit_menu_item(request, branch_id, item_id):
             menu_item.is_featured = request.POST.get('is_featured') == 'on'
             
             if 'image' in request.FILES:
+                if menu_item.image:
+                    menu_item.image.delete(save=False)
                 menu_item.image = request.FILES['image']
-            
+            elif request.POST.get('remove_image') == 'on' and menu_item.image:
+                menu_item.image.delete(save=False)
+                menu_item.image = None
+
             menu_item.save()
             messages.success(request, f'Menu item "{menu_item.name}" updated successfully!')
             return redirect('branch_menu_items', branch_id=branch.id)

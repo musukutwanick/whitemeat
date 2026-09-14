@@ -118,6 +118,7 @@
             border: 1px solid var(--line);
             border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,.04);
         }
         .card + .card { margin-top: 20px; }
         .card-header {
@@ -135,16 +136,16 @@
             background: var(--ink);
             color: #fff;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 9px;
             border: 1px solid var(--ink);
             cursor: pointer;
             font-size: .88rem;
             font-weight: 600;
             font-family: inherit;
-            transition: background .15s, color .15s, transform .1s;
+            transition: background .15s, color .15s, transform .1s, box-shadow .15s;
         }
-        .btn:hover { background: #000; color: #fff; }
-        .btn:active { transform: translateY(1px); }
+        .btn:hover { background: #000; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,.18); }
+        .btn:active { transform: translateY(1px); box-shadow: none; }
         .btn--ghost { background: #fff; color: var(--ink); border-color: var(--line); }
         .btn--ghost:hover { background: var(--hover); color: var(--ink); border-color: #cfcfcf; }
         .btn--danger { background: #fff; color: var(--ink); border-color: var(--ink); }
@@ -162,30 +163,65 @@
         .pill--off { background: #ededed; color: #8a8a8a; }
 
         /* ---------- Forms ---------- */
-        .form-row { margin-bottom: 16px; }
-        .form-row label { display: block; margin-bottom: 6px; font-weight: 600; font-size: .85rem; color: var(--ink); }
+        .form-row { margin-bottom: 18px; }
+        .form-row label { display: block; margin-bottom: 7px; font-weight: 600; font-size: .85rem; color: var(--ink); }
         .form-control, .form-control-file {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            font-size: .9rem;
+            padding: 11px 14px;
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            font-size: .92rem;
             font-family: inherit;
-            background: #fff;
+            background: #fafafa;
             color: var(--ink);
+            transition: border-color .15s, background-color .15s, box-shadow .15s;
         }
-        .form-control:focus {
+        .form-control:hover, .form-control-file:hover { border-color: #cbcbcb; }
+        .form-control:focus, .form-control-file:focus {
             outline: none;
             border-color: var(--ink);
-            box-shadow: 0 0 0 3px rgba(0,0,0,.08);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(17,17,17,.08);
         }
+        select.form-control { cursor: pointer; }
+        textarea.form-control { resize: vertical; min-height: 92px; line-height: 1.5; }
+        .form-control-file { padding: 9px 12px; cursor: pointer; }
+        .form-control-file::file-selector-button {
+            margin-right: 12px; padding: 8px 14px; border: 0; border-radius: 7px;
+            background: var(--ink); color: #fff; font-weight: 600; font-size: .82rem;
+            cursor: pointer; transition: background .15s;
+        }
+        .form-control-file::file-selector-button:hover { background: #000; }
         .form-check { display: flex; align-items: center; gap: 9px; }
         .form-check-input { width: 17px; height: 17px; accent-color: #111; }
-        .form-help { font-size: .78rem; color: var(--muted); margin-top: 4px; }
+        .form-help { font-size: .78rem; color: var(--muted); margin-top: 5px; }
         .form-errors { color: #111; font-weight: 600; font-size: .8rem; margin-top: 4px; }
         .form-actions { display: flex; gap: 10px; margin-top: 8px; }
         .current-image { margin-bottom: 16px; }
         .current-image img { max-height: 150px; border-radius: 8px; border: 1px solid var(--line); }
+
+        /* Django's built-in "Currently: <file> [Clear]" markup for an
+           existing upload - group it into a tidy box and style the loose
+           checkbox/label it renders as a pill toggle, since we can't
+           control its raw HTML structure without overriding the widget. */
+        .form-row:has(input[type="checkbox"][id$="-clear_id"]) {
+            background: #fafafa; border: 1px solid var(--line); border-radius: 10px;
+            padding: 14px 16px 16px;
+        }
+        .form-row:has(input[type="checkbox"][id$="-clear_id"]) > a {
+            color: var(--ink); font-weight: 600; text-decoration: underline;
+        }
+        input[type="checkbox"][id$="-clear_id"] {
+            width: 15px; height: 15px; accent-color: #111; vertical-align: middle; margin-right: 6px;
+        }
+        label[for$="-clear_id"] {
+            display: inline-flex !important; align-items: center; gap: 6px;
+            font-weight: 600 !important; font-size: .78rem !important; color: var(--ink) !important;
+            cursor: pointer; background: #fff; padding: 6px 12px; border-radius: 999px;
+            border: 1px solid var(--line); margin: 0 0 8px !important;
+            transition: background .15s, color .15s, border-color .15s;
+        }
+        label[for$="-clear_id"]:hover { background: var(--ink); color: #fff !important; border-color: var(--ink); }
 
         /* ---------- Stat tiles ---------- */
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }

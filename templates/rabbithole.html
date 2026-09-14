@@ -43,7 +43,6 @@
           <p>{{ item.description|truncatewords:16 }}</p>
           <div class="wm-menu-card__row">
             <span class="wm-menu-card__price">${{ item.price }}</span>
-            <span class="wm-menu-card__badge">{{ item.category.name }}</span>
           </div>
           <button type="button" class="wm-btn wm-btn--accent wm-btn--sm" style="margin-top:10px;width:100%;justify-content:center"
                   onclick="WMProductCart.add('{{ item.name|escapejs }}', {{ item.price|floatformat:'-2' }})">
