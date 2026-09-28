@@ -13,10 +13,14 @@
       {% endif %}
       <div class="wm-hero__inner">
         <div class="wm-hero__copy">
+          {% if 'rabbit hole' in slide.heading|lower %}
           <span class="wm-eyebrow wm-slogan">
             {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}{{ part }}{% endfor %}
           </span>
-          <h1>{{ slide.heading }}</h1>
+          {% else %}
+          <span class="wm-eyebrow wm-slogan wm-slogan--plain">We are your first market</span>
+          {% endif %}
+          <h1>{% if slide.heading == "Pioneering Zimbabwe's white meat revolution" %}Pioneering Zimbabwe's <span class="wm-hero__accent">white meat revolution</span>{% elif slide.heading == "Pure, health-certified breeding stock" %}Pure, <span class="wm-hero__accent">health-certified breeding stock</span>{% elif "international-standard" in slide.heading|lower %}<span class="wm-hero__accent">International-standard cages</span> &amp; accessories{% elif slide.heading == "The Rabbitry Masterclass" %}The <span class="wm-hero__accent">Rabbitry Masterclass</span>{% elif "rabbit hole" in slide.heading|lower %}The <span class="wm-hero__accent">Rabbit Hole Bar &amp; Grill</span>{% elif slide.heading == "Whitemeat Butchery" %}<span class="wm-hero__accent">Whitemeat Butchery</span>{% else %}{{ slide.heading }}{% endif %}</h1>
           {% if slide.subheading %}<p>{{ slide.subheading }}</p>{% endif %}
         </div>
         {% if slide.cta_primary_label %}

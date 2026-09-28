@@ -9,14 +9,15 @@
     <source src="{% static 'videos/butchery.mp4' %}" type="video/mp4">
   </video>
   <div class="wm-hero-photo__inner">
-    <span class="wm-eyebrow wm-slogan" style="justify-content:center">
-      {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}{{ part }}{% endfor %}
-    </span>
+    <span class="wm-eyebrow wm-slogan wm-slogan--plain" style="justify-content:center">We are your first market</span>
     <h1>Fresh rabbit meat, cut to order</h1>
     <p>Lean, high in protein and low in cholesterol &mdash; the same rabbits that supply the Rabbit Hole
       kitchen, prepared for your table. Order online and we'll confirm on WhatsApp.</p>
     <a href="#shop" class="wm-btn wm-btn--accent">Shop the butchery {% wm_icon "arrow-right" size=15 %}</a>
   </div>
+  <a class="wm-scroll-cue" href="#shop" aria-label="Scroll to the butchery shop">
+    <span>Scroll</span><span class="wm-scroll-cue__arrow" aria-hidden="true">&darr;</span>
+  </a>
 </section>
 
 <section class="wm-section">

@@ -52,8 +52,6 @@
 
   <div class="wm-container wm-footer__bar">
     <span>&copy; {% now "Y" %} {{ site.company_name }}. All rights reserved.</span>
-    <span class="wm-eyebrow wm-slogan wm-brand-slogan">
-      {% for part in site.slogan_parts %}{% if not forloop.first %}<i class="wm-sep" aria-hidden="true"></i>{% endif %}{{ part }}{% endfor %}
-    </span>
+    <span class="wm-eyebrow wm-slogan wm-slogan--plain wm-brand-slogan">We are your first market</span>
   </div>
 </footer>
