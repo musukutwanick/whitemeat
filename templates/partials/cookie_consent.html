@@ -1,0 +1,38 @@
+<section id="wm-cookie-banner" class="wm-cookie-banner" hidden aria-label="Cookie preferences">
+  <div class="wm-cookie-banner__copy">
+    <p class="wm-cookie-banner__title">Your privacy matters</p>
+    <p>We use necessary cookies to keep you signed in and remember your cart. Optional cookies help remember preferences and improve the site.</p>
+  </div>
+  <div class="wm-cookie-banner__actions">
+    <button type="button" class="wm-btn wm-btn--dark" data-cookie-action="accept-all">Accept all</button>
+    <button type="button" class="wm-btn wm-btn--outline" data-cookie-action="essential-only">Essential only</button>
+    <button type="button" class="wm-cookie-banner__manage" data-cookie-action="open-preferences">Manage preferences</button>
+  </div>
+</section>
+
+<div id="wm-cookie-preferences" class="wm-cookie-modal" hidden role="dialog" aria-modal="true" aria-labelledby="wm-cookie-preferences-title">
+  <div class="wm-cookie-modal__card">
+    <button type="button" class="wm-cookie-modal__close" data-cookie-action="close-preferences" aria-label="Close cookie preferences">&times;</button>
+    <p class="wm-eyebrow">Privacy</p>
+    <h2 id="wm-cookie-preferences-title">Cookie preferences</h2>
+    <p class="wm-cookie-modal__intro">Choose which optional cookies you allow. Necessary cookies cannot be switched off because the site needs them for login, security, and your cart.</p>
+    <label class="wm-cookie-option">
+      <input type="checkbox" checked disabled>
+      <span><strong>Necessary</strong><small>Login sessions, security, and essential site functions.</small></span>
+    </label>
+    <label class="wm-cookie-option">
+      <input type="checkbox" id="wm-cookie-preferences-choice">
+      <span><strong>Preferences</strong><small>Remember choices that make the site more convenient for you.</small></span>
+    </label>
+    <label class="wm-cookie-option">
+      <input type="checkbox" id="wm-cookie-analytics-choice">
+      <span><strong>Analytics</strong><small>Allow anonymous usage measurement when analytics is enabled.</small></span>
+    </label>
+    <button type="button" class="wm-btn wm-btn--dark wm-cookie-modal__save" data-cookie-action="save-preferences">Save preferences</button>
+  </div>
+</div>
+
+<button id="wm-cookie-settings" type="button" class="wm-cookie-settings" data-cookie-action="open-preferences" hidden>
+  <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+  <span>Cookies</span>
+</button>

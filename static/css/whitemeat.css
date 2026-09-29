@@ -635,14 +635,18 @@
   z-index: 6;
 }
 .wm-servicebar__row {
+  position: relative;
   display: flex;
   background: #fff;
   box-shadow: var(--wm-shadow-lg);
   border: 1px solid rgba(0, 0, 0, .06);
+  overflow: hidden;
 }
 .wm-servicebar__item {
   flex: 1 1 0;
   min-width: 0;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1452,11 +1456,164 @@ button.wm-calendar__day.is-full {
 #wm-checkout-form.wm-contact__form label { margin-bottom: 14px; }
 
 /* =========================================================================
+   COOKIE CONSENT
+   ========================================================================= */
+[hidden] { display: none !important; }
+.wm-cookie-banner {
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 24px;
+  background: #171717;
+  color: #fff;
+  box-shadow: var(--wm-shadow-lg);
+}
+.wm-cookie-banner__copy { max-width: 680px; }
+.wm-cookie-banner__title { margin: 0 0 5px; font-weight: 700; color: #fff; }
+.wm-cookie-banner__copy p:last-child { margin: 0; color: rgba(255, 255, 255, .72); font-size: .86rem; line-height: 1.55; }
+.wm-cookie-banner__actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+.wm-cookie-banner__actions .wm-btn { white-space: nowrap; }
+.wm-cookie-banner__manage {
+  padding: 8px 4px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, .8);
+  font: inherit;
+  font-size: .82rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.wm-cookie-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 5100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 20, 18, .68);
+}
+.wm-cookie-modal__card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  padding: 32px;
+  background: #fff;
+  box-shadow: var(--wm-shadow-lg);
+}
+.wm-cookie-modal__card h2 { margin: 0 0 10px; color: var(--wm-ink); }
+.wm-cookie-modal__intro { margin: 0 0 22px; color: var(--wm-body); font-size: .9rem; line-height: 1.6; }
+.wm-cookie-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  color: var(--wm-ink);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.wm-cookie-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 0;
+  border-top: 1px solid var(--wm-line);
+  cursor: pointer;
+}
+.wm-cookie-option input { width: 17px; height: 17px; margin-top: 2px; accent-color: var(--wm-accent); }
+.wm-cookie-option span { display: grid; gap: 3px; }
+.wm-cookie-option strong { color: var(--wm-ink); font-size: .9rem; }
+.wm-cookie-option small { color: var(--wm-body); font-size: .8rem; line-height: 1.45; }
+.wm-cookie-modal__save { margin-top: 18px; }
+.wm-cookie-settings {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 4999;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 13px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: #171717;
+  color: #fff;
+  font: 600 .78rem/1 var(--wm-font-body);
+  cursor: pointer;
+  box-shadow: var(--wm-shadow);
+}
+.wm-cookie-settings:hover { background: var(--wm-accent); }
+@media (max-width: 760px) {
+  .wm-cookie-banner { left: 12px; right: 12px; bottom: 12px; align-items: stretch; flex-direction: column; gap: 14px; padding: 18px; }
+  .wm-cookie-banner__actions { justify-content: flex-start; }
+  .wm-cookie-settings { left: 12px; bottom: 12px; }
+  .wm-cookie-modal__card { padding: 28px 22px; }
+}
+
+/* =========================================================================
    SITE MOTION  -  scroll reveals, hero entrance, count-up
    Tagged/triggered by static/js/site-animations.js. All of this sits inside
    a no-preference guard so reduced-motion users get the plain layout.
    ========================================================================= */
 @media (prefers-reduced-motion: no-preference) {
+  .wm-servicebar__row::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: -35%;
+    bottom: -35%;
+    left: 0;
+    width: 55%;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      rgba(190, 48, 48, .05) 18%,
+      rgba(70, 28, 28, .08) 42%,
+      rgba(205, 54, 54, .14) 58%,
+      rgba(170, 38, 38, .06) 74%,
+      transparent 100%
+    );
+    pointer-events: none;
+    transform: translateX(-180%) skewX(-12deg);
+    animation: wm-servicebar-glide 10s linear infinite;
+  }
+  .wm-servicebar__row::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: -35%;
+    bottom: -35%;
+    left: 0;
+    width: 28%;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      rgba(220, 76, 76, .04) 26%,
+      rgba(190, 42, 42, .1) 52%,
+      rgba(115, 28, 28, .05) 68%,
+      transparent 100%
+    );
+    pointer-events: none;
+    transform: translateX(-260%) skewX(-12deg);
+    animation: wm-servicebar-glide-secondary 7s linear infinite;
+  }
+  @keyframes wm-servicebar-glide {
+    from { transform: translateX(-180%) skewX(-12deg); }
+    to { transform: translateX(300%) skewX(-12deg); }
+  }
+  @keyframes wm-servicebar-glide-secondary {
+    from { transform: translateX(-260%) skewX(-12deg); }
+    to { transform: translateX(520%) skewX(-12deg); }
+  }
+
   [data-reveal] {
     opacity: 0;
     transform: translateY(26px);

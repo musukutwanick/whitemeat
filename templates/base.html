@@ -52,12 +52,14 @@
   {% include "partials/footer.html" %}
   {% include "partials/cart_widgets.html" %}
   {% include "partials/checkout_modal.html" %}
+  {% include "partials/cookie_consent.html" %}
 
   <script src="{% static 'js/hero-slider.js' %}"></script>
   <script src="{% static 'js/scroll-animations.js' %}"></script>
   <script src="{% static 'js/site-animations.js' %}"></script>
   <script src="{% static 'js/checkout.js' %}"></script>
   <script src="{% static 'js/product-cart.js' %}"></script>
+  <script src="{% static 'js/cookie-consent.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     if (window.AOS) AOS.init({ duration: 400, easing: 'ease-out-cubic', once: true, offset: 40 });
