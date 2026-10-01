@@ -1,12 +1,145 @@
-<section class="wm-servicebar" aria-label="What we offer">
-  <div class="wm-container">
-    <div class="wm-servicebar__row">
-      {% for card in service_cards %}
-      <a class="wm-servicebar__item" href="{{ card.url }}"{% if card.description %} title="{{ card.description }}"{% endif %}>
-        <span class="wm-servicebar__icon"><i class="{{ card.fa_class }}" aria-hidden="true"></i></span>
-        <span class="wm-servicebar__label">{{ card.title }}</span>
+{% load static wm_icons %}
+<section class="wm-service-strip" aria-label="Quick Navigation">
+  <div class="wm-service-strip__container">
+    <div class="wm-service-cards">
+
+      <!-- Card 1: Breeding Stock -->
+      <a href="{% url 'breeding' %}" class="wm-scard wm-scard--breeding" title="Breeding Stock">
+        <div class="wm-scard__texture" style="background-image: url('{% static 'images/new.jpg' %}');"></div>
+        <div class="wm-scard__top">
+          <div class="wm-scard__icon">
+            <svg class="wm-scard__svg" viewBox="0 0 34 34" fill="currentColor" aria-hidden="true">
+              <path d="M11 2C9.5 2 8.6 3.5 9 5.6 L10.2 11.2 C9 9.2 7.6 7.4 6.2 7.4 C4.8 7.4 4 8.6 4.6 10.4 L7 15.8 C5.2 17.6 4.2 20 3.8 22.6 C3.2 26.8 5.4 30.6 8.6 33 C8.4 34 7.6 35.4 8.4 36.2 C9.2 37 11 36.6 12.4 35.6 C14 34.6 15 33.4 16 32.2 C19.2 32.8 23.4 32.2 26.6 30.6 C29.8 29 32.4 26.2 32.8 22.4 C33.2 18.8 31.4 16.2 29.4 14.6 C30 13.2 30.8 12 30 11 C29.2 10 27.8 10.6 26.6 11.4 C24.4 12.8 22.8 15 21.4 16.6 C19 15.4 16.4 15.2 14 15.6 C15 14 15.8 12.2 15.2 10.2 C14.4 7.6 12.6 1.8 11 2 Z" transform="scale(0.85) translate(2, -1)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="wm-scard__bottom">
+          <span class="wm-scard__title">Breeding Stock</span>
+          <span class="wm-scard__arrow-btn" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+        <div class="wm-scard__wave" aria-hidden="true">
+          <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+            <path d="M0,20 C45,30 85,12 135,18 C170,22 188,16 200,12 L200,32 L0,32 Z" fill="rgba(3, 30, 15, 0.4)"/>
+            <path d="M0,24 C40,32 75,18 125,24 C160,28 185,22 200,18 L200,32 L0,32 Z" fill="rgba(2, 20, 10, 0.3)"/>
+          </svg>
+        </div>
       </a>
-      {% endfor %}
+
+      <!-- Card 2: Rabbit Farm Equipment -->
+      <a href="{% url 'equipment' %}" class="wm-scard wm-scard--equipment" title="Rabbit Farm Equipment">
+        <div class="wm-scard__texture" style="background-image: url('{% static 'images/equip.jpg' %}');"></div>
+        <div class="wm-scard__top">
+          <div class="wm-scard__icon">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+          </div>
+        </div>
+        <div class="wm-scard__bottom">
+          <span class="wm-scard__title">Rabbit Farm<br>Equipment</span>
+          <span class="wm-scard__arrow-btn" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+        <div class="wm-scard__wave" aria-hidden="true">
+          <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+            <path d="M0,20 C45,30 85,12 135,18 C170,22 188,16 200,12 L200,32 L0,32 Z" fill="rgba(80, 50, 0, 0.35)"/>
+            <path d="M0,24 C40,32 75,18 125,24 C160,28 185,22 200,18 L200,32 L0,32 Z" fill="rgba(60, 35, 0, 0.25)"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Card 3: Masterclass -->
+      <a href="{% url 'masterclass' %}" class="wm-scard wm-scard--masterclass" title="Masterclass">
+        <div class="wm-scard__texture" style="background-image: url('{% static 'images/masterclass_hero.jpg' %}');"></div>
+        <div class="wm-scard__top">
+          <div class="wm-scard__icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+        </div>
+        <div class="wm-scard__bottom">
+          <span class="wm-scard__title">Masterclass</span>
+          <span class="wm-scard__arrow-btn" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+        <div class="wm-scard__wave" aria-hidden="true">
+          <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+            <path d="M0,20 C45,30 85,12 135,18 C170,22 188,16 200,12 L200,32 L0,32 Z" fill="rgba(70, 5, 12, 0.4)"/>
+            <path d="M0,24 C40,32 75,18 125,24 C160,28 185,22 200,18 L200,32 L0,32 Z" fill="rgba(50, 2, 8, 0.3)"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Card 4: Outgrower Initiatives -->
+      <a href="{% url 'outgrowers' %}" class="wm-scard wm-scard--outgrower" title="Outgrower Initiatives">
+        <div class="wm-scard__texture" style="background-image: url('{% static 'images/house.jpg' %}');"></div>
+        <div class="wm-scard__top">
+          <div class="wm-scard__icon">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+        </div>
+        <div class="wm-scard__bottom">
+          <span class="wm-scard__title">Outgrower<br>Initiatives</span>
+          <span class="wm-scard__arrow-btn" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+        <div class="wm-scard__wave" aria-hidden="true">
+          <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+            <path d="M0,20 C45,30 85,12 135,18 C170,22 188,16 200,12 L200,32 L0,32 Z" fill="rgba(3, 30, 15, 0.4)"/>
+            <path d="M0,24 C40,32 75,18 125,24 C160,28 185,22 200,18 L200,32 L0,32 Z" fill="rgba(2, 20, 10, 0.3)"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Card 5: Rabbit Hole -->
+      <a href="{% url 'rabbithole' %}" class="wm-scard wm-scard--rabbithole" title="Rabbit Hole">
+        <div class="wm-scard__texture" style="background-image: url('{% static 'images/pagomo.jpg' %}');"></div>
+        <div class="wm-scard__top">
+          <div class="wm-scard__icon">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+        </div>
+        <div class="wm-scard__bottom">
+          <span class="wm-scard__title">Rabbit Hole</span>
+          <span class="wm-scard__arrow-btn" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+        <div class="wm-scard__wave" aria-hidden="true">
+          <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+            <path d="M0,20 C45,30 85,12 135,18 C170,22 188,16 200,12 L200,32 L0,32 Z" fill="rgba(90, 30, 0, 0.35)"/>
+            <path d="M0,24 C40,32 75,18 125,24 C160,28 185,22 200,18 L200,32 L0,32 Z" fill="rgba(65, 20, 0, 0.25)"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Card 6: Whitemeat Butchery -->
+      <a href="{% url 'butchery' %}" class="wm-scard wm-scard--butchery" title="Whitemeat Butchery">
+        <div class="wm-scard__texture" style="background-image: url('{% static 'images/butchery.jpg' %}');"></div>
+        <div class="wm-scard__top">
+          <div class="wm-scard__icon">
+            <svg class="wm-scard__svg" viewBox="0 0 36 36" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10 5C4.5 9 2.5 17 6.5 24.5C9.5 30 15 35 22 35C29.5 35 36 29 36 21.5C36 13 30 6.5 22 6.5C18 6.5 14 4.5 10 5ZM25 16.5C26.9 16.5 28.5 14.9 28.5 13C28.5 11.1 26.9 9.5 25 9.5C23.1 9.5 21.5 11.1 21.5 13C21.5 14.9 23.1 16.5 25 16.5ZM14.5 23C15.6 23 16.5 22.1 16.5 21C16.5 19.9 15.6 19 14.5 19C13.4 19 12.5 19.9 12.5 21C12.5 22.1 13.4 23 14.5 23ZM19.5 27C20.6 27 21.5 26.1 21.5 25C21.5 23.9 20.6 23 19.5 23C18.4 23 17.5 23.9 17.5 25C17.5 26.1 18.4 27 19.5 27ZM13 14.5C14.1 14.5 15 13.6 15 12.5C15 11.4 14.1 10.5 13 10.5C11.9 10.5 11 11.4 11 12.5C11 13.6 11.9 14.5 13 14.5Z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="wm-scard__bottom">
+          <span class="wm-scard__title">Whitemeat<br>Butchery</span>
+          <span class="wm-scard__arrow-btn" aria-hidden="true">
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+        <div class="wm-scard__wave" aria-hidden="true">
+          <svg viewBox="0 0 200 32" preserveAspectRatio="none">
+            <path d="M0,20 C45,30 85,12 135,18 C170,22 188,16 200,12 L200,32 L0,32 Z" fill="rgba(50, 0, 8, 0.45)"/>
+            <path d="M0,24 C40,32 75,18 125,24 C160,28 185,22 200,18 L200,32 L0,32 Z" fill="rgba(35, 0, 5, 0.3)"/>
+          </svg>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
+

@@ -7,11 +7,13 @@
     </a>
 
     <ul class="wm-nav__links" id="wm-nav-links">
-      <li><a href="{% url 'index' %}" class="{% if path == '/' %}is-active{% endif %}">Home</a></li>
+      <li class="wm-nav__item wm-nav__item--home">
+        <a href="{% url 'index' %}" class="wm-nav__link wm-nav__link--pill {% if path == '/' %}is-active{% endif %}">Home</a>
+      </li>
 
-      <li>
-        <a href="{% url 'equipment' %}" class="{% if '/equipment' in path or path == '/cages/' or path == '/sheds/' or path == '/accessories/' %}is-active{% endif %}">
-          Rabbit Farm Equipment {% wm_icon "chevron-down" size=14 %}
+      <li class="wm-nav__item wm-nav__item--has-drop">
+        <a href="{% url 'equipment' %}" class="wm-nav__link {% if '/equipment' in path or path == '/cages/' or path == '/sheds/' or path == '/accessories/' %}is-active{% endif %}">
+          Rabbit Farm Equipment <i class="fa-solid fa-chevron-down wm-nav__chevron"></i>
         </a>
         <div class="wm-nav__drop">
           <a href="{% url 'equipment' %}">Equipment overview</a>
@@ -21,13 +23,21 @@
         </div>
       </li>
 
-      <li><a href="{% url 'outgrowers' %}" class="{% if '/outgrowers' in path %}is-active{% endif %}">Outgrower Initiatives</a></li>
-      <li><a href="{% url 'breeding' %}" class="{% if path == '/breeding/' %}is-active{% endif %}">Breeding Stock</a></li>
-      <li><a href="{% url 'masterclass' %}" class="{% if path == '/masterclass/' %}is-active{% endif %}">Masterclass</a></li>
+      <li class="wm-nav__item">
+        <a href="{% url 'outgrowers' %}" class="wm-nav__link {% if '/outgrowers' in path %}is-active{% endif %}">Outgrower Initiatives</a>
+      </li>
 
-      <li>
-        <a href="{% url 'rabbithole' %}" class="{% if '/rabbithole' in path or '/pagomo' in path %}is-active{% endif %}">
-          Rabbit Hole {% wm_icon "chevron-down" size=14 %}
+      <li class="wm-nav__item">
+        <a href="{% url 'breeding' %}" class="wm-nav__link {% if path == '/breeding/' %}is-active{% endif %}">Breeding Stock</a>
+      </li>
+
+      <li class="wm-nav__item">
+        <a href="{% url 'masterclass' %}" class="wm-nav__link {% if path == '/masterclass/' %}is-active{% endif %}">Masterclass</a>
+      </li>
+
+      <li class="wm-nav__item wm-nav__item--has-drop">
+        <a href="{% url 'rabbithole' %}" class="wm-nav__link {% if '/rabbithole' in path or '/pagomo' in path %}is-active{% endif %}">
+          Rabbit Hole <i class="fa-solid fa-chevron-down wm-nav__chevron"></i>
         </a>
         <div class="wm-nav__drop">
           <a href="{% url 'rabbithole' %}">All branches</a>
@@ -35,12 +45,19 @@
         </div>
       </li>
 
-      <li><a href="{% url 'butchery' %}" class="{% if '/butchery' in path %}is-active{% endif %}">Whitemeat Butchery</a></li>
+      <li class="wm-nav__item">
+        <a href="{% url 'butchery' %}" class="wm-nav__link {% if '/butchery' in path %}is-active{% endif %}">Whitemeat Butchery</a>
+      </li>
     </ul>
 
     <div class="wm-nav__cta">
       <button type="button" class="wm-nav__cart" id="wm-nav-cart-btn" onclick="WMProductCart.toggle(true)" aria-label="Open cart">
-        {% wm_icon "shop" size=18 %}<span id="nav-cart-badge" class="wm-nav__cart-badge">0</span>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span id="nav-cart-badge" class="wm-nav__cart-badge">0</span>
       </button>
       <button class="wm-nav__burger" id="wm-nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="wm-nav-links">
         <span></span><span></span><span></span>
@@ -50,3 +67,4 @@
 </nav>
 <div class="wm-nav__scrim" aria-hidden="true"></div>
 {% endwith %}
+
