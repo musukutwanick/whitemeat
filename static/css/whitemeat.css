@@ -732,22 +732,6 @@
   transform: translateX(4px);
 }
 
-/* Decorative organic red curve graphic at bottom-left corner */
-.wm-hero__organic-wave {
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: clamp(220px, 26vw, 380px);
-  height: clamp(70px, 9vw, 120px);
-  pointer-events: none;
-  z-index: 5;
-}
-.wm-hero__organic-wave svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
 /* Circular Previous and Next Arrows - positioned in the left half to avoid CTA overlap */
 .wm-hero__arrow {
   position: absolute;
@@ -1069,6 +1053,12 @@
   .wm-scard__svg { width: 32px; height: 32px; }
   .wm-scard__title { font-size: 13px; }
   .wm-scard__arrow-btn { width: 28px; height: 28px; font-size: 11px; }
+}
+
+@media (max-width: 430px) {
+  .wm-hero__copy {
+    transform: translateY(32px);
+  }
 }
 
 

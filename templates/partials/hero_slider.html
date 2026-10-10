@@ -56,30 +56,6 @@
     {% endfor %}
   </div>
 
-  <!-- Decorative organic red curved ribbons at bottom-left corner -->
-  <div class="wm-hero__organic-wave" aria-hidden="true">
-    <svg viewBox="0 0 380 140" fill="none" preserveAspectRatio="none">
-      <path d="M -10 140 C 40 140 90 120 150 85 C 220 45 290 55 380 95 L 380 140 Z" fill="url(#hero-red-deep)" opacity="0.85"/>
-      <path d="M -10 140 C 30 140 70 115 130 75 C 190 35 250 30 330 65 L 330 140 Z" fill="url(#hero-red-mid)" opacity="0.9"/>
-      <path d="M -10 140 C 20 140 50 125 100 95 C 150 65 210 65 270 100 L 270 140 Z" fill="url(#hero-red-bright)"/>
-      <defs>
-        <linearGradient id="hero-red-bright" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#b80f19" />
-          <stop offset="60%" stop-color="#e51a24" />
-          <stop offset="100%" stop-color="#ff3b47" />
-        </linearGradient>
-        <linearGradient id="hero-red-mid" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#800a11" />
-          <stop offset="100%" stop-color="#cc1520" />
-        </linearGradient>
-        <linearGradient id="hero-red-deep" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#540409" />
-          <stop offset="100%" stop-color="#990f17" />
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
-
   {% if hero_slides|length > 1 %}
   <button class="wm-hero__arrow wm-hero__arrow--prev" aria-label="Previous slide">
     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -102,4 +78,3 @@
   </div>
   {% endif %}
 </section>
-
