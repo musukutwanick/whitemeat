@@ -45,12 +45,13 @@
       <div class="wm-product-card"
            data-name="{{ cage.name }}"
            data-price="{{ cage.price|floatformat:'-2' }}"
-           data-img="{{ cage.image_url }}"
+           data-img="{% if cage.name == '6Sdx Weaners Cage' %}{% static 'images/cage4.png' %}{% else %}{{ cage.image_url }}{% endif %}"
            data-desc="{{ cage.description }}"
            data-capacity="{{ cage.capacity }}"
            data-features="{{ cage.features }}">
         <div class="wm-product-card__media">
-          <img src="{{ cage.image_url }}" alt="{{ cage.image_alt|default:cage.name }}">
+          <img src="{% if cage.name == '6Sdx Weaners Cage' %}{% static 'images/cage4.png' %}{% else %}{{ cage.image_url }}{% endif %}"
+               alt="{{ cage.image_alt|default:cage.name }}">
           <span class="wm-product-card__tag">{{ cage.get_category_display }}</span>
         </div>
         <div class="wm-product-card__body">
