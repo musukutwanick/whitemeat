@@ -19,6 +19,9 @@
       <span class="wm-eyebrow">Order &amp; reserve</span>
       <h2>Place your order</h2>
       <p>Pick items from the menu, then reserve your table &mdash; we'll confirm on WhatsApp.</p>
+      {% if site.rabbit_hole_hours %}
+      <p><strong>Opening hours</strong><br>{{ site.rabbit_hole_hours|linebreaksbr }}</p>
+      {% endif %}
     </div>
 
     <div class="wm-order-grid">

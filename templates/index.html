@@ -86,7 +86,7 @@
     </div>
 
     <div class="wm-promo wm-promo--flip">
-      <div class="wm-promo__media"><img src="{% static 'images/equip.png' %}" alt="Rabbit farm cages and equipment"></div>
+      <div class="wm-promo__media"><img src="{% static 'images/cage3.jpg' %}" alt="Rabbit farm cages and equipment"></div>
       <div>
         <span class="wm-eyebrow">Rabbit Farm Equipment</span>
         <h2>International-standard cages &amp; accessories</h2>
@@ -119,7 +119,7 @@
     </div>
 
     <div class="wm-promo">
-      <div class="wm-promo__media"><img src="{% static 'images/house.jpg' %}" alt="Whitemeat Butchery products"></div>
+      <div class="wm-promo__media"><img src="{% static 'images/rabbi.jpg' %}" alt="Whitemeat Butchery products"></div>
       <div>
         <span class="wm-eyebrow">Whitemeat Butchery</span>
         <h2>Fresh rabbit cuts &amp; portions</h2>
@@ -195,6 +195,7 @@
         <div class="wm-contact__row">{% wm_icon "phone" %}<div><strong>Phone &amp; WhatsApp</strong><br>{{ site.phone_primary }}{% if site.phone_secondary %}<br>{{ site.phone_secondary }}{% endif %}</div></div>
         {% if site.email %}<div class="wm-contact__row">{% wm_icon "mail" %}<div><strong>Email</strong><br><a href="mailto:{{ site.email }}">{{ site.email }}</a></div></div>{% endif %}
         {% if site.business_hours %}<div class="wm-contact__row">{% wm_icon "clock" %}<div><strong>Business hours</strong><br>{{ site.business_hours|linebreaksbr }}</div></div>{% endif %}
+        {% if site.rabbit_hole_hours %}<div class="wm-contact__row">{% wm_icon "clock" %}<div><strong>Rabbit Hole hours</strong><br>{{ site.rabbit_hole_hours|linebreaksbr }}</div></div>{% endif %}
       </div>
 
       <form class="wm-contact__form" id="wmContactForm">

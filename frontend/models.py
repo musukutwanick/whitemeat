@@ -121,13 +121,18 @@ class MenuItem(models.Model):
     
     @property
     def image_url(self):
+        # Keep the checked-in menu artwork available even when a Firebase/
+        # Supabase upload is missing or unavailable.
+        if self.image_filename:
+            filename = self.image_filename.lstrip("/")
+            if not filename.startswith("menu/"):
+                filename = f"menu/{filename}"
+            return f"/static/images/{filename}"
         if self.image:
             try:
                 return self.image.url
             except Exception:
                 pass
-        elif self.image_filename:
-            return f'/static/images/{self.image_filename}'
         return '/static/images/default-menu-item.jpg'
 
 class RestaurantLocation(models.Model):
@@ -282,7 +287,12 @@ class SiteSettings(models.Model):
     )
     business_hours = models.TextField(
         blank=True,
-        default="Mon-Fri 08:00-17:00\nSat 08:00-15:00",
+        default="Monday to Friday: 8:00am to 5:00pm\nSaturday: 8:00am to 3:00pm",
+    )
+    rabbit_hole_hours = models.TextField(
+        blank=True,
+        default="Monday to Thursday: 9:30am to 7:00pm\nFriday to Sunday: 9:30am to 10:00pm",
+        help_text="Rabbit Hole restaurant opening hours",
     )
     map_embed_url = models.URLField(
         blank=True, max_length=1000,

@@ -180,7 +180,7 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ("Brand", {"fields": ("company_name", "tagline", "brand_slogan")}),
         ("Contact", {"fields": (
             "whatsapp_number", "phone_primary", "phone_secondary", "email",
-            "office_address", "restaurant_address", "business_hours",
+            "office_address", "restaurant_address", "business_hours", "rabbit_hole_hours",
             "map_embed_url",
         )}),
         ("Social links", {"fields": (

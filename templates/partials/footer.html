@@ -46,6 +46,7 @@
         {% endif %}
         {% if site.email %}<li>{% wm_icon "mail" size=16 %}<a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
         {% if site.business_hours %}<li>{% wm_icon "clock" size=16 %}<span>{{ site.business_hours|linebreaksbr }}</span></li>{% endif %}
+        {% if site.rabbit_hole_hours %}<li>{% wm_icon "clock" size=16 %}<span><strong>Rabbit Hole</strong><br>{{ site.rabbit_hole_hours|linebreaksbr }}</span></li>{% endif %}
       </ul>
     </div>
   </div>

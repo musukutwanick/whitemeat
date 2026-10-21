@@ -83,6 +83,9 @@
         <div>
           <a href="{% url 'pagomo' %}" class="wm-btn wm-btn--accent">Visit Pagomo {% wm_icon "arrow-right" size=15 %}</a>
         </div>
+        {% if site.rabbit_hole_hours %}
+        <p style="margin:18px 0 0;color:var(--wm-body)"><strong>Opening hours</strong><br>{{ site.rabbit_hole_hours|linebreaksbr }}</p>
+        {% endif %}
       </div>
     </div>
 
