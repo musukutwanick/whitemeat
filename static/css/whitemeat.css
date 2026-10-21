@@ -24,8 +24,8 @@
   --wm-cream:    #faf7f0;
 
   /* Type */
-  --wm-font-head: Arial, Helvetica, sans-serif;
-  --wm-font-body: Arial, Helvetica, sans-serif;
+  --wm-font-head: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --wm-font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   /* Scale */
   --wm-container: 1200px;
@@ -669,7 +669,7 @@
   text-transform: uppercase;
 }
 
-/* Headline with the shared Arial font & red highlight */
+/* Headline with the shared Segoe UI font & red highlight */
 .wm-hero__copy h1 {
   font-family: var(--wm-font-head);
   font-size: clamp(2rem, 1.6rem + 2vw, 3.2rem);
