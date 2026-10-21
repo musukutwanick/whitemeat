@@ -1,0 +1,33 @@
+{% extends "login.html" %}
+
+{% block content %}
+<div class="login-wrap">
+  <div class="login-container" data-aos="zoom-in" data-aos-duration="600">
+    <div class="login-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+    </div>
+    <h1 class="login-title">Staff Login</h1>
+    {% if form.errors %}<div class="error-message">Please check your username and password.</div>{% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_username">Username</label>
+        <div class="input-wrapper">
+          <input type="text" id="id_username" name="username" autocomplete="username" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="id_password">Password</label>
+        <div class="input-wrapper">
+          <input type="password" id="id_password" name="password" autocomplete="current-password" required>
+        </div>
+      </div>
+      {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+      <button type="submit" class="login-btn">Sign in</button>
+    </form>
+    <a href="{% url 'index' %}" class="back-home">&larr; Back to Home</a>
+  </div>
+</div>
+{% endblock %}

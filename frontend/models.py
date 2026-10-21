@@ -5,6 +5,33 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from whitemeat_backend.supabase_storage import get_menu_storage, get_equipment_storage, get_masterclass_storage, get_order_storage
 
+LOCAL_MENU_IMAGES = {
+    "full rabbit": "menu/full-rabbit.jpg",
+    "half rabbit": "menu/half-rabbit.jpg",
+    "bream": "menu/bream.jpg",
+    "full chicken": "menu/full-chicken.jpg",
+    "country style": "menu/country-style.jpg",
+    "pork chop": "menu/pork-chop.jpg",
+    "grilled lamb": "menu/grilled-lamb.jpg",
+    "rabbit curry": "menu/rabbit-curry.jpg",
+    "knuckle bones": "menu/knucklebones.jpg",
+    "maguru": "menu/maguru.jpg",
+    "oxtail": "menu/oxtail.jpg",
+    "beef stew": "menu/beef-stew.jpg",
+    "roadrunner": "menu/roadrunner-chicken.jpg",
+    "haifiridzi": "menu/haifiridzi.jpg",
+    "stewed lamb": "menu/stewed-lamb.jpg",
+    "zviyo": "menu/zviyo.jpg",
+    "mhunga": "menu/mhunga.jpg",
+    "mapfunde": "menu/mapfunde.jpg",
+    "rice dovi": "menu/rice-dovi.jpg",
+    "fries / chips": "menu/fries.jpg",
+    "plain rice": "menu/plain-rice.jpg",
+    "braai salad": "menu/braai-salad.jpg",
+    "mugaiwa": "menu/mugaiwa.jpg",
+    "samoosas (rabbit / beef)": "menu/samoosas.jpg",
+}
+
 # Accessory model for cages/equipment accessories
 class Accessory(models.Model):
     name = models.CharField(max_length=200)
@@ -123,10 +150,9 @@ class MenuItem(models.Model):
     def image_url(self):
         # Keep the checked-in menu artwork available even when a Firebase/
         # Supabase upload is missing or unavailable.
-        if self.image_filename:
-            filename = self.image_filename.lstrip("/")
-            if not filename.startswith("menu/"):
-                filename = f"menu/{filename}"
+        filename = self.image_filename or LOCAL_MENU_IMAGES.get(self.name.strip().lower(), "")
+        if filename:
+            filename = filename.lstrip("/")
             return f"/static/images/{filename}"
         if self.image:
             try:
