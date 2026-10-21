@@ -27,13 +27,13 @@ class Accessory(models.Model):
 
     @property
     def image_url(self):
+        if self.image_filename:
+            return f"/static/images/{self.image_filename.lstrip('/')}"
         if self.image:
             try:
                 return self.image.url
             except Exception:
                 pass
-        elif self.image_filename:
-            return f'/static/images/{self.image_filename}'
         return '/static/images/default-accessory.jpg'
 
 class MasterclassEvent(models.Model):
@@ -424,13 +424,13 @@ class HeroSlide(models.Model):
 
     @property
     def image_url(self):
+        if self.background_image_filename:
+            return f"/static/images/{self.background_image_filename.lstrip('/')}"
         if self.background_image:
             try:
                 return self.background_image.url
             except Exception:
                 pass
-        if self.background_image_filename:
-            return f"/static/images/{self.background_image_filename}"
         return "/static/images/home.jpeg"
 
     @property
@@ -546,13 +546,13 @@ class Breed(models.Model):
 
     @property
     def image_url(self):
+        if self.image_filename:
+            return f"/static/images/{self.image_filename.lstrip('/')}"
         if self.image:
             try:
                 return self.image.url
             except Exception:
                 pass
-        if self.image_filename:
-            return f"/static/images/{self.image_filename}"
         return "/static/images/new.jpg"
 
     @property
@@ -692,13 +692,13 @@ class ButcheryProduct(models.Model):
 
     @property
     def image_url(self):
+        if self.image_filename:
+            return f"/static/images/{self.image_filename.lstrip('/')}"
         if self.image:
             try:
                 return self.image.url
             except Exception:
                 pass
-        if self.image_filename:
-            return f"/static/images/{self.image_filename}"
         return "/static/images/default-menu-item.jpg"
 
 
@@ -765,13 +765,13 @@ class Cage(models.Model):
 
     @property
     def image_url(self):
+        if self.image_filename:
+            return f"/static/images/{self.image_filename.lstrip('/')}"
         if self.image:
             try:
                 return self.image.url
             except Exception:
                 pass
-        if self.image_filename:
-            return f"/static/images/{self.image_filename}"
         return "/static/images/cage3.jpg"
 
     @property
@@ -842,13 +842,13 @@ class Shed(models.Model):
 
     @property
     def image_url(self):
+        if self.image_filename:
+            return f"/static/images/{self.image_filename.lstrip('/')}"
         if self.image:
             try:
                 return self.image.url
             except Exception:
                 pass
-        if self.image_filename:
-            return f"/static/images/{self.image_filename}"
         return "/static/images/house.jpg"
 
     @property

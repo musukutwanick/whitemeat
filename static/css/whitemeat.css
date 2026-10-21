@@ -4,8 +4,6 @@
    pages that still use the old classes are unaffected.
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 :root {
   /* Brand */
   --wm-green:        #2d6a4f;
@@ -26,8 +24,8 @@
   --wm-cream:    #faf7f0;
 
   /* Type */
-  --wm-font-head: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-  --wm-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  --wm-font-head: Arial, Helvetica, sans-serif;
+  --wm-font-body: Arial, Helvetica, sans-serif;
 
   /* Scale */
   --wm-container: 1200px;
@@ -671,7 +669,7 @@
   text-transform: uppercase;
 }
 
-/* Headline with the shared Inter font & red highlight */
+/* Headline with the shared Arial font & red highlight */
 .wm-hero__copy h1 {
   font-family: var(--wm-font-head);
   font-size: clamp(2rem, 1.6rem + 2vw, 3.2rem);
